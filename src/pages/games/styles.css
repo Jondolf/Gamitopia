@@ -1,0 +1,38 @@
+.game-container {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  width: 90%;
+}
+
+.game-container ul {
+  padding: 0;
+  text-align: center;
+}
+
+.game-container li {
+  max-width: 300px;
+  min-width: 200px;
+  min-height: 100px;
+  width: 100%;
+  background-color: var(--secondaryColor);
+  margin: 50px;
+  display: inline-block;
+  border-radius: 5px;
+  align-items: center;
+  color: white;
+}
+
+.game-container h3, .game-container h6 {
+  margin: 5px;
+}
+
+.game-container img {
+  width: 90%;
+  border-radius: 5px;
+}
+
+.game-container a {
+  width: 100%;
+  height: 100%;
+}
