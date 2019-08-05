@@ -1,0 +1,57 @@
+.new-content {
+  background-color: var(--secondaryColor);
+  text-align: center;
+  padding: 20px;
+  color: white;
+}
+
+.new-img {
+  width: 450px;
+  border-radius: 5px;
+  margin: 20px;
+}
+
+h2 {
+  margin: 65px auto 0 auto;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  justify-content: center;
+  padding: initial;
+}
+
+.game-container li {
+  max-width: 300px;
+  min-width: 100px;
+  min-height: 100px;
+  width: 100%;
+  background-color: var(--secondaryColor);
+  margin: 50px;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+@media only screen and (max-width: 865px) {
+  .game-container li {
+    margin: 30px;
+    width: 250px
+  }
+}
+
+@media only screen and (max-width: 610px) {
+  .game-container li {
+    width: 300px;
+  }
+  .new-content img {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .new-content img {
+    width: 250px;
+  }
+}

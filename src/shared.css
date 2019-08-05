@@ -1,0 +1,101 @@
+@font-face {
+  font-family: Nunito;
+  src: url(/fonts/Nunito/Nunito-Regular.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Nunito;
+  src: url(/fonts/Nunito/Nunito-Bold.ttf);
+  font-weight: bold;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: Nunito;
+  padding: 0;
+  margin: 0;
+  --primaryColor: white;
+  --secondaryColor: rgb(67, 67, 255);
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+nav {
+  background-color: var(--secondaryColor);
+  color: white;
+  padding: 0 20px;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  align-items: center;
+  height: 68px;
+}
+
+.nav-logo {
+  text-align: center;
+  font-size: 50px;
+}
+
+.nav-logo:hover {
+  cursor: default;
+}
+
+.nav-link-container {
+  font-size: 25px;
+}
+
+.nav-link-container ul li {
+  display: inline-block;
+  padding-left: 10px;
+}
+
+nav a {
+  color: white;
+}
+
+nav a:hover {
+  color: rgb(200, 200, 255);
+  text-decoration: underline;
+}
+
+main {
+  margin-top: 68px;
+  text-align: center;
+}
+
+footer {
+  background-color: var(--secondaryColor);
+  text-align: center;
+  color: white;
+  padding: 30px;
+  bottom: 0;
+}
+
+@media only screen and (max-width: 450px) {
+  .nav-link-container li {
+    font-size: 20px;
+  }
+  .nav-logo {
+    font-size: 30px;
+  }
+}
