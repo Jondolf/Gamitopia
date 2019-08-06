@@ -41,7 +41,7 @@ h2 {
   }
 }
 
-@media only screen and (max-width: 610px) {
+@media only screen and (max-width: 645px) {
   .game-container li {
     width: 300px;
   }
@@ -53,5 +53,14 @@ h2 {
 @media only screen and (max-width: 400px) {
   .new-content img {
     width: 250px;
+  }
+  .game-container li {
+    width: 250px;
+  }
+}
+
+@media only screen and (max-width: 345px) {
+  .new-content img {
+    width: 200px;
   }
 }

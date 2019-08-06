@@ -24,8 +24,6 @@ body {
   flex-direction: column;
   justify-content: space-between;
   font-family: Nunito;
-  padding: 0;
-  margin: 0;
   --primaryColor: white;
   --secondaryColor: rgb(67, 67, 255);
   height: 100%;
@@ -40,7 +38,6 @@ nav {
   color: white;
   padding: 0 20px;
   width: 100%;
-  margin: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -64,22 +61,22 @@ nav {
   font-size: 25px;
 }
 
-.nav-link-container ul li {
+.nav-link-container li {
   display: inline-block;
   padding-left: 10px;
 }
 
-nav a {
+.nav-link-container li a {
   color: white;
 }
 
-nav a:hover {
+.nav-link-container li a:hover {
   color: rgb(200, 200, 255);
   text-decoration: underline;
 }
 
 main {
-  margin-top: 68px;
+  margin-top: 66px;
   text-align: center;
 }
 
@@ -97,5 +94,23 @@ footer {
   }
   .nav-logo {
     font-size: 30px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .nav-link-container li {
+    font-size: 17px;
+  }
+  .nav-logo {
+    font-size: 28px;
+  }
+}
+
+@media only screen and (max-width: 345px) {
+  .nav-link-container li {
+    font-size: 15px;
+  }
+  .nav-logo {
+    font-size: 26px;
   }
 }
