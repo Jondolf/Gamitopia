@@ -5,10 +5,16 @@
   color: white;
 }
 
+.new-content .new-img {
+  margin: 15px;
+  width: 350px;
+}
+
 .new-img {
-  width: 450px;
+  width: 90%;
+  max-width: 450px;
   border-radius: 5px;
-  margin: 20px;
+  margin: 20px, 0;
 }
 
 h2 {
@@ -29,9 +35,16 @@ h2 {
   min-height: 100px;
   width: 100%;
   background-color: var(--secondaryColor);
-  margin: 50px;
+  margin: 60px;
   display: inline-block;
   border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.game-container li h3, .game-container li h6 {
+  margin: 5px;
 }
 
 @media only screen and (max-width: 865px) {

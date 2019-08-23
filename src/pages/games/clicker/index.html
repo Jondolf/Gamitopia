@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="./styles.css">
+  <title>Games</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="description" content="Free Games">
+  <meta name="keywords" content="Games">
+</head>
+
+<body>
+  <nav>
+    <span class="nav-logo">G</span>
+    <ul class="nav-link-container">
+      <li><a href="/">Home</a></li>
+      <li><a href="/pages/games">Games</a></li>
+      <li><a href="/pages/news">News</a></li>
+      <li><a href="/pages/about">About</a></li>
+    </ul>
+  </nav>
+  <main>
+    <h2>Cookie Clicker</h2>
+    <div id="clickerContainer">
+      <ul class="upgradeContainer">
+        <li><button class="upgrades" id="upgrade1">Click +1<br>Price: <span class="priceElement"></span></button></li>
+        <li><button class="upgrades" id="upgrade2">Automatic Cookies +1<br>Price: <span
+              class="priceElement"></span></button></li>
+        <li><button class="upgrades" id="upgrade3">Click +1<br>Price: <span class="priceElement"></span></button></li>
+        <li><button class="upgrades" id="upgrade4">Click +1<br>Price: <span class="priceElement"></span></button></li>
+        <li><button class="upgrades" id="upgrade5">Click +1<br>Price: <span class="priceElement"></span></button></li>
+      </ul>
+      <div class="cookieContainer">
+        <p id="points">Cookies Baked: <span id="amountOfPoints"></span></p>
+        <img src="/images/cookie.png" id="cookie">
+      </div>
+    </div>
+  </main>
+  <footer>&copy Game Website 2019</footer>
+  <link rel="stylesheet" href="/shared.css">
+  <script src="./scripts.js"></script>
+</body>
+
+</html>
