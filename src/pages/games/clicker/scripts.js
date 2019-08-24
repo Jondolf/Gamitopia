@@ -1,12 +1,14 @@
 let pointsElement = document.getElementById("amountOfPoints");
-let priceElement = document.getElementsByClassName("priceElement")
+let priceElement = document.getElementsByClassName("priceElement");
+let upgradeLevel = document.getElementsByClassName("upgradeLevel");
 document.getElementById("cookie").addEventListener("click", addPointsByClick);
 //Adds points when the cookie is clicked
 
 let points = 0;
 let pointsToAddByClick = 1;
-let pointsToAddByTime = 0;
+let pointsToAddByTime = 1;
 let pointInterval;
+let time = 1000;
 
 document.getElementById("cookie")
   .addEventListener('mousedown', function (e) { e.preventDefault(); }, false);
@@ -34,7 +36,7 @@ const upgrades = [0, 0, 0, 0, 0]; //How many times an upgrade has been bought
 function upgradeNewCost(upgradeIndex) {
   const newUpgradeIndex = upgrades[upgradeIndex] + 1; //Adds 1 to the times-upgraded counter
   const defaultCost = defaultUpgradeCosts[upgradeIndex]; //The default cost of the element given by the argument
-  return defaultCost * Math.pow(1.5, newUpgradeIndex - 1); //Changes the default cost
+  return defaultCost * Math.pow(1.3, newUpgradeIndex - 1); //Changes the default cost
 }
 
 function buyUpgrade(upgradeIndex) {
@@ -46,17 +48,25 @@ function buyUpgrade(upgradeIndex) {
   if (upgradeIndex === 0) {
     pointsToAddByClick++;
     priceElement[0].innerText = Math.floor(upgradeNewCost(upgradeIndex));
+    upgradeLevel[0].innerText = upgrades[0];
   } else if (upgradeIndex === 1) {
     clearInterval(pointInterval);
-    pointsToAddByTime++;
-    pointInterval = setInterval(() => addPointsByTime(pointsToAddByTime), 1000);
+    time -= 100;
+    pointInterval = setInterval(() => addPointsByTime(pointsToAddByTime), time);
     priceElement[1].innerText = Math.floor(upgradeNewCost(upgradeIndex));
+    upgradeLevel[1].innerText = upgrades[1];
   } else if (upgradeIndex === 2) {
+    clearInterval(pointInterval);
+    pointsToAddByTime++;
+    pointInterval = setInterval(() => addPointsByTime(pointsToAddByTime), time);
     priceElement[2].innerText = Math.floor(upgradeNewCost(upgradeIndex));
+    upgradeLevel[2].innerText = upgrades[2];
   } else if (upgradeIndex === 3) {
     priceElement[3].innerText = Math.floor(upgradeNewCost(upgradeIndex));
+    upgradeLevel[3].innerText = upgrades[3];
   } else if (upgradeIndex === 4) {
     priceElement[4].innerText = Math.floor(upgradeNewCost(upgradeIndex));
+    upgradeLevel[4].innerText = upgrades[4];
   }
   refreshPoints();
   //If you have enough points, the cost of the upgrade will be subtracted from your points. Upgrades index +1
@@ -72,3 +82,10 @@ priceElement[1].innerText = defaultUpgradeCosts[1];
 priceElement[2].innerText = defaultUpgradeCosts[2];
 priceElement[3].innerText = defaultUpgradeCosts[3];
 priceElement[4].innerText = defaultUpgradeCosts[4];
+
+
+upgradeLevel[0].innerText = upgrades[0];
+upgradeLevel[1].innerText = upgrades[1];
+upgradeLevel[2].innerText = upgrades[2];
+upgradeLevel[3].innerText = upgrades[3];
+upgradeLevel[4].innerText = upgrades[4];
