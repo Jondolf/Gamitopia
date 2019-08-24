@@ -1,6 +1,10 @@
 let pointsElement = document.getElementById("amountOfPoints");
 let priceElement = document.getElementsByClassName("priceElement");
 let upgradeLevel = document.getElementsByClassName("upgradeLevel");
+/**
+ * @type {HTMLAudioElement}
+ */
+const audio = document.getElementById("soundEffect");
 document.getElementById("cookie").addEventListener("click", addPointsByClick);
 //Adds points when the cookie is clicked
 
@@ -24,6 +28,8 @@ function addPointsByTime(pointAmount) {
 function addPointsByClick(event) {
   points += pointsToAddByClick;
   refreshPoints();
+  audio.currentTime = 0;
+  audio.play();
 }
 
 function refreshPoints() {
