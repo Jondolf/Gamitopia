@@ -21,16 +21,9 @@
     </ul>
   </nav>
   <main>
-    <audio controls autoplay="true" loop="true" id="backgroundMusic">
-      <source src="/sound/cookie-clicker-background-music.mp3" type="audio/mp3">
-    </audio>
-    <audio id="soundEffect">
-      <source src="/sound/eat-cookie.mp3" type="audio/mp3">
-      Your browser does not support the audio element.
-    </audio>
     <h2>Cookie Clicker</h2>
     <div id="clickerContainer">
-      <ul class="upgradeContainer">
+      <ul id="upgradeContainer">
         <li>
           <button class="upgrades" id="upgrade1">Click
             <br>Level: <span class="upgradeLevel"></span>
@@ -62,15 +55,35 @@
           </button>
         </li>
       </ul>
-      <div class="cookieContainer">
-        <p id="points">Cookies Baked: <span id="amountOfPoints"></span></p>
-        <img src="/images/cookie.png" id="cookie">
+      <div class="cookieClickingContainer">
+        <div class="audioContainer">
+          <div id="toggleMusic">
+            <audio loop="true" id="backgroundMusic">
+              <source src="/sound/cookie-clicker-background-music.mp3" type="audio/mp3">
+            </audio>
+            <img id="musicOnOff">
+          </div>
+          <div id="toggleSoundEffects">
+            <audio id="soundEffect">
+              <source src="/sound/cookie-clicker-sound-effect.mp3" type="audio/mp3">
+            </audio>
+            <span id="soundEffectOnOff"></span>
+          </div>
+        </div>
+        <div class="cookieContainer">
+          <p id="points">Cookies Baked: <span id="amountOfPoints"></span></p>
+          <img src="/images/cookie.png" id="cookie">
+        </div>
+        <button id="openUpgradesMenu">
+          <p>Upgrades</p>
+        </button>
       </div>
     </div>
     <div class="description">
       <div class="mainDescription">
         <h3>Description</h3>
-        <p>Click the cookie to bake cookies. Use your baked cookies to buy upgrades. Upgrades help you bake more cookies
+        <p>Click the cookie to bake cookies. Use your baked cookies to buy upgrades. Upgrades help you bake more
+          cookies
           faster. Try to bake as many cookies as you can!</p>
       </div>
       <div class="otherDescription">

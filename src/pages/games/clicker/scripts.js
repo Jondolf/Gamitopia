@@ -4,7 +4,8 @@ let upgradeLevel = document.getElementsByClassName("upgradeLevel");
 /**
  * @type {HTMLAudioElement}
  */
-const audio = document.getElementById("soundEffect");
+let soundEffectsOn = false;
+let musicOn = false;
 document.getElementById("cookie").addEventListener("click", addPointsByClick);
 //Adds points when the cookie is clicked
 
@@ -20,6 +21,30 @@ document.getElementById("cookie")
 *
 * @param {MouseEvent} event
 */
+
+function toggleMusic() {
+  musicOn = !musicOn;
+  if (musicOn === true) {
+    document.getElementById("musicOnOff").src = "/images/speaker-icon.svg";
+    document.getElementById("backgroundMusic").play();
+  } else {
+    document.getElementById("musicOnOff").src = "/images/muted-speaker-icon.svg";
+    document.getElementById("backgroundMusic").pause();
+    document.getElementById("backgroundMusic").currentTime = 0;
+  }
+}
+
+function toggleSoundEffects() {
+  soundEffectsOn = !soundEffectsOn;
+  if (soundEffectsOn === true) {
+    document.getElementById("soundEffectOnOff").innerText = 'SFX ON';
+  } else {
+    document.getElementById("soundEffectOnOff").innerText = 'SFX OFF';
+  }
+}
+document.getElementById("toggleMusic").addEventListener("click", toggleMusic);
+document.getElementById("toggleSoundEffects").addEventListener("click", toggleSoundEffects);
+
 function addPointsByTime(pointAmount) {
   points += pointAmount;
   refreshPoints();
@@ -28,8 +53,10 @@ function addPointsByTime(pointAmount) {
 function addPointsByClick(event) {
   points += pointsToAddByClick;
   refreshPoints();
-  audio.currentTime = 0;
-  audio.play();
+  if (soundEffectsOn === true) {
+    document.getElementById("soundEffect").currentTime = 0;
+    document.getElementById("soundEffect").play();
+  }
 }
 
 function refreshPoints() {
@@ -78,6 +105,23 @@ function buyUpgrade(upgradeIndex) {
   //If you have enough points, the cost of the upgrade will be subtracted from your points. Upgrades index +1
 }
 
+const upgradeContainer = document.getElementById("upgradeContainer").style;
+const openUpgradeMenuButton = document.getElementById("openUpgradesMenu");
+let toggleUpgradeMenu = false;
+
+function openUpgradesMenu() {
+  toggleUpgradeMenu = !toggleUpgradeMenu;
+  upgradeContainer.zIndex = 2;
+  upgradeContainer.position = "absolute";
+  if (toggleUpgradeMenu === true) {
+    upgradeContainer.display = "flex";
+  } else if (toggleUpgradeMenu === false) {
+    upgradeContainer.display = "none";
+  }
+}
+openUpgradeMenuButton.addEventListener("click", openUpgradesMenu);
+
+
 document.getElementById("upgrade1").addEventListener("click", () => buyUpgrade(0));
 document.getElementById("upgrade2").addEventListener("click", () => buyUpgrade(1));
 document.getElementById("upgrade3").addEventListener("click", () => buyUpgrade(2));
@@ -95,3 +139,5 @@ upgradeLevel[1].innerText = upgrades[1];
 upgradeLevel[2].innerText = upgrades[2];
 upgradeLevel[3].innerText = upgrades[3];
 upgradeLevel[4].innerText = upgrades[4];
+document.getElementById("musicOnOff").src = "/images/muted-speaker-icon.svg";
+document.getElementById("soundEffectOnOff").innerText = "SFX OFF";
