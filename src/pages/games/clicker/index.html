@@ -42,19 +42,14 @@
             <br>Price: <span class="priceElement"></span>
           </button>
         </li>
-        <li>
-          <button class="upgrades" id="upgrade4">?
-            <br>Level: <span class="upgradeLevel"></span>
-            <br>Price: <span class="priceElement"></span>
-          </button>
-        </li>
-        <li>
-          <button class="upgrades" id="upgrade5">?
-            <br>Level: <span class="upgradeLevel"></span>
-            <br>Price: <span class="priceElement"></span>
-          </button>
-        </li>
       </ul>
+      <div id="resetProgress">
+        <h4>Are you sure you want to reset your progress?</h4>
+        <ul>
+          <button id="resetGame">Confirm reset</button>
+          <button id="cancelReset">Cancel</button>
+        </ul>
+      </div>
       <div class="cookieClickingContainer">
         <div class="audioContainer">
           <div id="toggleMusic">
@@ -63,6 +58,7 @@
             </audio>
             <img id="musicOnOff">
           </div>
+          <button id="openResetMenu">Reset</button>
           <div id="toggleSoundEffects">
             <audio id="soundEffect">
               <source src="/sound/cookie-clicker-sound-effect.mp3" type="audio/mp3">

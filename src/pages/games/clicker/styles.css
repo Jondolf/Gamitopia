@@ -11,10 +11,58 @@ h2 {
   position: relative;
   border: 1px solid black;
   border-radius: 5px;
-  background-color: lightskyblue;
+  background-color: rgb(100, 181, 246);
   width: 70%;
   margin: 30px auto;
   padding: 0;
+}
+
+#openResetMenu {
+  border: 1px solid black;
+  width: 20%;
+  height: 35px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#resetProgress {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  background-color: rgb(26, 35, 126);
+  color: white;
+  z-index: 2;
+  padding: 20px, 0, 0, 0;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 2px solid black;
+}
+
+#resetProgress h4 {
+  padding: 10px;
+}
+
+#resetProgress button {
+  width: 50%;
+  color: black;
+  border: none;
+  font-size: 20px;
+  font-family: Nunito;
+  background-color: rgb(197, 202, 233);
+}
+
+#resetProgress ul {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: rgb(197, 202, 233);
 }
 
 .audioContainer {
@@ -70,7 +118,7 @@ h2 {
   justify-content: space-between;
   width: 40%;
   text-align: left;
-  background-color: rgb(0, 110, 255);
+  background-color: rgb(21, 101, 192);
 }
 
 #upgradeContainer li {
@@ -90,7 +138,7 @@ h2 {
   line-height: 25px;
   font-size: 16px;
   padding: 10px;
-  background-color: rgb(0, 110, 255);
+  background-color: rgb(21, 101, 192);
 }
 
 #openUpgradesMenu {
@@ -160,5 +208,38 @@ h2 {
     color: white;
     font-size: 20px;
     font-family: Nunito, sans-serif;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #toggleMusic, #toggleSoundEffects {
+    width: 40px;
+    height: 40px;
+  }
+  #soundEffectOnOff {
+    font-size: 12px;
+  }
+  #openResetMenu {
+    font-size: 12px;
+    width: 25%;
+  }
+  #resetProgress {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  #resetProgress ul button {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  #resetProgress ul button {
+    font-size: 12px;
+  }
+  #openResetMenu {
+    font-size: 12px;
+    width: 25%;
   }
 }
