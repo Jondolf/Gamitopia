@@ -25,7 +25,7 @@ body {
   justify-content: space-between;
   font-family: Nunito;
   --primaryColor: white;
-  --secondaryColor: rgb(67, 67, 255);
+  --secondaryColor: rgb(55, 76, 194);
   height: 100%;
 }
 
@@ -46,6 +46,7 @@ nav {
   top: 0;
   align-items: center;
   height: 68px;
+  z-index: 10;
 }
 
 .nav-logo {
@@ -58,12 +59,13 @@ nav {
 }
 
 .nav-link-container {
-  font-size: 25px;
+  font-size: 22px;
+  margin-right: 22px;
 }
 
 .nav-link-container li {
   display: inline-block;
-  padding-left: 10px;
+  padding-left: 28px;
 }
 
 .nav-link-container li a {
@@ -88,7 +90,7 @@ footer {
   bottom: 0;
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 500px) {
   .nav-link-container li {
     font-size: 20px;
   }
@@ -97,7 +99,7 @@ footer {
   }
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 460px) {
   .nav-link-container li {
     font-size: 17px;
   }
@@ -106,9 +108,20 @@ footer {
   }
 }
 
-@media only screen and (max-width: 345px) {
+@media only screen and (max-width: 430px) {
   .nav-link-container li {
     font-size: 15px;
+    padding-left: 10px;
+  }
+  .nav-logo {
+    font-size: 26px;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .nav-link-container li {
+    font-size: 14px;
+    padding-left: 8px;
   }
   .nav-logo {
     font-size: 26px;

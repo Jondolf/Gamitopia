@@ -64,6 +64,9 @@ h2 {
 }
 
 @media only screen and (max-width: 400px) {
+  .new-content .new-img {
+    width: 200px;
+  }
   .new-content img {
     width: 250px;
   }
