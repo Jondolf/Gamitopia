@@ -125,8 +125,6 @@ let toggleUpgradeMenu = false;
 
 function openUpgradesMenu() {
   toggleUpgradeMenu = !toggleUpgradeMenu;
-  upgradeContainer.zIndex = "2";
-  upgradeContainer.position = "absolute";
   if (toggleUpgradeMenu === true) {
     upgradeContainer.display = "flex";
   } else if (toggleUpgradeMenu === false) {
