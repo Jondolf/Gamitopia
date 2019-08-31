@@ -211,6 +211,23 @@ h2 {
   }
 }
 
+@media only screen and (max-width: 620px) {
+  .description {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .mainDescription {
+    width: 100%;
+  }
+  .otherDescription {
+    width: 100%;
+    margin-top: 30px;
+  }
+  .mainDescription, .otherDescription {
+    padding: 0;
+  }
+}
+
 @media only screen and (max-width: 500px) {
   #toggleMusic, #toggleSoundEffects {
     width: 40px;
@@ -241,5 +258,8 @@ h2 {
   #openResetMenu {
     font-size: 12px;
     width: 25%;
+  }
+  .description p {
+    font-size: 14px;
   }
 }
