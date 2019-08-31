@@ -2,18 +2,13 @@
   "name": "gamitopia",
   "scripts": {
     "start": "npm run browser-sync",
-    "browser-sync": "browser-sync start --server src --files **/*.html --files **/*.css --files **/*.js --browser \"chrome\"",
-    "build": "gulp build",
-    "build:watch": "gulp build:watch"
+    "browser-sync": "browser-sync start --server src --files **/*.html --files **/*.css --files **/*.js --browser \"chrome\""
   },
   "dependencies": {
     "browser-sync": "^2.24.5",
     "node-static": "^0.7.11"
   },
   "devDependencies": {
-    "concurrently": "^3.6.0",
-    "gulp": "^4.0.0",
-    "gulp-html-minifier": "^0.1.8",
-    "gulp-nunjucks-render": "^2.2.2"
+    "concurrently": "^3.6.0"
   }
 }
