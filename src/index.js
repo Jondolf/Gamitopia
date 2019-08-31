@@ -1,5 +1,5 @@
 const static = require('node-static');
-const file = new static.Server();
+const file = new static.Server('src');
 
 require('http').createServer(function (request, response) {
   request.addListener('end', function () {
