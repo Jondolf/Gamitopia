@@ -1,5 +1,5 @@
 {
-  "name": "game-website",
+  "name": "gamitopia",
   "scripts": {
     "start": "npm run browser-sync",
     "browser-sync": "browser-sync start --server src --files **/*.html --files **/*.css --files **/*.js --browser \"chrome\"",
@@ -7,7 +7,8 @@
     "build:watch": "gulp build:watch"
   },
   "dependencies": {
-    "browser-sync": "^2.24.5"
+    "browser-sync": "^2.24.5",
+    "node-static": "^0.7.11"
   },
   "devDependencies": {
     "concurrently": "^3.6.0",
