@@ -1,4 +1,3 @@
-// @ts-check
 let pointsElement = document.getElementById("amountOfPoints");
 let priceElement = document.getElementsByClassName("priceElement");
 let upgradeLevel = document.getElementsByClassName("upgradeLevel");
