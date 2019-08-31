@@ -228,6 +228,12 @@ h2 {
   }
 }
 
+@media only screen and (max-width: 550px) {
+  #resetProgress ul button {
+    font-size: 16px;
+  }
+}
+
 @media only screen and (max-width: 500px) {
   #toggleMusic, #toggleSoundEffects {
     width: 40px;
@@ -245,12 +251,6 @@ h2 {
   }
 }
 
-@media only screen and (max-width: 550px) {
-  #resetProgress ul button {
-    font-size: 16px;
-  }
-}
-
 @media only screen and (max-width: 460px) {
   #resetProgress ul button {
     font-size: 12px;
@@ -260,6 +260,12 @@ h2 {
     width: 25%;
   }
   .description p {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .upgrades {
     font-size: 14px;
   }
 }
