@@ -126,8 +126,10 @@ let toggleUpgradeMenu = false;
 function openUpgradesMenu() {
   toggleUpgradeMenu = !toggleUpgradeMenu;
   if (toggleUpgradeMenu === true) {
+    document.getElementById("openUpgradesMenu").innerText = "Close upgrades";
     upgradeContainer.display = "flex";
   } else if (toggleUpgradeMenu === false) {
+    document.getElementById("openUpgradesMenu").innerText = "Open upgrades";
     upgradeContainer.display = "none";
   }
 }
