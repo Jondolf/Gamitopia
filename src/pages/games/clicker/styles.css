@@ -15,6 +15,7 @@ h2 {
   width: 70%;
   margin: 30px auto;
   padding: 0;
+  touch-action: manipulation;
 }
 
 #openResetMenu {
