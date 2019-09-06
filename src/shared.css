@@ -53,6 +53,7 @@ body {
   justify-content: space-between;
   font-family: Nunito;
   height: 100%;
+  background-color: var(--primaryColor);
 }
 
 a {
