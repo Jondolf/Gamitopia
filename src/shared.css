@@ -15,8 +15,36 @@
   padding: 0;
 }
 
+:root {
+  --primaryColor: white;
+  --secondaryColor: rgb(55, 76, 194);
+}
+
 html {
   height: 100%;
+}
+
+.darkMode {
+  --primaryColor: #393e46;
+  --secondaryColor: #222831;
+}
+
+.darkMode a:hover {
+  color: red;
+}
+
+.darkMode nav li a:hover {
+  color: #ca3e47;
+}
+
+#darkModeButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.darkMode h2 {
+  color: white;
 }
 
 body {
@@ -24,8 +52,6 @@ body {
   flex-direction: column;
   justify-content: space-between;
   font-family: Nunito;
-  --primaryColor: white;
-  --secondaryColor: rgb(55, 76, 194);
   height: 100%;
 }
 
@@ -50,16 +76,9 @@ nav {
   z-index: 10;
 }
 
-.nav-logo {
-  text-align: center;
-  font-size: 50px;
-}
-
-.nav-logo:hover {
-  cursor: default;
-}
-
 .nav-link-container {
+  display: flex;
+  align-items: center;
   font-size: 22px;
   margin-right: 22px;
 }
@@ -81,6 +100,7 @@ nav {
 main {
   margin-top: 66px;
   text-align: center;
+  background-color: var(--primaryColor);
 }
 
 footer {
