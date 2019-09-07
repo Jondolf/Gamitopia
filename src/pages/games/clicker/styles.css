@@ -1,3 +1,13 @@
+body {
+  --upgrades: rgb(55, 76, 194);
+  --clickingContainer: rgb(100, 181, 246);
+}
+
+.cookieClickerDarkMode {
+  --upgrades: #17223b;
+  --clickingContainer: #263859;
+}
+
 h2 {
   margin: 30px;
 }
@@ -11,7 +21,7 @@ h2 {
   position: relative;
   border: 1px solid black;
   border-radius: 5px;
-  background-color: rgb(100, 181, 246);
+  background-color: var(--clickingContainer);
   width: 70%;
   margin: 30px auto;
   padding: 0;
@@ -119,7 +129,6 @@ h2 {
   flex-flow: wrap;
   width: 40%;
   text-align: left;
-  background-color: rgb(21, 101, 192);
 }
 
 #upgradeContainer li {
@@ -138,7 +147,7 @@ h2 {
   line-height: 25px;
   font-size: 16px;
   padding: 0 10px 0 10px;
-  background-color: rgb(21, 101, 192);
+  background-color: var(--upgrades);
 }
 
 #openUpgradesMenu {

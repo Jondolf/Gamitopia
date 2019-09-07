@@ -218,3 +218,29 @@ priceElement[2].innerText = Math.round(upgradeService.getCost(2)).toString();
 upgradeLevel[0].innerText = upgradeService.timesUpgraded[0].toString();
 upgradeLevel[1].innerText = upgradeService.timesUpgraded[1].toString();
 upgradeLevel[2].innerText = upgradeService.timesUpgraded[2].toString();
+
+function toggleDarkMode() {
+  localStorage.setItem("darkMode", darkModeOnOff);
+
+  if (localStorage.getItem("darkMode") === "true") {
+    bodyElement[0].classList.add("cookieClickerDarkMode");
+    document.getElementById("points").style.color = "white";
+    document.getElementById("darkModeButton").src = "/images/turnDarkModeOff.png";
+  } else if (localStorage.getItem("darkMode") === "false") {
+    bodyElement[0].classList.remove("cookieClickerDarkMode");
+    document.getElementById("points").style.color = "black";
+    document.getElementById("darkModeButton").src = "/images/turnDarkModeOn.png";
+  }
+}
+
+document.getElementById("darkModeButton").addEventListener("click", toggleDarkMode);
+
+if (localStorage.getItem("darkMode") === "true") {
+  bodyElement[0].classList.add("cookieClickerDarkMode");
+  document.getElementById("points").style.color = "white";
+  document.getElementById("darkModeButton").src = "/images/turnDarkModeOff.png";
+} else if (localStorage.getItem("darkMode") === "false") {
+  bodyElement[0].classList.remove("cookieClickerDarkMode");
+  document.getElementById("points").style.color = "black";
+  document.getElementById("darkModeButton").src = "/images/turnDarkModeOn.png";
+}
