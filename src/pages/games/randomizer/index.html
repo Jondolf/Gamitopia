@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146791846-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-146791846-1');
+  </script>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="/shared.css">
+  <title>Randomizer | Gamitopia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="description" content="Free Games">
+  <meta name="keywords" content="Games">
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/favicons.ico/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/favicons.ico/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/favicons.ico/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/favicons.ico/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/favicons.ico/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/favicons.ico/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/favicons.ico/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/favicons.ico/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons.ico/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/images/favicons.ico/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons.ico/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicons.ico/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons.ico/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#374cc2">
+  <meta name="msapplication-TileImage" content="/images/favicons.ico/ms-icon-144x144.png">
+  <meta name="theme-color" content="#374cc2">
+</head>
+
+
+<body>
+  <nav id="nav">
+    <img src="/images/turnDarkModeOn.png" id="darkModeButton">
+    <ul class="nav-link-container">
+      <li><a href="/">Home</a></li>
+      <li><a href="/pages/games">Games</a></li>
+      <li><a href="/pages/news">News</a></li>
+      <li><a href="/pages/about">About</a></li>
+    </ul>
+  </nav>
+  <main id="main">
+    <h2 id="randomizer-header">Randomizer</h2>
+    <div class="randomizer-container" id="randomizer-container">
+      <div class="header-container">
+        <h2>Press the button to randomize!</h2>
+      </div>
+      <div class="top-img-container">
+        <img src="/images/hamburger-menu-icon.png" id="open-what-to-randomize-menu">
+        <img src="/images/toggle-fullscreen-icon.png" id="fullscreen">
+      </div>
+      <div id="what-to-randomize-menu-container">
+        <ul>
+          <li class="what-to-randomize">Number Range</li>
+          <li class="what-to-randomize">Heads or Tails</li>
+          <li class="what-to-randomize">Roll Dice</li>
+        </ul>
+      </div>
+      <div id="num-range-result" class="result"></div>
+      <div id="heads-or-tails-result" class="result"></div>
+      <div id="roll-dice-result" class="result">
+        <img src="/images/num-1-dice.jpg" class="dice-img-hide">
+        <img src="/images/num-2-dice.jpg" class="dice-img-hide">
+        <img src="/images/num-3-dice.jpg" class="dice-img-hide">
+        <img src="/images/num-4-dice.jpg" class="dice-img-hide">
+        <img src="/images/num-5-dice.jpg" class="dice-img-hide">
+        <img src="/images/num-6-dice.jpg" class="dice-img-hide">
+      </div>
+      <div class="randomizer-button-container">
+        <button id="randomizer-button">Randomize</button>
+      </div>
+      <div id="randomizer-settings">
+        <input type="range" max="1000" min="0" value="10" id="slider">
+        <span id="slider-value"></span>
+      </div>
+    </div>
+    <div id="main-other">
+      <div class="description">
+        <div class="mainDescription">
+          <h3>Description</h3>
+          <p>Press the button in the bottom to randomize. Click the menu button to open a small list of things to
+            randomize. Click on a list item and press the randomizer button to randomize.
+            <br>
+            <br>
+            Number Range: Get a random number from 0 to 10 (with default settings). You can move the slider below the
+            randomizer button to change the range of numbers to randomize, for example 0 to 100 or 0 to 255.
+            <br>
+            <br>
+            Heads or Tails: Get either heads or tails. This could be useful if you have to decide between two things.
+            For example, should I eat pizza or lasagna? Heads or tails?
+            <br>
+            <br>
+            Roll Dice: Get a random number (shown on the dice) between 1 and 6. This could be useful, for example, if
+            you want to play board games but don't have a dice with you.
+          </p>
+        </div>
+        <div class="otherDescription">
+          <div class="madeWith">
+            <h3>Made with:</h3>
+            <ul>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+            </ul>
+          </div>
+          <div class="otherInfo">
+            <h3>Other Info</h3>
+            <p>Dark mode support: no</p>
+            <br>
+            <p>Fullscreen support: yes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer id="footer">&copy Gamitopia 2019</footer>
+  <script src="./randomizer.js"></script>
+  <script src="/shared.js"></script>
+</body>
+
+</html>

@@ -161,8 +161,8 @@ h2 {
   border-radius: 5px;
   margin: 50px auto;
   color: white;
-  padding: 10px;
   text-align: left;
+  position: relative;
 }
 
 .description h3 {
@@ -172,20 +172,31 @@ h2 {
 .mainDescription, .otherDescription {
   padding: 20px;
   list-style: none;
+  box-sizing: border-box;
 }
 
 .mainDescription {
-  width: 70%;
-  height: 100%;
+  width: 60%;
+  border-right: 1px solid;
 }
 
 .otherDescription {
-  width: 30%;
+  width: 40%;
   height: 100%;
 }
 
 .otherDescription li {
   list-style: none;
+}
+
+.madeWith {
+  padding: 20px;
+  height: 100%;
+}
+
+.otherInfo {
+  padding: 20px;
+  height: 100%;
 }
 
 @media only screen and (max-width: 800px) {
@@ -230,12 +241,12 @@ h2 {
   }
   .mainDescription {
     width: 100%;
+    border-right: none;
+    border-bottom: 1px solid;
+    padding: 20px;
   }
   .otherDescription {
     width: 100%;
-    margin-top: 30px;
-  }
-  .mainDescription, .otherDescription {
     padding: 0;
   }
 }
