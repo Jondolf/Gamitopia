@@ -20,6 +20,11 @@
   --secondaryColor: rgb(55, 76, 194);
 }
 
+::selection {
+  background-color: rgb(76, 92, 130);
+  color: white;
+}
+
 html {
   height: 100%;
 }
@@ -27,6 +32,10 @@ html {
 .darkMode {
   --primaryColor: #393e46;
   --secondaryColor: #222831;
+}
+
+.darkMode ::selection {
+  background-color: rgb(255, 160, 160);
 }
 
 .darkMode a:hover {
