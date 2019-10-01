@@ -95,7 +95,8 @@ img {
 .header-container {
   position: absolute;
   left: 50%;
-  width: 70%;
+  width: 71%;
+  margin-top: 30px;
 }
 
 .top-img-container {
@@ -122,7 +123,6 @@ img {
   position: relative;
   text-align: center;
   margin: auto;
-  margin-top: 30px;
   color: white;
   width: 100%;
 }
@@ -269,31 +269,57 @@ img {
 }
 
 @media only screen and (max-width: 850px) {
-  #randomizer-container .header-container h2 {
-    font-size: 18px;
+  #randomizer-container .header-container {
+    font-size: 13px;
     margin-top: 20px;
   }
   .top-img-container img {
     width: 30px;
+    height: 30px;
     margin: 20px;
   }
   #what-to-randomize-menu-container ul li {
-    font-size: 16px;
+    font-size: 14px;
   }
   .result {
     font-size: 70px;
+  }
+  .fullscreen-randomizer .header-container h2 {
+    font-size: 22px;
+    margin-bottom: 25px;
+  }
+  .fullscreen-randomizer .top-img-container img {
+    width: 35px;
+    height: 35px;
+    margin: 25px;
+  }
+  .fullscreen-randomizer .result {
+    font-size: 90px;
   }
 }
 
 @media only screen and (max-width: 675px) {
   .header-container {
-    font-size: 13px;
+    font-size: 12px;
   }
   .top-img-container img {
     width: 25px;
+    height: 25px;
   }
   #what-to-randomize-menu-container ul li {
-    font-size: 13px;
+    font-size: 12px;
+  }
+  .fullscreen-randomizer .header-container h2 {
+    font-size: 28px;
+    margin-bottom: 22px;
+  }
+  .fullscreen-randomizer .top-img-container img {
+    width: 35px;
+    height: 35px;
+    margin: 22px;
+  }
+  .fullscreen-randomizer .result {
+    font-size: 85px;
   }
 }
 
@@ -312,29 +338,41 @@ img {
     width: 100%;
     padding: 0;
   }
-  #randomizer-container .header-container h2 {
-    font-size: 17px;
+  #randomizer-container .header-container {
+    font-size: 12px;
     margin-top: 18px;
   }
   .top-img-container img {
-    width: 25px;
     margin: 18px;
   }
   #what-to-randomize-menu-container ul li {
-    font-size: 13px;
+    font-size: 11px;
   }
   .result {
     font-size: 65px;
   }
+  .fullscreen-randomizer .header-container h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  .fullscreen-randomizer .top-img-container img {
+    width: 30px;
+    height: 30px;
+    margin: 20px;
+  }
+  .fullscreen-randomizer .result {
+    font-size: 80px;
+  }
 }
 
 @media only screen and (max-width: 550px) {
-  #randomizer-container .header-container h2 {
-    font-size: 16px;
+  #randomizer-container .header-container {
+    font-size: 10px;
     margin-top: 18px;
   }
   .top-img-container img {
     width: 23px;
+    height: 23px;
     margin: 18px;
   }
   #what-to-randomize-menu-container {
@@ -352,12 +390,13 @@ img {
 }
 
 @media only screen and (max-width: 500px) {
-  #randomizer-container .header-container h2 {
-    font-size: 14px;
+  #randomizer-container .header-container {
+    font-size: 9px;
     margin-top: 16px;
   }
   .top-img-container img {
     width: 20px;
+    height: 20px;
     margin: 16px;
   }
   #what-to-randomize-menu-container {
@@ -375,16 +414,29 @@ img {
     font-size: 15px;
     padding: 6px;
   }
+  .fullscreen-randomizer .header-container h2 {
+    font-size: 16px;
+    margin-bottom: 18px;
+  }
+  .fullscreen-randomizer .top-img-container img {
+    width: 28px;
+    height: 28px;
+    margin: 18px;
+  }
+  .fullscreen-randomizer .result {
+    font-size: 75px;
+  }
 }
 
 @media only screen and (max-width: 440px) {
-  #randomizer-container .header-container h2 {
-    font-size: 12px;
-    margin-top: 14px;
+  #randomizer-container .header-container {
+    font-size: 8px;
+    margin-top: 10px;
   }
   .top-img-container img {
-    width: 17px;
-    margin: 14px;
+    width: 18px;
+    height: 18px;
+    margin: 8px;
   }
   #what-to-randomize-menu-container {
     width: 100%;
@@ -401,23 +453,36 @@ img {
     font-size: 12px;
     padding: 5px;
   }
+  .fullscreen-randomizer .header-container h2 {
+    font-size: 14px;
+    margin-top: 18px;
+  }
+  .fullscreen-randomizer .top-img-container img {
+    width: 28px;
+    height: 28px;
+    margin: 18px;
+  }
+  .fullscreen-randomizer .result {
+    font-size: 75px;
+  }
 }
 
 @media only screen and (max-width: 360px) {
-  #randomizer-container .header-container h2 {
-    font-size: 10px;
-    margin-top: 12px;
+  #randomizer-container .header-container {
+    font-size: 7px;
+    margin-top: 6px;
   }
   .top-img-container img {
-    width: 13px;
-    margin: 12px;
+    width: 16px;
+    height: 16px;
+    margin: 6px;
   }
   #what-to-randomize-menu-container {
     width: 100%;
     padding: 8px;
   }
   #what-to-randomize-menu-container ul li {
-    font-size: 8px;
+    font-size: 10px;
   }
   .result {
     font-size: 30px;
@@ -426,5 +491,17 @@ img {
   #randomizer-button {
     font-size: 10px;
     padding: 5px;
+  }
+  .fullscreen-randomizer .header-container h2 {
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+  .fullscreen-randomizer .top-img-container img {
+    width: 26px;
+    height: 26px;
+    margin: 16px;
+  }
+  .fullscreen-randomizer .result {
+    font-size: 70px;
   }
 }
