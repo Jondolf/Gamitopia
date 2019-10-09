@@ -1,0 +1,34 @@
+html {
+  --primary-color: white;
+  --secondary-color: rgb(55, 76, 194);
+}
+
+@font-face {
+  font-family: Nunito;
+  src: url(/assets/fonts/Nunito/Nunito-Regular.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Nunito;
+  src: url(/assets/fonts/Nunito/Nunito-Bold.ttf);
+  font-weight: bold;
+}
+
+.darkMode {
+  --primary-color: #393e46;
+  --secondary-color: #222831;
+  border-color: white;
+  color: white;
+  ::selection {
+    background-color: rgb(255, 160, 160);
+  }
+
+  a:hover {
+    color: red;
+  }
+
+  #nav .nav-link-container a:hover {
+    color: #ca3e47;
+  }
+}
