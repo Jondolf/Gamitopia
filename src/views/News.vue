@@ -41,7 +41,7 @@
         <br />I also did some minor other changes, mostly typos and updating
         info on the about-page. That's it for now.
       </p>
-      <h6></h6>
+      <h6>9.10.2019</h6>
     </div>
     <div class="news-post">
       <h3>Randomizer</h3>

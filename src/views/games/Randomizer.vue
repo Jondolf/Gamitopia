@@ -6,7 +6,10 @@
         <h2>Press the button to randomize!</h2>
       </div>
       <div class="top-img-container">
-        <img src="@/assets/images/hamburger-menu-icon.png" id="open-what-to-randomize-menu" />
+        <img
+          src="@/assets/images/hamburger-menu-icon.png"
+          id="open-what-to-randomize-menu"
+        />
         <img src="@/assets/images/toggle-fullscreen-icon.png" id="fullscreen" />
       </div>
       <div id="what-to-randomize-menu-container">
@@ -62,8 +65,8 @@
             <h3>Made with:</h3>
             <ul>
               <li>HTML</li>
-              <li>CSS</li>
-              <li>JavaScript</li>
+              <li>SCSS</li>
+              <li>TypeScript</li>
             </ul>
           </div>
           <div class="otherInfo">
@@ -79,19 +82,18 @@
 </template>
 
 <script lang="ts">
-//@ts-nocheck
 import Vue from "vue";
 export default Vue.extend({
   name: "randomizer",
   components: {},
   mounted() {
     let whatToRandomize = document.getElementsByClassName("what-to-randomize");
-    let numRangeResult = document.getElementById("num-range-result");
-    let headsOrTailsResult = document.getElementById("heads-or-tails-result");
-    let rollDiceResult = document.getElementById("roll-dice-result");
-    let randomizerButton = document.getElementById("randomizer-button");
+    let numRangeResult = document.getElementById("num-range-result")!;
+    let headsOrTailsResult = document.getElementById("heads-or-tails-result")!;
+    let rollDiceResult = document.getElementById("roll-dice-result")!;
+    let randomizerButton = document.getElementById("randomizer-button")!;
 
-    let numberRange = document.getElementById("randomizer-settings");
+    let numberRange = document.getElementById("randomizer-settings")!;
 
     function removeHighlightsFromWhatToRandomizeMenu() {
       whatToRandomize[0].classList.remove("highlight");
@@ -99,7 +101,7 @@ export default Vue.extend({
       whatToRandomize[2].classList.remove("highlight");
     }
 
-    function highlightWhatToRandomizeMenuElement(index) {
+    function highlightWhatToRandomizeMenuElement(index: number) {
       whatToRandomize[index].classList.add("highlight");
     }
 
@@ -111,20 +113,24 @@ export default Vue.extend({
       rollDiceResult.className = "hide";
       numberRange.style.display = "flex";
       randomizerButton.addEventListener("click", getRandomNumber);
-      let sliderElement = document.getElementById("slider");
+      let sliderElement = document.getElementById(
+        "slider"
+      )! as HTMLInputElement;
       let sliderValue = sliderElement.value;
-      document.getElementById("slider-value").innerText = sliderValue;
+      document.getElementById("slider-value")!.innerText = sliderValue;
 
-      let numRange = +document.getElementById("slider-value").innerText;
+      let numRange = +document.getElementById("slider-value")!.innerText;
 
       function getRandomNumber() {
         const randomNumber = Math.floor(Math.random() * (numRange + 1));
-        numRangeResult.innerHTML = randomNumber;
+        numRangeResult.innerHTML = randomNumber.toString();
       }
 
       sliderElement.oninput = function() {
-        document.getElementById("slider-value").innerText = this.value;
-        numRange = +this.value;
+        document.getElementById(
+          "slider-value"
+        )!.innerText = (this as HTMLInputElement).value;
+        numRange = +(this as HTMLInputElement).value;
       };
     }
 
@@ -136,7 +142,7 @@ export default Vue.extend({
       headsOrTailsResult.className = "result";
       rollDiceResult.className = "hide";
       numberRange.style.display = "none";
-      document.getElementById("randomizer-button").style.display = "block";
+      document.getElementById("randomizer-button")!.style.display = "block";
       function getRandomNumber() {
         let randomNum = Math.round(Math.random());
         if (randomNum === 0) {
@@ -159,7 +165,13 @@ export default Vue.extend({
         function setImg() {
           let diceImg = document.getElementsByClassName("dice-img-hide");
           let randomNum = Math.round(Math.random() * 5 + 1);
-          function hideDice(one, two, three, four, five) {
+          function hideDice(
+            one: number,
+            two: number,
+            three: number,
+            four: number,
+            five: number
+          ) {
             diceImg[one].className = "dice-img-hide";
             diceImg[two].className = "dice-img-hide";
             diceImg[three].className = "dice-img-hide";
@@ -215,11 +227,11 @@ export default Vue.extend({
       if (openWhatToRandomizeMenuToggle === true) {
         document.getElementById(
           "what-to-randomize-menu-container"
-        ).style.display = "block";
+        )!.style.display = "block";
       } else {
         document.getElementById(
           "what-to-randomize-menu-container"
-        ).style.display = "none";
+        )!.style.display = "none";
       }
     }
 
@@ -227,19 +239,19 @@ export default Vue.extend({
     function toggleFullscreen() {
       fullscreenToggle = !fullscreenToggle;
       if (fullscreenToggle === true) {
-        document.getElementById("randomizer-container").className =
+        document.getElementById("randomizer-container")!.className =
           "fullscreen-randomizer";
       } else {
-        document.getElementById("randomizer-container").className =
+        document.getElementById("randomizer-container")!.className =
           "randomizer-container";
       }
     }
 
     document
-      .getElementById("open-what-to-randomize-menu")
+      .getElementById("open-what-to-randomize-menu")!
       .addEventListener("click", openWhatToRandomizeMenu);
     document
-      .getElementById("fullscreen")
+      .getElementById("fullscreen")!
       .addEventListener("click", toggleFullscreen);
     openWhatToRandomizeMenu();
   }

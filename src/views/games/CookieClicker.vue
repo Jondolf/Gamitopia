@@ -86,8 +86,8 @@
           <h3>Made with:</h3>
           <ul>
             <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
+            <li>SCSS</li>
+            <li>TypeScript</li>
           </ul>
         </div>
         <div class="otherInfo">
@@ -112,7 +112,7 @@ export default Vue.extend({
     let upgradeLevel = document.getElementsByClassName("upgradeLevel");
     function resetInterval() {
       pointService.previousTime = performance.now();
-      clearInterval(pointService.pointInterval);
+      clearInterval(pointService.pointInterval!);
       pointService.pointInterval = setInterval(
         () => pointService.addPointsByTime(pointService.pointsToAddByTime),
         Math.max(pointService.timeBetweenPoints, 50)
@@ -133,12 +133,12 @@ export default Vue.extend({
         );
       },
 
-      getCost(upgradeIndex) {
+      getCost(upgradeIndex: number) {
         const newUpgradeIndex = this.timesUpgraded[upgradeIndex] + 1; //Adds 1 to the times-upgraded counter
         const defaultCost = this.defaultUpgradeCosts[upgradeIndex]; //The default cost of the element given by the argument
         return defaultCost * Math.pow(1.1, newUpgradeIndex - 1); //Changes the default cost
       },
-      buyUpgrade(upgradeIndex) {
+      buyUpgrade(upgradeIndex: number) {
         if (pointService.points < this.getCost(upgradeIndex)) {
           return;
         }
@@ -146,19 +146,25 @@ export default Vue.extend({
         this.timesUpgraded[upgradeIndex]++;
         if (upgradeIndex === 0) {
           pointService.pointsToAddByClick++;
-          priceElement[0].innerText = Math.floor(this.getCost(upgradeIndex));
-          upgradeLevel[0].innerText = this.timesUpgraded[0];
+          priceElement[0].innerHTML = Math.floor(
+            this.getCost(upgradeIndex)
+          ).toString();
+          upgradeLevel[0].innerHTML = this.timesUpgraded[0].toString();
         } else if (upgradeIndex === 1) {
           pointService.timeBetweenPoints *= 0.9;
           resetInterval();
-          priceElement[1].innerText = Math.floor(this.getCost(upgradeIndex));
-          upgradeLevel[1].innerText = this.timesUpgraded[1];
+          priceElement[1].innerHTML = Math.floor(
+            this.getCost(upgradeIndex)
+          ).toString();
+          upgradeLevel[1].innerHTML = this.timesUpgraded[1].toString();
           refreshPoints();
         } else if (upgradeIndex === 2) {
           pointService.pointsToAddByTime++;
           resetInterval();
-          priceElement[2].innerText = Math.floor(this.getCost(upgradeIndex));
-          upgradeLevel[2].innerText = this.timesUpgraded[2];
+          priceElement[2].innerHTML = Math.floor(
+            this.getCost(upgradeIndex)
+          ).toString();
+          upgradeLevel[2].innerHTML = this.timesUpgraded[2].toString();
           refreshPoints();
         }
         refreshPoints();
@@ -171,39 +177,43 @@ export default Vue.extend({
 
       toggleMusic() {
         this.musicOn = !this.musicOn;
+        const bgMusic = document.getElementById(
+          "backgroundMusic"
+        )! as HTMLAudioElement;
+        const musicOnOffImg = document.getElementById(
+          "musicOnOff"
+        )! as HTMLImageElement;
         if (this.musicOn === true) {
-          document.getElementById(
-            "musicOnOff"
-          ).src = require("@/assets/images/speaker-icon.svg");
-          document.getElementById("backgroundMusic").play();
+          musicOnOffImg.src = require("@/assets/images/speaker-icon.svg");
+          bgMusic.play();
         } else {
-          document.getElementById(
+          (document.getElementById(
             "musicOnOff"
-          ).src = require("@/assets/images/muted-speaker-icon.svg");
-          document.getElementById("backgroundMusic").pause();
-          document.getElementById("backgroundMusic").currentTime = 0;
+          )! as HTMLImageElement).src = require("@/assets/images/muted-speaker-icon.svg");
+          bgMusic.pause();
+          bgMusic.currentTime = 0;
         }
       },
 
       toggleSoundEffects() {
         this.soundEffectsOn = !this.soundEffectsOn;
+        const sfxOnOff = document.getElementById("soundEffectOnOff")!;
         if (this.soundEffectsOn === true) {
-          document.getElementById("soundEffectOnOff").innerText = "SFX ON";
+          sfxOnOff.innerText = "SFX ON";
         } else {
-          document.getElementById("soundEffectOnOff").innerText = "SFX OFF";
+          sfxOnOff.innerText = "SFX OFF";
         }
       }
     };
-
     const pointService = {
       points: 0,
       pointsToAddByClick: 1,
       pointsToAddByTime: 1,
-      pointInterval: null,
+      pointInterval: null as number | null,
       timeBetweenPoints: 2000,
       previousTime: performance.now(),
 
-      addPointsByTime(pointAmount) {
+      addPointsByTime(pointAmount: number) {
         const timeDifference = performance.now() - this.previousTime;
         const timesAdded = Math.floor(timeDifference / this.timeBetweenPoints);
         this.previousTime += timesAdded * this.timeBetweenPoints;
@@ -218,16 +228,19 @@ export default Vue.extend({
         localStorage.setItem("cookie-clicker-points", this.points.toString());
         refreshPoints();
         if (musicService.soundEffectsOn === true) {
-          document.getElementById("soundEffect").currentTime = 0;
-          document.getElementById("soundEffect").play();
+          const sfx = document.getElementById(
+            "soundEffect"
+          )! as HTMLAudioElement;
+          sfx.currentTime = 0;
+          sfx.play();
         }
       }
     };
 
     document
-      .getElementById("cookie")
+      .getElementById("cookie")!
       .addEventListener("click", () => pointService.addPointsByClick());
-    document.getElementById("cookie").addEventListener(
+    document.getElementById("cookie")!.addEventListener(
       "mousedown",
       function(e) {
         e.preventDefault();
@@ -236,59 +249,62 @@ export default Vue.extend({
     );
 
     function refreshPoints() {
-      document.getElementById("amountOfPoints").innerText = Math.floor(
+      document.getElementById("amountOfPoints")!.innerText = Math.floor(
         pointService.points
       ).toString();
     }
 
     function refreshUpgrades() {
       upgradeService.timesUpgraded = [0, 0, 0];
-      upgradeService.getCost();
+      for (let i = 0; i < 3; i++) {
+        upgradeService.getCost(i);
+      }
     }
 
-    const upgradeContainer = document.getElementById("upgradeContainer").style;
+    const upgradeContainer = document.getElementById("upgradeContainer")!.style;
     const openUpgradeMenuButton = document.getElementById("openUpgradesMenu");
     let toggleUpgradeMenu = false;
 
     function openUpgradesMenu() {
       toggleUpgradeMenu = !toggleUpgradeMenu;
       if (toggleUpgradeMenu === true) {
-        document.getElementById("openUpgradesMenu").innerText =
+        document.getElementById("openUpgradesMenu")!.innerText =
           "Close upgrades";
         upgradeContainer.display = "flex";
       } else if (toggleUpgradeMenu === false) {
-        document.getElementById("openUpgradesMenu").innerText = "Open upgrades";
+        document.getElementById("openUpgradesMenu")!.innerText =
+          "Open upgrades";
         upgradeContainer.display = "none";
       }
     }
 
-    openUpgradeMenuButton.addEventListener("click", openUpgradesMenu);
+    openUpgradeMenuButton!.addEventListener("click", openUpgradesMenu);
 
-    pointService.points = +localStorage.getItem("cookie-clicker-points");
+    pointService.points = +localStorage.getItem("cookie-clicker-points")!;
 
     document
-      .getElementById("openResetMenu")
+      .getElementById("openResetMenu")!
       .addEventListener("click", toggleResetMenu);
     document
-      .getElementById("cancelReset")
+      .getElementById("cancelReset")!
       .addEventListener("click", closeResetMenu);
 
     let resetProgressMenu = false;
     function toggleResetMenu() {
       resetProgressMenu = !resetProgressMenu;
       if (resetProgressMenu === false) {
-        document.getElementById("resetProgress").style.display = "none";
+        document.getElementById("resetProgress")!.style.display = "none";
       } else {
-        document.getElementById("resetProgress").style.display = "block";
+        document.getElementById("resetProgress")!.style.display = "block";
       }
     }
 
     function closeResetMenu() {
-      document.getElementById("resetProgress").style.display = "none";
+      document.getElementById("resetProgress")!.style.display = "none";
     }
 
     function resetGameData() {
-      document.getElementById("resetProgress").style.display = "none";
+      document.getElementById("resetProgress")!.style.display = "none";
       localStorage.removeItem("cookie-clicker-points");
       localStorage.removeItem("cookie-clicker-upgrades");
       localStorage.removeItem("cookie-clicker-points-to-add-by-click");
@@ -297,52 +313,52 @@ export default Vue.extend({
       pointService.pointsToAddByClick = 1;
       pointService.pointsToAddByTime = 1;
       pointService.timeBetweenPoints = 2000;
-      clearInterval(pointService.pointInterval);
+      clearInterval(pointService.pointInterval!);
       refreshPoints();
       refreshDefaultUpgrades();
     }
 
     upgradeService.timesUpgraded =
-      JSON.parse(localStorage.getItem("cookie-clicker-upgrades")) ||
+      JSON.parse(localStorage.getItem("cookie-clicker-upgrades")!) ||
       upgradeService.timesUpgraded;
 
     document
-      .getElementById("resetGame")
+      .getElementById("resetGame")!
       .addEventListener("click", resetGameData);
     document
-      .getElementById("upgrade1")
+      .getElementById("upgrade1")!
       .addEventListener("click", () => upgradeService.buyUpgrade(0));
     document
-      .getElementById("upgrade2")
+      .getElementById("upgrade2")!
       .addEventListener("click", () => upgradeService.buyUpgrade(1));
     document
-      .getElementById("upgrade3")
+      .getElementById("upgrade3")!
       .addEventListener("click", () => upgradeService.buyUpgrade(2));
 
     function refreshDefaultUpgrades() {
-      priceElement[0].innerText = upgradeService.defaultUpgradeCosts[0];
-      priceElement[1].innerText = upgradeService.defaultUpgradeCosts[1];
-      priceElement[2].innerText = upgradeService.defaultUpgradeCosts[2];
+      priceElement[0].innerHTML = upgradeService.defaultUpgradeCosts[0].toString();
+      priceElement[1].innerHTML = upgradeService.defaultUpgradeCosts[1].toString();
+      priceElement[2].innerHTML = upgradeService.defaultUpgradeCosts[2].toString();
 
-      upgradeLevel[0].innerText = upgradeService.timesUpgraded[0];
-      upgradeLevel[1].innerText = upgradeService.timesUpgraded[1];
-      upgradeLevel[2].innerText = upgradeService.timesUpgraded[2];
+      upgradeLevel[0].innerHTML = upgradeService.timesUpgraded[0].toString();
+      upgradeLevel[1].innerHTML = upgradeService.timesUpgraded[1].toString();
+      upgradeLevel[2].innerHTML = upgradeService.timesUpgraded[2].toString();
     }
 
     function refreshCurrentUpgrades() {
-      document.getElementById("upgrade1").innerText;
+      document.getElementById("upgrade1")!.innerText;
     }
 
     document
-      .getElementById("toggleMusic")
+      .getElementById("toggleMusic")!
       .addEventListener("click", () => musicService.toggleMusic());
     document
-      .getElementById("toggleSoundEffects")
+      .getElementById("toggleSoundEffects")!
       .addEventListener("click", () => musicService.toggleSoundEffects());
-    document.getElementById(
+    (document.getElementById(
       "musicOnOff"
-    ).src = require("@/assets/images/muted-speaker-icon.svg");
-    document.getElementById("soundEffectOnOff").innerText = "SFX OFF";
+    )! as HTMLAudioElement).src = require("@/assets/images/muted-speaker-icon.svg");
+    document.getElementById("soundEffectOnOff")!.innerText = "SFX OFF";
 
     pointService.pointsToAddByClick = upgradeService.timesUpgraded[0] + 1;
 
@@ -360,19 +376,19 @@ export default Vue.extend({
     pointService.pointsToAddByTime;
     refreshPoints();
 
-    priceElement[0].innerText = Math.round(
+    priceElement[0].innerHTML = Math.round(
       upgradeService.getCost(0)
     ).toString();
-    priceElement[1].innerText = Math.round(
+    priceElement[1].innerHTML = Math.round(
       upgradeService.getCost(1)
     ).toString();
-    priceElement[2].innerText = Math.round(
+    priceElement[2].innerHTML = Math.round(
       upgradeService.getCost(2)
     ).toString();
 
-    upgradeLevel[0].innerText = upgradeService.timesUpgraded[0].toString();
-    upgradeLevel[1].innerText = upgradeService.timesUpgraded[1].toString();
-    upgradeLevel[2].innerText = upgradeService.timesUpgraded[2].toString();
+    upgradeLevel[0].innerHTML = upgradeService.timesUpgraded[0].toString();
+    upgradeLevel[1].innerHTML = upgradeService.timesUpgraded[1].toString();
+    upgradeLevel[2].innerHTML = upgradeService.timesUpgraded[2].toString();
   }
 });
 </script>
