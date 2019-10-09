@@ -17,6 +17,8 @@ export default Vue.extend({
     Footer
   }
 });
+const attachFastClick = require('fastclick');
+attachFastClick(document.body);
 </script>
 
 <style lang="scss">
