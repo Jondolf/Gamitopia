@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@types/fastclick": "^1.0.28",
     "fastclick": "^1.0.6",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3"
@@ -38,7 +39,9 @@
       "@vue/prettier",
       "@vue/typescript"
     ],
-    "rules": {},
+    "rules": {
+      "no-console": "off"
+    },
     "parserOptions": {
       "parser": "@typescript-eslint/parser"
     }

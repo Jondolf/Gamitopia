@@ -10,15 +10,19 @@
 import Vue from "vue";
 import Nav from "@/components/Nav.vue";
 import Footer from "@/components/Footer.vue";
+import * as FastClick from "fastclick";
+
 export default Vue.extend({
   name: "app",
   components: {
     Nav,
     Footer
+  },
+  mounted() {
+    //@ts-ignore
+    FastClick.attach(document.body);
   }
 });
-const attachFastClick = require('fastclick');
-attachFastClick(document.body);
 </script>
 
 <style lang="scss">
