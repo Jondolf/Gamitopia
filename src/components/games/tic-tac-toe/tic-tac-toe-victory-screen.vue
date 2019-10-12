@@ -41,6 +41,7 @@ button {
   font-size: 16px;
   outline: none;
   border: none;
+  background-color: white;
   font-family: Nunito;
   border-radius: 5px;
 }

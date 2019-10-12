@@ -41,13 +41,11 @@ export default Vue.extend({
       if (square.symbol === "" && this.player1Turn === true) {
         this.addCross(square);
         this.detectVictory();
-        console.log("Cross");
         this.changeTurn();
       } else if (square.symbol === "" && this.player2Turn === true) {
         this.addNought(square);
         this.detectVictory();
         this.changeTurn();
-        console.log("Not cross");
       }
     },
     changeTurn() {
