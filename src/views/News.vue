@@ -1,6 +1,22 @@
 <template>
   <div id="news">
     <div class="news-post">
+      <h3>Tic-Tac-Toe</h3>
+      <p>
+        Gamitopia's 3rd game has already been released! <br /><br />Tic-Tac-Toe
+        is a game that we all know and have played at one point in our lives. If
+        you haven't (and even if you have), play it now and read the rules in
+        the description! <br /><br />You can play Tic-Tac-Toe
+        <router-link to="/tic-tac-toe">here</router-link> <br /><br /><strong
+          >*Note</strong
+        ><br />Currently the game has only one grid size and game mode, so you
+        have to play it locally with someone else (or yourself). Later on I will
+        most likely update the game: add a 4x4 grid, a start menu and an AI to
+        play against.
+      </p>
+      <h6>12.10.2019</h6>
+    </div>
+    <div class="news-post">
       <h3>Transitioning to Vue.js</h3>
       <p>
         For the past week I have been busy coding.

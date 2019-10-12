@@ -3,6 +3,17 @@
     <div class="game-container">
       <ul>
         <li>
+          <h3>Tic-Tac-Toe</h3>
+          <router-link to="/tic-tac-toe">
+            <img
+              src="@/assets/images/tic-tac-toe-light-thumbnail.jpg"
+              alt="Tic-Tac-Toe"
+              class="new-img"
+            />
+          </router-link>
+          <h6>12.10.2019</h6>
+        </li>
+        <li>
           <h3>Randomizer</h3>
           <router-link to="/randomizer">
             <img
@@ -11,7 +22,6 @@
               class="new-img"
             />
           </router-link>
-
           <h6>30.9.2019</h6>
         </li>
         <li>
@@ -23,7 +33,6 @@
               class="new-img"
             />
           </router-link>
-
           <h6>31.8.2019</h6>
         </li>
       </ul>

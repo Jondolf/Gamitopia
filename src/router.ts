@@ -36,6 +36,11 @@ export default new Router({
       path: "/randomizer",
       name: "randomizer",
       component: () => import("./views/games/Randomizer.vue")
+    },
+    {
+      path: "/tic-tac-toe",
+      name: "tic-tac-toe",
+      component: () => import("./views/games/Tic-Tac-Toe.vue")
     }
   ]
 });

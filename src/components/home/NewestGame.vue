@@ -1,15 +1,15 @@
 <template>
   <div id="newest-game">
     <h1>Newest Game</h1>
-    <h2>Randomizer</h2>
-    <router-link to="/randomizer">
+    <h3>Tic-Tac-Toe</h3>
+    <router-link to="/tic-tac-toe">
       <img
-        src="@/assets/images/randomizer-thumbnail.png"
-        alt="Randomizer"
+        src="@/assets/images/tic-tac-toe-light-thumbnail.jpg"
+        alt="Tic-Tac-Toe"
         id="newest-game-img"
       />
     </router-link>
-    <h6>31.8.2019</h6>
+    <h6>12.10.2019</h6>
   </div>
 </template>
 
