@@ -1,6 +1,9 @@
 <template>
   <div id="grid-container">
-    <TicTacToeTopBar @clicked="restartGame" />
+    <TopBar
+      @clicked="restartGame"
+      @startMenuBtnClicked="toggleStartMenuVisibility"
+    />
     <div id="grid">
       <VictoryScreen
         v-if="victory"
@@ -21,9 +24,9 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Square from "@/components/games/tic-tac-toe/tic-tac-toe-square.vue";
+import Square from "@/components/games/tic-tac-toe/square.vue";
 import VictoryScreen from "@/components/games/tic-tac-toe/tic-tac-toe-victory-screen.vue";
-import TicTacToeTopBar from "@/components/games/tic-tac-toe/tic-tac-toe-top-bar.vue";
+import TopBar from "@/components/games/tic-tac-toe/top-bar.vue";
 
 export interface SquareData {
   symbol: string;
@@ -34,9 +37,12 @@ export default Vue.extend({
   components: {
     Square,
     VictoryScreen,
-    TicTacToeTopBar
+    TopBar
   },
   methods: {
+    toggleStartMenuVisibility() {
+      this.$emit("openStartMenuBtnClicked");
+    },
     addSymbol(square: SquareData) {
       if (square.symbol === "" && this.player1Turn === true) {
         this.addCross(square);
@@ -176,8 +182,6 @@ export default Vue.extend({
 #grid-container {
   width: 75vw;
   height: 80vw;
-  border: 2px solid;
-  border-radius: 5px;
   overflow: hidden;
   margin: auto;
 }

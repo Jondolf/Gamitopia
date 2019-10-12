@@ -2,7 +2,11 @@
   <div id="tic-tac-toe">
     <h2>Tic-Tac-Toe</h2>
     <div id="tic-tac-toe-container">
-      <Grid />
+      <StartMenu
+        v-if="this.startMenuVisibility === true"
+        @startMenuBtnClicked="this.toggleStartMenuVisibility"
+      />
+      <Grid @openStartMenuBtnClicked="this.toggleStartMenuVisibility" />
     </div>
     <div class="description">
       <div class="mainDescription">
@@ -42,16 +46,23 @@
 <script lang="ts">
 import Vue from "vue";
 import Grid from "@/components/games/tic-tac-toe/grid.vue";
-
+import StartMenu from "@/components/games/tic-tac-toe/start-menu.vue";
 export default Vue.extend({
   name: "tic-tac-toe",
   components: {
-    Grid
+    Grid,
+    StartMenu
   },
   data() {
-    return {};
+    return {
+      startMenuVisibility: true
+    };
   },
-  mounted() {}
+  methods: {
+    toggleStartMenuVisibility() {
+      this.startMenuVisibility = !this.startMenuVisibility;
+    }
+  }
 });
 </script>
 
@@ -59,6 +70,36 @@ export default Vue.extend({
 @import "@/global.scss";
 #tic-tac-toe {
   padding-top: 66px;
+}
+
+#tic-tac-toe-container {
+  width: 75vw;
+  height: 80vw;
+  border: 2px solid;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: auto;
+  position: relative;
+  cursor: default;
+}
+
+.darkMode #tic-tac-toe-container {
+  background-color: black;
+  color: white;
+  border-color: white;
+}
+@media only screen and (min-width: 600px) {
+  #tic-tac-toe-container {
+    width: 45vw;
+    height: 50vw;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  #tic-tac-toe-container {
+    width: 30vw;
+    height: 35vw;
+  }
 }
 
 h2 {
