@@ -1,12 +1,14 @@
 <template>
   <div class="start-menu">
-    <h2>Tic-Tac-Toe</h2>
+    <h2>Home Menu</h2>
     <button v-on:click="this.toggleStartMenuVisibility">
       Start Game
     </button>
     <Settings
       v-if="this.settingsVisibility"
       @openSettingsBtnClicked="this.toggleSettingsVisibility"
+      @activateThreeByThreeGridClicked="this.activateThreeByThreeGrid"
+      @activateFourByFourGridClicked="this.activateFourByFourGrid"
     />
     <button v-on:click="this.toggleSettingsVisibility">Settings</button>
   </div>
@@ -26,6 +28,12 @@ export default Vue.extend({
     },
     toggleSettingsVisibility() {
       this.settingsVisibility = !this.settingsVisibility;
+    },
+    activateThreeByThreeGrid() {
+      this.$emit("activateThreeByThreeGrid");
+    },
+    activateFourByFourGrid() {
+      this.$emit("activateFourByFourGrid");
     }
   },
   data: function() {

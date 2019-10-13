@@ -5,8 +5,14 @@
       <StartMenu
         v-if="this.startMenuVisibility === true"
         @startMenuBtnClicked="this.toggleStartMenuVisibility"
+        @activateThreeByThreeGrid="this.activateThreeByThreeGrid"
+        @activateFourByFourGrid="this.activateFourByFourGrid"
       />
-      <Grid @openStartMenuBtnClicked="this.toggleStartMenuVisibility" />
+      <Grid
+        @openStartMenuBtnClicked="this.toggleStartMenuVisibility"
+        :threeByThreeGrid="this.threeByThreeGridActive"
+        :fourByFourGrid="this.fourByFourGridActive"
+      />
     </div>
     <div class="description">
       <div class="mainDescription">
@@ -20,7 +26,7 @@
           or a nought. The player that succeeds wins the game. If all squares on
           the grid are filled and no-one has gotten a row of 3, the game will be
           a tie. <br /><br />Currently you can only play the game locally
-          against someone else with a 3x3 grid.
+          against someone else.
         </p>
       </div>
       <div class="otherDescription">
@@ -53,14 +59,25 @@ export default Vue.extend({
     Grid,
     StartMenu
   },
+  props: {},
   data() {
     return {
-      startMenuVisibility: true
+      startMenuVisibility: true,
+      threeByThreeGridActive: true,
+      fourByFourGridActive: false
     };
   },
   methods: {
     toggleStartMenuVisibility() {
       this.startMenuVisibility = !this.startMenuVisibility;
+    },
+    activateThreeByThreeGrid() {
+      this.threeByThreeGridActive = true;
+      this.fourByFourGridActive = false;
+    },
+    activateFourByFourGrid() {
+      this.fourByFourGridActive = true;
+      this.threeByThreeGridActive = false;
     }
   }
 });

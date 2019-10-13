@@ -2,19 +2,16 @@
   <div class="settings">
     <h2>Settings</h2>
     <button v-on:click="this.toggleSettingsVisibility">
-      Back To Start Menu
+      Back To Home Menu
     </button>
     <div class="grid-size-setting-container">
-      <div class="grid-size">
-        <h3>Coming Soon</h3>
-        <p>4x4</p>
-      </div>
-      <div class="grid-size">
-        <h3>Already Active</h3>
-        <p>3x3</p>
-      </div>
+      <button id="3x3-grid" v-on:click="this.activate3x3GridClicked">
+        3x3 Grid
+      </button>
+      <button id="4x4-grid" v-on:click="this.activate4x4GridClicked">
+        4x4 Grid
+      </button>
     </div>
-    <p>*working settings coming soon</p>
   </div>
 </template>
 
@@ -26,6 +23,12 @@ export default Vue.extend({
   methods: {
     toggleSettingsVisibility() {
       this.$emit("openSettingsBtnClicked");
+    },
+    activate3x3GridClicked() {
+      this.$emit("activateThreeByThreeGridClicked");
+    },
+    activate4x4GridClicked() {
+      this.$emit("activateFourByFourGridClicked");
     }
   },
   data: function() {
@@ -82,6 +85,11 @@ export default Vue.extend({
     padding: 5px;
     margin-bottom: 15px;
     font-size: 3vw;
+  }
+  button {
+    border: 1px solid;
+    margin: 5px;
+    padding: 5px;
   }
 }
 
