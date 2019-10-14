@@ -24,14 +24,14 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import "@/global.scss";
 #newest-game-img {
-  width: 30vw;
+  width: 28vw;
   border-radius: 5px;
   margin: 25px;
   transition: 1s;
 }
 
 #newest-game-img:hover {
-  width: 35vw;
+  width: 33vw;
 }
 #newest-game {
   background-color: var(--secondary-color);
@@ -45,5 +45,51 @@ h2 {
 }
 h3 {
   margin: 20px auto 10px auto;
+}
+
+@media only screen and (max-width: 700px) {
+  #newest-game-img {
+    width: 38vw;
+  }
+  #newest-game-img:hover {
+    width: 44vw;
+  }
+  h3 {
+    font-size: 16px;
+  }
+  h6 {
+    font-size: 10px;
+    margin: auto 1.5vw;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #newest-game-img {
+    width: 48vw;
+  }
+  #newest-game-img:hover {
+    width: 55vw;
+  }
+  h3 {
+    font-size: 15px;
+  }
+  h6 {
+    font-size: 9px;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  #newest-game-img {
+    width: 58vw;
+  }
+  #newest-game-img:hover {
+    width: 66vw;
+  }
+  h3 {
+    font-size: 14px;
+  }
+  h6 {
+    font-size: 8px;
+  }
 }
 </style>
