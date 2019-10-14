@@ -1,5 +1,7 @@
 <template>
-  <img v-on:click="toggleDarkMode" v-bind:src="imgUrl" id="darkModeButton" />
+  <div>
+    <img v-on:click="toggleDarkMode" v-bind:src="imgUrl" id="darkModeButton" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -50,31 +52,54 @@ export default Vue.extend({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import "@/global.scss";
-
 #darkModeButton {
-  width: 40px;
-  height: 40px;
+  width: 3vw;
+  height: 3vw;
+  padding: 1vw;
+  border-radius: 5px;
+  transition: 1s;
   border-radius: 50%;
 }
 
-@media only screen and (max-width: 460px) {
+#darkModeButton:hover {
+  width: 4vw;
+  height: 4vw;
+  padding-left: 0.5vw;
+}
+
+@media only screen and (max-width: 1000px) {
   #darkModeButton {
-    width: 28px;
-    height: 28px;
+    width: 4vw;
+    height: 4vw;
+  }
+  #darkModeButton:hover {
+    width: 5vw;
+    height: 5vw;
+    padding-left: 0.5vw;
   }
 }
 
-@media only screen and (max-width: 430px) {
+@media only screen and (max-width: 700px) {
   #darkModeButton {
-    width: 26px;
-    height: 26px;
+    width: 5vw;
+    height: 5vw;
+  }
+  #darkModeButton:hover {
+    width: 6vw;
+    height: 6vw;
+    padding-left: 0.5vw;
   }
 }
 
-@media only screen and (max-width: 350px) {
+@media only screen and (max-width: 500px) {
   #darkModeButton {
-    width: 26px;
-    height: 26px;
+    width: 7vw;
+    height: 7vw;
+  }
+  #darkModeButton:hover {
+    width: 8.5vw;
+    height: 8.5vw;
+    padding-left: 0.5vw;
   }
 }
 </style>
