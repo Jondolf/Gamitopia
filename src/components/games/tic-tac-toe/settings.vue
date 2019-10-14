@@ -52,17 +52,18 @@ export default Vue.extend({
   button {
     width: 100%;
     height: 20%;
-    background-color: rgba(34, 40, 49, 0.5);
     color: white;
     font-size: 16px;
     outline: none;
     border: 1px solid black;
     border-left: none;
     border-right: none;
+    background-color: rgba(34, 40, 49, 0.5);
+    transition: 0.4s;
   }
 
   button:hover {
-    background-color: rgba(34, 40, 49, 0.75);
+    background-color: rgb(91, 97, 112);
   }
 }
 .darkMode button {

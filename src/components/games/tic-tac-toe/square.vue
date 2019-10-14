@@ -26,17 +26,19 @@ export default Vue.extend({
   height: 25vw;
   outline: 2px solid black;
   font-size: 11vw;
+  background-color: rgba(255, 255, 255, 0);
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.darkMode .grid-square {
-  outline: 2px solid white;
+  transition: 0.4s;
 }
 
 .grid-square:hover {
-  background-color: gray;
+  background-color: rgba(127.5, 127.5, 127.5, 1);
+}
+.darkMode .grid-square {
+  outline: 2px solid white;
 }
 
 @media only screen and (min-width: 600px) {

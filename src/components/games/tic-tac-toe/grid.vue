@@ -138,83 +138,25 @@ export default Vue.extend({
           gameEnd("O");
         } else if (fourByFourGrid) {
           if (
-            (grid[1][0].symbol === "X" &&
-              grid[2][1].symbol === "X" &&
-              grid[3][2].symbol === "X" &&
-              fourByFourGrid) ||
             (grid[0][0].symbol === "X" &&
               grid[1][1].symbol === "X" &&
               grid[2][2].symbol === "X" &&
-              fourByFourGrid) ||
-            (grid[0][1].symbol === "X" &&
-              grid[1][2].symbol === "X" &&
-              grid[2][3].symbol === "X" &&
-              fourByFourGrid) ||
-            (grid[2][0].symbol === "X" &&
-              grid[1][1].symbol === "X" &&
-              grid[0][2].symbol === "X" &&
-              fourByFourGrid) ||
+              grid[3][3].symbol === "X") ||
             (grid[3][0].symbol === "X" &&
               grid[2][1].symbol === "X" &&
               grid[1][2].symbol === "X" &&
-              fourByFourGrid) ||
-            (grid[3][2].symbol === "X" &&
-              grid[2][1].symbol === "X" &&
-              grid[1][0].symbol === "X" &&
-              fourByFourGrid) ||
-            (grid[3][3].symbol === "X" &&
-              grid[2][2].symbol === "X" &&
-              grid[1][1].symbol === "X" &&
-              fourByFourGrid) ||
-            (grid[1][3].symbol === "X" &&
-              grid[2][2].symbol === "X" &&
-              grid[3][1].symbol === "X" &&
-              fourByFourGrid) ||
-            (grid[0][3].symbol === "X" &&
-              grid[1][2].symbol === "X" &&
-              grid[2][1].symbol === "X" &&
-              fourByFourGrid)
+              grid[0][3].symbol === "X")
           ) {
             gameEnd("X");
-          }
-
-          if (
-            (grid[1][0].symbol === "O" &&
-              grid[2][1].symbol === "O" &&
-              grid[3][2].symbol === "O" &&
-              fourByFourGrid) ||
+          } else if (
             (grid[0][0].symbol === "O" &&
               grid[1][1].symbol === "O" &&
               grid[2][2].symbol === "O" &&
-              fourByFourGrid) ||
-            (grid[0][1].symbol === "O" &&
-              grid[1][2].symbol === "O" &&
-              grid[2][3].symbol === "O" &&
-              fourByFourGrid) ||
-            (grid[2][0].symbol === "O" &&
-              grid[1][1].symbol === "O" &&
-              grid[0][2].symbol === "O" &&
-              fourByFourGrid) ||
+              grid[3][3].symbol === "O") ||
             (grid[3][0].symbol === "O" &&
               grid[2][1].symbol === "O" &&
               grid[1][2].symbol === "O" &&
-              fourByFourGrid) ||
-            (grid[3][2].symbol === "O" &&
-              grid[2][1].symbol === "O" &&
-              grid[1][0].symbol === "O" &&
-              fourByFourGrid) ||
-            (grid[3][3].symbol === "O" &&
-              grid[2][2].symbol === "O" &&
-              grid[1][1].symbol === "O" &&
-              fourByFourGrid) ||
-            (grid[1][3].symbol === "O" &&
-              grid[2][2].symbol === "O" &&
-              grid[3][1].symbol === "O" &&
-              fourByFourGrid) ||
-            (grid[0][3].symbol === "O" &&
-              grid[1][2].symbol === "O" &&
-              grid[2][1].symbol === "O" &&
-              fourByFourGrid)
+              grid[0][3].symbol === "O")
           ) {
             gameEnd("O");
           }
@@ -236,7 +178,7 @@ export default Vue.extend({
       );
       const symbolArrays = [...rows, ...columns, ...diagonalRows];
       const ended = symbolArrays.some(squares =>
-        this.sequentialSymbols(squares, 3)
+        this.sequentialSymbols(squares, this.threeByThreeGrid ? 3 : 4)
       );
       if (ended && this.player1Turn) {
         this.gameEnd("X");
@@ -330,7 +272,7 @@ export default Vue.extend({
   display: flex;
   flex-wrap: wrap;
   background-color: white;
-  color: black;
+  color: #0c0f14;
   background-color: white;
   position: relative;
   cursor: default;

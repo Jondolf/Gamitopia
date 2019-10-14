@@ -40,9 +40,12 @@ export default Vue.extend({
     outline: none;
     border: none;
     font-family: Nunito;
+    background-color: rgba(34, 40, 49, 0.5);
+    transition: 0.4s;
   }
+
   button:hover {
-    background-color: rgba(34, 40, 49, 0.75);
+    background-color: rgb(91, 97, 112);
   }
 }
 .darkMode button {
