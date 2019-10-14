@@ -51,60 +51,100 @@ export default Vue.extend({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import "@/global.scss";
-.new-img {
-  width: 90%;
-  max-width: 450px;
-  border-radius: 5px;
-  margin: 20px, 0;
-}
 
 h2 {
-  margin: 65px auto 0 auto;
+  margin: 65px auto 20px auto;
+}
+
+.new-img {
+  width: 18vw;
+  border-radius: 5px;
+  margin: 20px, 0;
+  transition: 1s;
+}
+
+.new-img:hover {
+  width: 20vw;
 }
 
 .game-container {
-  display: flex;
-  flex-direction: row;
   margin: auto;
-  justify-content: center;
   padding: initial;
 }
 
 .game-container li {
-  max-width: 300px;
-  min-width: 100px;
-  min-height: 100px;
-  width: 100%;
   background-color: var(--secondary-color);
-  margin: 60px;
+  margin: 5vw;
   display: inline-block;
   border-radius: 5px;
   justify-content: center;
   align-items: center;
   color: white;
+  transition: 1s;
+  max-height: 50vw;
+  padding: 0 1vw 0.75vw 1vw;
 }
 
 .game-container li h3,
 .game-container li h6 {
-  margin: 5px;
+  margin: auto 0.5vw;
 }
 
-@media only screen and (max-width: 865px) {
+@media only screen and (max-width: 700px) {
   .game-container li {
-    margin: 30px;
-    width: 250px;
+    margin: 5vw;
+    padding: 0 1.5vw 1.5vw 1.5vw;
+    .new-img {
+      width: 30vw;
+    }
+    .new-img:hover {
+      width: 34vw;
+    }
+    h3 {
+      font-size: 16px;
+    }
+    h6 {
+      font-size: 10px;
+      margin: auto 1.5vw;
+    }
   }
 }
 
-@media only screen and (max-width: 645px) {
+@media only screen and (max-width: 500px) {
   .game-container li {
-    width: 300px;
+    margin: 4vw;
+    padding: 0 2vw 2vw 2vw;
+    .new-img {
+      width: 40vw;
+    }
+    .new-img:hover {
+      width: 46vw;
+    }
+    h3 {
+      font-size: 15px;
+    }
+    h6 {
+      font-size: 9px;
+    }
   }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 350px) {
   .game-container li {
-    width: 250px;
+    margin: 4vw;
+    padding: 0 2.5vw 2.5vw 2.5vw;
+    .new-img {
+      width: 50vw;
+    }
+    .new-img:hover {
+      width: 58vw;
+    }
+    h3 {
+      font-size: 14px;
+    }
+    h6 {
+      font-size: 8px;
+    }
   }
 }
 </style>

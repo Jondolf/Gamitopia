@@ -23,6 +23,16 @@ export default Vue.extend({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import "@/global.scss";
+#newest-game-img {
+  width: 30vw;
+  border-radius: 5px;
+  margin: 25px;
+  transition: 1s;
+}
+
+#newest-game-img:hover {
+  width: 35vw;
+}
 #newest-game {
   background-color: var(--secondary-color);
   text-align: center;
@@ -30,34 +40,10 @@ export default Vue.extend({
   color: white;
 }
 
-#newest-game-img {
-  margin: 15px;
-  width: 350px;
-  max-width: 450px;
-  border-radius: 5px;
-}
-
 h2 {
-  margin: 65px auto 0 auto;
+  margin: 65px auto 20px auto;
 }
-@media only screen and (max-width: 645px) {
-  #newest-game-img {
-    width: 300px;
-  }
-}
-
-@media only screen and (max-width: 400px) {
-  #newest-game-img {
-    width: 200px;
-  }
-  #newest-game-img {
-    width: 250px;
-  }
-}
-
-@media only screen and (max-width: 345px) {
-  #newest-game-img {
-    width: 200px;
-  }
+h3 {
+  margin: 20px auto 10px auto;
 }
 </style>
