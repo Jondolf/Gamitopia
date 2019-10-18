@@ -119,7 +119,6 @@ export default Vue.extend({
           for (let j = 0; j < rows.length; j++) {
             if (j + i >= 0 && i + j < columns.length) {
               diagonalRow.push(rows[j][i + j]);
-              console.log(diagonalRows);
             }
           }
         }
