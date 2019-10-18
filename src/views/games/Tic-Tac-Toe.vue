@@ -89,13 +89,13 @@ export default Vue.extend({
       this.fourByFourGridActive = true;
       this.threeByThreeGridActive = false;
     },
-    changeGridWidth(value) {
+    changeGridWidth(value: number) {
       this.gridWidth = value;
     },
-    changeGridHeight(value) {
+    changeGridHeight(value: number) {
       this.gridHeight = value;
     },
-    changeRowToWin(value) {
+    changeRowToWin(value: number) {
       this.amountOfSymbolsNeededInARowToWin = value;
     }
   }

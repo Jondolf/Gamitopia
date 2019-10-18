@@ -95,9 +95,9 @@ export default Vue.extend({
     detectVictory() {
       this.detectTie();
       const rows = this.grid;
-      const reversedRows: SquareData[] = [...rows].reverse();
-      const reversedDiagonalRows: SquareData[] = [];
-      const columns: SquareData[] = [];
+      const reversedRows: any = [...rows].reverse();
+      const reversedDiagonalRows: any = [];
+      const columns: any = [];
       const diagonalRows: SquareData[] = [];
       const getColumns = function() {
         for (let i = 0; i < rows[0].length; i++) {
@@ -108,13 +108,13 @@ export default Vue.extend({
         }
       };
       const getDiagonalRows = function(
-        grid: SquareData[],
+        grid: object,
         gameEnd: Function,
         gridWidth: number,
         gridHeight: number
       ) {
         for (let i = -rows.length + 1; i < columns.length; i++) {
-          const diagonalRow: SquareData[] = [];
+          const diagonalRow: any = [];
           diagonalRows.push(diagonalRow);
           for (let j = 0; j < rows.length; j++) {
             if (j + i >= 0 && i + j < columns.length) {
@@ -124,7 +124,6 @@ export default Vue.extend({
         }
       };
       const getReversedDiagonalRows = function(
-        grid: SquareData[],
         gameEnd: Function,
         gridWidth: number,
         gridHeight: number
@@ -141,12 +140,7 @@ export default Vue.extend({
       };
       getColumns();
       getDiagonalRows(this.grid, this.gameEnd, this.gridWidth, this.gridHeight);
-      getReversedDiagonalRows(
-        this.grid,
-        this.gameEnd,
-        this.gridWidth,
-        this.gridHeight
-      );
+      getReversedDiagonalRows(this.gameEnd, this.gridWidth, this.gridHeight);
       const symbolArrays = [
         ...rows,
         ...columns,
@@ -208,16 +202,18 @@ export default Vue.extend({
       this.restartGame();
     },
     getSquareSize() {
+      const gridElement = this.$refs.grid as HTMLElement;
       this.squareSize =
         (
-          this.$refs.grid.clientWidth /
+          gridElement.clientWidth /
           Math.max(this.grid.length, this.grid[0].length)
         ).toString() + "px";
     },
     getFontSize() {
+      const gridElement = this.$refs.grid as HTMLElement;
       this.fontSize =
         Math.floor(
-          this.$refs.grid.clientWidth /
+          gridElement.clientWidth /
             Math.max(this.grid.length, this.grid[0].length) -
             20
         ).toString() + "px";
@@ -256,7 +252,7 @@ export default Vue.extend({
   },
   created() {
     function setSquareSize() {
-      this.setSquareSize();
+      setSquareSize();
     }
   },
   mounted() {
