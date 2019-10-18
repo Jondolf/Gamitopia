@@ -1,5 +1,5 @@
 <template>
-  <div class="tic-tac-toe-win-screen">
+  <div id="tic-tac-toe-win-screen">
     <h2>{{ gameEndMessage }}</h2>
     <button v-on:click="onClickButton">Restart</button>
   </div>
@@ -24,15 +24,19 @@ export default Vue.extend({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import "@/global.scss";
-.tic-tac-toe-win-screen {
+#tic-tac-toe-win-screen {
   position: absolute;
-  padding-top: 15%;
   width: 100%;
   height: 100%;
   background-color: rgba(34, 40, 49, 0.5);
-}
-h2 {
-  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h2 {
+    color: white;
+    margin: 0 auto 20px auto;
+  }
 }
 
 button {

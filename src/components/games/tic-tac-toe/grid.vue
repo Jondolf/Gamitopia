@@ -1,27 +1,24 @@
 <template>
-  <div id="grid-container">
+  <div id="grid-container" ref="appWidth">
     <TopBar
       @clicked="restartGame"
       @startMenuBtnClicked="toggleStartMenuVisibility"
     />
-    <div
-      id="grid"
-      v-bind:class="{
-        threeByThreeGrid: threeByThreeGrid,
-        fourByFourGrid: fourByFourGrid
-      }"
-    >
+
+    <div id="grid" ref="grid">
       <VictoryScreen
         v-if="victory"
         v-bind:gameEndMessage="this.gameEndMessage"
         @clicked="restartGame"
       />
-      <div v-for="(row, index) in grid" v-bind:key="index">
+      <div v-for="(row, index) in grid" v-bind:key="index" id="row">
         <Square
           v-for="(square, index2) in row"
           v-on:click.native="addSymbol(square)"
           v-bind:grid="square.symbol"
           v-bind:key="index2"
+          :squareSize="squareSize"
+          :fontSize="fontSize"
         ></Square>
       </div>
     </div>
@@ -98,10 +95,12 @@ export default Vue.extend({
     detectVictory() {
       this.detectTie();
       const rows = this.grid;
-      const columns: any = [];
-      const diagonalRows: any = [];
+      const reversedRows: SquareData[] = [...rows].reverse();
+      const reversedDiagonalRows: SquareData[] = [];
+      const columns: SquareData[] = [];
+      const diagonalRows: SquareData[] = [];
       const getColumns = function() {
-        for (let i = 0; i < rows.length; i++) {
+        for (let i = 0; i < rows[0].length; i++) {
           columns.push([]);
           for (let j = 0; j < rows.length; j++) {
             columns[i].push(rows[j][i]);
@@ -109,76 +108,55 @@ export default Vue.extend({
         }
       };
       const getDiagonalRows = function(
-        grid: any,
-        threeByThreeGrid: boolean,
-        fourByFourGrid: boolean,
-        gameEnd: Function
+        grid: SquareData[],
+        gameEnd: Function,
+        gridWidth: number,
+        gridHeight: number
       ) {
-        if (
-          (grid[0][0].symbol === "X" &&
-            grid[1][1].symbol === "X" &&
-            grid[2][2].symbol === "X" &&
-            threeByThreeGrid) ||
-          (grid[2][0].symbol === "X" &&
-            grid[1][1].symbol === "X" &&
-            grid[0][2].symbol === "X" &&
-            threeByThreeGrid)
-        ) {
-          gameEnd("X");
-        } else if (
-          (grid[0][0].symbol === "O" &&
-            grid[1][1].symbol === "O" &&
-            grid[2][2].symbol === "O" &&
-            threeByThreeGrid) ||
-          (grid[2][0].symbol === "O" &&
-            grid[1][1].symbol === "O" &&
-            grid[0][2].symbol === "O" &&
-            threeByThreeGrid)
-        ) {
-          gameEnd("O");
-        } else if (fourByFourGrid) {
-          if (
-            (grid[0][0].symbol === "X" &&
-              grid[1][1].symbol === "X" &&
-              grid[2][2].symbol === "X" &&
-              grid[3][3].symbol === "X") ||
-            (grid[3][0].symbol === "X" &&
-              grid[2][1].symbol === "X" &&
-              grid[1][2].symbol === "X" &&
-              grid[0][3].symbol === "X")
-          ) {
-            gameEnd("X");
-          } else if (
-            (grid[0][0].symbol === "O" &&
-              grid[1][1].symbol === "O" &&
-              grid[2][2].symbol === "O" &&
-              grid[3][3].symbol === "O") ||
-            (grid[3][0].symbol === "O" &&
-              grid[2][1].symbol === "O" &&
-              grid[1][2].symbol === "O" &&
-              grid[0][3].symbol === "O")
-          ) {
-            gameEnd("O");
+        for (let i = -rows.length + 1; i < columns.length; i++) {
+          const diagonalRow: SquareData[] = [];
+          diagonalRows.push(diagonalRow);
+          for (let j = 0; j < rows.length; j++) {
+            if (j + i >= 0 && i + j < columns.length) {
+              diagonalRow.push(rows[j][i + j]);
+              console.log(diagonalRows);
+            }
           }
         }
-
-        /*for (let i = 0; i < rows.length; i++) {
-          diagonalRows.push([]);
-          for (let j = 0; j < rows.length; j++) {
-            diagonalRows[i].push(rows[i][i]);
+      };
+      const getReversedDiagonalRows = function(
+        grid: SquareData[],
+        gameEnd: Function,
+        gridWidth: number,
+        gridHeight: number
+      ) {
+        for (let i = -rows.length + 1; i < columns.length; i++) {
+          const diagonalRow: SquareData[] = [];
+          reversedDiagonalRows.push(diagonalRow);
+          for (let j = 0; j < reversedRows.length; j++) {
+            if (j + i >= 0 && i + j < columns.length) {
+              diagonalRow.push(reversedRows[j][i + j]);
+            }
           }
-        }*/
+        }
       };
       getColumns();
-      getDiagonalRows(
+      getDiagonalRows(this.grid, this.gameEnd, this.gridWidth, this.gridHeight);
+      getReversedDiagonalRows(
         this.grid,
-        this.threeByThreeGrid,
-        this.fourByFourGrid,
-        this.gameEnd
+        this.gameEnd,
+        this.gridWidth,
+        this.gridHeight
       );
-      const symbolArrays = [...rows, ...columns, ...diagonalRows];
-      const ended = symbolArrays.some(squares =>
-        this.sequentialSymbols(squares, this.threeByThreeGrid ? 3 : 4)
+      const symbolArrays = [
+        ...rows,
+        ...columns,
+        ...diagonalRows,
+        ...reversedDiagonalRows
+      ];
+      const ended = symbolArrays.some(
+        squares =>
+          this.sequentialSymbols(squares, this.amountOfSymbolsNeededInARowToWin) //Amount of symbols in a row needed to win
       );
       if (ended && this.player1Turn) {
         this.gameEnd("X");
@@ -211,27 +189,47 @@ export default Vue.extend({
       this.player2Turn = false;
       this.victory = false;
       this.gameEndMessage = "";
-      if (this.fourByFourGrid === true) {
-        this.grid = [
-          [{ symbol: "" }, { symbol: "" }, { symbol: "" }, { symbol: "" }],
-          [{ symbol: "" }, { symbol: "" }, { symbol: "" }, { symbol: "" }],
-          [{ symbol: "" }, { symbol: "" }, { symbol: "" }, { symbol: "" }],
-          [{ symbol: "" }, { symbol: "" }, { symbol: "" }, { symbol: "" }]
-        ];
+      for (let i = 0; i < this.grid.length; i++) {
+        for (let j = 0; j < this.grid[0].length; j++) {
+          this.grid[i][j].symbol = "";
+        }
       }
-      if (this.threeByThreeGrid === true) {
-        this.grid = [
-          [{ symbol: "" }, { symbol: "" }, { symbol: "" }],
-          [{ symbol: "" }, { symbol: "" }, { symbol: "" }],
-          [{ symbol: "" }, { symbol: "" }, { symbol: "" }]
-        ];
+    },
+    setGridSize() {
+      this.grid = [];
+      for (let i = 0; i < this.gridWidth; i++) {
+        this.grid.push([]);
+        for (let j = 0; j < this.gridHeight; j++) {
+          const square = { symbol: "" };
+          this.grid[i].push(square);
+        }
       }
+      this.getSquareSize();
+      this.getFontSize();
+      this.restartGame();
+    },
+    getSquareSize() {
+      this.squareSize =
+        (
+          this.$refs.grid.clientWidth /
+          Math.max(this.grid.length, this.grid[0].length)
+        ).toString() + "px";
+    },
+    getFontSize() {
+      this.fontSize =
+        Math.floor(
+          this.$refs.grid.clientWidth /
+            Math.max(this.grid.length, this.grid[0].length) -
+            20
+        ).toString() + "px";
     }
   },
   data: function() {
     return {
       player1Turn: true,
       player2Turn: false,
+      squareSize: "10vw",
+      fontSize: "",
       victory: false,
       gameEndMessage: "",
       grid: [
@@ -242,13 +240,32 @@ export default Vue.extend({
     };
   },
   props: {
-    threeByThreeGrid: Boolean,
-    fourByFourGrid: Boolean
+    gridWidth: Number,
+    gridHeight: Number,
+    amountOfSymbolsNeededInARowToWin: Number
   },
   watch: {
-    threeByThreeGrid: function() {
-      this.restartGame();
+    gridWidth: function() {
+      this.setGridSize();
+    },
+    gridHeight: function() {
+      this.setGridSize();
+    },
+    amountOfSymbolsNeededInARowToWin: function() {
+      this.setGridSize();
     }
+  },
+  created() {
+    function setSquareSize() {
+      this.setSquareSize();
+    }
+  },
+  mounted() {
+    this.$nextTick(function() {
+      window.addEventListener("resize", this.getSquareSize);
+      window.addEventListener("resize", this.getFontSize);
+    });
+    this.setGridSize();
   }
 });
 </script>
@@ -259,21 +276,27 @@ export default Vue.extend({
 
 #grid-container {
   width: 75vw;
-  height: 80vw;
+  height: 85vw;
   overflow: hidden;
   margin: auto;
+  background-color: gray;
+  display: flex;
+  flex-direction: column;
+}
+.darkMode #grid-container {
+  background-color: rgb(50, 50, 50);
 }
 
 #grid {
+  height: 100%;
+  width: 100%;
   margin: auto;
   overflow: hidden;
-  width: 75vw;
-  height: 75vw;
   display: flex;
-  flex-wrap: wrap;
-  background-color: white;
+  justify-content: center;
+  align-items: center;
+  display: flex;
   color: #0c0f14;
-  background-color: white;
   position: relative;
   cursor: default;
   -webkit-touch-callout: none;
@@ -286,41 +309,20 @@ export default Vue.extend({
 }
 
 .darkMode #grid {
-  background-color: black;
   color: white;
   border-color: white;
 }
 @media only screen and (min-width: 600px) {
   #grid-container {
     width: 45vw;
-    height: 50vw;
-  }
-  #grid {
-    width: 45vw;
-    height: 45vw;
+    height: 51vw;
   }
 }
 
 @media only screen and (min-width: 1100px) {
   #grid-container {
-    width: 30vw;
-    height: 35vw;
-  }
-  #grid {
-    width: 30vw;
-    height: 30vw;
-  }
-}
-.fourByFourGrid div .grid-square {
-  width: 18.75vw;
-  height: 18.75vw;
-  @media only screen and (min-width: 600px) {
-    width: 11.25vw;
-    height: 11.25vw;
-  }
-  @media only screen and (min-width: 1100px) {
-    width: 7.5vw;
-    height: 7.5vw;
+    width: 33vw;
+    height: 37vw;
   }
 }
 </style>

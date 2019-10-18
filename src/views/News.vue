@@ -1,6 +1,32 @@
 <template>
   <div id="news">
     <div class="news-post">
+      <h3>Tic-Tac-Toe Update</h3>
+      <p>
+        Tic-Tac-Toe has received a farely large update!
+        <br />Here's a quick list of the changes:
+      </p>
+      <ul>
+        <li>A start menu has been added</li>
+        <li>An instructions menu has been added</li>
+        <li>A settings menu has been added</li>
+        <li>You can now change the size of the grid from the settings</li>
+        <li>
+          You can now also change how many X's or O's you need in a row to win
+          from the settings
+        </li>
+        <li>Some visual improvements</li>
+        <li>
+          The game is now more responsive (works with different screen sizes)
+        </li>
+      </ul>
+      <p>
+        That's it for now. I'll probably make some more small changes to the
+        game in the future, mainly visual improvements.
+      </p>
+      <h6>18.10.2019</h6>
+    </div>
+    <div class="news-post">
       <h3>Tic-Tac-Toe</h3>
       <p>
         Gamitopia's 3rd game has already been released! <br /><br />Tic-Tac-Toe

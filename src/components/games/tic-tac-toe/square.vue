@@ -1,5 +1,7 @@
 <template>
-  <div class="grid-square">{{ grid }}</div>
+  <div class="grid-square" :style="{ width: squareSize, height: squareSize }">
+    <p :style="{ fontSize: fontSize }">{{ grid }}</p>
+  </div>
 </template>
 
 <script lang="ts">
@@ -8,7 +10,9 @@ export default Vue.extend({
   name: "Grid-Square",
   components: {},
   props: {
-    grid: String
+    grid: String,
+    squareSize: String,
+    fontSize: String
   },
 
   methods: {},
@@ -22,37 +26,40 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import "@/global.scss";
 .grid-square {
-  width: 25vw;
-  height: 25vw;
   outline: 2px solid black;
   font-size: 11vw;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: white;
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 0.4s;
+  transition: 0.3s;
+  overflow: hidden;
+  p {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .grid-square:hover {
   background-color: rgba(127.5, 127.5, 127.5, 1);
 }
 .darkMode .grid-square {
+  background-color: black;
   outline: 2px solid white;
+}
+.darkMode .grid-square:hover {
+  background-color: rgba(127.5, 127.5, 127.5, 1);
 }
 
 @media only screen and (min-width: 600px) {
   .grid-square {
-    width: 15vw;
-    height: 15vw;
     font-size: 8vw;
   }
 }
 
 @media only screen and (min-width: 1100px) {
   .grid-square {
-    width: 10vw;
-    height: 10vw;
     font-size: 5vw;
   }
 }

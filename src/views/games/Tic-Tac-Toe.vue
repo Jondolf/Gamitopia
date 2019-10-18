@@ -7,11 +7,17 @@
         @startMenuBtnClicked="this.toggleStartMenuVisibility"
         @activateThreeByThreeGrid="this.activateThreeByThreeGrid"
         @activateFourByFourGrid="this.activateFourByFourGrid"
+        @gridWidthChanged="changeGridWidth"
+        @gridHeightChanged="changeGridHeight"
+        @rowToWinChanged="changeRowToWin"
       />
       <Grid
         @openStartMenuBtnClicked="this.toggleStartMenuVisibility"
         :threeByThreeGrid="this.threeByThreeGridActive"
         :fourByFourGrid="this.fourByFourGridActive"
+        :gridWidth="gridWidth"
+        :gridHeight="gridHeight"
+        :amountOfSymbolsNeededInARowToWin="amountOfSymbolsNeededInARowToWin"
       />
     </div>
     <div class="description">
@@ -25,8 +31,8 @@
           cross or a nought the turn switches and the other player gets to put
           down a cross or a nought. The player that succeeds wins the game. If
           all squares on the grid are filled and no-one has gotten a row of 3,
-          the game will be a tie. <br /><br />If you are playing on a 4x4 grid
-          you have to get a row of 4. Otherwise the rules will stay the same.<br /><br />Currently
+          the game will be a tie. <br /><br />For more information about the
+          rules check out the instructions in the game itself.<br /><br />Currently
           you can only play the game locally against someone else.
         </p>
       </div>
@@ -65,7 +71,10 @@ export default Vue.extend({
     return {
       startMenuVisibility: true,
       threeByThreeGridActive: true,
-      fourByFourGridActive: false
+      fourByFourGridActive: false,
+      gridWidth: 3,
+      gridHeight: 3,
+      amountOfSymbolsNeededInARowToWin: 3
     };
   },
   methods: {
@@ -79,6 +88,15 @@ export default Vue.extend({
     activateFourByFourGrid() {
       this.fourByFourGridActive = true;
       this.threeByThreeGridActive = false;
+    },
+    changeGridWidth(value) {
+      this.gridWidth = value;
+    },
+    changeGridHeight(value) {
+      this.gridHeight = value;
+    },
+    changeRowToWin(value) {
+      this.amountOfSymbolsNeededInARowToWin = value;
     }
   }
 });
@@ -92,7 +110,7 @@ export default Vue.extend({
 
 #tic-tac-toe-container {
   width: 75vw;
-  height: 80vw;
+  height: 85vw;
   border: 2px solid;
   border-radius: 5px;
   overflow: hidden;
@@ -109,19 +127,24 @@ export default Vue.extend({
 @media only screen and (min-width: 600px) {
   #tic-tac-toe-container {
     width: 45vw;
-    height: 50vw;
+    height: 51vw;
   }
 }
 
 @media only screen and (min-width: 1100px) {
   #tic-tac-toe-container {
-    width: 30vw;
-    height: 35vw;
+    width: 33vw;
+    height: 37vw;
   }
 }
 
 h2 {
   margin: 30px;
+}
+
+#tic-tac-toe-container h2 {
+  padding: 8%;
+  margin: 0;
 }
 
 .description {

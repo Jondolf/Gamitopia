@@ -4,23 +4,34 @@
     <button v-on:click="this.toggleStartMenuVisibility">
       Start Game
     </button>
+    <Instructions
+      v-if="instructionsVisibility"
+      @toggleInstructionsBtnClicked="toggleInstructionsVisibility"
+    />
     <Settings
       v-if="this.settingsVisibility"
       @openSettingsBtnClicked="this.toggleSettingsVisibility"
-      @activateThreeByThreeGridClicked="this.activateThreeByThreeGrid"
-      @activateFourByFourGridClicked="this.activateFourByFourGrid"
+      @gridWidthChanged="changeGridWidth"
+      @gridHeightChanged="changeGridHeight"
+      @rowToWinChanged="changeRowToWin"
+      :symbolsNeededInARow="symbolsNeededInARow"
+      :gridWidthProp="gridWidth"
+      :gridHeightProp="gridHeight"
     />
-    <button v-on:click="this.toggleSettingsVisibility">Settings</button>
+    <button v-on:click="toggleInstructionsVisibility">Instructions</button>
+    <button v-on:click="toggleSettingsVisibility">Settings</button>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import Settings from "@/components/games/tic-tac-toe/settings.vue";
+import Instructions from "@/components/games/tic-tac-toe/instructions.vue";
 export default Vue.extend({
   name: "Start-Menu",
   components: {
-    Settings
+    Settings,
+    Instructions
   },
   methods: {
     toggleStartMenuVisibility() {
@@ -29,17 +40,30 @@ export default Vue.extend({
     toggleSettingsVisibility() {
       this.settingsVisibility = !this.settingsVisibility;
     },
-    activateThreeByThreeGrid() {
-      this.$emit("activateThreeByThreeGrid");
+    toggleInstructionsVisibility() {
+      this.instructionsVisibility = !this.instructionsVisibility;
     },
-    activateFourByFourGrid() {
-      this.$emit("activateFourByFourGrid");
+    changeGridWidth(value) {
+      this.$emit("gridWidthChanged", +value);
+      this.gridWidth = +value;
+    },
+    changeGridHeight(value) {
+      this.$emit("gridHeightChanged", +value);
+      this.gridHeight = +value;
+    },
+    changeRowToWin(value) {
+      this.$emit("rowToWinChanged", +value);
+      this.symbolsNeededInARow = +value;
     }
   },
   data: function() {
     return {
       startMenuVisibility: true,
-      settingsVisibility: false
+      settingsVisibility: false,
+      instructionsVisibility: false,
+      symbolsNeededInARow: 3,
+      gridWidth: 3,
+      gridHeight: 3
     };
   }
 });

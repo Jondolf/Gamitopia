@@ -25,7 +25,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import "@/global.scss";
 .top-bar {
-  height: 5vw;
+  height: 10vw;
   border-bottom: 2px solid black;
   background-color: white;
   display: flex;
@@ -60,14 +60,20 @@ export default Vue.extend({
 }
 
 @media only screen and (min-width: 600px) {
+  .top-bar {
+    height: 6vw;
+  }
   .top-bar button {
-    font-size: 2.5vw;
+    font-size: 2vw;
   }
 }
 
 @media only screen and (min-width: 1100px) {
+  .top-bar {
+    height: 4vw;
+  }
   .top-bar button {
-    font-size: 1.8vw;
+    font-size: 1.5vw;
   }
 }
 </style>
