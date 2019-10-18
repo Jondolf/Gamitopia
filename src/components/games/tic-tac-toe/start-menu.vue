@@ -43,15 +43,15 @@ export default Vue.extend({
     toggleInstructionsVisibility() {
       this.instructionsVisibility = !this.instructionsVisibility;
     },
-    changeGridWidth(value) {
+    changeGridWidth(value: string) {
       this.$emit("gridWidthChanged", +value);
       this.gridWidth = +value;
     },
-    changeGridHeight(value) {
+    changeGridHeight(value: string) {
       this.$emit("gridHeightChanged", +value);
       this.gridHeight = +value;
     },
-    changeRowToWin(value) {
+    changeRowToWin(value: string) {
       this.$emit("rowToWinChanged", +value);
       this.symbolsNeededInARow = +value;
     }
