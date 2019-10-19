@@ -15,6 +15,15 @@ html {
   font-weight: bold;
 }
 
+a {
+  font-weight: bolder;
+  font-style: italic;
+}
+a:hover {
+  color: rgb(200, 200, 255);
+  text-decoration: underline;
+}
+
 .darkMode {
   --primary-color: #393e46;
   --secondary-color: #222831;
@@ -24,15 +33,15 @@ html {
     background-color: rgb(255, 160, 160);
   }
 
+  a {
+    font-weight: bolder;
+    font-style: italic;
+  }
   a:hover {
     color: red;
   }
 
-  #nav .nav-link-container a:hover {
-    color: #ca3e47;
+  button {
+    font-family: Nunito;
   }
-}
-
-button {
-  font-family: Nunito;
 }

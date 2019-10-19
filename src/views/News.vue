@@ -145,6 +145,12 @@ export default Vue.extend({
 
 <style lang="scss">
 @import "@/global.scss";
+a:visited {
+  color: white;
+}
+a:hover {
+  color: rgb(200, 200, 255);
+}
 #news {
   padding-top: 86px;
   .news-post {
@@ -160,17 +166,15 @@ export default Vue.extend({
     }
 
     a {
-      color: white;
-    }
-
-    a:visited {
-      color: white;
-    }
-
-    a:hover {
-      color: rgb(200, 200, 255);
-      text-decoration: underline;
+      font-weight: bolder;
+      font-style: italic;
     }
   }
+}
+#news .news-post .darkMode a {
+  font-weight: bolder;
+  font-style: italic;
+
+  color: red;
 }
 </style>

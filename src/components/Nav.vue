@@ -49,14 +49,29 @@ export default Vue.extend({
     display: inline-block;
     margin-left: 28px;
     color: white;
+    font-weight: normal;
+    font-style: normal;
   }
 
   .nav-link-container a:hover {
     color: rgb(200, 200, 255);
-    text-decoration: underline;
+    border-bottom: 2px solid rgb(200, 200, 255);
+    margin-bottom: -2px;
+    text-decoration: none;
   }
 }
-
+.darkMode {
+  #nav .nav-link-container a {
+    font-weight: normal;
+    font-style: normal;
+  }
+  #nav .nav-link-container a:hover {
+    color: rgb(230, 40, 40);
+    border-bottom: 2px solid rgb(230, 40, 40);
+    margin-bottom: -2px;
+    text-decoration: none;
+  }
+}
 @media only screen and (max-width: 500px) {
   #nav .nav-link-container a {
     font-size: 20px;
