@@ -1,17 +1,38 @@
 <template>
   <div id="about">
     <div class="about-container">
-      <p>
-        Gamitopia is a website with completely free games made by me. My goal is
-        to make fun games and projects and learn programming along the way.
-      </p>
-      <div>
+      <div class="about-gamitopia">
+        <h2>About Gamitopia</h2>
+        <p>
+          Gamitopia is a website with completely free games made by me. My goal
+          is to make fun games and projects and learn programming along the way.
+        </p>
         <h3>Website Made With:</h3>
         <br />
         <ul>
           <li>HTML</li>
           <li>SCSS/CSS</li>
           <li>TS/JS</li>
+          <li>Vue.js</li>
+        </ul>
+      </div>
+      <div class="about-me">
+        <h2>About me</h2>
+        <p>
+          I am a Finnish junior high school student who has worked with HTML,
+          CSS and JavaScript for roughly 3-4 years. I have also worked with Vue,
+          SCSS and TypeScript.
+          <br />
+          <a href="https://github.com/Jondolf" target="_blank"
+            >The link to my GitHub profile</a
+          >
+        </p>
+        <h3>Languages that I have used (and more)</h3>
+        <ul>
+          <li>HTML</li>
+          <li>SCSS/CSS</li>
+          <li>TS/JS</li>
+          <li>A tiny bit of Python</li>
           <li>Vue.js</li>
         </ul>
       </div>
@@ -38,21 +59,34 @@ export default Vue.extend({
     width: 80%;
     background-color: var(--secondary-color);
     color: white;
-    margin: auto;
+    margin: auto 30px;
     display: flex;
     flex-direction: row;
-    align-items: center;
     text-align: left;
     padding: 20px;
     border-radius: 5px;
     justify-content: space-between;
+    h2 {
+      margin: 0;
+      margin-bottom: 15px;
+    }
+    .about-gamitopia,
+    .about-me {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 50%;
+      height: 100%;
+      padding: 10px;
+      h3,
+      ul {
+        margin-top: 15px;
+        width: 100%;
+      }
+    }
   }
 
-  p {
-    width: 50%;
-  }
-
-  .about-container div {
+  .about-gamitopia div {
     width: 40%;
     border-radius: 5px;
   }
@@ -64,17 +98,25 @@ export default Vue.extend({
 }
 
 @media only screen and (max-width: 550px) {
-  .about-container {
-    flex-direction: column;
-    padding: 10px;
+  #about {
+    .about-container {
+      flex-direction: column;
+      padding: 10px;
+      margin: 30px;
+      justify-content: center;
+      align-items: center;
 
-    p {
-      font-size: 14px;
-      width: 100%;
-    }
-    div {
-      width: 100%;
-      margin-top: 20px;
+      p {
+        font-size: 14px;
+        width: 100%;
+      }
+      .about-gamitopia,
+      .about-me {
+        width: 100%;
+      }
+      .about-me {
+        margin-top: 20px;
+      }
     }
   }
 }
