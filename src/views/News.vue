@@ -1,7 +1,58 @@
 <template>
   <div id="news">
     <div class="news-post">
-      <h3>Tic-Tac-Toe Update</h3>
+      <h2>Adventura</h2>
+      <p>
+        Gamitopia's 4th game, Adventura, has been released!
+        <br />
+        Adventura is a turn based combat game where you fight enemies and
+        bosses, become stronger and discover the many different areas.
+        <br />
+        <br />
+        Adventura is my most visually impressive game so far and it will also be
+        easier to update as I can just add more areas with new enemies and
+        weapons.
+        <br />
+        <br />
+        Some potential updates include lots of new areas and enemies, seasonal
+        areas such as a Halloween area that will be available for only a certain
+        period of time, proper mobile support and much more.
+      </p>
+      <h6>24.12.2019</h6>
+    </div>
+    <div class="news-post">
+      <h2>Merry Christmas 2019</h2>
+      <p>
+        Merry Christmas everyone!
+        <br />
+        <br />
+        Unfortunately this blog is the only Christmas related thing I will be
+        able to do for Gamitopia this Christmas as I have been very busy with
+        school and the new game that I have been making for over a month (the
+        next blog will be about that).
+        <br />
+        <br />
+        While it's not necessarily Christmas related, the new game that I
+        mentioned, Adventura is now released! It's my most impressive game so
+        far and I'm really proud about it and I hope you'll enjoy playing it!
+        <br />
+        <br />
+        I also made some minor changes to the website. I added an About Me
+        section to the About page and highlighted the lists on the News page.
+        <br />
+        <br />
+        Now that the game is officially released and I have a break from school,
+        I'll most likely take a little break from coding actively. I do however
+        have some plans for the future of this website and I will address them
+        in a future blog coming on New Years Eve.
+        <br />
+        <br />
+        With that said I wish you a Merry Cristmas and a happy new year.
+      </p>
+      <h6>24.12.2019</h6>
+    </div>
+    <div class="news-post">
+      <h2>Tic-Tac-Toe Update</h2>
       <p>
         Tic-Tac-Toe has received a farely large update!
         <br />Here's a quick list of the changes:
@@ -27,7 +78,7 @@
       <h6>18.10.2019</h6>
     </div>
     <div class="news-post">
-      <h3>Tic-Tac-Toe</h3>
+      <h2>Tic-Tac-Toe</h2>
       <p>
         Gamitopia's 3rd game has already been released! <br /><br />Tic-Tac-Toe
         is a game that we all know and have played at one point in our lives. If
@@ -43,7 +94,7 @@
       <h6>12.10.2019</h6>
     </div>
     <div class="news-post">
-      <h3>Transitioning to Vue.js</h3>
+      <h2>Transitioning to Vue.js</h2>
       <p>
         For the past week I have been busy coding.
         <br />I have set up a framework called Vue.js for my website, which
@@ -86,7 +137,7 @@
       <h6>9.10.2019</h6>
     </div>
     <div class="news-post">
-      <h3>Randomizer</h3>
+      <h2>Randomizer</h2>
       <p>
         The second game on Gamitopia, Randomizer, is now published!
         <br />In Randomizer, you can get random things like numbers and more by
@@ -98,7 +149,7 @@
       <h6>30.9.2019</h6>
     </div>
     <div class="news-post">
-      <h3>Dark Theme</h3>
+      <h2>Dark Theme</h2>
       <p>
         For those who are looking at screens late at night or just like dark
         colors, the dark theme has been added! Press the icon at the top-left
@@ -111,7 +162,7 @@
       <h6>6.9.2019</h6>
     </div>
     <div class="news-post">
-      <h3>Cookie Clicker</h3>
+      <h2>Cookie Clicker</h2>
       <p>
         Gamitopia's first game, Cookie Clicker is now finished!
         <br />Bake cookies by clicking the large cookie. Use those cookies to
@@ -123,7 +174,7 @@
       <h6>31.8.2019</h6>
     </div>
     <div class="news-post">
-      <h3>The Journey Begins</h3>
+      <h2>The Journey Begins</h2>
       <p>
         Welcome to Gamitopia, the website with small games and projects all made
         by me! Whenever I publish games or make big updates to games or the
@@ -161,15 +212,27 @@ a:hover {
     padding: 30px;
     text-align: left;
     border-radius: 5px;
+    h2 {
+      margin: 0;
+    }
     p {
       margin: 15px auto 15px auto;
     }
-
     a {
       font-weight: bolder;
       font-style: italic;
     }
+    ul {
+      list-style: inside square;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: var(--primary-color);
+      color: black;
+    }
   }
+}
+.darkMode #news .news-post ul li {
+  color: white;
 }
 #news .news-post .darkMode a {
   font-weight: bolder;
