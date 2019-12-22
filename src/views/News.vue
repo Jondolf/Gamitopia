@@ -17,6 +17,9 @@
         Some potential updates include lots of new areas and enemies, seasonal
         areas such as a Halloween area that will be available for only a certain
         period of time, proper mobile support and much more.
+        <br />
+        <br />
+        You can play Adventura <router-link to="/adventura">here</router-link>
       </p>
       <h6>24.12.2019</h6>
     </div>
