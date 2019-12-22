@@ -16,14 +16,24 @@ html {
 }
 
 a {
-  font-weight: bolder;
+  font-weight: bold;
   font-style: italic;
+  text-decoration: none;
 }
 a:hover {
   color: rgb(200, 200, 255);
-  text-decoration: underline;
+}
+a:visited {
+  color: white;
+}
+button {
+  font-family: Nunito;
+  outline: none;
 }
 
+button:focus {
+  outline: none;
+}
 .darkMode {
   --primary-color: #393e46;
   --secondary-color: #222831;
@@ -34,14 +44,14 @@ a:hover {
   }
 
   a {
-    font-weight: bolder;
+    font-weight: bold;
     font-style: italic;
+    text-decoration: none;
+  }
+  a:visited {
+    color: white;
   }
   a:hover {
     color: red;
-  }
-
-  button {
-    font-family: Nunito;
   }
 }
