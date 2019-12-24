@@ -1,7 +1,7 @@
 <template>
   <div id="newest-game">
     <h1>Newest Game</h1>
-    <h3>Tic-Tac-Toe</h3>
+    <h3>Adventura</h3>
     <router-link to="/adventura">
       <img
         src="@/assets/images/adventura-thumbnail.png"
