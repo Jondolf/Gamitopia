@@ -41,6 +41,11 @@ export default new Router({
       path: "/tic-tac-toe",
       name: "tic-tac-toe",
       component: () => import("./views/games/Tic-Tac-Toe.vue")
+    },
+    {
+      path: "/adventura",
+      name: "adventura",
+      component: () => import("./views/games/Adventura.vue")
     }
   ]
 });

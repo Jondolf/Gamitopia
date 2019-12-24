@@ -4,6 +4,17 @@
     <div class="game-container">
       <ul>
         <li>
+          <h3>Adventura</h3>
+          <router-link to="/adventura">
+            <img
+              src="@/assets/images/adventura-thumbnail.png"
+              alt="Adventura game"
+              class="new-img"
+            />
+          </router-link>
+          <h6>24.12.2019</h6>
+        </li>
+        <li>
           <h3>Tic-Tac-Toe</h3>
           <router-link to="/tic-tac-toe">
             <img
@@ -24,17 +35,6 @@
             />
           </router-link>
           <h6>30.9.2019</h6>
-        </li>
-        <li>
-          <h3>Cookie Clicker</h3>
-          <router-link to="/cookie-clicker">
-            <img
-              src="@/assets/images/cookie-clicker-thumbnail.png"
-              alt="Cookie Clicker"
-              class="new-img"
-            />
-          </router-link>
-          <h6>31.8.2019</h6>
         </li>
       </ul>
     </div>

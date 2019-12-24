@@ -2,14 +2,14 @@
   <div id="newest-game">
     <h1>Newest Game</h1>
     <h3>Tic-Tac-Toe</h3>
-    <router-link to="/tic-tac-toe">
+    <router-link to="/adventura">
       <img
-        src="@/assets/images/tic-tac-toe-light-thumbnail.jpg"
-        alt="Tic-Tac-Toe"
+        src="@/assets/images/adventura-thumbnail.png"
+        alt="Adventura game"
         id="newest-game-img"
       />
     </router-link>
-    <h6>12.10.2019</h6>
+    <h6>24.12.2019</h6>
   </div>
 </template>
 

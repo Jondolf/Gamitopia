@@ -60,7 +60,8 @@ export default Vue.extend({
       this.$emit("gridHeightChanged", height);
     },
     displayNum() {
-      this.numberToDisplay = this.gridWidth.toString() + "x" + this.gridHeight.toString();
+      this.numberToDisplay =
+        this.gridWidth.toString() + "x" + this.gridHeight.toString();
     },
     setGridSize() {
       const gridWidthInput = this.$refs.gridWidthInput as HTMLInputElement;
