@@ -215,6 +215,7 @@ export default Vue.extend({
     .locked-area {
       width: 100%;
       height: 100%;
+      position: absolute;
       border-top: 1px solid white;
       display: flex;
       justify-content: center;
@@ -248,8 +249,8 @@ export default Vue.extend({
         background-color: rgba(0, 0, 0, 0.5);
       }
       img {
-        width: auto;
-        max-height: 80%;
+        width: 80%;
+        max-height: 90%;
       }
     }
   }

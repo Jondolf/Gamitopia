@@ -471,7 +471,7 @@ export default Vue.extend({
     text-align: left;
   }
   .stats {
-    width: 50%;
+    width: 40%;
     font-size: 30px;
     text-align: left;
     color: white;
@@ -489,7 +489,7 @@ export default Vue.extend({
     }
   }
   .buyItemBtnContainer {
-    width: 50%;
+    width: 60%;
     height: 100%;
     border-left: 1px solid white;
     margin: auto;
@@ -509,6 +509,7 @@ export default Vue.extend({
         display: flex;
         flex: 1 1 0;
         text-align: left;
+        font-size: 12px
       }
     }
     button:hover {
@@ -531,7 +532,7 @@ export default Vue.extend({
       }
     }
   }
-  @media only screen and (max-width: 850px) {
+  @media only screen and (max-width: 950px) {
     .shop-container {
       flex-direction: column;
       overflow: auto;
