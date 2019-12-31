@@ -1,6 +1,52 @@
 <template>
   <div id="news">
     <div class="news-post">
+      <h2>New Year 2019-2020</h2>
+      <p>
+        Happy New Year's Eve!
+        <br />
+        At midnight tonight we will transition into 2020, the beginning of a new
+        year, the beginning of a whole new decade.
+        <br />
+        <br />
+        I said in a previous post that I would discuss my plans for the
+        beginning year. That's what I'm going to do now.
+      </p>
+      <h3>My plans for 2020</h3>
+      <p>
+        I will most likely be mostly doing updates to the games this website
+        already has, as well as a couple new games.
+        <br />
+        I would also like to make some kind of admin related stuff for this
+        website (being able to create, edit or delete news posts for example)
+        but I'm not quite sure yet.
+        <br />
+        <br />
+        Below is a list of things I would like to do to this website in 2020.
+      </p>
+      <ul>
+        <li>Updating current games, adding more content to them</li>
+        <li>Making a few new games (one of them I have started)</li>
+        <li>Admin system</li>
+        <li>Visual improvements</li>
+        <li>
+          Overall a slightly better design and layout for the main components of
+          the website
+        </li>
+        <li>
+          Making the website even more responsive (works well on screens of all
+          sizes)
+        </li>
+        <li>Etc.</li>
+      </ul>
+      <p>
+        It's important to remember that these are things that I
+        <strong>may</strong> do, not things that I <strong>will</strong> do.
+        <br />With all that said, happy New Year!
+      </p>
+      <h6>31.12.2019</h6>
+    </div>
+    <div class="news-post">
       <h2>Adventura</h2>
       <p>
         Gamitopia's 4th game, Adventura, has been released!
