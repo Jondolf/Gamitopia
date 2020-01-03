@@ -82,9 +82,9 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
-  name: "instructions",
+  name: 'instructions',
   components: {},
   props: {},
   data() {
@@ -92,7 +92,7 @@ export default Vue.extend({
   },
   methods: {
     closeInstructions() {
-      this.$emit("closeInstructions");
+      this.$emit('closeInstructions');
     }
   }
 });
@@ -100,7 +100,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 
 @keyframes HEADER-ANIMATION {
   0% {

@@ -102,14 +102,14 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
-  name: "cookie-clicker",
+  name: 'cookie-clicker',
   components: {},
   mounted() {
-    let pointsElement = document.getElementById("amountOfPoints");
-    let priceElement = document.getElementsByClassName("priceElement");
-    let upgradeLevel = document.getElementsByClassName("upgradeLevel");
+    let pointsElement = document.getElementById('amountOfPoints');
+    let priceElement = document.getElementsByClassName('priceElement');
+    let upgradeLevel = document.getElementsByClassName('upgradeLevel');
     function resetInterval() {
       pointService.previousTime = performance.now();
       clearInterval(pointService.pointInterval!);
@@ -124,11 +124,11 @@ export default Vue.extend({
 
       upgradeLocalStorageSetter() {
         localStorage.setItem(
-          "cookie-clicker-points",
+          'cookie-clicker-points',
           pointService.points.toString()
         );
         localStorage.setItem(
-          "cookie-clicker-upgrades",
+          'cookie-clicker-upgrades',
           JSON.stringify(this.timesUpgraded)
         );
       },
@@ -178,18 +178,18 @@ export default Vue.extend({
       toggleMusic() {
         this.musicOn = !this.musicOn;
         const bgMusic = document.getElementById(
-          "backgroundMusic"
+          'backgroundMusic'
         )! as HTMLAudioElement;
         const musicOnOffImg = document.getElementById(
-          "musicOnOff"
+          'musicOnOff'
         )! as HTMLImageElement;
         if (this.musicOn === true) {
-          musicOnOffImg.src = require("@/assets/images/speaker-icon.svg");
+          musicOnOffImg.src = require('@/assets/images/speaker-icon.svg');
           bgMusic.play();
         } else {
           (document.getElementById(
-            "musicOnOff"
-          )! as HTMLImageElement).src = require("@/assets/images/muted-speaker-icon.svg");
+            'musicOnOff'
+          )! as HTMLImageElement).src = require('@/assets/images/muted-speaker-icon.svg');
           bgMusic.pause();
           bgMusic.currentTime = 0;
         }
@@ -197,11 +197,11 @@ export default Vue.extend({
 
       toggleSoundEffects() {
         this.soundEffectsOn = !this.soundEffectsOn;
-        const sfxOnOff = document.getElementById("soundEffectOnOff")!;
+        const sfxOnOff = document.getElementById('soundEffectOnOff')!;
         if (this.soundEffectsOn === true) {
-          sfxOnOff.innerText = "SFX ON";
+          sfxOnOff.innerText = 'SFX ON';
         } else {
-          sfxOnOff.innerText = "SFX OFF";
+          sfxOnOff.innerText = 'SFX OFF';
         }
       }
     };
@@ -219,17 +219,17 @@ export default Vue.extend({
         this.previousTime += timesAdded * this.timeBetweenPoints;
 
         this.points += timesAdded * pointAmount;
-        localStorage.setItem("cookie-clicker-points", this.points.toString());
+        localStorage.setItem('cookie-clicker-points', this.points.toString());
         refreshPoints();
       },
 
       addPointsByClick() {
         this.points += this.pointsToAddByClick;
-        localStorage.setItem("cookie-clicker-points", this.points.toString());
+        localStorage.setItem('cookie-clicker-points', this.points.toString());
         refreshPoints();
         if (musicService.soundEffectsOn === true) {
           const sfx = document.getElementById(
-            "soundEffect"
+            'soundEffect'
           )! as HTMLAudioElement;
           sfx.currentTime = 0;
           sfx.play();
@@ -238,10 +238,10 @@ export default Vue.extend({
     };
 
     document
-      .getElementById("cookie")!
-      .addEventListener("click", () => pointService.addPointsByClick());
-    document.getElementById("cookie")!.addEventListener(
-      "mousedown",
+      .getElementById('cookie')!
+      .addEventListener('click', () => pointService.addPointsByClick());
+    document.getElementById('cookie')!.addEventListener(
+      'mousedown',
       function(e) {
         e.preventDefault();
       },
@@ -249,7 +249,7 @@ export default Vue.extend({
     );
 
     function refreshPoints() {
-      document.getElementById("amountOfPoints")!.innerText = Math.floor(
+      document.getElementById('amountOfPoints')!.innerText = Math.floor(
         pointService.points
       ).toString();
     }
@@ -261,53 +261,53 @@ export default Vue.extend({
       }
     }
 
-    const upgradeContainer = document.getElementById("upgradeContainer")!.style;
-    const openUpgradeMenuButton = document.getElementById("openUpgradesMenu");
+    const upgradeContainer = document.getElementById('upgradeContainer')!.style;
+    const openUpgradeMenuButton = document.getElementById('openUpgradesMenu');
     let toggleUpgradeMenu = false;
 
     function openUpgradesMenu() {
       toggleUpgradeMenu = !toggleUpgradeMenu;
       if (toggleUpgradeMenu === true) {
-        document.getElementById("openUpgradesMenu")!.innerText =
-          "Close upgrades";
-        upgradeContainer.display = "flex";
+        document.getElementById('openUpgradesMenu')!.innerText =
+          'Close upgrades';
+        upgradeContainer.display = 'flex';
       } else if (toggleUpgradeMenu === false) {
-        document.getElementById("openUpgradesMenu")!.innerText =
-          "Open upgrades";
-        upgradeContainer.display = "none";
+        document.getElementById('openUpgradesMenu')!.innerText =
+          'Open upgrades';
+        upgradeContainer.display = 'none';
       }
     }
 
-    openUpgradeMenuButton!.addEventListener("click", openUpgradesMenu);
+    openUpgradeMenuButton!.addEventListener('click', openUpgradesMenu);
 
-    pointService.points = +localStorage.getItem("cookie-clicker-points")!;
+    pointService.points = +localStorage.getItem('cookie-clicker-points')!;
 
     document
-      .getElementById("openResetMenu")!
-      .addEventListener("click", toggleResetMenu);
+      .getElementById('openResetMenu')!
+      .addEventListener('click', toggleResetMenu);
     document
-      .getElementById("cancelReset")!
-      .addEventListener("click", closeResetMenu);
+      .getElementById('cancelReset')!
+      .addEventListener('click', closeResetMenu);
 
     let resetProgressMenu = false;
     function toggleResetMenu() {
       resetProgressMenu = !resetProgressMenu;
       if (resetProgressMenu === false) {
-        document.getElementById("resetProgress")!.style.display = "none";
+        document.getElementById('resetProgress')!.style.display = 'none';
       } else {
-        document.getElementById("resetProgress")!.style.display = "block";
+        document.getElementById('resetProgress')!.style.display = 'block';
       }
     }
 
     function closeResetMenu() {
-      document.getElementById("resetProgress")!.style.display = "none";
+      document.getElementById('resetProgress')!.style.display = 'none';
     }
 
     function resetGameData() {
-      document.getElementById("resetProgress")!.style.display = "none";
-      localStorage.removeItem("cookie-clicker-points");
-      localStorage.removeItem("cookie-clicker-upgrades");
-      localStorage.removeItem("cookie-clicker-points-to-add-by-click");
+      document.getElementById('resetProgress')!.style.display = 'none';
+      localStorage.removeItem('cookie-clicker-points');
+      localStorage.removeItem('cookie-clicker-upgrades');
+      localStorage.removeItem('cookie-clicker-points-to-add-by-click');
       pointService.points = 0;
       upgradeService.timesUpgraded = [0, 0, 0];
       pointService.pointsToAddByClick = 1;
@@ -319,21 +319,21 @@ export default Vue.extend({
     }
 
     upgradeService.timesUpgraded =
-      JSON.parse(localStorage.getItem("cookie-clicker-upgrades")!) ||
+      JSON.parse(localStorage.getItem('cookie-clicker-upgrades')!) ||
       upgradeService.timesUpgraded;
 
     document
-      .getElementById("resetGame")!
-      .addEventListener("click", resetGameData);
+      .getElementById('resetGame')!
+      .addEventListener('click', resetGameData);
     document
-      .getElementById("upgrade1")!
-      .addEventListener("click", () => upgradeService.buyUpgrade(0));
+      .getElementById('upgrade1')!
+      .addEventListener('click', () => upgradeService.buyUpgrade(0));
     document
-      .getElementById("upgrade2")!
-      .addEventListener("click", () => upgradeService.buyUpgrade(1));
+      .getElementById('upgrade2')!
+      .addEventListener('click', () => upgradeService.buyUpgrade(1));
     document
-      .getElementById("upgrade3")!
-      .addEventListener("click", () => upgradeService.buyUpgrade(2));
+      .getElementById('upgrade3')!
+      .addEventListener('click', () => upgradeService.buyUpgrade(2));
 
     function refreshDefaultUpgrades() {
       priceElement[0].innerHTML = upgradeService.defaultUpgradeCosts[0].toString();
@@ -346,19 +346,19 @@ export default Vue.extend({
     }
 
     function refreshCurrentUpgrades() {
-      document.getElementById("upgrade1")!.innerText;
+      document.getElementById('upgrade1')!.innerText;
     }
 
     document
-      .getElementById("toggleMusic")!
-      .addEventListener("click", () => musicService.toggleMusic());
+      .getElementById('toggleMusic')!
+      .addEventListener('click', () => musicService.toggleMusic());
     document
-      .getElementById("toggleSoundEffects")!
-      .addEventListener("click", () => musicService.toggleSoundEffects());
+      .getElementById('toggleSoundEffects')!
+      .addEventListener('click', () => musicService.toggleSoundEffects());
     (document.getElementById(
-      "musicOnOff"
-    )! as HTMLAudioElement).src = require("@/assets/images/muted-speaker-icon.svg");
-    document.getElementById("soundEffectOnOff")!.innerText = "SFX OFF";
+      'musicOnOff'
+    )! as HTMLAudioElement).src = require('@/assets/images/muted-speaker-icon.svg');
+    document.getElementById('soundEffectOnOff')!.innerText = 'SFX OFF';
 
     pointService.pointsToAddByClick = upgradeService.timesUpgraded[0] + 1;
 
@@ -394,7 +394,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import "@/global.scss";
+@import '@/global.scss';
 #cookie-clicker {
   padding-top: 66px;
 }

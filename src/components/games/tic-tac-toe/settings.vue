@@ -45,23 +45,23 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
-  name: "Start-Menu",
+  name: 'Start-Menu',
   components: {},
   methods: {
     toggleSettingsVisibility() {
-      this.$emit("openSettingsBtnClicked");
+      this.$emit('openSettingsBtnClicked');
     },
     setGridWidth(width: number) {
-      this.$emit("gridWidthChanged", width);
+      this.$emit('gridWidthChanged', width);
     },
     setGridHeight(height: number) {
-      this.$emit("gridHeightChanged", height);
+      this.$emit('gridHeightChanged', height);
     },
     displayNum() {
       this.numberToDisplay =
-        this.gridWidth.toString() + "x" + this.gridHeight.toString();
+        this.gridWidth.toString() + 'x' + this.gridHeight.toString();
     },
     setGridSize() {
       const gridWidthInput = this.$refs.gridWidthInput as HTMLInputElement;
@@ -75,8 +75,8 @@ export default Vue.extend({
     setRowNeededToWin() {
       const rowToWinInput = this.$refs.rowToWinInput as HTMLInputElement;
       this.numbersNeededInARowToWin =
-        "Numbers needed in a row required to win: " + rowToWinInput.value;
-      this.$emit("rowToWinChanged", rowToWinInput.value);
+        'Numbers needed in a row required to win: ' + rowToWinInput.value;
+      this.$emit('rowToWinChanged', rowToWinInput.value);
     }
   },
   data: function() {
@@ -84,10 +84,10 @@ export default Vue.extend({
       gridWidthInput: this.$refs.gridWidthInput as HTMLInputElement,
       gridHeightInput: this.$refs.gridHeightInput as HTMLInputElement,
       settingsVisibility: true,
-      numberToDisplay: "3",
-      gridWidth: "3",
-      gridHeight: "3",
-      numbersNeededInARowToWin: "Numbers in a row required to win: "
+      numberToDisplay: '3',
+      gridWidth: '3',
+      gridHeight: '3',
+      numbersNeededInARowToWin: 'Numbers in a row required to win: '
     };
   },
   props: {
@@ -104,7 +104,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 .settings {
   position: absolute;
   top: 0;

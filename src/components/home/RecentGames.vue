@@ -4,6 +4,17 @@
     <div class="game-container">
       <ul>
         <li>
+          <h3>Snake</h3>
+          <router-link to="/snake">
+            <img
+              src="@/assets/images/snake-thumbnail.jpg"
+              alt="Snake game"
+              class="new-img"
+            />
+          </router-link>
+          <h6>3.1.2020</h6>
+        </li>
+        <li>
           <h3>Adventura</h3>
           <router-link to="/adventura">
             <img
@@ -25,32 +36,21 @@
           </router-link>
           <h6>12.10.2019</h6>
         </li>
-        <li>
-          <h3>Randomizer</h3>
-          <router-link to="/randomizer">
-            <img
-              src="@/assets/images/randomizer-thumbnail.png"
-              alt="Randomizer"
-              class="new-img"
-            />
-          </router-link>
-          <h6>30.9.2019</h6>
-        </li>
       </ul>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
-  name: "RecentGames"
+  name: 'RecentGames'
 });
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 
 h2 {
   margin: 65px auto 20px auto;

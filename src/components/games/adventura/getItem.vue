@@ -7,8 +7,8 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { Melee, IronSword } from "@/components/games/adventura/melee";
+import Vue from 'vue';
+import { Melee, IronSword } from '@/components/games/adventura/melee';
 import {
   Magic,
   FireScroll,
@@ -17,9 +17,9 @@ import {
   AirScroll,
   LightningScroll,
   HealScroll
-} from "@/components/games/adventura/magic";
+} from '@/components/games/adventura/magic';
 export default Vue.extend({
-  name: "Choose-Move",
+  name: 'Choose-Move',
   components: {},
   props: {
     getItem: Boolean,
@@ -39,7 +39,7 @@ export default Vue.extend({
   },
   methods: {
     openMap() {
-      this.$emit("openMap");
+      this.$emit('openMap');
     }
   },
   watch: {}
@@ -48,7 +48,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 .get-item {
   background-color: rgba(0, 0, 0, 0.5);
   width: 33%;

@@ -2,6 +2,17 @@
   <div id="game-thumbnails">
     <ul class="game-container">
       <li>
+        <h3>Snake</h3>
+        <router-link to="/snake">
+          <img
+            src="@/assets/images/snake-thumbnail.jpg"
+            alt="Snake game"
+            class="new-img"
+          />
+        </router-link>
+        <h6>3.1.2020</h6>
+      </li>
+      <li>
         <h3>Adventura</h3>
         <router-link to="/adventura">
           <img
@@ -50,15 +61,15 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
-  name: "GameThumbnails"
+  name: 'GameThumbnails'
 });
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 .new-img {
   width: 18vw;
   border-radius: 5px;

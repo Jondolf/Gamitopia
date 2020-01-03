@@ -205,17 +205,17 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 
 //Components
-import TopBar from "@/components/games/adventura/TopBar.vue";
-import BattleArea from "@/components/games/adventura/BattleArea.vue";
-import StartMenu from "@/components/games/adventura/StartMenu.vue";
-import AreaMap from "@/components/games/adventura/areaMap.vue";
-import Shop from "@/components/games/adventura/shop.vue";
+import TopBar from '@/components/games/adventura/TopBar.vue';
+import BattleArea from '@/components/games/adventura/BattleArea.vue';
+import StartMenu from '@/components/games/adventura/StartMenu.vue';
+import AreaMap from '@/components/games/adventura/areaMap.vue';
+import Shop from '@/components/games/adventura/shop.vue';
 
 //Weapons
-import { Melee, IronSword } from "@/components/games/adventura/melee";
+import { Melee, IronSword } from '@/components/games/adventura/melee';
 import {
   Magic,
   FireScroll,
@@ -225,7 +225,7 @@ import {
   AirScroll,
   LightningScroll,
   HealScroll
-} from "@/components/games/adventura/magic";
+} from '@/components/games/adventura/magic';
 
 //Areas
 import {
@@ -237,16 +237,16 @@ import {
   SnowLands,
   BlueAbyss,
   LandOfTheDead
-} from "@/components/games/adventura/area";
+} from '@/components/games/adventura/area';
 
 //Enemies
-import { Enemy } from "../../components/games/adventura/enemy";
+import { Enemy } from '../../components/games/adventura/enemy';
 
 //Bosses
-import { Boss } from "../../components/games/adventura/boss";
+import { Boss } from '../../components/games/adventura/boss';
 
 export default Vue.extend({
-  name: "adventura",
+  name: 'adventura',
   components: {
     TopBar,
     BattleArea,
@@ -286,21 +286,21 @@ export default Vue.extend({
       maxEnemyHealth: 10,
       enemyHealth: 10,
       enemyMana: 0,
-      enemyWeakness: [""],
-      enemyStrength: [""],
+      enemyWeakness: [''],
+      enemyStrength: [''],
       coins: 0,
-      visibleCoinAmount: "0",
+      visibleCoinAmount: '0',
       coinsLost: 0,
 
-      unlockedMoves: ["Iron sword", "Fire scroll", "Heal scroll"],
+      unlockedMoves: ['Iron sword', 'Fire scroll', 'Heal scroll'],
       unlockedAreas: [grasslands],
 
-      playerName: "Player",
-      enemyName: "",
+      playerName: 'Player',
+      enemyName: '',
 
-      damageInflicted: "0",
-      damageReceived: "0",
-      bossesDefeated: [""],
+      damageInflicted: '0',
+      damageReceived: '0',
+      bossesDefeated: [''],
       hasHealed: false,
       playerDead: false,
       enemyDead: false,
@@ -314,7 +314,7 @@ export default Vue.extend({
       sfxOn: true,
 
       //Component visibility
-      currentView: "Start menu",
+      currentView: 'Start menu',
       inBattle: false,
 
       currentArea: {} as any,
@@ -326,30 +326,30 @@ export default Vue.extend({
       if (item === this.maxHealth) {
         this.maxHealth++;
         localStorage.setItem(
-          "adventura" + itemName,
+          'adventura' + itemName,
           JSON.stringify(this.maxHealth)
         );
       }
       if (item === this.maxMana) {
         this.maxMana++;
         localStorage.setItem(
-          "adventura" + itemName,
+          'adventura' + itemName,
           JSON.stringify(this.maxMana)
         );
       }
       if (item === this.healScroll) {
         this.healScroll.heal++;
-        localStorage.setItem("adventura" + itemName + "Amount", item.heal);
+        localStorage.setItem('adventura' + itemName + 'Amount', item.heal);
       }
       if (item !== this.healScroll) {
         item.minDamage++;
         item.maxDamage++;
         localStorage.setItem(
-          "adventura" + itemName + "MinDamage",
+          'adventura' + itemName + 'MinDamage',
           item.minDamage
         );
         localStorage.setItem(
-          "adventura" + itemName + "MaxDamage",
+          'adventura' + itemName + 'MaxDamage',
           item.maxDamage
         );
       }
@@ -362,7 +362,7 @@ export default Vue.extend({
     },
     buyItem(coinsUsed: number) {
       this.coins -= coinsUsed;
-      localStorage.setItem("adventuracoins", JSON.stringify(this.coins));
+      localStorage.setItem('adventuracoins', JSON.stringify(this.coins));
       const clickSound = this.$refs.clickSound as HTMLAudioElement;
       clickSound.play();
     },
@@ -384,7 +384,7 @@ export default Vue.extend({
     },
     setCurrentArea(area: Area) {
       this.currentArea = area;
-      this.currentView = "Battle";
+      this.currentView = 'Battle';
       this.inBattle = true;
       this.health = this.maxHealth;
       this.mana = this.maxMana;
@@ -397,7 +397,7 @@ export default Vue.extend({
     },
     setBossArea(area: Area, boss: Boss) {
       this.currentArea = area;
-      this.currentView = "Battle";
+      this.currentView = 'Battle';
       this.inBattle = true;
       this.bossToFight = true;
       this.health = this.maxHealth;
@@ -405,7 +405,7 @@ export default Vue.extend({
       this.setEnemyStatus(boss.health, boss.mana, boss.weakness, boss.strength);
     },
     openMainMenu() {
-      this.currentView = "Battle";
+      this.currentView = 'Battle';
       this.playerDead = false;
       this.inBattle = false;
       this.health = this.maxHealth;
@@ -414,7 +414,7 @@ export default Vue.extend({
     },
     saveUpgrades(itemName: string, item: any) {
       item += 1;
-      localStorage.setItem("adventura" + itemName, item);
+      localStorage.setItem('adventura' + itemName, item);
     },
     enemyStrike(amount: any) {
       if (this.enemyDead === false) {
@@ -423,7 +423,7 @@ export default Vue.extend({
           this.damageReceived = amount.toString();
         } else {
           this.health -= 0;
-          this.damageReceived = "Miss";
+          this.damageReceived = 'Miss';
         }
       }
     },
@@ -449,40 +449,40 @@ export default Vue.extend({
       }
       if (amount === 0) {
         this.enemyHealth -= 0;
-        this.damageInflicted = "Miss";
+        this.damageInflicted = 'Miss';
       }
     },
     strikeWithSword(amount: number) {
-      this.checkWeaknessesAndStrengths(amount, 0, "Melee");
+      this.checkWeaknessesAndStrengths(amount, 0, 'Melee');
     },
     blastFire(amount: number, manaToConsume: number) {
       if (this.mana - manaToConsume >= 0) {
-        this.checkWeaknessesAndStrengths(amount, manaToConsume, "Fire");
+        this.checkWeaknessesAndStrengths(amount, manaToConsume, 'Fire');
       }
     },
     blastWater(amount: number, manaToConsume: number) {
       if (this.mana - manaToConsume >= 0) {
-        this.checkWeaknessesAndStrengths(amount, manaToConsume, "Water");
+        this.checkWeaknessesAndStrengths(amount, manaToConsume, 'Water');
       }
     },
     blastIce(amount: number, manaToConsume: number) {
       if (this.mana - manaToConsume >= 0) {
-        this.checkWeaknessesAndStrengths(amount, manaToConsume, "Ice");
+        this.checkWeaknessesAndStrengths(amount, manaToConsume, 'Ice');
       }
     },
     blastEarth(amount: number, manaToConsume: number) {
       if (this.mana - manaToConsume >= 0) {
-        this.checkWeaknessesAndStrengths(amount, manaToConsume, "Earth");
+        this.checkWeaknessesAndStrengths(amount, manaToConsume, 'Earth');
       }
     },
     blastAir(amount: number, manaToConsume: number) {
       if (this.mana - manaToConsume >= 0) {
-        this.checkWeaknessesAndStrengths(amount, manaToConsume, "Air");
+        this.checkWeaknessesAndStrengths(amount, manaToConsume, 'Air');
       }
     },
     blastLightning(amount: number, manaToConsume: number) {
       if (this.mana - manaToConsume >= 0) {
-        this.checkWeaknessesAndStrengths(amount, manaToConsume, "Lightning");
+        this.checkWeaknessesAndStrengths(amount, manaToConsume, 'Lightning');
       }
     },
     heal(amount: number, manaToConsume: number) {
@@ -503,13 +503,13 @@ export default Vue.extend({
     fullscreenOn: function() {
       const gameContainer = this.$refs.gameContainer as HTMLElement;
       if (this.fullscreenOn) {
-        gameContainer.classList.add("fullscreen");
-        gameContainer.classList.remove("gameContainer");
-        document.body.style.overflow = "hidden";
+        gameContainer.classList.add('fullscreen');
+        gameContainer.classList.remove('gameContainer');
+        document.body.style.overflow = 'hidden';
       } else if (!this.fullscreenOn) {
-        gameContainer.classList.add("gameContainer");
-        gameContainer.classList.remove("fullscreen");
-        document.body.style.overflow = "auto";
+        gameContainer.classList.add('gameContainer');
+        gameContainer.classList.remove('fullscreen');
+        document.body.style.overflow = 'auto';
       }
     },
     coins: function() {
@@ -522,7 +522,7 @@ export default Vue.extend({
       ) {
         this.visibleCoinAmount =
           (Math.round((this.coins / 1000000) * 100) / 100).toString() +
-          " Million";
+          ' Million';
       }
       if (
         +this.visibleCoinAmount >= 1000000000 &&
@@ -530,39 +530,39 @@ export default Vue.extend({
       ) {
         this.visibleCoinAmount =
           (Math.round((this.coins / 1000000000) * 100) / 100).toString() +
-          " Billion";
+          ' Billion';
       }
       if (+this.visibleCoinAmount >= 1000000000000) {
         this.visibleCoinAmount =
           (Math.round((this.coins / 1000000000000) * 100) / 100).toString() +
-          " Trillion";
+          ' Trillion';
       }
     },
     ironSword: function() {
       localStorage.setItem(
-        "adventuraswordMinDmg",
+        'adventuraswordMinDmg',
         JSON.stringify(this.ironSword.minDamage)
       );
       localStorage.setItem(
-        "adventuraswordMaxDmg",
+        'adventuraswordMaxDmg',
         JSON.stringify(this.ironSword.maxDamage)
       );
     },
     maxHealth: function() {
       localStorage.setItem(
-        "adventuramaxHealth",
+        'adventuramaxHealth',
         JSON.stringify(this.maxHealth)
       );
     },
     maxMana: function() {
-      localStorage.setItem("adventuramaxMana", JSON.stringify(this.maxMana));
+      localStorage.setItem('adventuramaxMana', JSON.stringify(this.maxMana));
     },
     health: function() {
       if (this.health <= 0) {
         this.health = 0;
         this.coinsLost = Math.ceil(this.coins / 4);
         this.coins -= Math.ceil(this.coins / 4);
-        localStorage.setItem("adventuracoins", JSON.stringify(this.coins));
+        localStorage.setItem('adventuracoins', JSON.stringify(this.coins));
         this.playerDead = true;
       }
     },
@@ -576,10 +576,10 @@ export default Vue.extend({
         this.enemyDead = true;
         if (this.bossToFight === false && this.enemyHealth === 0) {
           this.coins += Math.floor(this.currentArea.coinRange);
-          localStorage.setItem("adventuracoins", JSON.stringify(this.coins));
+          localStorage.setItem('adventuracoins', JSON.stringify(this.coins));
         } else if (this.bossToFight && this.enemyHealth === 0) {
           this.coins += this.currentArea.areaBoss.coinsDropped;
-          localStorage.setItem("adventuracoins", JSON.stringify(this.coins));
+          localStorage.setItem('adventuracoins', JSON.stringify(this.coins));
           setTimeout(() => {
             if (!this.bossesDefeated.includes(this.currentArea.areaBoss.name)) {
               this.bossesDefeated.push(this.currentArea.areaBoss.name);
@@ -595,7 +595,7 @@ export default Vue.extend({
                 this.currentArea.areaBoss.itemDropped.name
               );
               localStorage.setItem(
-                "adventuraunlockedMoves",
+                'adventuraunlockedMoves',
                 JSON.stringify(this.unlockedMoves)
               );
             }, 1);
@@ -617,7 +617,7 @@ export default Vue.extend({
     },
     bossesDefeated: function() {
       localStorage.setItem(
-        "adventurabossesDefeated",
+        'adventurabossesDefeated',
         JSON.stringify(this.bossesDefeated)
       );
       for (let area of this.allAreas) {
@@ -631,104 +631,104 @@ export default Vue.extend({
     },
     unlockedAreas: function() {
       localStorage.setItem(
-        "adventuraunlockedAreas",
+        'adventuraunlockedAreas',
         JSON.stringify(this.unlockedAreas)
       );
     }
   },
   created() {
-    if (localStorage.getItem("adventuraironSwordMinDamage")) {
+    if (localStorage.getItem('adventuraironSwordMinDamage')) {
       this.ironSword.minDamage = JSON.parse(
-        localStorage.getItem("adventuraironSwordMinDamage")!
+        localStorage.getItem('adventuraironSwordMinDamage')!
       );
       this.ironSword.maxDamage = JSON.parse(
-        localStorage.getItem("adventuraironSwordMaxDamage")!
+        localStorage.getItem('adventuraironSwordMaxDamage')!
       );
     }
-    if (localStorage.getItem("adventurafireMinDamage")) {
+    if (localStorage.getItem('adventurafireMinDamage')) {
       this.fireScroll.minDamage = JSON.parse(
-        localStorage.getItem("adventurafireMinDamage")!
+        localStorage.getItem('adventurafireMinDamage')!
       );
       this.fireScroll.maxDamage = JSON.parse(
-        localStorage.getItem("adventurafireMaxDamage")!
+        localStorage.getItem('adventurafireMaxDamage')!
       );
     }
-    if (localStorage.getItem("adventurawaterMinDamage")) {
+    if (localStorage.getItem('adventurawaterMinDamage')) {
       this.waterScroll.minDamage = JSON.parse(
-        localStorage.getItem("adventurawaterMinDamage")!
+        localStorage.getItem('adventurawaterMinDamage')!
       );
       this.waterScroll.maxDamage = JSON.parse(
-        localStorage.getItem("adventurawaterMaxDamage")!
+        localStorage.getItem('adventurawaterMaxDamage')!
       );
     }
-    if (localStorage.getItem("adventuraiceMinDamage")) {
+    if (localStorage.getItem('adventuraiceMinDamage')) {
       this.iceScroll.minDamage = JSON.parse(
-        localStorage.getItem("adventuraiceMinDamage")!
+        localStorage.getItem('adventuraiceMinDamage')!
       );
       this.iceScroll.maxDamage = JSON.parse(
-        localStorage.getItem("adventuraiceMaxDamage")!
+        localStorage.getItem('adventuraiceMaxDamage')!
       );
     }
-    if (localStorage.getItem("adventuraearthMinDamage")) {
+    if (localStorage.getItem('adventuraearthMinDamage')) {
       this.earthScroll.minDamage = JSON.parse(
-        localStorage.getItem("adventuraearthMinDamage")!
+        localStorage.getItem('adventuraearthMinDamage')!
       );
       this.earthScroll.maxDamage = JSON.parse(
-        localStorage.getItem("adventuraearthMaxDamage")!
+        localStorage.getItem('adventuraearthMaxDamage')!
       );
     }
-    if (localStorage.getItem("adventuraairMinDamage")) {
+    if (localStorage.getItem('adventuraairMinDamage')) {
       this.airScroll.minDamage = JSON.parse(
-        localStorage.getItem("adventuraairMinDamage")!
+        localStorage.getItem('adventuraairMinDamage')!
       );
       this.airScroll.maxDamage = JSON.parse(
-        localStorage.getItem("adventuraairMaxDamage")!
+        localStorage.getItem('adventuraairMaxDamage')!
       );
     }
-    if (localStorage.getItem("adventuralightningMinDamage")) {
+    if (localStorage.getItem('adventuralightningMinDamage')) {
       this.lightningScroll.minDamage = JSON.parse(
-        localStorage.getItem("adventuralightningMinDamage")!
+        localStorage.getItem('adventuralightningMinDamage')!
       );
       this.lightningScroll.maxDamage = JSON.parse(
-        localStorage.getItem("adventuralightningMaxDamage")!
+        localStorage.getItem('adventuralightningMaxDamage')!
       );
     }
-    if (localStorage.getItem("adventurahealAmount")) {
+    if (localStorage.getItem('adventurahealAmount')) {
       this.healScroll.heal = JSON.parse(
-        localStorage.getItem("adventurahealAmount")!
+        localStorage.getItem('adventurahealAmount')!
       );
     }
-    if (localStorage.getItem("adventuracoins")) {
-      this.coins = JSON.parse(localStorage.getItem("adventuracoins")!);
+    if (localStorage.getItem('adventuracoins')) {
+      this.coins = JSON.parse(localStorage.getItem('adventuracoins')!);
       this.visibleCoinAmount = this.coins.toString();
     }
-    if (localStorage.getItem("adventuraunlockedMoves") !== null) {
+    if (localStorage.getItem('adventuraunlockedMoves') !== null) {
       this.unlockedMoves = JSON.parse(
-        localStorage.getItem("adventuraunlockedMoves")!
+        localStorage.getItem('adventuraunlockedMoves')!
       );
     }
-    if (localStorage.getItem("adventuraunlockedAreas")) {
+    if (localStorage.getItem('adventuraunlockedAreas')) {
       this.unlockedAreas = JSON.parse(
-        localStorage.getItem("adventuraunlockedAreas")!
+        localStorage.getItem('adventuraunlockedAreas')!
       );
     }
-    if (localStorage.getItem("adventurabossesDefeated") !== null) {
+    if (localStorage.getItem('adventurabossesDefeated') !== null) {
       this.bossesDefeated = JSON.parse(
-        localStorage.getItem("adventurabossesDefeated")!
+        localStorage.getItem('adventurabossesDefeated')!
       );
     }
-    if (localStorage.getItem("adventuramaxHealth")) {
-      this.maxHealth = JSON.parse(localStorage.getItem("adventuramaxHealth")!);
+    if (localStorage.getItem('adventuramaxHealth')) {
+      this.maxHealth = JSON.parse(localStorage.getItem('adventuramaxHealth')!);
     }
-    if (localStorage.getItem("adventuramaxMana")) {
-      this.maxMana = JSON.parse(localStorage.getItem("adventuramaxMana")!);
+    if (localStorage.getItem('adventuramaxMana')) {
+      this.maxMana = JSON.parse(localStorage.getItem('adventuramaxMana')!);
     }
   }
 });
 </script>
 
 <style lang="scss">
-@import "@/global.scss";
+@import '@/global.scss';
 #adventura {
   padding-top: 66px;
 }

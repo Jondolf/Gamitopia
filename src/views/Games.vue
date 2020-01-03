@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import GameThumbnails from "@/components/games/GameThumbnails.vue";
+import Vue from 'vue';
+import GameThumbnails from '@/components/games/GameThumbnails.vue';
 export default Vue.extend({
-  name: "home",
+  name: 'home',
   components: {
     GameThumbnails
   }

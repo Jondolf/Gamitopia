@@ -7,16 +7,16 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
-  name: "Death-Screen",
+  name: 'Death-Screen',
   components: {},
   props: {
     coinsLost: Number
   },
   methods: {
     openMap() {
-      this.$emit("openMap");
+      this.$emit('openMap');
     }
   },
   watch: {}
@@ -25,7 +25,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 .death-screen {
   background-color: rgba(0, 0, 0, 0.5);
   width: 33%;

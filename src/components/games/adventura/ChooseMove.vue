@@ -54,11 +54,11 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { Melee } from "@/components/games/adventura/melee";
-import { Magic } from "@/components/games/adventura/magic";
+import Vue from 'vue';
+import { Melee } from '@/components/games/adventura/melee';
+import { Magic } from '@/components/games/adventura/magic';
 export default Vue.extend({
-  name: "Choose-Move",
+  name: 'Choose-Move',
   components: {},
   props: {
     unlockedMoves: Array,
@@ -76,28 +76,28 @@ export default Vue.extend({
   },
   methods: {
     strikeWithSword(amount: number) {
-      this.$emit("strikeWithSword", amount);
+      this.$emit('strikeWithSword', amount);
     },
     blastFire(amount: number, manaToConsume: number) {
-      this.$emit("blastFire", amount, manaToConsume);
+      this.$emit('blastFire', amount, manaToConsume);
     },
     blastWater(amount: number, manaToConsume: number) {
-      this.$emit("blastWater", amount, manaToConsume);
+      this.$emit('blastWater', amount, manaToConsume);
     },
     blastIce(amount: number, manaToConsume: number) {
-      this.$emit("blastIce", amount, manaToConsume);
+      this.$emit('blastIce', amount, manaToConsume);
     },
     blastEarth(amount: number, manaToConsume: number) {
-      this.$emit("blastEarth", amount, manaToConsume);
+      this.$emit('blastEarth', amount, manaToConsume);
     },
     blastAir(amount: number, manaToConsume: number) {
-      this.$emit("blastAir", amount, manaToConsume);
+      this.$emit('blastAir', amount, manaToConsume);
     },
     blastLightning(amount: number, manaToConsume: number) {
-      this.$emit("blastLightning", amount, manaToConsume);
+      this.$emit('blastLightning', amount, manaToConsume);
     },
     heal(amount: number, manaToConsume: number) {
-      this.$emit("heal", amount, manaToConsume);
+      this.$emit('heal', amount, manaToConsume);
     }
   },
   watch: {}
@@ -106,7 +106,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 .choose-move {
   background-color: rgba(0, 0, 0, 0.5);
   width: 33%;

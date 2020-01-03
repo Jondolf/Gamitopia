@@ -6,11 +6,11 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import NewestGame from "@/components/home/NewestGame.vue";
-import RecentGames from "@/components/home/RecentGames.vue";
+import Vue from 'vue';
+import NewestGame from '@/components/home/NewestGame.vue';
+import RecentGames from '@/components/home/RecentGames.vue';
 export default Vue.extend({
-  name: "home",
+  name: 'home',
   components: {
     NewestGame,
     RecentGames

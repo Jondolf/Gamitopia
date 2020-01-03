@@ -1,6 +1,34 @@
 <template>
   <div id="news">
     <div class="news-post">
+      <h2>Snake</h2>
+      <p>
+        Yet another game has been released for Gamitopia, and this one is a
+        classic. Slither around as a snake as you collect fruit and grow bigger
+        to increase your score.
+        <br />
+        If you hit a wall or your own tail, your snake dies and you will have to
+        try again.
+        <br />
+        <br />
+        I also added a settings menu where you can make the game a lot more
+        interesting by changing the size of the game area or
+        increasing/decreasing the speed of your snake.
+        <br />
+        <br />
+        I will update the game later this year by adding settings that will
+        generate random walls around the game area whenever you restart to make
+        navigating around a lot more interesting, settings to maybe change the
+        color of the snake and the walls, settings to change how often fruit
+        spawns and settings to choose if you want the snake's speed to change
+        whenever you get a fruit.
+        <br />
+        <br />
+        You can play snake <router-link to="/snake">here</router-link>
+      </p>
+      <h6>3.1.2020</h6>
+    </div>
+    <div class="news-post">
       <h2>New Year 2019-2020</h2>
       <p>
         Happy New Year's Eve!
@@ -236,15 +264,15 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
-  name: "news",
+  name: 'news',
   components: {}
 });
 </script>
 
 <style lang="scss">
-@import "@/global.scss";
+@import '@/global.scss';
 a:visited {
   color: white;
 }

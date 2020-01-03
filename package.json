@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "@types/fastclick": "^1.0.28",
+    "@types/vue2-hammer": "^2.1.0",
     "fastclick": "^1.0.6",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.3"
+    "vue-router": "^3.0.3",
+    "vue2-hammer": "^2.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-eslint": "^3.11.0",
@@ -40,7 +42,13 @@
       "@vue/typescript"
     ],
     "rules": {
-      "no-console": "off"
+      "no-console": "off",
+      "prettier/prettier": [
+        "warn",
+        {
+          "singleQuote": true
+        }
+      ]
     },
     "parserOptions": {
       "parser": "@typescript-eslint/parser"

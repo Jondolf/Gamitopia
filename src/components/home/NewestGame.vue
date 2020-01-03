@@ -1,28 +1,28 @@
 <template>
   <div id="newest-game">
     <h1>Newest Game</h1>
-    <h3>Adventura</h3>
-    <router-link to="/adventura">
+    <h3>Snake</h3>
+    <router-link to="/snake">
       <img
-        src="@/assets/images/adventura-thumbnail.png"
-        alt="Adventura game"
+        src="@/assets/images/snake-thumbnail.jpg"
+        alt="Snake game"
         id="newest-game-img"
       />
     </router-link>
-    <h6>24.12.2019</h6>
+    <h6>3.1.2020</h6>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
-  name: "NewestGame"
+  name: 'NewestGame'
 });
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 #newest-game-img {
   width: 28vw;
   border-radius: 5px;

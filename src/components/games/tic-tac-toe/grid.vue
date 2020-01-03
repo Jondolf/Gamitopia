@@ -26,17 +26,17 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Square from "@/components/games/tic-tac-toe/square.vue";
-import VictoryScreen from "@/components/games/tic-tac-toe/tic-tac-toe-victory-screen.vue";
-import TopBar from "@/components/games/tic-tac-toe/top-bar.vue";
+import Vue from 'vue';
+import Square from '@/components/games/tic-tac-toe/square.vue';
+import VictoryScreen from '@/components/games/tic-tac-toe/tic-tac-toe-victory-screen.vue';
+import TopBar from '@/components/games/tic-tac-toe/top-bar.vue';
 
 export interface SquareData {
   symbol: string;
 }
 
 export default Vue.extend({
-  name: "Grid",
+  name: 'Grid',
   components: {
     Square,
     VictoryScreen,
@@ -44,14 +44,14 @@ export default Vue.extend({
   },
   methods: {
     toggleStartMenuVisibility() {
-      this.$emit("openStartMenuBtnClicked");
+      this.$emit('openStartMenuBtnClicked');
     },
     addSymbol(square: SquareData) {
-      if (square.symbol === "" && this.player1Turn === true) {
+      if (square.symbol === '' && this.player1Turn === true) {
         this.addCross(square);
         this.detectVictory();
         this.changeTurn();
-      } else if (square.symbol === "" && this.player2Turn === true) {
+      } else if (square.symbol === '' && this.player2Turn === true) {
         this.addNought(square);
         this.detectVictory();
         this.changeTurn();
@@ -62,10 +62,10 @@ export default Vue.extend({
       this.player2Turn = !this.player2Turn;
     },
     addCross: function(square: SquareData) {
-      square.symbol = "X";
+      square.symbol = 'X';
     },
     addNought: function(square: SquareData) {
-      square.symbol = "O";
+      square.symbol = 'O';
     },
     /*this.detectXVictory3x3();
       this.detectOVictory3x3();
@@ -88,7 +88,7 @@ export default Vue.extend({
             number
           ];
         },
-        [0, "", 0]
+        [0, '', 0]
       );
       return count <= result[2];
     },
@@ -152,39 +152,39 @@ export default Vue.extend({
           this.sequentialSymbols(squares, this.amountOfSymbolsNeededInARowToWin) //Amount of symbols in a row needed to win
       );
       if (ended && this.player1Turn) {
-        this.gameEnd("X");
+        this.gameEnd('X');
       } else if (ended && this.player2Turn) {
-        this.gameEnd("O");
+        this.gameEnd('O');
       }
     },
     detectTie() {
       const hasEmptySquare =
         this.grid.filter(
-          row => row.filter(square => square.symbol === "").length
+          row => row.filter(square => square.symbol === '').length
         ).length === 0;
       if (hasEmptySquare) {
-        this.gameEnd("Tie");
+        this.gameEnd('Tie');
       }
     },
 
     gameEnd(condition: String) {
       this.victory = true;
-      if (condition === "X") {
-        this.gameEndMessage = "Player With X Wins!";
-      } else if (condition === "O") {
-        this.gameEndMessage = "Player With O Wins!";
-      } else if (condition === "Tie") {
-        this.gameEndMessage = "Tie";
+      if (condition === 'X') {
+        this.gameEndMessage = 'Player With X Wins!';
+      } else if (condition === 'O') {
+        this.gameEndMessage = 'Player With O Wins!';
+      } else if (condition === 'Tie') {
+        this.gameEndMessage = 'Tie';
       }
     },
     restartGame() {
       this.player1Turn = true;
       this.player2Turn = false;
       this.victory = false;
-      this.gameEndMessage = "";
+      this.gameEndMessage = '';
       for (let i = 0; i < this.grid.length; i++) {
         for (let j = 0; j < this.grid[0].length; j++) {
-          this.grid[i][j].symbol = "";
+          this.grid[i][j].symbol = '';
         }
       }
     },
@@ -193,7 +193,7 @@ export default Vue.extend({
       for (let i = 0; i < this.gridWidth; i++) {
         this.grid.push([]);
         for (let j = 0; j < this.gridHeight; j++) {
-          const square = { symbol: "" };
+          const square = { symbol: '' };
           this.grid[i].push(square);
         }
       }
@@ -207,7 +207,7 @@ export default Vue.extend({
         (
           gridElement.clientWidth /
           Math.max(this.grid.length, this.grid[0].length)
-        ).toString() + "px";
+        ).toString() + 'px';
     },
     getFontSize() {
       const gridElement = this.$refs.grid as HTMLElement;
@@ -216,21 +216,21 @@ export default Vue.extend({
           gridElement.clientWidth /
             Math.max(this.grid.length, this.grid[0].length) -
             20
-        ).toString() + "px";
+        ).toString() + 'px';
     }
   },
   data: function() {
     return {
       player1Turn: true,
       player2Turn: false,
-      squareSize: "10vw",
-      fontSize: "",
+      squareSize: '10vw',
+      fontSize: '',
       victory: false,
-      gameEndMessage: "",
+      gameEndMessage: '',
       grid: [
-        [{ symbol: "" }, { symbol: "" }, { symbol: "" }],
-        [{ symbol: "" }, { symbol: "" }, { symbol: "" }],
-        [{ symbol: "" }, { symbol: "" }, { symbol: "" }]
+        [{ symbol: '' }, { symbol: '' }, { symbol: '' }],
+        [{ symbol: '' }, { symbol: '' }, { symbol: '' }],
+        [{ symbol: '' }, { symbol: '' }, { symbol: '' }]
       ]
     };
   },
@@ -257,8 +257,8 @@ export default Vue.extend({
   },
   mounted() {
     this.$nextTick(function() {
-      window.addEventListener("resize", this.getSquareSize);
-      window.addEventListener("resize", this.getFontSize);
+      window.addEventListener('resize', this.getSquareSize);
+      window.addEventListener('resize', this.getFontSize);
     });
     this.setGridSize();
   }
@@ -267,7 +267,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 
 #grid-container {
   width: 75vw;

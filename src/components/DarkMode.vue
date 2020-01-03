@@ -5,15 +5,15 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
-  name: "DarkMode",
+  name: 'DarkMode',
   data() {
     return {
       imgUrl:
-        localStorage.getItem("darkMode") === "true"
-          ? require("@/assets/images/turnDarkModeOff.png")
-          : require("@/assets/images/turnDarkModeOn.png"),
+        localStorage.getItem('darkMode') === 'true'
+          ? require('@/assets/images/turnDarkModeOff.png')
+          : require('@/assets/images/turnDarkModeOn.png'),
       darkModeOnOff: true
     };
   },
@@ -21,18 +21,18 @@ export default Vue.extend({
     toggleDarkMode() {
       this.darkModeOnOffBoolean();
       this.darkModeOnOff = !this.darkModeOnOff;
-      localStorage.setItem("darkMode", this.darkModeOnOff.toString());
+      localStorage.setItem('darkMode', this.darkModeOnOff.toString());
 
-      if (localStorage.getItem("darkMode") === "true") {
-        document.body.classList.add("darkMode");
-        this.imgUrl = require("@/assets/images/turnDarkModeOff.png");
-      } else if (localStorage.getItem("darkMode") === "false") {
-        document.body.classList.remove("darkMode");
-        this.imgUrl = require("@/assets/images/turnDarkModeOn.png");
+      if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('darkMode');
+        this.imgUrl = require('@/assets/images/turnDarkModeOff.png');
+      } else if (localStorage.getItem('darkMode') === 'false') {
+        document.body.classList.remove('darkMode');
+        this.imgUrl = require('@/assets/images/turnDarkModeOn.png');
       }
     },
     darkModeOnOffBoolean() {
-      if (localStorage.getItem("darkMode") === "true") {
+      if (localStorage.getItem('darkMode') === 'true') {
         this.darkModeOnOff = true;
       } else {
         this.darkModeOnOff = false;
@@ -40,10 +40,10 @@ export default Vue.extend({
     }
   },
   created() {
-    if (localStorage.getItem("darkMode") === "true") {
-      document.body.classList.add("darkMode");
-    } else if (localStorage.getItem("darkMode") === "false") {
-      document.body.classList.remove("darkMode");
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('darkMode');
+    } else if (localStorage.getItem('darkMode') === 'false') {
+      document.body.classList.remove('darkMode');
     }
   }
 });
@@ -51,7 +51,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 #darkModeButton {
   width: 3vw;
   height: 3vw;

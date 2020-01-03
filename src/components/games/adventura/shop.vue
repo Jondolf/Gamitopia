@@ -135,11 +135,11 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { Melee } from "./melee";
-import { Magic } from "./magic";
+import Vue from 'vue';
+import { Melee } from './melee';
+import { Magic } from './magic';
 export default Vue.extend({
-  name: "shop",
+  name: 'shop',
   components: {},
   props: {
     //Weapons
@@ -186,7 +186,7 @@ export default Vue.extend({
   },
   methods: {
     openMap() {
-      this.$emit("openMap");
+      this.$emit('openMap');
     },
     saveToLocalStorage(
       item: string,
@@ -194,182 +194,182 @@ export default Vue.extend({
       costName: string,
       cost: number
     ) {
-      localStorage.setItem("adventura" + item, JSON.stringify(itemLevel));
-      localStorage.setItem("adventura" + costName, JSON.stringify(cost));
+      localStorage.setItem('adventura' + item, JSON.stringify(itemLevel));
+      localStorage.setItem('adventura' + costName, JSON.stringify(cost));
     },
     getFromLocalStorage(itemName: string) {
-      if (localStorage.getItem("adventura" + itemName)) {
-        return JSON.parse(localStorage.getItem("adventura" + itemName)!);
+      if (localStorage.getItem('adventura' + itemName)) {
+        return JSON.parse(localStorage.getItem('adventura' + itemName)!);
       } else {
         return 1;
       }
     },
     getCostFromLocalStorage(itemName: string, defaultCost: number) {
-      if (localStorage.getItem("adventura" + itemName)) {
-        return JSON.parse(localStorage.getItem("adventura" + itemName)!);
+      if (localStorage.getItem('adventura' + itemName)) {
+        return JSON.parse(localStorage.getItem('adventura' + itemName)!);
       } else {
         return defaultCost;
       }
     },
     buyItem(item: string | object) {
       switch (item) {
-        case "health":
+        case 'health':
           if (this.coins >= this.newHealthUpgradeCost) {
-            this.$emit("itemBought", this.newHealthUpgradeCost);
-            this.$emit("healthUpgraded");
+            this.$emit('itemBought', this.newHealthUpgradeCost);
+            this.$emit('healthUpgraded');
             this.newHealthUpgradeCost = Math.round(
               this.newHealthUpgradeCost * Math.pow(1.05, this.healthLevel)
             );
             this.healthLevel++;
             this.saveToLocalStorage(
-              "healthLevel",
+              'healthLevel',
               this.healthLevel,
-              "healthUpgradeCost",
+              'healthUpgradeCost',
               this.newHealthUpgradeCost
             );
           }
           break;
 
-        case "mana":
+        case 'mana':
           if (this.coins >= this.newManaUpgradeCost) {
-            this.$emit("itemBought", this.newManaUpgradeCost);
-            this.$emit("manaUpgraded");
+            this.$emit('itemBought', this.newManaUpgradeCost);
+            this.$emit('manaUpgraded');
             this.newManaUpgradeCost = Math.round(
               this.newManaUpgradeCost * Math.pow(1.05, this.manaLevel)
             );
             this.manaLevel++;
             this.saveToLocalStorage(
-              "manaLevel",
+              'manaLevel',
               this.manaLevel,
-              "manaUpgradeCost",
+              'manaUpgradeCost',
               this.newManaUpgradeCost
             );
           }
           break;
-        case "sword":
+        case 'sword':
           if (this.coins >= this.newSwordUpgradeCost) {
-            this.$emit("itemBought", this.newSwordUpgradeCost);
-            this.$emit("swordUpgraded");
+            this.$emit('itemBought', this.newSwordUpgradeCost);
+            this.$emit('swordUpgraded');
             this.newSwordUpgradeCost = Math.round(
               this.newSwordUpgradeCost * Math.pow(1.05, this.swordLevel)
             );
             this.swordLevel++;
             this.saveToLocalStorage(
-              "swordLevel",
+              'swordLevel',
               this.swordLevel,
-              "swordUpgradeCost",
+              'swordUpgradeCost',
               this.newSwordUpgradeCost
             );
           }
           break;
-        case "fire":
+        case 'fire':
           if (this.coins >= this.newFireUpgradeCost) {
-            this.$emit("itemBought", this.newFireUpgradeCost);
-            this.$emit("fireUpgraded");
+            this.$emit('itemBought', this.newFireUpgradeCost);
+            this.$emit('fireUpgraded');
             this.newFireUpgradeCost = Math.round(
               this.newFireUpgradeCost * Math.pow(1.05, this.fireLevel)
             );
             this.fireLevel++;
             this.saveToLocalStorage(
-              "fireLevel",
+              'fireLevel',
               this.fireLevel,
-              "fireUpgradeCost",
+              'fireUpgradeCost',
               this.newFireUpgradeCost
             );
           }
           break;
-        case "water":
+        case 'water':
           if (this.coins >= this.newWaterUpgradeCost) {
-            this.$emit("itemBought", this.newWaterUpgradeCost);
-            this.$emit("waterUpgraded");
+            this.$emit('itemBought', this.newWaterUpgradeCost);
+            this.$emit('waterUpgraded');
             this.newWaterUpgradeCost = Math.round(
               this.newWaterUpgradeCost * Math.pow(1.05, this.waterLevel)
             );
             this.waterLevel++;
             this.saveToLocalStorage(
-              "waterLevel",
+              'waterLevel',
               this.waterLevel,
-              "waterUpgradeCost",
+              'waterUpgradeCost',
               this.newWaterUpgradeCost
             );
           }
           break;
-        case "ice":
+        case 'ice':
           if (this.coins >= this.newIceUpgradeCost) {
-            this.$emit("itemBought", this.newIceUpgradeCost);
-            this.$emit("iceUpgraded");
+            this.$emit('itemBought', this.newIceUpgradeCost);
+            this.$emit('iceUpgraded');
             this.newIceUpgradeCost = Math.round(
               this.newIceUpgradeCost * Math.pow(1.05, this.iceLevel)
             );
             this.iceLevel++;
             this.saveToLocalStorage(
-              "iceLevel",
+              'iceLevel',
               this.iceLevel,
-              "iceUpgradeCost",
+              'iceUpgradeCost',
               this.newIceUpgradeCost
             );
           }
           break;
-        case "earth":
+        case 'earth':
           if (this.coins >= this.newEarthUpgradeCost) {
-            this.$emit("itemBought", this.newEarthUpgradeCost);
-            this.$emit("earthUpgraded");
+            this.$emit('itemBought', this.newEarthUpgradeCost);
+            this.$emit('earthUpgraded');
             this.newEarthUpgradeCost = Math.round(
               this.newEarthUpgradeCost * Math.pow(1.05, this.earthLevel)
             );
             this.earthLevel++;
             this.saveToLocalStorage(
-              "earthLevel",
+              'earthLevel',
               this.earthLevel,
-              "earthUpgradeCost",
+              'earthUpgradeCost',
               this.newEarthUpgradeCost
             );
           }
           break;
-        case "air":
+        case 'air':
           if (this.coins >= this.newAirUpgradeCost) {
-            this.$emit("itemBought", this.newAirUpgradeCost);
-            this.$emit("airUpgraded");
+            this.$emit('itemBought', this.newAirUpgradeCost);
+            this.$emit('airUpgraded');
             this.newAirUpgradeCost = Math.round(
               this.newAirUpgradeCost * Math.pow(1.05, this.airLevel)
             );
             this.airLevel++;
             this.saveToLocalStorage(
-              "airLevel",
+              'airLevel',
               this.airLevel,
-              "airUpgradeCost",
+              'airUpgradeCost',
               this.newAirUpgradeCost
             );
           }
           break;
-        case "lightning":
+        case 'lightning':
           if (this.coins >= this.newLightningUpgradeCost) {
-            this.$emit("itemBought", this.newLightningUpgradeCost);
-            this.$emit("lightningUpgraded");
+            this.$emit('itemBought', this.newLightningUpgradeCost);
+            this.$emit('lightningUpgraded');
             this.newLightningUpgradeCost = Math.round(
               this.newLightningUpgradeCost * Math.pow(1.05, this.lightningLevel)
             );
             this.lightningLevel++;
             this.saveToLocalStorage(
-              "lightningLevel",
+              'lightningLevel',
               this.lightningLevel,
-              "lightningUpgradeCost",
+              'lightningUpgradeCost',
               this.newLightningUpgradeCost
             );
           }
           break;
-        case "heal":
+        case 'heal':
           if (this.coins >= this.newHealUpgradeCost) {
-            this.$emit("itemBought", this.newHealUpgradeCost);
-            this.$emit("healUpgraded");
+            this.$emit('itemBought', this.newHealUpgradeCost);
+            this.$emit('healUpgraded');
             this.newHealUpgradeCost = Math.round(
               this.newHealUpgradeCost * Math.pow(1.05, this.healLevel)
             );
             this.healLevel++;
             this.saveToLocalStorage(
-              "healLevel",
+              'healLevel',
               this.healLevel,
-              "healUpgradeCost",
+              'healUpgradeCost',
               this.newHealUpgradeCost
             );
           }
@@ -380,55 +380,55 @@ export default Vue.extend({
     }
   },
   created() {
-    this.healthLevel = this.getFromLocalStorage("healthLevel");
-    this.manaLevel = this.getFromLocalStorage("manaLevel");
-    this.swordLevel = this.getFromLocalStorage("swordLevel");
-    this.fireLevel = this.getFromLocalStorage("fireLevel");
-    this.waterLevel = this.getFromLocalStorage("waterLevel");
-    this.iceLevel = this.getFromLocalStorage("iceLevel");
-    this.earthLevel = this.getFromLocalStorage("earthLevel");
-    this.airLevel = this.getFromLocalStorage("airLevel");
-    this.lightningLevel = this.getFromLocalStorage("lightningLevel");
-    this.healLevel = this.getFromLocalStorage("healLevel");
+    this.healthLevel = this.getFromLocalStorage('healthLevel');
+    this.manaLevel = this.getFromLocalStorage('manaLevel');
+    this.swordLevel = this.getFromLocalStorage('swordLevel');
+    this.fireLevel = this.getFromLocalStorage('fireLevel');
+    this.waterLevel = this.getFromLocalStorage('waterLevel');
+    this.iceLevel = this.getFromLocalStorage('iceLevel');
+    this.earthLevel = this.getFromLocalStorage('earthLevel');
+    this.airLevel = this.getFromLocalStorage('airLevel');
+    this.lightningLevel = this.getFromLocalStorage('lightningLevel');
+    this.healLevel = this.getFromLocalStorage('healLevel');
 
     this.newHealthUpgradeCost = this.getCostFromLocalStorage(
-      "healthUpgradeCost",
+      'healthUpgradeCost',
       this.newHealthUpgradeCost
     );
     this.newManaUpgradeCost = this.getCostFromLocalStorage(
-      "manaUpgradeCost",
+      'manaUpgradeCost',
       this.newManaUpgradeCost
     );
     this.newSwordUpgradeCost = this.getCostFromLocalStorage(
-      "swordUpgradeCost",
+      'swordUpgradeCost',
       this.newSwordUpgradeCost
     );
     this.newFireUpgradeCost = this.getCostFromLocalStorage(
-      "fireUpgradeCost",
+      'fireUpgradeCost',
       this.newFireUpgradeCost
     );
     this.newWaterUpgradeCost = this.getCostFromLocalStorage(
-      "waterUpgradeCost",
+      'waterUpgradeCost',
       this.newWaterUpgradeCost
     );
     this.newIceUpgradeCost = this.getCostFromLocalStorage(
-      "iceUpgradeCost",
+      'iceUpgradeCost',
       this.newIceUpgradeCost
     );
     this.newEarthUpgradeCost = this.getCostFromLocalStorage(
-      "earthUpgradeCost",
+      'earthUpgradeCost',
       this.newEarthUpgradeCost
     );
     this.newAirUpgradeCost = this.getCostFromLocalStorage(
-      "airUpgradeCost",
+      'airUpgradeCost',
       this.newAirUpgradeCost
     );
     this.newLightningUpgradeCost = this.getCostFromLocalStorage(
-      "lightningUpgradeCost",
+      'lightningUpgradeCost',
       this.newLightningUpgradeCost
     );
     this.newHealUpgradeCost = this.getCostFromLocalStorage(
-      "healUpgradeCost",
+      'healUpgradeCost',
       this.newHealUpgradeCost
     );
   }
@@ -437,7 +437,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 .shop {
   background-color: rgb(0, 0, 0);
   height: 100%;
@@ -509,7 +509,7 @@ export default Vue.extend({
         display: flex;
         flex: 1 1 0;
         text-align: left;
-        font-size: 12px
+        font-size: 12px;
       }
     }
     button:hover {

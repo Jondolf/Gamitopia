@@ -7,13 +7,13 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Nav from "@/components/Nav.vue";
-import Footer from "@/components/Footer.vue";
-import * as FastClick from "fastclick";
+import Vue from 'vue';
+import Nav from '@/components/Nav.vue';
+import Footer from '@/components/Footer.vue';
+import * as FastClick from 'fastclick';
 
 export default Vue.extend({
-  name: "app",
+  name: 'app',
   components: {
     Nav,
     Footer
@@ -26,7 +26,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import "@/global.scss";
+@import '@/global.scss';
 * {
   margin: 0;
   padding: 0;

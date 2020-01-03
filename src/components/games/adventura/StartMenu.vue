@@ -57,12 +57,12 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { Area } from "./area";
-import Settings from "./Settings.vue";
-import Instructions from "./Instructions.vue";
+import Vue from 'vue';
+import { Area } from './area';
+import Settings from './Settings.vue';
+import Instructions from './Instructions.vue';
 export default Vue.extend({
-  name: "start-menu",
+  name: 'start-menu',
   components: {
     Settings,
     Instructions
@@ -84,75 +84,75 @@ export default Vue.extend({
       this.$emit(viewName);
     },
     checkIfGameStarted(param: string) {
-      if (param === "continue") {
-        if (localStorage.getItem("coins")) {
+      if (param === 'continue') {
+        if (localStorage.getItem('coins')) {
           return true;
         }
         return false;
-      } else if (param === "reset") {
-        if (localStorage.getItem("coins")) {
+      } else if (param === 'reset') {
+        if (localStorage.getItem('coins')) {
           this.confirmResetBtnVisibility = true;
         } else {
-          this.changeView("map");
+          this.changeView('map');
         }
       }
     },
     resetProgress() {
-      if (localStorage.getItem("coins")) {
+      if (localStorage.getItem('coins')) {
         setTimeout(() => {
           location.reload();
         }, 1);
       }
-      localStorage.removeItem("adventurabossesDefeated");
-      localStorage.removeItem("adventuracoins");
-      localStorage.removeItem("adventuramaxHealth");
-      localStorage.removeItem("adventuramaxMana");
-      localStorage.removeItem("adventuraunlockedAreas");
-      localStorage.removeItem("adventuraunlockedMoves");
-      localStorage.removeItem("adventurahealthLevel");
-      localStorage.removeItem("adventurahealthUpgradeCost");
-      localStorage.removeItem("adventuramanaLevel");
-      localStorage.removeItem("adventuramanaUpgradeCost");
-      localStorage.removeItem("adventuraswordLevel");
-      localStorage.removeItem("adventurafireLevel");
-      localStorage.removeItem("adventurawaterLevel");
-      localStorage.removeItem("adventuraiceLevel");
-      localStorage.removeItem("adventuraearthLevel");
-      localStorage.removeItem("adventuraairLevel");
-      localStorage.removeItem("adventuralightningLevel");
-      localStorage.removeItem("adventurahealLevel");
-      localStorage.removeItem("adventuraswordUpgradeCost");
-      localStorage.removeItem("adventurafireUpgradeCost");
-      localStorage.removeItem("adventurawaterUpgradeCost");
-      localStorage.removeItem("adventuraiceUpgradeCost");
-      localStorage.removeItem("adventuraearthUpgradeCost");
-      localStorage.removeItem("adventuraairUpgradeCost");
-      localStorage.removeItem("adventuralightningUpgradeCost");
-      localStorage.removeItem("adventurahealUpgradeCost");
-      localStorage.removeItem("adventuraironSwordMinDamage");
-      localStorage.removeItem("adventurafireMinDamage");
-      localStorage.removeItem("adventurawaterMinDamage");
-      localStorage.removeItem("adventuraiceMinDamage");
-      localStorage.removeItem("adventuraearthMinDamage");
-      localStorage.removeItem("adventuraairMinDamage");
-      localStorage.removeItem("adventuralightningMinDamage");
-      localStorage.removeItem("adventuraironSwordMaxDamage");
-      localStorage.removeItem("adventurafireMaxDamage");
-      localStorage.removeItem("adventurawaterMaxDamage");
-      localStorage.removeItem("adventuraiceMaxDamage");
-      localStorage.removeItem("adventuraearthMaxDamage");
-      localStorage.removeItem("adventuraairMaxDamage");
-      localStorage.removeItem("adventuralightningMaxDamage");
-      localStorage.removeItem("adventurahealAmount");
+      localStorage.removeItem('adventurabossesDefeated');
+      localStorage.removeItem('adventuracoins');
+      localStorage.removeItem('adventuramaxHealth');
+      localStorage.removeItem('adventuramaxMana');
+      localStorage.removeItem('adventuraunlockedAreas');
+      localStorage.removeItem('adventuraunlockedMoves');
+      localStorage.removeItem('adventurahealthLevel');
+      localStorage.removeItem('adventurahealthUpgradeCost');
+      localStorage.removeItem('adventuramanaLevel');
+      localStorage.removeItem('adventuramanaUpgradeCost');
+      localStorage.removeItem('adventuraswordLevel');
+      localStorage.removeItem('adventurafireLevel');
+      localStorage.removeItem('adventurawaterLevel');
+      localStorage.removeItem('adventuraiceLevel');
+      localStorage.removeItem('adventuraearthLevel');
+      localStorage.removeItem('adventuraairLevel');
+      localStorage.removeItem('adventuralightningLevel');
+      localStorage.removeItem('adventurahealLevel');
+      localStorage.removeItem('adventuraswordUpgradeCost');
+      localStorage.removeItem('adventurafireUpgradeCost');
+      localStorage.removeItem('adventurawaterUpgradeCost');
+      localStorage.removeItem('adventuraiceUpgradeCost');
+      localStorage.removeItem('adventuraearthUpgradeCost');
+      localStorage.removeItem('adventuraairUpgradeCost');
+      localStorage.removeItem('adventuralightningUpgradeCost');
+      localStorage.removeItem('adventurahealUpgradeCost');
+      localStorage.removeItem('adventuraironSwordMinDamage');
+      localStorage.removeItem('adventurafireMinDamage');
+      localStorage.removeItem('adventurawaterMinDamage');
+      localStorage.removeItem('adventuraiceMinDamage');
+      localStorage.removeItem('adventuraearthMinDamage');
+      localStorage.removeItem('adventuraairMinDamage');
+      localStorage.removeItem('adventuralightningMinDamage');
+      localStorage.removeItem('adventuraironSwordMaxDamage');
+      localStorage.removeItem('adventurafireMaxDamage');
+      localStorage.removeItem('adventurawaterMaxDamage');
+      localStorage.removeItem('adventuraiceMaxDamage');
+      localStorage.removeItem('adventuraearthMaxDamage');
+      localStorage.removeItem('adventuraairMaxDamage');
+      localStorage.removeItem('adventuralightningMaxDamage');
+      localStorage.removeItem('adventurahealAmount');
     },
     toggleFullscreen() {
-      this.$emit("toggleFullscreen");
+      this.$emit('toggleFullscreen');
     },
     toggleMusic() {
-      this.$emit("toggleMusic");
+      this.$emit('toggleMusic');
     },
     toggleSfx() {
-      this.$emit("toggleSfx");
+      this.$emit('toggleSfx');
     },
     setBackgroundImg() {
       const animatableBackgroundImg = this.$refs
@@ -164,7 +164,7 @@ export default Vue.extend({
       ) {
         animatableBackgroundImg.style.backgroundImage = `url(${this.unlockedAreas[this.unlockedAreas.length - 1].animatableBackgroundImgSrc})`;
       } else {
-        animatableBackgroundImg.style.display = "none";
+        animatableBackgroundImg.style.display = 'none';
       }
       backgroundImg.style.backgroundImage = `url(${this.unlockedAreas[this.unlockedAreas.length - 1].backgroundImgSrc})`;
     }
@@ -177,7 +177,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 
 @keyframes BACKGROUND-MOVE {
   0% {

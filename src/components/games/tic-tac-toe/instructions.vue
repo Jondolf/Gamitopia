@@ -21,13 +21,13 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
-  name: "Instructions",
+  name: 'Instructions',
   components: {},
   methods: {
     toggleInstructionsVisibility() {
-      this.$emit("toggleInstructionsBtnClicked");
+      this.$emit('toggleInstructionsBtnClicked');
     }
   }
 });
@@ -35,7 +35,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 .instructions {
   position: absolute;
   top: 0;

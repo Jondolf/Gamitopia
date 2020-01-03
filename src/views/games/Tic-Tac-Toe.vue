@@ -57,11 +57,11 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Grid from "@/components/games/tic-tac-toe/grid.vue";
-import StartMenu from "@/components/games/tic-tac-toe/start-menu.vue";
+import Vue from 'vue';
+import Grid from '@/components/games/tic-tac-toe/grid.vue';
+import StartMenu from '@/components/games/tic-tac-toe/start-menu.vue';
 export default Vue.extend({
-  name: "tic-tac-toe",
+  name: 'tic-tac-toe',
   components: {
     Grid,
     StartMenu
@@ -103,7 +103,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import "@/global.scss";
+@import '@/global.scss';
 #tic-tac-toe {
   padding-top: 66px;
 }

@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
-  name: "Grid-Square",
+  name: 'Grid-Square',
   components: {},
   props: {
     grid: String,
@@ -24,7 +24,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 .grid-square {
   outline: 2px solid black;
   font-size: 11vw;

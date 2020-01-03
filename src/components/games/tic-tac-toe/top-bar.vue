@@ -6,16 +6,16 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
-  name: "Top-Bar",
+  name: 'Top-Bar',
   components: {},
   methods: {
     onClickButton() {
-      this.$emit("clicked");
+      this.$emit('clicked');
     },
     openStartMenu() {
-      this.$emit("startMenuBtnClicked");
+      this.$emit('startMenuBtnClicked');
     }
   }
 });
@@ -23,7 +23,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 .top-bar {
   height: 10vw;
   border-bottom: 2px solid black;

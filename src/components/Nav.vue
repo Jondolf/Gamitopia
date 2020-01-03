@@ -11,10 +11,10 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import DarkMode from "@/components/DarkMode.vue";
+import Vue from 'vue';
+import DarkMode from '@/components/DarkMode.vue';
 export default Vue.extend({
-  name: "Nav",
+  name: 'Nav',
   components: {
     DarkMode
   }
@@ -23,7 +23,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 #nav {
   background-color: var(--secondary-color);
   color: white;

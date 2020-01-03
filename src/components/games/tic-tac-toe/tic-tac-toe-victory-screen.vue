@@ -6,16 +6,16 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
-  name: "Tic-Tac-Toe-Win-Screen",
+  name: 'Tic-Tac-Toe-Win-Screen',
   components: {},
   props: {
     gameEndMessage: String
   },
   methods: {
     onClickButton() {
-      this.$emit("clicked");
+      this.$emit('clicked');
     }
   }
 });
@@ -23,7 +23,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 #tic-tac-toe-win-screen {
   position: absolute;
   width: 100%;

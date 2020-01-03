@@ -22,9 +22,9 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 export default Vue.extend({
-  name: "settings",
+  name: 'settings',
   components: {},
   props: {
     fullscreenOn: Boolean,
@@ -36,16 +36,16 @@ export default Vue.extend({
   },
   methods: {
     closeSettings() {
-      this.$emit("closeSettings");
+      this.$emit('closeSettings');
     },
     toggleFullscreen() {
-      this.$emit("toggleFullscreen");
+      this.$emit('toggleFullscreen');
     },
     toggleMusic() {
-      this.$emit("toggleMusic");
+      this.$emit('toggleMusic');
     },
     toggleSfx() {
-      this.$emit("toggleSfx");
+      this.$emit('toggleSfx');
     }
   }
 });
@@ -53,7 +53,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 
 @keyframes BACKGROUND-MOVE {
   0% {

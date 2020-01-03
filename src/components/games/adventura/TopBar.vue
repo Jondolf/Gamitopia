@@ -90,11 +90,11 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { Enemy } from "./enemy";
-import { Area } from "./area";
+import Vue from 'vue';
+import { Enemy } from './enemy';
+import { Area } from './area';
 export default Vue.extend({
-  name: "Top-Bar",
+  name: 'Top-Bar',
   props: {
     playerName: String,
     enemyName: String,
@@ -120,7 +120,7 @@ export default Vue.extend({
   },
   methods: {
     openMap() {
-      this.$emit("openMap");
+      this.$emit('openMap');
     }
   },
   created() {
@@ -131,7 +131,7 @@ export default Vue.extend({
         this.maxEnemyMana = this.enemyMana;
         if (this.enemyMana === 0) {
           const enemyManaElement = this.$refs.enemyMana as HTMLElement;
-          enemyManaElement.style.width = "0%";
+          enemyManaElement.style.width = '0%';
         }
       }, 2);
     }
@@ -140,24 +140,24 @@ export default Vue.extend({
     coins: function() {
       const coinElement = this.$refs.coin as HTMLElement;
       const coinTextElement = this.$refs.coinText as HTMLElement;
-      coinElement.classList.add("coin-animation");
-      coinTextElement.classList.add("coin-text-animation");
+      coinElement.classList.add('coin-animation');
+      coinTextElement.classList.add('coin-text-animation');
       setTimeout(() => {
-        coinElement.classList.remove("coin-animation");
+        coinElement.classList.remove('coin-animation');
       }, 1000);
       setTimeout(() => {
-        coinTextElement.classList.remove("coin-text-animation");
+        coinTextElement.classList.remove('coin-text-animation');
       }, 1000);
     },
     health: function() {
       const health = this.$refs.health as HTMLElement;
       health.style.width =
-        Math.round((this.health / this.maxHealth) * 100).toString() + "%";
+        Math.round((this.health / this.maxHealth) * 100).toString() + '%';
     },
     mana: function() {
       const mana = this.$refs.mana as HTMLElement;
       mana.style.width =
-        Math.round((this.mana / this.maxMana) * 100).toString() + "%";
+        Math.round((this.mana / this.maxMana) * 100).toString() + '%';
     },
     enemyHealth: function() {
       const enemyHealth = this.$refs.enemyHealth as HTMLElement;
@@ -165,20 +165,20 @@ export default Vue.extend({
         enemyHealth.style.width =
           Math.round(
             (this.enemyHealth / this.maxEnemyHealth) * 100
-          ).toString() + "%";
+          ).toString() + '%';
       }, 3);
     },
     enemyMana: function() {
       const enemyMana = this.$refs.enemyMana as HTMLElement;
       enemyMana.style.width =
-        Math.round((this.enemyMana / this.maxEnemyMana) * 100).toString() + "%";
+        Math.round((this.enemyMana / this.maxEnemyMana) * 100).toString() + '%';
     },
     getNewEnemy: function() {
       setTimeout(() => {
         this.maxEnemyMana = this.enemyMana;
         if (this.enemyMana === 0) {
           const enemyManaElement = this.$refs.enemyMana as HTMLElement;
-          enemyManaElement.style.width = "0%";
+          enemyManaElement.style.width = '0%';
         }
       }, 1000);
     }
@@ -188,7 +188,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 @keyframes GET-COIN {
   0% {
     width: 14px;

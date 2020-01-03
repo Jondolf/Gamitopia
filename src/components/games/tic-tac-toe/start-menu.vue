@@ -24,18 +24,18 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Settings from "@/components/games/tic-tac-toe/settings.vue";
-import Instructions from "@/components/games/tic-tac-toe/instructions.vue";
+import Vue from 'vue';
+import Settings from '@/components/games/tic-tac-toe/settings.vue';
+import Instructions from '@/components/games/tic-tac-toe/instructions.vue';
 export default Vue.extend({
-  name: "Start-Menu",
+  name: 'Start-Menu',
   components: {
     Settings,
     Instructions
   },
   methods: {
     toggleStartMenuVisibility() {
-      this.$emit("startMenuBtnClicked");
+      this.$emit('startMenuBtnClicked');
     },
     toggleSettingsVisibility() {
       this.settingsVisibility = !this.settingsVisibility;
@@ -44,15 +44,15 @@ export default Vue.extend({
       this.instructionsVisibility = !this.instructionsVisibility;
     },
     changeGridWidth(value: string) {
-      this.$emit("gridWidthChanged", +value);
+      this.$emit('gridWidthChanged', +value);
       this.gridWidth = +value;
     },
     changeGridHeight(value: string) {
-      this.$emit("gridHeightChanged", +value);
+      this.$emit('gridHeightChanged', +value);
       this.gridHeight = +value;
     },
     changeRowToWin(value: string) {
-      this.$emit("rowToWinChanged", +value);
+      this.$emit('rowToWinChanged', +value);
       this.symbolsNeededInARow = +value;
     }
   },
@@ -71,7 +71,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 .start-menu {
   position: absolute;
   top: 0;

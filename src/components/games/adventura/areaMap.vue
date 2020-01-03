@@ -104,7 +104,7 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue from 'vue';
 import {
   Grasslands,
   Desert,
@@ -113,10 +113,10 @@ import {
   SnowLands,
   Forest,
   BlueAbyss
-} from "@/components/games/adventura/area";
-import { Enemy } from "./enemy";
+} from '@/components/games/adventura/area';
+import { Enemy } from './enemy';
 export default Vue.extend({
-  name: "area-map",
+  name: 'area-map',
   components: {},
   props: {
     currentEnemy: Object as () => Enemy,
@@ -136,25 +136,25 @@ export default Vue.extend({
   },
   methods: {
     openShop() {
-      this.$emit("openShop");
+      this.$emit('openShop');
     },
     openStartMenu() {
-      this.$emit("openStartMenu");
+      this.$emit('openStartMenu');
     },
     goToArea(area: any) {
       if (area === this.grasslands) {
-        this.$emit("newCurrentArea", area);
+        this.$emit('newCurrentArea', area);
       }
       if (this.bossesDefeated.includes(area.bossDefeatedToUnlock)) {
-        this.$emit("newCurrentArea", area);
+        this.$emit('newCurrentArea', area);
       }
     },
     getBoss(area: any) {
       if (area === this.grasslands) {
-        this.$emit("bossArea", area, area.areaBoss);
+        this.$emit('bossArea', area, area.areaBoss);
       }
       if (this.bossesDefeated.includes(area.bossDefeatedToUnlock)) {
-        this.$emit("bossArea", area, area.areaBoss);
+        this.$emit('bossArea', area, area.areaBoss);
       }
     }
   }
@@ -163,7 +163,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import "@/global.scss";
+@import '@/global.scss';
 .area-map {
   background-color: rgb(0, 0, 0);
   position: absolute;
