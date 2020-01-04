@@ -3,39 +3,27 @@
     <h2>Recent Games</h2>
     <div class="game-container">
       <ul>
-        <li>
-          <h3>Snake</h3>
-          <router-link to="/snake">
-            <img
-              src="@/assets/images/snake-thumbnail.jpg"
-              alt="Snake game"
-              class="new-img"
-            />
-          </router-link>
-          <h6>3.1.2020</h6>
-        </li>
-        <li>
-          <h3>Adventura</h3>
-          <router-link to="/adventura">
-            <img
-              src="@/assets/images/adventura-thumbnail.png"
-              alt="Adventura game"
-              class="new-img"
-            />
-          </router-link>
-          <h6>24.12.2019</h6>
-        </li>
-        <li>
-          <h3>Tic-Tac-Toe</h3>
-          <router-link to="/tic-tac-toe">
-            <img
-              src="@/assets/images/tic-tac-toe-light-thumbnail.jpg"
-              alt="Tic-Tac-Toe"
-              class="new-img"
-            />
-          </router-link>
-          <h6>12.10.2019</h6>
-        </li>
+        <GameThumbnail
+          :name="'Snake'"
+          :link="'/snake'"
+          :imgSrc="require('@/assets/images/snake-thumbnail.jpg')"
+          :imgAlt="'Snake game'"
+          :date="'3.1.2020'"
+        />
+        <GameThumbnail
+          :name="'Adventura'"
+          :link="'/adventura'"
+          :imgSrc="require('@/assets/images/adventura-thumbnail.png')"
+          :imgAlt="'Adventura game'"
+          :date="'24.12.2019'"
+        />
+        <GameThumbnail
+          :name="'Tic-Tac-Toe'"
+          :link="'/tic-tac-toe'"
+          :imgSrc="require('@/assets/images/tic-tac-toe-light-thumbnail.jpg')"
+          :imgAlt="'Tic-Tac-Toe game'"
+          :date="'12.10.2019'"
+        />
       </ul>
     </div>
   </div>
@@ -43,8 +31,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import GameThumbnail from '@/components/games/GameThumbnail.vue';
 export default Vue.extend({
-  name: 'RecentGames'
+  name: 'RecentGames',
+  components: {
+    GameThumbnail
+  }
 });
 </script>
 
