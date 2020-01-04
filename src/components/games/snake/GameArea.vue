@@ -1,5 +1,9 @@
 <template>
-  <div id="gameArea">
+  <div
+    id="gameArea"
+    ref="gameArea"
+    v-hammer:swipe.horizontal.vertical="e => changeDirection(e)"
+  >
     <div class="game-area-container">
       <TopBar
         :score="game.score"
@@ -10,7 +14,6 @@
       <div class="canvas-container">
         <p v-if="paused">Paused (Press P or move to continue)</p>
         <canvas
-          v-hammer:swipe.horizontal.vertical="e => changeDirection(e)"
           width="450px"
           height="450px"
           id="canvas"
@@ -64,16 +67,17 @@ export default Vue.extend({
     }
   },
   mounted() {
+    const gameArea = this.$refs.gameArea as HTMLElement;
     const canvas = this.$refs.canvas as HTMLCanvasElement;
     const ctx = canvas.getContext('2d')!!;
     this.canvas = canvas;
     this.ctx = ctx;
     if (this.resetGame) {
-      game.resetGame(canvas, ctx);
+      game.resetGame(gameArea, canvas, ctx);
       this.$emit('toggleResetGame');
     }
     graphics.drawGame(canvas, ctx);
-    game.startGame(canvas, ctx);
+    game.startGame(gameArea, canvas, ctx);
   },
   computed: {
     paused() {

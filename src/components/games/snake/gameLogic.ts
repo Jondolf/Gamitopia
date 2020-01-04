@@ -42,13 +42,17 @@ export const game = {
   paused: false,
   keyPressListener: null as ((ev: KeyboardEvent) => void) | null,
 
-  startGame(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+  startGame(
+    gameArea: HTMLElement,
+    canvas: HTMLCanvasElement,
+    ctx: CanvasRenderingContext2D
+  ) {
     if (this.keyPressListener != null) {
-      canvas.removeEventListener('keydown', this.keyPressListener);
+      gameArea.removeEventListener('keydown', this.keyPressListener);
     }
     this.keyPressListener = this.processInput.bind(game, canvas, ctx);
 
-    canvas.addEventListener('keydown', this.keyPressListener);
+    gameArea.addEventListener('keydown', this.keyPressListener);
     this.tick(canvas, ctx);
     fruit.addFruit();
   },
@@ -57,7 +61,11 @@ export const game = {
     window.clearTimeout(this.timer);
   },
 
-  resetGame(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+  resetGame(
+    gameArea: HTMLElement,
+    canvas: HTMLCanvasElement,
+    ctx: CanvasRenderingContext2D
+  ) {
     this.gameOver = false;
     this.score = 0;
     this.timesMoved = 0;
@@ -72,7 +80,7 @@ export const game = {
     snake.parts = [{ x: 4, y: 5 }, { x: 3, y: 5 }, { x: 2, y: 5 }];
     fruit.fruitArray = [{}];
     graphics.drawGame(canvas, ctx);
-    this.startGame(canvas, ctx);
+    this.startGame(gameArea, canvas, ctx);
   },
 
   tick(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {

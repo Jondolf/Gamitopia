@@ -7,9 +7,9 @@
       <h3>Board size</h3>
       <h6>(Changing the board size resets your game)</h6>
       <div class="board-size-modifier-container">
-        <button v-on:click="changeBoardSize('small')">Small (10x10)</button>
-        <button v-on:click="changeBoardSize('medium')">Medium (30x30)</button>
-        <button v-on:click="changeBoardSize('large')">Large (50x50)</button>
+        <button v-on:click="changeBoardSize('small')">Small</button>
+        <button v-on:click="changeBoardSize('medium')">Medium</button>
+        <button v-on:click="changeBoardSize('large')">Large</button>
       </div>
       <h3>Snake speed</h3>
       <div class="speed-modifier-container">
@@ -30,17 +30,22 @@ export default Vue.extend({
   data() {
     return {
       smallBoard: [
-        // 10x10
-        '##########',
-        '#        #',
-        '#        #',
-        '#        #',
-        '#        #',
-        '#        #',
-        '#        #',
-        '#        #',
-        '#        #',
-        '##########'
+        // 15x15
+        '###############',
+        '#             #',
+        '#             #',
+        '#             #',
+        '#             #',
+        '#             #',
+        '#             #',
+        '#             #',
+        '#             #',
+        '#             #',
+        '#             #',
+        '#             #',
+        '#             #',
+        '#             #',
+        '###############'
       ],
 
       mediumBoard: [
@@ -229,7 +234,7 @@ export default Vue.extend({
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: bold;
       }
     }
@@ -246,6 +251,7 @@ export default Vue.extend({
         align-items: center;
         font-size: 30px;
         font-weight: bold;
+        padding: 0;
       }
       p {
         width: 25px;

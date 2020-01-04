@@ -55,7 +55,7 @@ export default Vue.extend({
       outline: none;
       border: none;
       margin: 5px 15px 5px 5px;
-      padding: 15px;
+      padding: 0 15px 0 15px;
       font-size: 16px;
       transition: 0.4s;
       height: 30px;
@@ -93,7 +93,7 @@ export default Vue.extend({
       font-size: 10px;
     }
     .btn-container button {
-      padding: 8px;
+      padding: 0 8px 0 8px;
       font-size: 13px;
       margin: 3px 10px 3px 3px;
     }
