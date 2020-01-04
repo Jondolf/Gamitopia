@@ -111,7 +111,6 @@ export const game = {
   ) {
     let key = event.key;
     let direction = snake.facing;
-    console.log(key);
 
     if (
       (key === 'w' || key === 'KeyW' || key === 'ArrowUp') &&

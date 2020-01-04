@@ -9,7 +9,7 @@
         :score="game.score"
         :timesMoved="game.timesMoved"
         @startMenu="changeView('startMenu')"
-        @resetGame="game.resetGame(canvas, ctx)"
+        @resetGame="game.resetGame(gameArea, canvas, ctx)"
       />
       <div class="canvas-container">
         <p v-if="paused">Paused (Press P or move to continue)</p>
@@ -42,6 +42,7 @@ export default Vue.extend({
   data() {
     return {
       game: game,
+      gameArea: null as unknown,
       canvas: null as unknown,
       ctx: null as unknown
     };
@@ -60,7 +61,6 @@ export default Vue.extend({
       } else if (e.type === 'swipedown' && snake.facing !== 'N') {
         snake.facing = 'S';
       } else if (e.type === 'swipeleft' && snake.facing !== 'E') {
-        console.log(e.type, 'gtbnh');
         snake.facing = 'W';
       }
       game.tick(canvas, ctx);
@@ -70,6 +70,7 @@ export default Vue.extend({
     const gameArea = this.$refs.gameArea as HTMLElement;
     const canvas = this.$refs.canvas as HTMLCanvasElement;
     const ctx = canvas.getContext('2d')!!;
+    this.gameArea = gameArea;
     this.canvas = canvas;
     this.ctx = ctx;
     if (this.resetGame) {
@@ -79,16 +80,13 @@ export default Vue.extend({
     graphics.drawGame(canvas, ctx);
     game.startGame(gameArea, canvas, ctx);
   },
+
   computed: {
     paused() {
       return game.paused;
     }
   },
-  watch: {
-    paused() {
-      console.log(this.paused);
-    }
-  },
+
   beforeDestroy() {
     game.pauseGame();
   }
