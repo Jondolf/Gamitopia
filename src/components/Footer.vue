@@ -1,5 +1,5 @@
 <template>
-  <div id="footer">&copy; Gamitopia 2019</div>
+  <div id="footer">&copy; Gamitopia 2020</div>
 </template>
 
 <script lang="ts">
