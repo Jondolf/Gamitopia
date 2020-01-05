@@ -2,9 +2,11 @@
   <div id="news">
     <div class="filter">
       <h2>Filter</h2>
-      <button v-on:click="filterByYear('Show all')">Show all</button>
-      <button v-on:click="filterByYear('2020')">Show 2020</button>
-      <button v-on:click="filterByYear('2019')">Show 2019</button>
+      <div class="btn-container">
+        <button v-on:click="filterByYear('Show all')">All</button>
+        <button v-on:click="filterByYear('2020')">2020</button>
+        <button v-on:click="filterByYear('2019')">2019</button>
+      </div>
     </div>
     <div class="news-post">
       <h2>Snake</h2>
@@ -300,6 +302,9 @@ a:visited {
 a:hover {
   color: rgb(200, 200, 255);
 }
+.darkMode .filter button {
+  color: white;
+}
 #news {
   padding-top: 86px;
   .filter {
@@ -312,17 +317,25 @@ a:hover {
     h2 {
       color: white;
     }
+    .btn-container {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 15px;
+    }
     button {
       background-color: var(--primary-color);
-      padding: 15px;
+      width: 33%;
+      padding: 15px 0 15px 0;
       border: none;
       outline: none;
-      margin: 15px 15px 0 0;
+      margin: 0 15px 0 0;
       border-radius: 5px;
       transition: 0.4s;
     }
-    .darkMode button {
-      color: white;
+    button:last-child {
+      margin: 0;
     }
     button:hover {
       padding: 18px;
