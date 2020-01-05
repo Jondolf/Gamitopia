@@ -1,5 +1,11 @@
 <template>
   <div id="news">
+    <div class="filter">
+      <h2>Filter</h2>
+      <button v-on:click="filterByYear('Show all')">Show all</button>
+      <button v-on:click="filterByYear('2020')">Show 2020</button>
+      <button v-on:click="filterByYear('2019')">Show 2019</button>
+    </div>
     <div class="news-post">
       <h2>Snake</h2>
       <p>
@@ -267,7 +273,22 @@
 import Vue from 'vue';
 export default Vue.extend({
   name: 'news',
-  components: {}
+  components: {},
+  methods: {
+    filterByYear(year: string) {
+      const newsPosts = document.getElementsByClassName('news-post') as any;
+      for (let post of newsPosts) {
+        let date = post.getElementsByTagName('h6');
+        if (date[0].innerText.includes(year)) {
+          post.style.display = 'block';
+        } else if (year === 'Show all') {
+          post.style.display = 'block';
+        } else {
+          post.style.display = 'none';
+        }
+      }
+    }
+  }
 });
 </script>
 
@@ -281,6 +302,32 @@ a:hover {
 }
 #news {
   padding-top: 86px;
+  .filter {
+    width: 50%;
+    padding: 25px;
+    border-radius: 5px;
+    text-align: left;
+    background-color: var(--secondary-color);
+    margin: auto;
+    h2 {
+      color: white;
+    }
+    button {
+      background-color: var(--primary-color);
+      padding: 15px;
+      border: none;
+      outline: none;
+      margin: 15px 15px 0 0;
+      border-radius: 5px;
+      transition: 0.4s;
+    }
+    .darkMode button {
+      color: white;
+    }
+    button:hover {
+      padding: 18px;
+    }
+  }
   .news-post {
     width: 70%;
     background-color: var(--secondary-color);
