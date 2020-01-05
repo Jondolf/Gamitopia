@@ -8,6 +8,13 @@ Vue.use(VueHammer);
 
 Vue.config.productionTip = false;
 
+import VueAnalytics from 'vue-analytics';
+Vue.use(VueAnalytics, {
+  id: 'UA-146791846-1',
+  router,
+  checkDuplicatedScript: true
+});
+
 new Vue({
   router,
   render: h => h(App)

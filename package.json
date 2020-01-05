@@ -12,6 +12,7 @@
     "@types/vue2-hammer": "^2.1.0",
     "fastclick": "^1.0.6",
     "vue": "^2.6.10",
+    "vue-analytics": "^5.20.2",
     "vue-router": "^3.0.3",
     "vue2-hammer": "^2.1.2"
   },
