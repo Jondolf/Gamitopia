@@ -166,7 +166,6 @@ export default Vue.extend({
     },
     toggleFullscreen() {
       this.$emit('toggleFullscreen');
-      console.log('emitted');
     }
   },
   created() {
