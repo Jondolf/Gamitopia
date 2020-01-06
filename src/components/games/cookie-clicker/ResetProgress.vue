@@ -1,0 +1,73 @@
+<template>
+  <div id="resetProgress">
+    <h4>Are you sure you want to reset your progress?</h4>
+    <ul>
+      <button v-on:click="$emit('reset')" id="resetGame">Confirm reset</button>
+      <button v-on:click="$emit('cancel')" id="cancelReset">Cancel</button>
+    </ul>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+export default Vue.extend({
+  name: 'ResetProgress'
+});
+</script>
+
+<style lang="scss" scoped>
+@import '@/global.scss';
+
+#resetProgress {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  background-color: rgb(26, 35, 126);
+  color: white;
+  z-index: 2;
+  padding: 20px, 0, 0, 0;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 2px solid black;
+}
+
+#resetProgress h4 {
+  padding: 10px;
+}
+
+#resetProgress button {
+  width: 50%;
+  color: black;
+  border: none;
+  font-size: 20px;
+  font-family: Nunito;
+  background-color: rgb(197, 202, 233);
+  padding: 10px;
+}
+
+#resetProgress ul {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(197, 202, 233);
+}
+
+@media only screen and (max-width: 550px) {
+  #resetProgress ul button {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  #resetProgress {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  #resetProgress ul button {
+    font-size: 12px;
+  }
+}
+</style>

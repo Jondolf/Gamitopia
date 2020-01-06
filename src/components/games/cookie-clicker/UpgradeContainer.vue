@@ -1,0 +1,109 @@
+<template>
+  <div id="upgradeContainer" ref="upgradeContainer">
+    <button v-on:click="openUpgradesMenu()" id="openUpgradesMenu">
+      <p>Open upgrades</p>
+    </button>
+    <div class="upgrade-btn-container">
+      <UpgradeBtn
+        :name="pointsPerClick.name"
+        :level="pointsPerClick.level"
+        :cost="pointsPerClick.cost"
+        @btnClicked="$emit('btnClicked', pointsPerClick, 'Not unique')"
+      />
+      <UpgradeBtn
+        :name="speedOfPointsByTime.name"
+        :level="speedOfPointsByTime.level"
+        :cost="speedOfPointsByTime.cost"
+        @btnClicked="$emit('btnClicked', speedOfPointsByTime, 'Unique')"
+      />
+      <UpgradeBtn
+        :name="amountOfPointsByTime.name"
+        :level="amountOfPointsByTime.level"
+        :cost="amountOfPointsByTime.cost"
+        @btnClicked="$emit('btnClicked', amountOfPointsByTime, 'Unique')"
+      />
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+import UpgradeBtn from './UpgradeBtn.vue';
+import { Upgrade } from './upgrade';
+export default Vue.extend({
+  name: 'UpgradeContainer',
+  components: {
+    UpgradeBtn
+  },
+
+  props: {
+    pointsPerClick: Object as () => Upgrade,
+    speedOfPointsByTime: Object as () => Upgrade,
+    amountOfPointsByTime: Object as () => Upgrade
+  },
+  data() {
+    return {
+      upgradesMenuOpen: false
+    };
+  },
+  methods: {
+    openUpgradesMenu() {
+      const upgradeContainer = this.$refs.upgradeContainer as HTMLButtonElement;
+      this.upgradesMenuOpen = !this.upgradesMenuOpen;
+      this.upgradesMenuOpen
+        ? (upgradeContainer.style.top = '0')
+        : (upgradeContainer.style.top = '90%');
+    }
+  }
+});
+</script>
+
+<style lang="scss" scoped>
+@import '@/global.scss';
+#upgradeContainer {
+  width: 40%;
+  text-align: left;
+  -webkit-transition: 1s 0s ease-out;
+  -moz-transition: 1s 0s ease-out;
+  -o-transition: 1s 0s ease-out;
+  transition: 1s 0s ease-out;
+
+  #openUpgradesMenu {
+    display: none;
+  }
+
+  .upgrade-btn-container {
+    display: flex;
+    flex-direction: column;
+    flex-flow: wrap;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  #upgradeContainer {
+    position: absolute;
+    top: 90%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+
+    #openUpgradesMenu {
+      display: block;
+      width: 100%;
+      height: 10%;
+      background-color: var(--secondary-color);
+      border: none;
+      color: white;
+      font-size: 16px;
+      font-family: Nunito, sans-serif;
+    }
+    .upgrade-btn-container {
+      height: 90%;
+      border-top: 2px solid white;
+    }
+  }
+}
+</style>
