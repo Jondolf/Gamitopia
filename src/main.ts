@@ -5,6 +5,9 @@ import router from './router';
 // @ts-ignore
 import { VueHammer } from 'vue2-hammer';
 Vue.use(VueHammer);
+VueHammer.config.press = {
+  time: 0
+};
 
 Vue.config.productionTip = false;
 
