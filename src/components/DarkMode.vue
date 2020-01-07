@@ -1,6 +1,8 @@
 <template>
   <div>
-    <img v-on:click="toggleDarkMode" v-bind:src="imgUrl" id="darkModeButton" />
+    <i v-on:click="toggleDarkMode" id="darkModeButton" class="material-icons">{{
+      iconText
+    }}</i>
   </div>
 </template>
 
@@ -10,10 +12,10 @@ export default Vue.extend({
   name: 'DarkMode',
   data() {
     return {
-      imgUrl:
+      iconText:
         localStorage.getItem('darkMode') === 'true'
-          ? require('@/assets/images/turnDarkModeOff.png')
-          : require('@/assets/images/turnDarkModeOn.png'),
+          ? 'brightness_2'
+          : 'wb_sunny',
       darkModeOnOff: true
     };
   },
@@ -25,10 +27,10 @@ export default Vue.extend({
 
       if (localStorage.getItem('darkMode') === 'true') {
         document.body.classList.add('darkMode');
-        this.imgUrl = require('@/assets/images/turnDarkModeOff.png');
+        this.iconText = 'brightness_2';
       } else if (localStorage.getItem('darkMode') === 'false') {
         document.body.classList.remove('darkMode');
-        this.imgUrl = require('@/assets/images/turnDarkModeOn.png');
+        this.iconText = 'wb_sunny';
       }
     },
     darkModeOnOffBoolean() {
@@ -49,21 +51,25 @@ export default Vue.extend({
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import '@/global.scss';
 #darkModeButton {
   width: 3vw;
   height: 3vw;
+  font-size: 35px;
   padding: 1vw;
   border-radius: 5px;
   transition: 1s;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #darkModeButton:hover {
   width: 4vw;
   height: 4vw;
+  font-size: 40px;
   padding-left: 0.5vw;
 }
 
