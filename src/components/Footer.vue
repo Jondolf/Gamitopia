@@ -1,5 +1,5 @@
 <template>
-  <div id="footer">&copy; Gamitopia 2020</div>
+  <div id="footer"><i class="material-icons">copyright</i> Gamitopia 2020</div>
 </template>
 
 <script lang="ts">
@@ -18,5 +18,12 @@ export default Vue.extend({
   text-align: center;
   color: white;
   padding: 30px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  i {
+    font-size: 20px;
+    margin-right: 5px;
+  }
 }
 </style>
