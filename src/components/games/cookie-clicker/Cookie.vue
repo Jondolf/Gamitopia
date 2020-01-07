@@ -16,9 +16,20 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import '@/global.scss';
+@keyframes cookie-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .cookie {
-  width: 25vw;
-  height: 25vw;
+  width: 20vw;
+  height: 20vw;
   margin: 20px;
   background-color: rgba(0, 0, 0, 0);
   border-radius: 30%;
@@ -27,6 +38,8 @@ export default Vue.extend({
   background-size: 100%;
   background-position: center center;
   background-repeat: no-repeat;
+  animation: cookie-rotate 50s linear infinite;
+  transition: 0.1s;
 }
 
 .cookie:active {

@@ -43,8 +43,13 @@ export default Vue.extend({
   border: none;
   font-size: 20px;
   font-family: Nunito;
-  background-color: rgb(197, 202, 233);
+  background-color: rgba(255, 255, 255, 0);
   padding: 10px;
+  transition: 0.4s;
+}
+
+#resetProgress button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 #resetProgress ul {

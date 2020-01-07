@@ -89,17 +89,24 @@ export default Vue.extend({
     width: 100%;
     height: 100%;
     z-index: 2;
+    background-color: var(--upgrades);
 
     #openUpgradesMenu {
       display: block;
       width: 100%;
       height: 10%;
-      background-color: var(--secondary-color);
+      background-color: rgba(255, 255, 255, 0);
       border: none;
       color: white;
       font-size: 16px;
       font-family: Nunito, sans-serif;
+      transition: 0.4s;
     }
+
+    #openUpgradesMenu:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
     .upgrade-btn-container {
       height: 90%;
       border-top: 2px solid white;

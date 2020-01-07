@@ -55,9 +55,14 @@ export default Vue.extend({
   background-size: 70%;
   background-repeat: no-repeat;
   background-position: center center;
+  transition: 0.4s;
 
   // Google's icon font
   font-family: 'Material Icons';
   font-size: 35px;
+}
+
+#soundControlBtn:hover {
+  background-color: rgba(255, 255, 255, 0.7);
 }
 </style>

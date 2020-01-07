@@ -120,7 +120,9 @@ export default Vue.extend({
       pointInterval: null as number | null,
       previousTime: performance.now(),
 
-      cookieClickSound: this.$refs.cookieClickSound as HTMLAudioElement,
+      cookieClickSound: new Audio(
+        require('@/assets/sound/cookie-clicker-sound-effect.mp3')
+      ) as HTMLAudioElement,
       backgroundMusic: this.$refs.backgroundMusic as HTMLAudioElement,
 
       points: 0,
@@ -210,9 +212,7 @@ export default Vue.extend({
 
     playSound(sound: string) {
       if (sound === 'Cookie click' && this.sfxOn) {
-        let cookieClickSound = new Audio(
-          require('@/assets/sound/cookie-clicker-sound-effect.mp3')
-        );
+        let cookieClickSound = this.cookieClickSound.cloneNode() as HTMLAudioElement;
         cookieClickSound.play();
       }
     }
@@ -318,6 +318,11 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.4s;
+}
+
+#openResetMenu:hover {
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .audioContainer {
