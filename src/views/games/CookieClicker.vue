@@ -140,6 +140,8 @@ export default Vue.extend({
       this.pointsPerClick = new PointsPerClick();
       this.speedOfPointsByTime = new SpeedOfPointsByTime(2000);
       this.amountOfPointsByTime = new AmountOfPointsByTime();
+      
+      clearInterval(this.pointInterval!);
 
       if (localStorage.getItem('cookieClickerPoints')) {
         localStorage.removeItem('cookieClickerPoints');
