@@ -34,6 +34,15 @@
           <li>TS/JS</li>
           <li>A tiny bit of Python</li>
           <li>Vue.js</li>
+          <li>Some C#</li>
+          <li>The very basics of Unity</li>
+        </ul>
+        <h3>Software that I use</h3>
+        <ul>
+          <li>Visual Studio Code (for web stuff)</li>
+          <li>Visual Studio (for Unity related)</li>
+          <li>Unity Personal</li>
+          <li>Garageband (for game music)</li>
         </ul>
       </div>
     </div>
@@ -59,7 +68,7 @@ export default Vue.extend({
     width: 80%;
     background-color: var(--secondary-color);
     color: white;
-    margin: auto 30px;
+    margin: 30px auto;
     display: flex;
     flex-direction: row;
     text-align: left;
@@ -74,7 +83,6 @@ export default Vue.extend({
     .about-me {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       width: 50%;
       height: 100%;
       padding: 10px;
