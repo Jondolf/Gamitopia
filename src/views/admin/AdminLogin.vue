@@ -1,0 +1,197 @@
+<template>
+  <div id="adminLogin">
+    <DarkModeButton />
+    <h1>Log in as admin</h1>
+    <form @submit.prevent="handleAuthenticate">
+      <input
+        type="text"
+        name="username"
+        placeholder="Username"
+        id="username"
+        v-model="username"
+        ref="username"
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        id="password"
+        v-model="password"
+        ref="password"
+        required
+      />
+      <div class="show-password-container">
+        <input
+          type="checkbox"
+          name="show-password"
+          id="checkbox"
+          v-on:click="togglePasswordVisibility()"
+        />
+        <label for="checkbox"> Show password</label>
+      </div>
+      <p class="login-error">{{ loginError }}</p>
+      <input type="submit" class="confirm-password-btn" value="Log in" />
+    </form>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+import Axios from 'axios';
+
+import GameThumbnails from '@/components/games/GameThumbnails.vue';
+import DarkModeButton from '@/components/DarkMode.vue';
+
+import { authenticate } from './actions/authenticate';
+import router from '../../router';
+
+export default Vue.extend({
+  name: 'admin-login',
+  components: {
+    DarkModeButton
+  },
+
+  data() {
+    return {
+      username: '',
+      password: '',
+      loginError: ''
+    };
+  },
+  methods: {
+    togglePasswordVisibility() {
+      const passwordInputElement = this.$refs.password as HTMLInputElement;
+
+      passwordInputElement.type === 'password'
+        ? (passwordInputElement.type = 'text')
+        : (passwordInputElement.type = 'password');
+    },
+
+    async handleAuthenticate() {
+      try {
+        const jwt = await authenticate(
+          'http://localhost:3000/api/admin/login',
+          this.username,
+          this.password
+        );
+        this.loginError = '';
+        localStorage.setItem('jwt', jwt);
+        router.replace('/');
+      } catch (error) {
+        this.loginError = error.message;
+      }
+    }
+  }
+});
+</script>
+
+<style lang="scss">
+@import '@/global.scss';
+.darkMode #adminLogin #password,
+.darkMode #adminLogin .confirm-password-btn {
+  border: 2px solid white;
+}
+#adminLogin {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 20;
+  background-color: var(--primary-color);
+  padding-top: 10%;
+  cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 0 20px;
+  }
+  input {
+    font-family: Nunito;
+  }
+  #darkModeButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+  #username,
+  #password,
+  .confirm-password-btn {
+    border: 2px solid black;
+  }
+  #username,
+  #password {
+    margin: 20px 0;
+    height: 70px;
+    padding-left: 10px;
+    min-width: 40%;
+    width: auto;
+    border-radius: 5px;
+    background-color: rgb(245, 245, 245);
+    transition: 0.2s;
+    outline: none;
+    overflow: hidden;
+    box-sizing: border-box;
+    font-size: 18px;
+  }
+  #username:hover,
+  #password:hover {
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+  }
+  .show-password-container,
+  .login-error {
+    width: 100%;
+    text-align: left;
+  }
+  .login-error {
+    color: red;
+  }
+  .confirm-password-btn {
+    margin: 20px;
+    height: 70px;
+    min-width: 40%;
+    width: auto;
+    border-radius: 5px;
+    background-color: var(--secondary-color);
+    color: white;
+    transition: 0.2s;
+    outline: none;
+    overflow: hidden;
+    box-sizing: border-box;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    a {
+      width: 100%;
+      height: 100%;
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      color: white;
+      font-style: normal;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .confirm-password-btn:hover {
+    opacity: 0.9;
+    border-radius: 10px;
+  }
+}
+</style>
