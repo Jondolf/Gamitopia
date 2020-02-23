@@ -17,6 +17,7 @@
     "typeorm": "ts-node ./node_modules/typeorm/cli.js --config ./orm.env --",
     "typeorm:generate": "ts-node ./node_modules/typeorm/cli.js --config ./orm.env migration:generate -n",
     "typeorm:migrate": "ts-node ./node_modules/typeorm/cli.js --config ./orm.env migration:run",
+    "migration:run:prod": "ts-node ./node_modules/typeorm/cli.js migration:run",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
