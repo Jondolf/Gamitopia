@@ -2,6 +2,7 @@
   <div id="nav">
     <DarkMode />
     <div class="nav-link-container">
+      <p v-if="isAdmin">Admin</p>
       <router-link to="/">Home</router-link>
       <router-link to="/games">Games</router-link>
       <router-link to="/news">News</router-link>
@@ -13,10 +14,19 @@
 <script lang="ts">
 import Vue from 'vue';
 import DarkMode from '@/components/DarkMode.vue';
+
+import globalVariables from '@/global.variables';
+
 export default Vue.extend({
   name: 'Nav',
   components: {
     DarkMode
+  },
+
+  data() {
+    return {
+      isAdmin: globalVariables.isAdmin
+    };
   }
 });
 </script>

@@ -15,7 +15,7 @@ export async function authenticate(
   } catch (err) {
     let error: AxiosError = err;
     if (error.response?.status === 401) {
-      throw new Error('Wrong username or password')
+      throw new Error('Wrong username or password');
     }
     throw new Error(
       `Something went wrong with the authentication. Here's the error: ${error}`

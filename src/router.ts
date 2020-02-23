@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 
+let isAdmin = localStorage.getItem('jwt');
+
 Vue.use(Router);
 
 export default new Router({
@@ -26,6 +28,35 @@ export default new Router({
       path: '/about',
       name: 'about',
       component: () => import('./views/About.vue')
+    },
+    {
+      path: '/admin/login',
+      name: 'admin-login',
+      component: () => import('./views/admin/AdminLogin.vue')
+    },
+    {
+      path: '/admin/create-news-post',
+      name: 'create-news-post',
+      component: () => import('./views/admin/NewsPostCreate.vue'),
+      beforeEnter: (to, from, next) => {
+        if (isAdmin) {
+          next();
+        } else {
+          next('admin/login');
+        }
+      }
+    },
+    {
+      path: '/admin/edit-news-post/:id',
+      name: 'edit-news-post',
+      component: () => import('./views/admin/NewsPostEdit.vue'),
+      beforeEnter: (to, from, next) => {
+        if (isAdmin) {
+          next();
+        } else {
+          next('admin/login');
+        }
+      }
     },
     {
       path: '/cookie-clicker',

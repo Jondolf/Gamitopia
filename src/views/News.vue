@@ -1,5 +1,9 @@
 <template>
   <div id="news">
+    <router-link to="/admin/create-news-post" v-if="isAdmin"
+      ><button class="create-news-post-btn">Create new</button>
+    </router-link>
+
     <div class="filter">
       <h2>Filter</h2>
       <div class="btn-container">
@@ -8,6 +12,17 @@
         <button v-on:click="filterByYear('2019')">2019</button>
       </div>
     </div>
+    <div class="news-posts-container">
+      <NewsPost
+        v-for="newsPost in news"
+        :key="newsPost.id"
+        :id="newsPost.id"
+        :title="newsPost.title"
+        :body="newsPost.body"
+        :date="formatDate(newsPost.date)"
+      />
+    </div>
+    <!--
     <div class="news-post">
       <h2>What I've been up to</h2>
       <p>
@@ -102,7 +117,7 @@
         </li>
         <li>Etc.</li>
       </ul>
-      <p>
+      <p  >
         It's important to remember that these are things that I
         <strong>may</strong> do, not things that I <strong>will</strong> do.
         <br />With all that said, happy New Year!
@@ -295,20 +310,45 @@
       </p>
       <h6>31.8.2019</h6>
     </div>
+    -->
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import axios, { AxiosResponse } from 'axios';
+
+import NewsPost from '@/components/news/NewsPost.vue';
+
+import { getNewsPosts } from './admin/actions/getNewsPosts';
+import News from './admin/interfaces/newsInterface';
+
+import globalVariables from '@/global.variables';
+
 export default Vue.extend({
   name: 'news',
-  components: {},
+  components: { NewsPost },
+  data() {
+    return {
+      news: [] as News[],
+      isAdmin: globalVariables.isAdmin
+    };
+  },
   methods: {
+    formatDate(date: string) {
+      return date
+        .slice(0, 10)
+        .split('-')
+        .reverse()
+        .join('-')
+        .replace(/-/g, '.');
+    },
+
     filterByYear(year: string) {
       const newsPosts = document.getElementsByClassName('news-post') as any;
       for (let post of newsPosts) {
-        let date = post.getElementsByTagName('h6');
-        if (date[0].innerText.includes(year)) {
+        let date = post.getElementsByTagName('time')[0] as HTMLTimeElement;
+        if (date.innerText.includes(year)) {
           post.style.display = 'block';
         } else if (year === 'Show all') {
           post.style.display = 'block';
@@ -317,6 +357,9 @@ export default Vue.extend({
         }
       }
     }
+  },
+  async mounted() {
+    this.news = await getNewsPosts();
   }
 });
 </script>
@@ -332,8 +375,23 @@ a:hover {
 .darkMode .filter button {
   color: white;
 }
+
 #news {
   padding-top: 86px;
+  .create-news-post-btn {
+    width: 10%;
+    height: 35px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    opacity: none;
+    color: white;
+    background-color: var(--secondary-color);
+    transition: 0.4s;
+  }
+  .create-news-post-btn:hover {
+    border-radius: 10px;
+  }
   .filter {
     width: 50%;
     padding: 25px;
@@ -368,40 +426,9 @@ a:hover {
       padding: 18px;
     }
   }
-  .news-post {
-    width: 70%;
-    background-color: var(--secondary-color);
-    color: white;
-    margin: 20px auto;
-    padding: 30px;
-    text-align: left;
-    border-radius: 5px;
-    h2 {
-      margin: 0;
-    }
-    p {
-      margin: 15px auto 15px auto;
-    }
-    a {
-      font-weight: bolder;
-      font-style: italic;
-    }
-    ul {
-      list-style: inside square;
-      padding: 10px;
-      border-radius: 5px;
-      background-color: var(--primary-color);
-      color: black;
-    }
+  .news-posts-container {
+    display: flex;
+    flex-direction: column-reverse;
   }
-}
-.darkMode #news .news-post ul li {
-  color: white;
-}
-#news .news-post .darkMode a {
-  font-weight: bolder;
-  font-style: italic;
-
-  color: red;
 }
 </style>
