@@ -9,7 +9,7 @@ export async function createNewsPost(
 ) {
   try {
     const response = await axios.post<News>(
-      'http://localhost:3000/api/news',
+      '/api/news',
       {
         title: title,
         body: body,

@@ -10,7 +10,7 @@ export async function editNewsPost(
 ) {
   try {
     const response = await axios.put<News>(
-      `http://localhost:3000/api/news/${id}`,
+      `/api/news/${id}`,
       { title: title, body: body, date: date },
       {
         headers: {

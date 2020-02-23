@@ -3,7 +3,7 @@ import { handleUnauthorized } from './handleUnauthorized';
 
 export async function deleteNewsPost(id: number) {
   try {
-    await axios.delete(`http://localhost:3000/api/news/${id}`, {
+    await axios.delete(`/api/news/${id}`, {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('jwt')
       }

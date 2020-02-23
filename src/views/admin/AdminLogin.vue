@@ -71,7 +71,7 @@ export default Vue.extend({
     async handleAuthenticate() {
       try {
         const jwt = await authenticate(
-          'http://localhost:3000/api/admin/login',
+          '/api/admin/login',
           this.username,
           this.password
         );
