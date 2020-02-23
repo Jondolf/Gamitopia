@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "postinstall": "npm run build"
+    "postinstall": "npm install --prefix ./gamitopia-backend"
   },
   "dependencies": {
     "@types/fastclick": "^1.0.28",
