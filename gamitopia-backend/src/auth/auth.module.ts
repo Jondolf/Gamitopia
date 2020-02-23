@@ -14,7 +14,7 @@ import { ConfigService, ConfigModule } from '@nestjs/config';
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         secret: configService.get('SECRET_KEY'),
-        signOptions: { expiresIn: '60s' }
+        signOptions: { expiresIn: '2h' }
       }),
       inject: [ConfigService]
     })
