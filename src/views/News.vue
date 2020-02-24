@@ -19,7 +19,7 @@
         :id="newsPost.id"
         :title="newsPost.title"
         :body="newsPost.body"
-        :date="formatDate(newsPost.date)"
+        :date="handleFormatDate(newsPost.date)"
       />
     </div>
   </div>
@@ -32,6 +32,7 @@ import axios, { AxiosResponse } from 'axios';
 import NewsPost from '@/components/news/NewsPost.vue';
 
 import { getNewsPosts } from './admin/actions/getNewsPosts';
+import { formatDate } from './admin/actions/formatDate';
 import News from './admin/interfaces/newsInterface';
 
 import globalVariables from '@/global.variables';
@@ -46,15 +47,6 @@ export default Vue.extend({
     };
   },
   methods: {
-    formatDate(date: string) {
-      return date
-        .slice(0, 10)
-        .split('-')
-        .reverse()
-        .join('-')
-        .replace(/-/g, '.');
-    },
-
     filterByYear(year: string) {
       const newsPosts = document.getElementsByClassName('news-post') as any;
       for (let post of newsPosts) {
@@ -67,8 +59,11 @@ export default Vue.extend({
           post.style.display = 'none';
         }
       }
-    }
+    },
+
+    handleFormatDate: formatDate
   },
+
   async mounted() {
     this.news = await getNewsPosts();
   }

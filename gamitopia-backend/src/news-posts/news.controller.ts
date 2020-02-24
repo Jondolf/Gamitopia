@@ -22,6 +22,11 @@ export class NewsController {
     return await this.newsService.getNewsPosts();
   }
 
+  @Get('latest')
+  async getLatestNewsPost() {
+    return await this.newsService.getLatestNewsPost();
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return await this.newsService.getNewsPostById(id);

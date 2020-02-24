@@ -15,6 +15,14 @@ export class NewsService {
     return await News.findOneOrFail(id);
   }
 
+  async getLatestNewsPost(): Promise<News> {
+    const latest = await News.find({
+      order: { id: 'DESC' },
+      take: 1
+    });
+    return latest[0];
+  }
+
   async createNewsPost(newsPost: NewsPostDto) {
     return await News.create({
       title: newsPost.title,

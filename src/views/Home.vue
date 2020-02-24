@@ -2,6 +2,7 @@
   <div id="home">
     <NewestGame />
     <RecentGames />
+    <LatestNewsPost />
   </div>
 </template>
 
@@ -9,11 +10,13 @@
 import Vue from 'vue';
 import NewestGame from '@/components/home/NewestGame.vue';
 import RecentGames from '@/components/home/RecentGames.vue';
+import LatestNewsPost from '@/components/home/LatestNewsPost.vue';
 export default Vue.extend({
   name: 'home',
   components: {
     NewestGame,
-    RecentGames
+    RecentGames,
+    LatestNewsPost
   }
 });
 </script>
