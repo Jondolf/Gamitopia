@@ -22,7 +22,6 @@ export default Vue.extend({
     show() {
       const statusMessageElement = this.$refs.statusMessage as HTMLElement;
       const messageElement = this.$refs.message as HTMLElement;
-      console.log(this.messageType);
       this.messageType === 'Success'
         ? (messageElement.style.color = 'rgb(0, 255, 0)')
         : (messageElement.style.color = 'red');

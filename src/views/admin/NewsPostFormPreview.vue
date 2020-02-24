@@ -23,14 +23,6 @@ export default Vue.extend({
   },
 
   updated() {
-    console.log('kukkuluuruu');
-    const body = this.$refs.newsPostBody as HTMLElement;
-    body.querySelectorAll('pre code').forEach(block => {
-      hljs.highlightBlock(block);
-    });
-  },
-
-  mounted() {
     const body = this.$refs.newsPostBody as HTMLElement;
     body.querySelectorAll('pre code').forEach(block => {
       hljs.highlightBlock(block);

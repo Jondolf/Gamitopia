@@ -51,6 +51,10 @@ export default Vue.extend({
   mounted() {
     window.addEventListener('resize', this.resizeTextarea);
     this.resizeTextarea();
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeTextarea);
   }
 });
 </script>
