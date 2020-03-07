@@ -9,6 +9,7 @@ Vue.use(Router);
 export default new Router({
   mode: 'history',
   routes: [
+    // Main pages
     {
       path: '/',
       name: 'home',
@@ -29,6 +30,8 @@ export default new Router({
       name: 'about',
       component: () => import('./views/About.vue')
     },
+
+    // Admin
     {
       path: '/admin/login',
       name: 'admin-login',
@@ -58,6 +61,8 @@ export default new Router({
         }
       }
     },
+
+    // Games
     {
       path: '/cookie-clicker',
       name: 'cookie-clicker',
@@ -82,6 +87,11 @@ export default new Router({
       path: '/snake',
       name: '/snake',
       component: () => import('./views/games/Snake.vue')
+    },
+    {
+      path: '/card',
+      name: '/card',
+      component: () => import('./views/games/CardGame.vue')
     }
   ]
 });

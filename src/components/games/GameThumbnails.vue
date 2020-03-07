@@ -3,6 +3,13 @@
     <h2>All games</h2>
     <ul class="game-container">
       <GameThumbnail
+        :name="'Card game'"
+        :link="'/card'"
+        :imgSrc="require('@/assets/images/snake-thumbnail.jpg')"
+        :imgAlt="'Card game'"
+        :date="'5.3.2020'"
+      />
+      <GameThumbnail
         :name="'Snake'"
         :link="'/snake'"
         :imgSrc="require('@/assets/images/snake-thumbnail.jpg')"
