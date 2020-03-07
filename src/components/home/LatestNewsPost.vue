@@ -17,10 +17,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import Axios from 'axios';
+
 import NewsPost from '@/components/news/NewsPost.vue';
 
-import Axios from 'axios';
-import News from '../../views/admin/interfaces/newsInterface';
+import { INews } from '@/interfaces/INews';
 import { getLatestNewsPost } from '@/views/admin/actions/getNewsPostLatest';
 import { formatDate } from '@/views/admin/actions/formatDate';
 
@@ -34,7 +35,7 @@ export default Vue.extend({
   data() {
     return {
       errorMessage: '',
-      newsPost: {} as News,
+      newsPost: {} as INews,
       date: '' // date in data as well to avoid an error where date is not found due to it not being found from the database yet
     };
   },

@@ -33,7 +33,7 @@ import NewsPost from '@/components/news/NewsPost.vue';
 
 import { getNewsPosts } from './admin/actions/getNewsPosts';
 import { formatDate } from './admin/actions/formatDate';
-import News from './admin/interfaces/newsInterface';
+import { INews } from '../interfaces/INews';
 
 import globalVariables from '@/global.variables';
 
@@ -42,7 +42,7 @@ export default Vue.extend({
   components: { NewsPost },
   data() {
     return {
-      news: [] as News[],
+      news: [] as INews[],
       isAdmin: globalVariables.isAdmin
     };
   },

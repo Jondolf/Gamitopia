@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
-import News from '../interfaces/newsInterface';
 import { handleUnauthorized } from './handleUnauthorized';
+import { INews } from '@/interfaces/INews';
 
 export async function createNewsPost(
   title: string,
@@ -8,7 +8,7 @@ export async function createNewsPost(
   date: string
 ) {
   try {
-    const response = await axios.post<News>(
+    const response = await axios.post<INews>(
       '/api/news',
       {
         title: title,

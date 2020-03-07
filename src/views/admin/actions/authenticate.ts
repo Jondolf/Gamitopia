@@ -1,5 +1,5 @@
 import Axios, { AxiosError } from 'axios';
-import { AuthResponse } from '../interfaces/authResponseInterface';
+import { IAuthResponse } from '@/interfaces/IAuthResponse';
 
 export async function authenticate(
   url: string,
@@ -7,7 +7,7 @@ export async function authenticate(
   password: string
 ) {
   try {
-    const response = await Axios.post<AuthResponse>(url, {
+    const response = await Axios.post<IAuthResponse>(url, {
       username: username,
       password: password
     });

@@ -40,8 +40,6 @@ import StatusMessage from './StatusMessage.vue';
 import { getNewsPost } from './actions/getNewsPost';
 import { editNewsPost } from './actions/editNewsPost';
 
-import News from './interfaces/newsInterface';
-
 export default Vue.extend({
   name: 'NewsPostEdit',
   components: {

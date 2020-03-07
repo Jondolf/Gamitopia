@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import News from '../interfaces/newsInterface';
+import { INews } from '../../../interfaces/INews';
 import { handleUnauthorized } from './handleUnauthorized';
 
 export async function editNewsPost(
@@ -9,7 +9,7 @@ export async function editNewsPost(
   date: string
 ) {
   try {
-    const response = await axios.put<News>(
+    const response = await axios.put<INews>(
       `/api/news/${id}`,
       { title: title, body: body, date: date },
       {
