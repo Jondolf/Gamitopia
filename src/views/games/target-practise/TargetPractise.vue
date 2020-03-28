@@ -47,6 +47,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+// @ts-ignore
 import Unity from 'vue-unity-webgl';
 
 export default Vue.extend({
