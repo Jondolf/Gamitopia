@@ -92,6 +92,13 @@ export default new Router({
       path: '/card',
       name: '/card',
       component: () => import('./views/games/CardGame.vue')
+    },
+    {
+      path: '/target-practise',
+      name: 'target-practise',
+      component: () =>
+        import('./views/games/target-practise/TargetPractise.vue')
+
     }
   ]
 });

@@ -22,7 +22,8 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx",
-    "src/global.variables.ts"
+    "src/global.variables.ts",
+    "src/views/games/target-practise"
   ],
   "exclude": ["node_modules"]
 }

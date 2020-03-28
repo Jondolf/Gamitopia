@@ -1,7 +1,14 @@
 <template>
   <div class="card-game">
     <h2>Card game</h2>
-    <div class="game-container">
+    <h2>!Not Officially Released, Isn't Finished!</h2>
+    <div class="game-container" ref="gameContainer">
+      <button
+        @click="isFullscreen = !isFullscreen"
+        class="toggle-fullscreen-btn"
+      >
+        <i class="material-icons">fullscreen</i>
+      </button>
       <GameBoard :playerHand="playerHand" :enemyHand="enemyHand" />
     </div>
 
@@ -9,22 +16,8 @@
       <div class="mainDescription">
         <h3>Description</h3>
         <p>
-          Press the button in the bottom to randomize. Click the menu button to
-          open a small list of things to randomize. Click on a list item and
-          press the randomizer button to randomize.
-          <br />
-          <br />Number Range: Get a random number from 0 to 10 (with default
-          settings). You can move the slider below the randomizer button to
-          change the range of numbers to randomize, for example 0 to 100 or 0 to
-          255.
-          <br />
-          <br />Heads or Tails: Get either heads or tails. This could be useful
-          if you have to decide between two things. For example, should I eat
-          pizza or lasagna? Heads or tails?
-          <br />
-          <br />Roll Dice: Get a random number (shown on the dice) between 1 and
-          6. This could be useful, for example, if you want to play board games
-          but don't have a dice with you.
+          Card game is an ambituos indie game with over 30 cards to put into
+          your deck and fight with. You can play against a computer.
         </p>
       </div>
       <div class="otherDescription">
@@ -61,6 +54,8 @@ export default Vue.extend({
 
   data() {
     return {
+      isFullscreen: false,
+
       playerHand: [
         {
           name: 'Wulfric',
@@ -92,7 +87,7 @@ export default Vue.extend({
         },
         {
           name: 'Angry Boar',
-          rarity: 'common',
+          rarity: 'Common',
           imgSrc: require('@/assets/images/card-game/angry_boar.png'),
           animatableImgSrc: require('@/assets/images/card-game/angry_boar_animatable.png'),
           maxHealth: 4,
@@ -119,18 +114,18 @@ export default Vue.extend({
           description: `Despite lovin' the cold, he hates ice cream.`
         },
         {
-          name: 'Lord of the Dead',
+          name: 'Lord of Day and Night',
           rarity: 'Legendary',
-          imgSrc: require('@/assets/images/card-game/evil_ping.png'),
-          animatableImgSrc: require('@/assets/images/card-game/evil_ping_animatable.png'),
-          maxHealth: 7,
-          currentHealth: 7,
-          power: 9,
+          imgSrc: require('@/assets/images/card-game/lord_of_day_and_night.png'),
+          animatableImgSrc: require('@/assets/images/card-game/lord_of_day_and_night_animatable.png'),
+          maxHealth: 10,
+          currentHealth: 10,
+          power: 8,
           specialMove: {
             move: /* this.dealDmg(2)*/ 'Blah', //! DOESN'T WORK, FIND OUT WHY
             description: 'Deal 2 damage to any enemy'
           },
-          description: 'Who called him here?!'
+          description: 'How do you even kill a time of day?!'
         }
       ],
       enemyHand: [
@@ -214,6 +209,25 @@ export default Vue.extend({
         enemy.currentHealth -= amount;
       }
     }
+  },
+
+  watch: {
+    isFullscreen() {
+      const gameContainer = this.$refs.gameContainer as HTMLElement;
+      if (this.isFullscreen === true) {
+        gameContainer.classList.replace(
+          'game-container',
+          'fullscreen-game-container'
+        );
+        document.body.style.overflow === 'hidden';
+      } else {
+        gameContainer.classList.replace(
+          'fullscreen-game-container',
+          'game-container'
+        );
+        document.body.style.overflow === 'auto';
+      }
+    }
   }
 });
 </script>
@@ -226,7 +240,22 @@ export default Vue.extend({
     margin: 30px;
   }
 
+  .toggle-fullscreen-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    z-index: 25;
+    outline: none;
+    border: none;
+    i {
+      color: white;
+      font-size: 30px;
+    }
+  }
+
   .game-container {
+    position: relative;
     width: 80%;
     max-width: 1500px;
     height: 600px;
@@ -234,6 +263,17 @@ export default Vue.extend({
     border-radius: 5px;
     margin: auto;
     overflow: hidden;
+  }
+
+  .fullscreen-game-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    overflow: hidden;
+    z-index: 15;
   }
 
   .description {

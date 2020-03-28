@@ -45,7 +45,7 @@ export default Vue.extend({
 @import '@/global.scss';
 
 h2 {
-  margin: 40px auto 0 auto;
+  margin: 65px auto 20px auto;
 }
 
 .new-img {
