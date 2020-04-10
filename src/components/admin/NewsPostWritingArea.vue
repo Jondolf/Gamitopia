@@ -452,7 +452,7 @@ export default Vue.extend({
   }
 
   li p {
-    display: inline-block;
+    display: inline;
     line-height: 0;
   }
 

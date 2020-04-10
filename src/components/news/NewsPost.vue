@@ -106,7 +106,7 @@ export default Vue.extend({
   white-space: pre-line;
 
   li p {
-    display: inline-block;
+    display: inline;
   }
 
   .news-post-id {
