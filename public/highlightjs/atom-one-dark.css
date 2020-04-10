@@ -27,8 +27,8 @@ pre {
   background: #323640;
   border-radius: 5px;
   width: 100%;
-  padding: 0 15px 15px 15px;
-  margin-top: 15px;
+  padding: 15px;
+  margin: 15px auto;
 }
 
 .hljs-comment, .hljs-quote {

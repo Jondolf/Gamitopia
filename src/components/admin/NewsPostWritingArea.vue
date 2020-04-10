@@ -1,0 +1,615 @@
+<template>
+  <div class="news-post-writing-area" ref="newsPostBody">
+    <input
+      :value="title"
+      type="text"
+      name="news-post-name"
+      class="news-post-name"
+      spellcheck="false"
+      @input="$emit('update:title', $event.target.value)"
+    />
+    <div class="editor" spellcheck="false">
+      <EditorMenuBubble
+        class="menububble"
+        :editor="editor"
+        @hide="hideLinkMenu"
+        v-slot="{ commands, isActive, getMarkAttrs, menu }"
+      >
+        <div
+          class="menububble"
+          :class="{ 'is-active': menu.isActive }"
+          :style="`left: ${menu.left}px; bottom: ${menu.bottom}px;`"
+        >
+          <form
+            class="menububble__form"
+            v-if="linkMenuIsActive"
+            @submit.prevent="setLinkUrl(commands.link, linkUrl)"
+          >
+            <input
+              class="menububble__input"
+              type="text"
+              v-model="linkUrl"
+              placeholder="https://"
+              ref="linkInput"
+              @keydown.esc="hideLinkMenu"
+            />
+            <button
+              class="menububble__button"
+              @click="setLinkUrl(commands.link, null)"
+              type="button"
+            >
+              <i class="remove">Remove</i>
+            </button>
+          </form>
+
+          <template v-else>
+            <button
+              class="menububble__button"
+              @click="showLinkMenu(getMarkAttrs('link'))"
+              :class="{ 'is-active': isActive.link() }"
+            >
+              <i class="material-icons">link</i>
+            </button>
+          </template>
+
+          <button
+            class="menububble__button"
+            :class="{ 'is-active': isActive.bold() }"
+            @click="commands.bold"
+          >
+            <i class="material-icons">format_bold</i>
+          </button>
+
+          <button
+            class="menububble__button"
+            :class="{ 'is-active': isActive.italic() }"
+            @click="commands.italic"
+          >
+            <i class="material-icons">format_italic</i>
+          </button>
+
+          <button
+            class="menububble__button"
+            :class="{ 'is-active': isActive.strike() }"
+            @click="commands.strike"
+          >
+            <i class="material-icons">strikethrough_s</i>
+          </button>
+
+          <button
+            class="menububble__button"
+            :class="{ 'is-active': isActive.underline() }"
+            @click="commands.underline"
+          >
+            <i class="material-icons">format_underline</i>
+          </button>
+
+          <button
+            class="menububble__button"
+            :class="{ 'is-active': isActive.code() }"
+            @click="commands.code"
+          >
+            <i class="material-icons">code</i>
+          </button>
+        </div>
+      </EditorMenuBubble>
+
+      <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
+        <div class="menubar">
+          <button
+            title="Bold"
+            class="menubar__button"
+            :class="{ 'is-active': isActive.bold() }"
+            @click="commands.bold"
+          >
+            <i class="material-icons">format_bold</i>
+          </button>
+
+          <button
+            title="Italic"
+            class="menubar__button"
+            :class="{ 'is-active': isActive.italic() }"
+            @click="commands.italic"
+          >
+            <i class="material-icons">format_italic</i>
+          </button>
+
+          <button
+            title="Strikethrough"
+            class="menubar__button"
+            :class="{ 'is-active': isActive.strike() }"
+            @click="commands.strike"
+          >
+            <i class="material-icons">strikethrough_s</i>
+          </button>
+
+          <button
+            title="Underline"
+            class="menubar__button"
+            :class="{ 'is-active': isActive.underline() }"
+            @click="commands.underline"
+          >
+            <i class="material-icons">format_underline</i>
+          </button>
+
+          <button
+            title="Paragraph"
+            class="menubar__button"
+            :class="{ 'is-active': isActive.paragraph() }"
+            @click="commands.paragraph"
+          >
+            <span>P</span>
+          </button>
+
+          <button
+            title="Header 1"
+            class="menubar__button"
+            :class="{ 'is-active': isActive.heading({ level: 1 }) }"
+            @click="commands.heading({ level: 1 })"
+          >
+            <span>H1</span>
+          </button>
+
+          <button
+            title="Header 2"
+            class="menubar__button"
+            :class="{ 'is-active': isActive.heading({ level: 2 }) }"
+            @click="commands.heading({ level: 2 })"
+          >
+            <span>H2</span>
+          </button>
+
+          <button
+            title="Header 3"
+            class="menubar__button"
+            :class="{ 'is-active': isActive.heading({ level: 3 }) }"
+            @click="commands.heading({ level: 3 })"
+          >
+            <span>H3</span>
+          </button>
+
+          <button
+            title="Bullet list"
+            class="menubar__button"
+            :class="{ 'is-active': isActive.bullet_list() }"
+            @click="commands.bullet_list"
+          >
+            <i class="material-icons">format_list_bulleted</i>
+          </button>
+
+          <button
+            title="Number list"
+            class="menubar__button"
+            :class="{ 'is-active': isActive.ordered_list() }"
+            @click="commands.ordered_list"
+          >
+            <i class="material-icons">format_list_numbered</i>
+          </button>
+
+          <button
+            title="Quote"
+            class="menubar__button"
+            :class="{ 'is-active': isActive.blockquote() }"
+            @click="commands.blockquote"
+          >
+            <i class="material-icons">format_quote</i>
+          </button>
+
+          <button
+            title="Todo"
+            class="menubar__button"
+            :class="{ 'is-active': isActive.todo_list() }"
+            @click="commands.todo_list"
+          >
+            <i class="material-icons">list_alt</i>
+          </button>
+
+          <button
+            title="Code block"
+            class="menubar__button"
+            :class="{ 'is-active': isActive.code_block() }"
+            @click="commands.code_block"
+          >
+            <i class="material-icons">code</i>
+          </button>
+
+          <button
+            title="Horizontal line"
+            class="menubar__button"
+            @click="commands.horizontal_rule"
+          >
+            <i class="material-icons">remove</i>
+          </button>
+
+          <button title="Undo" class="menubar__button" @click="commands.undo">
+            <i class="material-icons">undo</i>
+          </button>
+
+          <button title="Redo" class="menubar__button" @click="commands.redo">
+            <i class="material-icons">redo</i>
+          </button>
+        </div>
+      </editor-menu-bar>
+
+      <editor-content
+        v-model="editor.content"
+        class="editor__content"
+        :editor="editor"
+      />
+    </div>
+    <input
+      :value="date"
+      @input="$emit('update:date', $event.target.value)"
+      type="date"
+      name="date"
+      class="date"
+    />
+  </div>
+</template>
+
+<script>
+import Vue from 'vue';
+import hljs from 'highlight.js';
+import javascript from 'highlight.js/lib/languages/javascript';
+import css from 'highlight.js/lib/languages/css';
+import { Editor, EditorContent, EditorMenuBar, EditorMenuBubble } from 'tiptap';
+import { CodeBlockHighlight } from 'tiptap-extensions';
+
+import {
+  Blockquote,
+  CodeBlock,
+  HardBreak,
+  Heading,
+  HorizontalRule,
+  OrderedList,
+  BulletList,
+  ListItem,
+  TodoItem,
+  TodoList,
+  Bold,
+  Code,
+  Italic,
+  Link,
+  Strike,
+  Underline,
+  History
+} from 'tiptap-extensions';
+export default Vue.extend({
+  components: {
+    EditorContent,
+    EditorMenuBar,
+    EditorMenuBubble
+  },
+
+  props: {
+    title: String,
+    originalBody: String,
+    date: String
+  },
+
+  data() {
+    return {
+      newsPostBody: '',
+
+      editor: new Editor({
+        extensions: [
+          new Blockquote(),
+          new BulletList(),
+          new CodeBlock(),
+          new HardBreak(),
+          new Heading(),
+          new HorizontalRule(),
+          new ListItem(),
+          new OrderedList(),
+          new TodoItem(),
+          new TodoList(),
+          new Link(),
+          new Bold(),
+          new Code(),
+          new Italic(),
+          new Strike(),
+          new Underline(),
+          new History(),
+          new CodeBlockHighlight({
+            languages: {
+              javascript,
+              css
+            }
+          })
+        ],
+        content: `
+          <h2>
+            Hi there,
+          </h2>
+          <p>
+            this is a very <em>basic</em> example of tiptap.
+          </p>
+          <pre><code>body { display: none; }</code></pre>
+          <ul>
+            <li>
+              A regular list
+            </li>
+            <li>
+              With regular items
+            </li>
+          </ul>
+          <blockquote>
+            It's amazing 👏
+            <br />
+            – mom
+          </blockquote>
+        `,
+        onUpdate: ({ getJSON, getHTML }) => {
+          console.log('on update');
+          this.json = getJSON();
+          this.html = getHTML();
+        }
+      }),
+      json: '',
+      html: '',
+      linkUrl: null,
+      linkMenuIsActive: false
+    };
+  },
+
+  methods: {
+    showLinkMenu(attrs) {
+      this.linkUrl = attrs.href;
+      this.linkMenuIsActive = true;
+      this.$nextTick(() => {
+        this.$refs.linkInput.focus();
+      });
+    },
+    hideLinkMenu() {
+      this.linkUrl = null;
+      this.linkMenuIsActive = false;
+    },
+    setLinkUrl(command, url) {
+      command({ href: url });
+      this.hideLinkMenu();
+    }
+  },
+
+  watch: {
+    html() {
+      console.log('html changed', this.html);
+      this.$emit('bodyChanged', this.html);
+    },
+
+    originalTitle() {
+      this.newsPostName = this.originalTitle;
+    },
+
+    originalBody() {
+      this.editor.setContent(
+        this.originalBody + '<pre id="codeBlockToRemove"><code></code></pre>',
+        true
+      );
+      //? I create the code element and remove it right after because the code highlighting didn't work without editing the code content for some reason
+      const codeBlocks = document.getElementsByTagName('pre');
+      const codeBlockToRemove = codeBlocks[codeBlocks.length - 1];
+      codeBlockToRemove.remove();
+    },
+
+    originalDate() {
+      this.newsPostDate = this.originalDate;
+    }
+  },
+
+  beforeDestroy() {
+    this.editor.destroy();
+  }
+});
+</script>
+
+<style lang="scss">
+@import '@/global.scss';
+.news-post-writing-area {
+  width: 70%;
+  background-color: var(--secondary-color);
+  margin: 20px auto;
+  padding: 30px;
+  text-align: left;
+  border-radius: 5px;
+  position: relative;
+  white-space: pre-line;
+  color: white;
+
+  blockquote {
+    border-color: white;
+  }
+
+  li p {
+    display: inline-block;
+  }
+
+  .date {
+    border: none;
+    outline: none;
+    font-family: Nunito;
+    background: transparent;
+    color: white;
+    font-size: 17px;
+  }
+
+  pre code {
+    display: block;
+    overflow-x: auto;
+    color: #abb2bf;
+    background: #323640;
+    border-radius: 5px;
+    width: 100%;
+    padding: 15px;
+    margin: 15px auto;
+  }
+
+  p,
+  i,
+  .menubar span,
+  li {
+    color: white;
+  }
+
+  blockquote {
+    border-left: 3px solid;
+    margin-left: 0;
+    padding-left: 1.25rem;
+  }
+
+  li p {
+    display: inline-block;
+    line-height: 0;
+  }
+
+  .news-post-name {
+    border: none;
+    outline: none;
+    font-size: 25.5px;
+    border-bottom: 2px solid;
+    margin-bottom: 25px;
+    width: 100%;
+    color: white;
+    border-color: white;
+    background: transparent;
+    font-family: Nunito;
+  }
+
+  .menububble {
+    position: absolute;
+    display: flex;
+    z-index: 20;
+    background: black;
+    border-radius: 5px;
+    padding: 0.3rem;
+    margin-bottom: 0.5rem;
+    transform: translateX(-50%);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s, visibility 0.2s;
+
+    &.is-active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &__button {
+      display: inline-flex;
+      background: transparent;
+      border: 0;
+      color: white;
+      padding: 0.2rem 0.5rem;
+      margin-right: 0.2rem;
+      border-radius: 3px;
+      cursor: pointer;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &:hover {
+        background-color: rgba(white, 0.1);
+      }
+
+      &.is-active {
+        background-color: rgba(white, 0.2);
+      }
+    }
+
+    &__form {
+      display: flex;
+      align-items: center;
+    }
+
+    &__input {
+      font: inherit;
+      border: none;
+      background: transparent;
+      color: white;
+    }
+  }
+
+  .editor {
+    background-color: transparent;
+    min-height: 150px;
+    width: 100%;
+    margin: 15px 0;
+
+    ul {
+      list-style: inside square;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: var(--primary-color);
+      color: black;
+      margin: 15px auto;
+      li[data-type='todo_item'] {
+        line-height: 0;
+      }
+    }
+
+    .menubar {
+      button {
+        background-color: rgba(0, 0, 0, 0);
+        width: 32px;
+        height: 32px;
+        margin-left: 5px;
+        border-radius: 5px;
+        position: relative;
+
+        i,
+        span {
+          color: white;
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        span {
+          font-size: 22px;
+        }
+      }
+      button:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.news-post-writing-area .editor .menubar .is-active {
+  border: 1px solid;
+}
+
+ul[data-type='todo_list'] li {
+  list-style: none;
+  div {
+    display: inline-block;
+  }
+  span.todo-checkbox {
+    display: inline-block;
+    border: 2px solid;
+    height: 0.9em;
+    width: 0.9em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-right: 10px;
+    margin-top: 0.3rem;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: pointer;
+    border-radius: 0.2em;
+    background-color: transparent;
+    -webkit-transition: background 0.4s;
+    transition: background 0.4s;
+  }
+}
+
+.news-post-writing-area .editor .menubar .is-active {
+  border: 1.5px solid white;
+}
+</style>

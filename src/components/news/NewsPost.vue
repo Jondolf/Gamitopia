@@ -104,6 +104,11 @@ export default Vue.extend({
   border-radius: 5px;
   position: relative;
   white-space: pre-line;
+
+  li p {
+    display: inline-block;
+  }
+
   .news-post-id {
     position: absolute;
     top: 5px;
@@ -157,6 +162,7 @@ export default Vue.extend({
       border-radius: 5px;
       background-color: var(--primary-color);
       color: black;
+      margin: 15px auto;
     }
   }
 }

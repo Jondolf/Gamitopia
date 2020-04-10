@@ -8,12 +8,21 @@
       :showMessage="showStatus"
     />
 
+    <h2>Edit news post</h2>
+
+    <NewsPostWritingArea
+      :title.sync="title"
+      :originalBody="originalBody"
+      :date.sync="date"
+      @bodyChanged="updateBody"
+    />
+
+    <!--
+          <h2>Edit news post</h2>
     <div class="edit-container">
       <div class="form-container">
-        <h2>Edit news post</h2>
-        <NewsPostForm :title.sync="title" :body.sync="body" :date.sync="date" />
+         <NewsPostForm :title.sync="title" :body.sync="body" :date.sync="date" />
       </div>
-
       <div class="preview-container">
         <h2>Preview</h2>
         <NewsPostFormPreview
@@ -22,7 +31,7 @@
           :date="formatDate(date)"
         />
       </div>
-    </div>
+    </div> -->
     <button v-on:click="handleEditNewsPost()" class="submit-btn">
       Save
     </button>
@@ -35,6 +44,7 @@ import axios from 'axios';
 
 import NewsPostForm from './NewsPostForm.vue';
 import NewsPostFormPreview from './NewsPostFormPreview.vue';
+import NewsPostWritingArea from '@/components/admin/NewsPostWritingArea.vue';
 import StatusMessage from './StatusMessage.vue';
 
 import { getNewsPost } from './actions/getNewsPost';
@@ -43,13 +53,15 @@ import { editNewsPost } from './actions/editNewsPost';
 export default Vue.extend({
   name: 'NewsPostEdit',
   components: {
-    NewsPostForm,
-    NewsPostFormPreview,
+    /*    NewsPostForm,
+    NewsPostFormPreview,*/
+    NewsPostWritingArea,
     StatusMessage
   },
 
   data() {
     return {
+      originalBody: '',
       id: '',
       title: '',
       body: '',
@@ -61,12 +73,17 @@ export default Vue.extend({
   },
 
   methods: {
+    updateBody(body: string) {
+      this.body = body;
+    },
+
     async handleGetNewsPost() {
       try {
         const newsPost = await getNewsPost(this.id);
         this.title = newsPost.title;
         this.body = newsPost.body;
         this.date = newsPost.date.slice(0, 10);
+        this.originalBody = this.body;
       } catch (error) {
         this.displayStatus(error.message, 'Error');
       }
