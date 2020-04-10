@@ -16,22 +16,6 @@
       :date.sync="date"
       @bodyChanged="updateBody"
     />
-
-    <!--
-          <h2>Edit news post</h2>
-    <div class="edit-container">
-      <div class="form-container">
-         <NewsPostForm :title.sync="title" :body.sync="body" :date.sync="date" />
-      </div>
-      <div class="preview-container">
-        <h2>Preview</h2>
-        <NewsPostFormPreview
-          :title="title"
-          :body="body"
-          :date="formatDate(date)"
-        />
-      </div>
-    </div> -->
     <button v-on:click="handleEditNewsPost()" class="submit-btn">
       Save
     </button>
@@ -53,8 +37,6 @@ import { editNewsPost } from './actions/editNewsPost';
 export default Vue.extend({
   name: 'NewsPostEdit',
   components: {
-    /*    NewsPostForm,
-    NewsPostFormPreview,*/
     NewsPostWritingArea,
     StatusMessage
   },

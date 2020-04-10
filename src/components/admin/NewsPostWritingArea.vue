@@ -6,6 +6,7 @@
       name="news-post-name"
       class="news-post-name"
       spellcheck="false"
+      placeholder="Write title here..."
       @input="$emit('update:title', $event.target.value)"
     />
     <div class="editor" spellcheck="false">
@@ -253,7 +254,6 @@ import hljs from 'highlight.js';
 import javascript from 'highlight.js/lib/languages/javascript';
 import css from 'highlight.js/lib/languages/css';
 import { Editor, EditorContent, EditorMenuBar, EditorMenuBubble } from 'tiptap';
-import { CodeBlockHighlight } from 'tiptap-extensions';
 
 import {
   Blockquote,
@@ -272,7 +272,9 @@ import {
   Link,
   Strike,
   Underline,
-  History
+  History,
+  CodeBlockHighlight,
+  Placeholder
 } from 'tiptap-extensions';
 export default Vue.extend({
   components: {
@@ -310,6 +312,13 @@ export default Vue.extend({
           new Strike(),
           new Underline(),
           new History(),
+          new Placeholder({
+            emptyEditorClass: 'is-editor-empty',
+            emptyNodeClass: 'is-empty',
+            emptyNodeText: 'Write content here…',
+            showOnlyWhenEditable: true,
+            showOnlyCurrent: true
+          }),
           new CodeBlockHighlight({
             languages: {
               javascript,
@@ -317,28 +326,7 @@ export default Vue.extend({
             }
           })
         ],
-        content: `
-          <h2>
-            Hi there,
-          </h2>
-          <p>
-            this is a very <em>basic</em> example of tiptap.
-          </p>
-          <pre><code>body { display: none; }</code></pre>
-          <ul>
-            <li>
-              A regular list
-            </li>
-            <li>
-              With regular items
-            </li>
-          </ul>
-          <blockquote>
-            It's amazing 👏
-            <br />
-            – mom
-          </blockquote>
-        `,
+        content: ``,
         onUpdate: ({ getJSON, getHTML }) => {
           this.json = getJSON();
           this.html = getHTML();
@@ -412,6 +400,15 @@ export default Vue.extend({
   position: relative;
   white-space: pre-line;
   color: white;
+
+  .editor p.is-editor-empty:first-child::before {
+    content: attr(data-empty-text);
+    float: left;
+    color: #aaa;
+    pointer-events: none;
+    height: 0;
+    font-style: italic;
+  }
 
   blockquote {
     border-color: white;

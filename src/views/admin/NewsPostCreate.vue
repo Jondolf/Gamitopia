@@ -8,24 +8,16 @@
       :showMessage="showStatus"
     />
 
-    <div class="create-container">
-      <div class="form-container">
-        <h2>Create news post</h2>
-        <NewsPostForm :title.sync="title" :body.sync="body" :date.sync="date" />
-      </div>
+    <h2>Create news post</h2>
 
-      <div class="preview-container">
-        <h2>Preview</h2>
-        <NewsPostFormPreview
-          :title="title"
-          :body="body"
-          :date="formatDate(date)"
-        />
-      </div>
-    </div>
-
+    <NewsPostWritingArea
+      :title.sync="title"
+      :originalBody="originalBody"
+      :date.sync="date"
+      @bodyChanged="updateBody"
+    />
     <button v-on:click="handleCreateNewsPost()" class="submit-btn">
-      Create
+      Save
     </button>
   </div>
 </template>
@@ -36,6 +28,7 @@ import axios from 'axios';
 
 import NewsPostForm from './NewsPostForm.vue';
 import NewsPostFormPreview from './NewsPostFormPreview.vue';
+import NewsPostWritingArea from '@/components/admin/NewsPostWritingArea.vue';
 import StatusMessage from './StatusMessage.vue';
 
 import { createNewsPost } from './actions/createNewsPost';
@@ -43,13 +36,13 @@ import { createNewsPost } from './actions/createNewsPost';
 export default Vue.extend({
   name: 'NewsPostCreate',
   components: {
-    NewsPostForm,
-    NewsPostFormPreview,
+    NewsPostWritingArea,
     StatusMessage
   },
 
   data() {
     return {
+      originalBody: '',
       id: '',
       title: '',
       body: '',
@@ -61,6 +54,10 @@ export default Vue.extend({
   },
 
   methods: {
+    updateBody(body: string) {
+      this.body = body;
+    },
+
     async handleCreateNewsPost() {
       try {
         const data = await createNewsPost(this.title, this.body, this.date);
