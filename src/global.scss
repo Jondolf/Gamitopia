@@ -15,6 +15,28 @@ html {
   font-weight: bold;
 }
 
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: rgb(225, 225, 255);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(55, 76, 194, 0.5);
+  border-radius: 6px;
+  border: 3px solid white;
+}
+
+body::-webkit-scrollbar-thumb:active {
+  background-color: rgba(55, 76, 194, 0.85);
+}
+
+i {
+  color: white;
+}
+
 p,
 li {
   line-height: 1.5rem;
@@ -35,16 +57,18 @@ a:hover {
 button {
   font-family: Nunito, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  border: none;
   outline: none;
 }
 
 button:focus {
+  border: none;
   outline: none;
 }
 
 .darkMode {
-  --primary-color: #393e46;
-  --secondary-color: #222831;
+  --primary-color: rgb(57, 62, 70);
+  --secondary-color: rgb(34, 40, 49);
   border-color: white;
   color: white;
   ::selection {
@@ -62,4 +86,22 @@ button:focus {
   a:hover {
     color: red;
   }
+}
+
+body.darkMode::-webkit-scrollbar {
+  width: 12px;
+}
+
+body.darkMode::-webkit-scrollbar-track {
+  background: rgb(29, 35, 46);
+}
+
+body.darkMode::-webkit-scrollbar-thumb {
+  background-color: rgb(20, 26, 37);
+  border-radius: 6px;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+}
+
+body.darkMode::-webkit-scrollbar-thumb:active {
+  background-color: rgb(5, 7, 22);
 }
