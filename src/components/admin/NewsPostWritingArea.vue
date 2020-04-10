@@ -340,7 +340,6 @@ export default Vue.extend({
           </blockquote>
         `,
         onUpdate: ({ getJSON, getHTML }) => {
-          console.log('on update');
           this.json = getJSON();
           this.html = getHTML();
         }
@@ -372,7 +371,6 @@ export default Vue.extend({
 
   watch: {
     html() {
-      console.log('html changed', this.html);
       this.$emit('bodyChanged', this.html);
     },
 
