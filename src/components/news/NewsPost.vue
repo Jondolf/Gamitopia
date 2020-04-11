@@ -158,20 +158,47 @@ export default Vue.extend({
 
     ul {
       list-style: inside square;
+      li ul {
+        list-style: inside circle;
+      }
+    }
+    ol {
+      list-style: inside decimal;
+      li ol {
+        list-style: inside lower-latin;
+      }
+    }
+
+    ul,
+    ol {
       padding: 10px;
       border-radius: 5px;
       background-color: var(--primary-color);
-      color: black;
       margin: 15px auto;
+      li,
+      li p {
+        color: black;
+      }
+      li[data-type='todo_item'] {
+        line-height: 0;
+      }
+      li ul,
+      li ol {
+        margin: 0;
+        padding: 0 0 0 15px;
+      }
     }
   }
 }
 
-.darkMode .news-post ul li {
+.darkMode .news-post ul li,
+.darkMode .news-post ul li p,
+.darkMode .news-post ol li,
+.darkMode .news-post ol li p {
   color: white;
 }
 
-.news-post .darkMode a {
+.darkMode .news-post a {
   font-weight: bolder;
   font-style: italic;
 

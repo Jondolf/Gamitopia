@@ -462,8 +462,7 @@ export default Vue.extend({
 
   p,
   i,
-  .menubar span,
-  li {
+  .menubar span {
     color: white;
   }
 
@@ -553,13 +552,34 @@ export default Vue.extend({
 
     ul {
       list-style: inside square;
+      li ul {
+        list-style: inside circle;
+      }
+    }
+    ol {
+      list-style: inside decimal;
+      li ol {
+        list-style: inside lower-latin;
+      }
+    }
+
+    ul,
+    ol {
       padding: 10px;
       border-radius: 5px;
       background-color: var(--primary-color);
-      color: black;
       margin: 15px auto;
+      li,
+      li p {
+        color: black;
+      }
       li[data-type='todo_item'] {
         line-height: 0;
+      }
+      li ul,
+      li ol {
+        margin: 0;
+        padding: 0 0 0 15px;
       }
     }
 
@@ -628,5 +648,12 @@ ul[data-type='todo_list'] li {
 
 .news-post-writing-area .editor .menubar .is-active {
   border: 1.5px solid white;
+}
+
+.darkMode .news-post-writing-area ul li,
+.darkMode .news-post-writing-area ul li p,
+.darkMode .news-post-writing-area ol li,
+.darkMode .news-post-writing-area ol li p {
+  color: white;
 }
 </style>
