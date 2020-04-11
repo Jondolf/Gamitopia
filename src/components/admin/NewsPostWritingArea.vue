@@ -215,6 +215,13 @@
           </button>
 
           <button
+            class="menubar__button"
+            @click="showImagePrompt(commands.image)"
+          >
+            <i class="material-icons">image</i>
+          </button>
+
+          <button
             title="Horizontal line"
             class="menubar__button"
             @click="commands.horizontal_rule"
@@ -274,6 +281,7 @@ import {
   Underline,
   History,
   CodeBlockHighlight,
+  Image,
   Placeholder
 } from 'tiptap-extensions';
 export default Vue.extend({
@@ -312,6 +320,7 @@ export default Vue.extend({
           new Strike(),
           new Underline(),
           new History(),
+          new Image(),
           new Placeholder({
             emptyEditorClass: 'is-editor-empty',
             emptyNodeClass: 'is-empty',
@@ -354,6 +363,12 @@ export default Vue.extend({
     setLinkUrl(command, url) {
       command({ href: url });
       this.hideLinkMenu();
+    },
+    showImagePrompt(command) {
+      const src = prompt('Enter the url of your image here');
+      if (src !== null) {
+        command({ src });
+      }
     }
   },
 
@@ -400,6 +415,13 @@ export default Vue.extend({
   position: relative;
   white-space: pre-line;
   color: white;
+
+  img {
+    width: 75%;
+    max-width: 400px;
+    margin: 10px auto;
+    border-radius: 5px;
+  }
 
   .editor p.is-editor-empty:first-child::before {
     content: attr(data-empty-text);
