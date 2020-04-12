@@ -100,12 +100,36 @@ export default Vue.extend({
         .split('-')
         .reverse()
         .join('.');
+    },
+
+    preventNav(event: any) {
+      event.preventDefault();
+      event.returnValue = '';
     }
   },
 
   async mounted() {
     this.id = this.$route.params.id;
     await this.handleGetNewsPost();
+  },
+
+  beforeRouteLeave(to, from, next) {
+    if (
+      !window.confirm(
+        'Are you sure you want to leave? Any unsaved data will be lost.'
+      )
+    ) {
+      return;
+    }
+    next();
+  },
+
+  beforeMount() {
+    window.addEventListener('beforeunload', this.preventNav);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('beforeunload', this.preventNav);
   }
 });
 </script>

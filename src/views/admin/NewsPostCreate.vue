@@ -32,6 +32,7 @@ import NewsPostWritingArea from '@/components/admin/NewsPostWritingArea.vue';
 import StatusMessage from './StatusMessage.vue';
 
 import { createNewsPost } from './actions/createNewsPost';
+import router from '../../router';
 
 export default Vue.extend({
   name: 'NewsPostCreate',
@@ -49,7 +50,8 @@ export default Vue.extend({
       date: new Date().toISOString().slice(0, 10),
       statusMessage: '',
       statusMessageType: '',
-      showStatus: false
+      showStatus: false,
+      released: false
     };
   },
 
@@ -62,6 +64,10 @@ export default Vue.extend({
       try {
         const data = await createNewsPost(this.title, this.body, this.date);
         this.displayStatus(`Successfully created news post`, 'Success');
+        this.released = true;
+        setTimeout(() => {
+          router.push('/news');
+        }, 1000);
       } catch (error) {
         this.displayStatus(error.message, 'Error');
       }
@@ -79,7 +85,32 @@ export default Vue.extend({
         .split('-')
         .reverse()
         .join('.');
+    },
+
+    preventNav(event: any) {
+      event.preventDefault();
+      event.returnValue = '';
     }
+  },
+
+  beforeRouteLeave(to, from, next) {
+    if (
+      !this.released &&
+      !window.confirm(
+        "Are you sure you want to leave? You haven't released this post yet!"
+      )
+    ) {
+      return;
+    }
+    next();
+  },
+
+  beforeMount() {
+    window.addEventListener('beforeunload', this.preventNav);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('beforeunload', this.preventNav);
   }
 });
 </script>
