@@ -432,6 +432,10 @@ export default Vue.extend({
     font-style: italic;
   }
 
+  hr {
+    margin: 15px auto;
+  }
+
   blockquote {
     border-color: white;
   }

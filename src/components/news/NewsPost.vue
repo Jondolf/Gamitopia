@@ -109,6 +109,10 @@ export default Vue.extend({
     display: inline;
   }
 
+  hr {
+    margin: 15px auto;
+  }
+
   .news-post-id {
     position: absolute;
     top: 5px;
