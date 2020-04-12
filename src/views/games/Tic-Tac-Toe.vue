@@ -102,7 +102,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/global.scss';
 #tic-tac-toe {
   padding-top: 66px;

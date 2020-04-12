@@ -727,7 +727,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/global.scss';
 #adventura {
   padding-top: 66px;

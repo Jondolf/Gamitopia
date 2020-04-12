@@ -258,7 +258,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/global.scss';
 #randomizer {
   padding-top: 66px;

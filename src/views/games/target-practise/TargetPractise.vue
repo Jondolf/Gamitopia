@@ -60,7 +60,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .card-game {
   padding-top: 86px;
 
