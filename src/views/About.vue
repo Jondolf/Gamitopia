@@ -1,5 +1,5 @@
 <template>
-  <div id="about">
+  <div class="about">
     <div class="about-container">
       <div class="about-gamitopia">
         <h2>About Gamitopia</h2>
@@ -7,13 +7,15 @@
           Gamitopia is a website with completely free games made by me. My goal
           is to make fun games and projects and learn programming along the way.
         </p>
-        <h3>Website Made With:</h3>
+        <h3>Made with:</h3>
         <br />
         <ul>
           <li>HTML</li>
           <li>SCSS/CSS</li>
           <li>TS/JS</li>
           <li>Vue.js</li>
+          <li>Nest.js</li>
+          <li>TypeORM</li>
         </ul>
       </div>
       <div class="about-me">
@@ -32,14 +34,16 @@
           <li>HTML</li>
           <li>SCSS/CSS</li>
           <li>TS/JS</li>
-          <li>A tiny bit of Python</li>
-          <li>Vue.js</li>
-          <li>Some C#</li>
-          <li>The very basics of Unity</li>
+          <li>Vue.js 2</li>
+          <li>A bit of Angular</li>
+          <li>Nest.js</li>
+          <li>Some C# (with Unity)</li>
+          <li>A bit of Python 2 & 3</li>
+          <li>A tiny bit of Java</li>
         </ul>
         <h3>Software that I use</h3>
         <ul>
-          <li>Visual Studio Code (for web stuff)</li>
+          <li>Visual Studio Code (for web development)</li>
           <li>Visual Studio (for Unity related)</li>
           <li>Unity Personal</li>
           <li>Garageband (for game music)</li>
@@ -58,7 +62,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-#about {
+.about {
   padding-top: 66px;
   height: 100%;
   display: flex;
@@ -106,7 +110,7 @@ export default Vue.extend({
 }
 
 @media only screen and (max-width: 550px) {
-  #about {
+  .about {
     .about-container {
       flex-direction: column;
       padding: 10px;

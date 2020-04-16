@@ -731,11 +731,11 @@ export default Vue.extend({
 @import '@/global.scss';
 #adventura {
   padding-top: 66px;
+  h2 {
+    margin: 30px;
+  }
 }
 
-h2 {
-  margin: 30px;
-}
 .fullscreen {
   background-color: black;
   position: fixed;
@@ -755,6 +755,7 @@ h2 {
   touch-action: manipulation;
   overflow: hidden;
 }
+
 .gameContainer {
   position: relative;
   margin: auto;

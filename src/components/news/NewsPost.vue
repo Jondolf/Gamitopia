@@ -58,6 +58,9 @@ export default Vue.extend({
 
   methods: {
     async handleDeleteNewsPost() {
+      if (!window.confirm('Are you sure you want to delete this news post?')) {
+        return;
+      }
       try {
         await deleteNewsPost(this.id);
         this.displayStatus(
