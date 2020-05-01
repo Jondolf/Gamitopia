@@ -15,37 +15,38 @@ export default Vue.extend({
       iconText:
         localStorage.getItem('darkMode') === 'true'
           ? 'brightness_2'
-          : 'wb_sunny',
-      darkModeOnOff: true
+          : 'wb_sunny'
     };
   },
   methods: {
     toggleDarkMode() {
-      this.darkModeOnOffBoolean();
-      this.darkModeOnOff = !this.darkModeOnOff;
-      localStorage.setItem('darkMode', this.darkModeOnOff.toString());
-
-      if (localStorage.getItem('darkMode') === 'true') {
-        document.body.classList.add('darkMode');
-        this.iconText = 'brightness_2';
-      } else if (localStorage.getItem('darkMode') === 'false') {
-        document.body.classList.remove('darkMode');
+      if (localStorage.getItem('gamitopiaTheme') === 'dark default-dark') {
+        localStorage.setItem('gamitopiaTheme', 'light default-light');
+        document.body.className = 'light default-light';
         this.iconText = 'wb_sunny';
-      }
-    },
-    darkModeOnOffBoolean() {
-      if (localStorage.getItem('darkMode') === 'true') {
-        this.darkModeOnOff = true;
+      } else if (
+        localStorage.getItem('gamitopiaTheme') === 'light default-light'
+      ) {
+        localStorage.setItem('gamitopiaTheme', 'dark default-dark');
+        document.body.className = 'dark default-dark';
+        this.iconText = 'brightness_2';
       } else {
-        this.darkModeOnOff = false;
+        document.body.className = 'light default-light';
+        localStorage.setItem('gamitopiaTheme', 'light default-light');
       }
     }
   },
+
   created() {
-    if (localStorage.getItem('darkMode') === 'true') {
-      document.body.classList.add('darkMode');
-    } else if (localStorage.getItem('darkMode') === 'false') {
-      document.body.classList.remove('darkMode');
+    if (localStorage.getItem('gamitopiaTheme') === 'dark default-dark') {
+      document.body.className = 'dark default-dark';
+    } else if (
+      localStorage.getItem('gamitopiaTheme') === 'light default-light'
+    ) {
+      document.body.className = 'light default-light';
+    } else {
+      document.body.className = 'light default-light';
+      localStorage.setItem('gamitopiaTheme', 'light default-light');
     }
   }
 });

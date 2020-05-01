@@ -1,6 +1,11 @@
-html {
-  --primary-color: white;
-  --secondary-color: rgb(55, 76, 194);
+body {
+  color: white;
+  border-color: white;
+  button,
+  input,
+  li {
+    color: white;
+  }
 }
 
 @font-face {
@@ -17,20 +22,21 @@ html {
 
 body::-webkit-scrollbar {
   width: 12px;
-}
-
-body::-webkit-scrollbar-track {
-  background: rgb(225, 225, 255);
+  background-color: var(--scrollbar-color);
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: rgba(55, 76, 194, 0.5);
   border-radius: 6px;
   border: 3px solid white;
+  background-color: var(--scrollbar-handle-color);
+  &:active {
+    background-color: var(--scrollbar-handle-active-color);
+  }
 }
 
-body::-webkit-scrollbar-thumb:active {
-  background-color: rgba(55, 76, 194, 0.85);
+::selection {
+  background-color: var(--selection-bg-color);
+  color: var(--selection-color);
 }
 
 // Inline code
@@ -71,60 +77,43 @@ a:visited {
   font-style: italic;
   text-decoration: none;
   color: white;
+  &:hover {
+    color: var(--link-hover-color);
+  }
 }
 
-a:hover {
-  color: rgb(200, 200, 255);
-}
-
-button {
+button,
+input {
   font-family: Nunito, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   border: none;
   outline: none;
+  &:focus {
+    border: none;
+    outline: none;
+  }
 }
 
-button:focus {
-  border: none;
-  outline: none;
+.light.default-light {
+  --primary-color: white;
+  --secondary-color: rgb(55, 76, 194);
+  --scrollbar-color: rgb(255, 255, 255);
+  --scrollbar-handle-color: rgb(55, 76, 194, 0.5);
+  --scrollbar-handle-active-color: rgb(55, 76, 194, 0.85);
+  --selection-bg-color: rgb(125, 160, 255);
+  --selection-color: white;
+  --link-visited-color: white;
+  --link-hover-color: rgb(200, 200, 255);
 }
 
-.darkMode {
+.dark.default-dark {
   --primary-color: rgb(57, 62, 70);
   --secondary-color: rgb(34, 40, 49);
-  border-color: white;
-  color: white;
-  ::selection {
-    background-color: rgb(255, 160, 160);
-  }
-
-  a,
-  a:visited {
-    font-weight: bold;
-    font-style: italic;
-    text-decoration: none;
-    color: white;
-  }
-
-  a:hover {
-    color: red;
-  }
-}
-
-body.darkMode::-webkit-scrollbar {
-  width: 12px;
-}
-
-body.darkMode::-webkit-scrollbar-track {
-  background: rgb(29, 35, 46);
-}
-
-body.darkMode::-webkit-scrollbar-thumb {
-  background-color: rgb(20, 26, 37);
-  border-radius: 6px;
-  border: 3px solid rgba(255, 255, 255, 0.25);
-}
-
-body.darkMode::-webkit-scrollbar-thumb:active {
-  background-color: rgb(5, 7, 22);
+  --scrollbar-color: rgb(29, 35, 46);
+  --scrollbar-handle-color: rgb(20, 26, 37);
+  --scrollbar-handle-active-color: rgb(5, 7, 22);
+  --selection-bg-color: rgb(255, 160, 160);
+  --selection-color: white;
+  --link-visited-color: white;
+  --link-hover-color: red;
 }
