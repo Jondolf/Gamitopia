@@ -11,7 +11,9 @@
 
     <div class="news-post-gradient"></div>
 
-    <router-link to="/news" class="read-all">Read here</router-link>
+    <router-link :to="'/news/' + newsPost.id" class="read-all"
+      >Read here</router-link
+    >
   </div>
 </template>
 
