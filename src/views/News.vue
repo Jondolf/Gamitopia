@@ -1,5 +1,5 @@
 <template>
-  <div id="news">
+  <div class="news">
     <router-link to="/admin/create-news-post" v-if="isAdmin"
       ><button class="create-news-post-btn">Create new</button>
     </router-link>
@@ -78,11 +78,11 @@ a:visited {
 a:hover {
   color: rgb(200, 200, 255);
 }
-.darkMode .filter button {
+.dark.default-dark .filter button {
   color: white;
 }
 
-#news {
+.news {
   padding-top: 86px;
   .create-news-post-btn {
     width: 10%;
@@ -117,6 +117,7 @@ a:hover {
     }
     button {
       background-color: var(--primary-color);
+      color: black;
       width: 33%;
       padding: 15px 0 15px 0;
       border: none;

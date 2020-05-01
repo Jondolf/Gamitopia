@@ -47,6 +47,7 @@
           <li>Visual Studio (for Unity related)</li>
           <li>Unity Personal</li>
           <li>Garageband (for game music)</li>
+          <li>Trello (for planning)</li>
         </ul>
       </div>
     </div>

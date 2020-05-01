@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <nav>
     <DarkMode />
     <div class="nav-link-container">
       <p v-if="isAdmin">Admin</p>
@@ -8,7 +8,7 @@
       <router-link to="/news">News</router-link>
       <router-link to="/about">About</router-link>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script lang="ts">
@@ -34,7 +34,7 @@ export default Vue.extend({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import '@/global.scss';
-#nav {
+nav {
   background-color: var(--secondary-color);
   color: white;
   padding: 0 20px;
@@ -70,12 +70,12 @@ export default Vue.extend({
     text-decoration: none;
   }
 }
-.darkMode {
-  #nav .nav-link-container a {
+.dark.default-dark {
+  nav .nav-link-container a {
     font-weight: normal;
     font-style: normal;
   }
-  #nav .nav-link-container a:hover {
+  nav .nav-link-container a:hover {
     color: rgb(230, 40, 40);
     border-bottom: 2px solid rgb(230, 40, 40);
     margin-bottom: -2px;
@@ -83,26 +83,26 @@ export default Vue.extend({
   }
 }
 @media only screen and (max-width: 500px) {
-  #nav .nav-link-container a {
+  nav .nav-link-container a {
     font-size: 20px;
   }
 }
 
 @media only screen and (max-width: 460px) {
-  #nav .nav-link-container a {
+  nav .nav-link-container a {
     font-size: 17px;
   }
 }
 
 @media only screen and (max-width: 430px) {
-  #nav .nav-link-container a {
+  nav .nav-link-container a {
     font-size: 15px;
     margin-left: 10px;
   }
 }
 
 @media only screen and (max-width: 350px) {
-  #nav .nav-link-container a {
+  nav .nav-link-container a {
     font-size: 14px;
     margin-left: 8px;
   }

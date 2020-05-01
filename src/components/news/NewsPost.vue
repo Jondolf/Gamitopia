@@ -224,26 +224,26 @@ export default Vue.extend({
   }
 }
 
-.darkMode .news-post ul li,
-.darkMode .news-post ul li p,
-.darkMode .news-post ol li,
-.darkMode .news-post ol li p {
+.dark.default-dark .news-post ul li,
+.dark.default-dark .news-post ul li p,
+.dark.default-dark .news-post ol li,
+.dark.default-dark .news-post ol li p {
   color: white;
 }
 
-.darkMode .news-post a {
+.dark.default-dark .news-post a {
   font-weight: bolder;
   font-style: italic;
 
   color: red;
 }
 
-.darkMode .news-post .admin-tools button i:hover,
-.darkMode .news-post .admin-tools a i:hover {
+.dark.default-dark .news-post .admin-tools button i:hover,
+.dark.default-dark .news-post .admin-tools a i:hover {
   color: red;
 }
 
-.darkMode .news-post .news-post-id {
+.dark.default-dark .news-post .news-post-id {
   color: rgb(122, 122, 122);
 }
 </style>
