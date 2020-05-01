@@ -1,80 +1,75 @@
 <template>
-  <div id="randomizer">
-    <h2 id="randomizer-header">Randomizer</h2>
-    <div class="randomizer-container" id="randomizer-container">
-      <div class="header-container">
-        <h2>Press the button to randomize!</h2>
+  <div class="randomizer">
+    <h2>Randomizer</h2>
+    <div class="game-container" ref="gameContainer">
+      <keep-alive>
+        <WhatToRandomizeMenu
+          v-if="isWhatToRandomizeMenuOpen"
+          @changeOption="changeOption"
+          @closeWhatToRandomizeMenu="isWhatToRandomizeMenuOpen = false"
+        ></WhatToRandomizeMenu>
+      </keep-alive>
+
+      <div class="top-container">
+        <button
+          v-on:click="isWhatToRandomizeMenuOpen = !isWhatToRandomizeMenuOpen"
+          class="open-what-to-randomize-menu-button"
+        >
+          <i class="material-icons">menu</i>
+        </button>
+        <h2>{{ whatToRandomize }}</h2>
+        <button
+          v-on:click="toggleFullscreen()"
+          class="toggle-fullscreen-button"
+        >
+          <i class="material-icons">{{ fullscreenIconName }}</i>
+        </button>
       </div>
-      <div class="top-img-container">
-        <img
-          src="@/assets/images/hamburger-menu-icon.png"
-          id="open-what-to-randomize-menu"
-        />
-        <img src="@/assets/images/toggle-fullscreen-icon.png" id="fullscreen" />
-      </div>
-      <div id="what-to-randomize-menu-container">
-        <ul>
-          <li class="what-to-randomize">Number Range</li>
-          <li class="what-to-randomize">Heads or Tails</li>
-          <li class="what-to-randomize">Roll Dice</li>
-        </ul>
-      </div>
-      <div id="num-range-result" class="result"></div>
-      <div id="heads-or-tails-result" class="result"></div>
-      <div id="roll-dice-result" class="result">
-        <img src="@/assets/images/num-1-dice.jpg" class="dice-img-hide" />
-        <img src="@/assets/images/num-2-dice.jpg" class="dice-img-hide" />
-        <img src="@/assets/images/num-3-dice.jpg" class="dice-img-hide" />
-        <img src="@/assets/images/num-4-dice.jpg" class="dice-img-hide" />
-        <img src="@/assets/images/num-5-dice.jpg" class="dice-img-hide" />
-        <img src="@/assets/images/num-6-dice.jpg" class="dice-img-hide" />
-      </div>
-      <div class="randomizer-button-container">
-        <button id="randomizer-button">Randomize</button>
-      </div>
-      <div id="randomizer-settings">
-        <input type="range" max="1000" min="0" value="10" id="slider" />
-        <span id="slider-value"></span>
-      </div>
+
+      <RandomizeContent :whatToRandomize="whatToRandomize"></RandomizeContent>
     </div>
-    <div id="main-other">
-      <div class="description">
-        <div class="mainDescription">
-          <h3>Description</h3>
-          <p>
-            Press the button in the bottom to randomize. Click the menu button
-            to open a small list of things to randomize. Click on a list item
-            and press the randomizer button to randomize.
-            <br />
-            <br />Number Range: Get a random number from 0 to 10 (with default
-            settings). You can move the slider below the randomizer button to
-            change the range of numbers to randomize, for example 0 to 100 or 0
-            to 255.
-            <br />
-            <br />Heads or Tails: Get either heads or tails. This could be
-            useful if you have to decide between two things. For example, should
-            I eat pizza or lasagna? Heads or tails?
-            <br />
-            <br />Roll Dice: Get a random number (shown on the dice) between 1
-            and 6. This could be useful, for example, if you want to play board
-            games but don't have a dice with you.
-          </p>
+
+    <div class="description">
+      <div class="mainDescription">
+        <h3>Description</h3>
+        <p>
+          Press the button in the bottom to randomize. Click the menu button to
+          open a small list of things to randomize. Click on a list item and
+          press the randomizer button to randomize.
+          <br />
+          <br />Number Range: Get a random number from 0 to 10 (with default
+          settings). You can move the slider below the randomizer button to
+          change the range of numbers to randomize, for example 0 to 100 or 0 to
+          255.
+          <br />
+          <br />Heads or Tails: Get either heads or tails. This could be useful
+          if you have to decide between two things. For example, should I eat
+          pizza or lasagna? Heads or tails?
+          <br />
+          <br />Roll Dice: Get a random number (shown on the dice) between 1 and
+          6. This could be useful, for example, if you want to play board games
+          but don't have a dice with you.
+        </p>
+      </div>
+      <div class="otherDescription">
+        <div class="madeWith">
+          <h3>Made with:</h3>
+          <ul>
+            <li>Vue.js</li>
+            <li>
+              <ul>
+                <li>HTML</li>
+                <li>SCSS</li>
+                <li>TypeScript</li>
+              </ul>
+            </li>
+          </ul>
         </div>
-        <div class="otherDescription">
-          <div class="madeWith">
-            <h3>Made with:</h3>
-            <ul>
-              <li>HTML</li>
-              <li>SCSS</li>
-              <li>TypeScript</li>
-            </ul>
-          </div>
-          <div class="otherInfo">
-            <h3>Other Info</h3>
-            <p>Dark mode support: no</p>
-            <br />
-            <p>Fullscreen support: yes</p>
-          </div>
+        <div class="otherInfo">
+          <h3>Other Info</h3>
+          <p>Dark mode support: no</p>
+          <br />
+          <p>Fullscreen support: yes</p>
         </div>
       </div>
     </div>
@@ -83,435 +78,367 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import RandomizeContent from '@/components/games/randomizer/RandomizeContent.vue';
+import WhatToRandomizeMenu from '@/components/games/randomizer/WhatToRandomizeMenu.vue';
 export default Vue.extend({
-  name: 'randomizer',
-  components: {},
-  mounted() {
-    let whatToRandomize = document.getElementsByClassName('what-to-randomize');
-    let numRangeResult = document.getElementById('num-range-result')!;
-    let headsOrTailsResult = document.getElementById('heads-or-tails-result')!;
-    let rollDiceResult = document.getElementById('roll-dice-result')!;
-    let randomizerButton = document.getElementById('randomizer-button')!;
+  name: 'Randomizer',
 
-    let numberRange = document.getElementById('randomizer-settings')!;
+  components: {
+    RandomizeContent,
+    WhatToRandomizeMenu
+  },
 
-    function removeHighlightsFromWhatToRandomizeMenu() {
-      whatToRandomize[0].classList.remove('highlight');
-      whatToRandomize[1].classList.remove('highlight');
-      whatToRandomize[2].classList.remove('highlight');
-    }
+  data() {
+    return {
+      whatToRandomize: 'Number range',
+      isFullscreen: false,
+      fullscreenIconName: 'fullscreen',
+      isWhatToRandomizeMenuOpen: false
+    };
+  },
 
-    function highlightWhatToRandomizeMenuElement(index: number) {
-      whatToRandomize[index].classList.add('highlight');
-    }
+  methods: {
+    changeOption(optionName: string) {
+      this.whatToRandomize = optionName;
+    },
 
-    function showNumberRange() {
-      removeHighlightsFromWhatToRandomizeMenu();
-      highlightWhatToRandomizeMenuElement(0);
-      numRangeResult.className = 'result';
-      headsOrTailsResult.className = 'hide';
-      rollDiceResult.className = 'hide';
-      numberRange.style.display = 'flex';
-      randomizerButton.addEventListener('click', getRandomNumber);
-      let sliderElement = document.getElementById(
-        'slider'
-      )! as HTMLInputElement;
-      let sliderValue = sliderElement.value;
-      document.getElementById('slider-value')!.innerText = sliderValue;
-
-      let numRange = +document.getElementById('slider-value')!.innerText;
-
-      function getRandomNumber() {
-        const randomNumber = Math.floor(Math.random() * (numRange + 1));
-        numRangeResult.innerHTML = randomNumber.toString();
-      }
-
-      sliderElement.oninput = function() {
-        document.getElementById(
-          'slider-value'
-        )!.innerText = (this as HTMLInputElement).value;
-        numRange = +(this as HTMLInputElement).value;
-      };
-    }
-
-    function showHeadsOrTails() {
-      removeHighlightsFromWhatToRandomizeMenu();
-      highlightWhatToRandomizeMenuElement(1);
-      randomizerButton.addEventListener('click', getRandomNumber);
-      numRangeResult.className = 'hide';
-      headsOrTailsResult.className = 'result';
-      rollDiceResult.className = 'hide';
-      numberRange.style.display = 'none';
-      document.getElementById('randomizer-button')!.style.display = 'block';
-      function getRandomNumber() {
-        let randomNum = Math.round(Math.random());
-        if (randomNum === 0) {
-          headsOrTailsResult.innerText = 'Heads';
-        } else {
-          headsOrTailsResult.innerText = 'Tails';
-        }
-      }
-    }
-
-    function rollDice() {
-      removeHighlightsFromWhatToRandomizeMenu();
-      highlightWhatToRandomizeMenuElement(2);
-      numRangeResult.className = 'hide';
-      headsOrTailsResult.className = 'hide';
-      rollDiceResult.className = 'result';
-      numberRange.style.display = 'none';
-      randomizerButton.addEventListener('click', getRandomNumber);
-      function getRandomNumber() {
-        function setImg() {
-          let diceImg = document.getElementsByClassName('dice-img-hide');
-          let randomNum = Math.round(Math.random() * 5 + 1);
-          function hideDice(
-            one: number,
-            two: number,
-            three: number,
-            four: number,
-            five: number
-          ) {
-            diceImg[one].className = 'dice-img-hide';
-            diceImg[two].className = 'dice-img-hide';
-            diceImg[three].className = 'dice-img-hide';
-            diceImg[four].className = 'dice-img-hide';
-            diceImg[five].className = 'dice-img-hide';
-          }
-          if (randomNum === 1) {
-            hideDice(1, 2, 3, 4, 5);
-            diceImg[0].classList.add('dice-img-show');
-          } else if (randomNum === 2) {
-            hideDice(0, 2, 3, 4, 5);
-            diceImg[1].classList.add('dice-img-show');
-          } else if (randomNum === 3) {
-            hideDice(0, 1, 3, 4, 5);
-            diceImg[2].classList.add('dice-img-show');
-          } else if (randomNum === 4) {
-            hideDice(0, 1, 2, 4, 5);
-            diceImg[3].classList.add('dice-img-show');
-          } else if (randomNum === 5) {
-            hideDice(0, 1, 2, 3, 5);
-            diceImg[4].classList.add('dice-img-show');
-          } else if (randomNum === 6) {
-            hideDice(0, 1, 2, 3, 4);
-            diceImg[5].classList.add('dice-img-show');
-          }
-        }
-        setTimeout(function() {
-          setImg();
-          setTimeout(function() {
-            setImg();
-            setTimeout(function() {
-              setImg();
-              setTimeout(function() {
-                setImg();
-                setTimeout(function() {
-                  setImg();
-                }, 250);
-              }, 150);
-            }, 100);
-          }, 100);
-        }, 100);
-      }
-    }
-
-    whatToRandomize[0].addEventListener('click', showNumberRange);
-    whatToRandomize[1].addEventListener('click', showHeadsOrTails);
-    whatToRandomize[2].addEventListener('click', rollDice);
-    showNumberRange();
-
-    let openWhatToRandomizeMenuToggle = true;
-    function openWhatToRandomizeMenu() {
-      openWhatToRandomizeMenuToggle = !openWhatToRandomizeMenuToggle;
-      if (openWhatToRandomizeMenuToggle === true) {
-        document.getElementById(
-          'what-to-randomize-menu-container'
-        )!.style.display = 'block';
+    toggleFullscreen() {
+      this.isFullscreen = !this.isFullscreen;
+      const gameContainer = this.$refs.gameContainer as HTMLElement;
+      if (this.isFullscreen) {
+        gameContainer.className = 'fullscreen-game-container';
+        this.fullscreenIconName = 'fullscreen_exit';
+        document.body.style.overflow = 'hidden';
       } else {
-        document.getElementById(
-          'what-to-randomize-menu-container'
-        )!.style.display = 'none';
+        gameContainer.className = 'game-container';
+        this.fullscreenIconName = 'fullscreen';
+        document.body.style.overflow = 'auto';
       }
     }
-
-    let fullscreenToggle = false;
-    function toggleFullscreen() {
-      fullscreenToggle = !fullscreenToggle;
-      if (fullscreenToggle === true) {
-        document.getElementById('randomizer-container')!.className =
-          'fullscreen-randomizer';
-      } else {
-        document.getElementById('randomizer-container')!.className =
-          'randomizer-container';
-      }
-    }
-
-    document
-      .getElementById('open-what-to-randomize-menu')!
-      .addEventListener('click', openWhatToRandomizeMenu);
-    document
-      .getElementById('fullscreen')!
-      .addEventListener('click', toggleFullscreen);
-    openWhatToRandomizeMenu();
   }
 });
 </script>
 
 <style lang="scss" scoped>
 @import '@/global.scss';
-#randomizer {
+@keyframes animategradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .randomizer .game-container .top-container h2,
+  .randomizer .fullscreen-game-container .top-container h2 {
+    display: none;
+  }
+}
+
+.randomizer {
   padding-top: 66px;
-}
 
-h2 {
-  margin: 30px;
-}
+  h2 {
+    margin: 30px;
+  }
 
-img {
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-}
+  img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+  }
 
-.fullscreen-randomizer {
-  position: fixed;
-  z-index: 15;
-  margin: 0;
-  bottom: 0;
-  left: 0;
-  border-radius: 0;
-  width: 100%;
-  height: 100%;
-  text-align: left;
-  padding: 0;
-  touch-action: manipulation;
-  font-family: Nunito;
-  background: linear-gradient(135deg, #1099bb, #2c2e83);
-  cursor: default;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+  .game-container {
+    text-align: left;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 70%;
+    height: 80vh;
+    margin: 30px auto;
+    padding: 0;
+    touch-action: manipulation;
+    font-family: Nunito;
+    background: linear-gradient(
+      -45deg,
+      #124cca,
+      #e7623a,
+      #a83ae7,
+      #124cca,
+      #1296ca,
+      #1bbb78,
+      #1296ca,
+      #124cca
+    ); // linear-gradient(135deg, #ffa55c, #1099bb, #2c2e83);
+    color: white;
+    background-size: 900% 900%;
+    animation: animategradient 90s infinite;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 
-.hide {
-  display: none;
-}
+  .fullscreen-game-container {
+    position: fixed;
+    z-index: 15;
+    margin: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 0;
+    text-align: left;
+    padding: 0;
+    touch-action: manipulation;
+    font-family: Nunito;
+    background: linear-gradient(
+      -45deg,
+      #124cca,
+      #e7623a,
+      #a83ae7,
+      #124cca,
+      #1296ca,
+      #1bbb78,
+      #1296ca,
+      #124cca
+    ); // linear-gradient(135deg, #ffa55c, #1099bb, #2c2e83);
+    background-size: 900% 900%;
+    animation: animategradient 90s infinite;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+    .top-container {
+      z-index: 16;
+    }
+  }
 
-.highlight {
-  font-weight: 900;
-  color: black;
-}
+  .top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 5;
+    height: 70px;
+    h2 {
+      margin: 0;
+      width: 100%;
+      text-align: center;
+    }
+    button {
+      background: transparent;
+      outline: none;
+      border: none;
+      position: absolute;
+      top: 15px;
+      width: 45px;
+      height: 45px;
+      border-radius: 5px;
+      transition: 0.4s ease-out;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover {
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.25);
+      }
+      &:first-child {
+        left: 15px;
+      }
+      &:last-child {
+        right: 15px;
+      }
+      i {
+        font-weight: bold;
+        font-size: 40px;
+      }
+    }
+  }
 
-.randomizer-container {
-  text-align: left;
-  border: 1px solid black;
-  border-radius: 5px;
-  width: 70%;
-  margin: 30px auto;
-  padding: 0;
-  touch-action: manipulation;
-  font-family: Nunito;
-  background: linear-gradient(135deg, #1099bb, #2c2e83);
-  cursor: default;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+  .dice-img-hide {
+    display: none;
+  }
 
-.header-container {
-  position: absolute;
-  left: 50%;
-  width: 71%;
-  margin-top: 30px;
-}
+  .dice-img-show {
+    display: flex;
+  }
 
-.top-img-container {
-  display: flex;
-  justify-content: space-between;
-}
+  #randomizer-container h2 {
+    left: -50%;
+    position: relative;
+    text-align: center;
+    margin: auto;
+    color: white;
+    width: 100%;
+  }
 
-.top-img-container img {
-  width: 40px;
-  height: 40px;
-  margin: 30px;
-  z-index: 2;
-}
+  #what-to-randomize-menu-container {
+    display: none;
+    position: absolute;
+    padding: 15px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 30%;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-weight: lighter;
+    color: #505050;
+    box-sizing: border-box;
+    margin-top: 15%;
+  }
 
-.dice-img-hide {
-  display: none;
-}
+  #what-to-randomize-menu-container:hover {
+    cursor: default;
+  }
 
-.dice-img-show {
-  display: flex;
-}
+  #what-to-randomize-menu-container ul li {
+    list-style: none;
+  }
 
-#randomizer-container h2 {
-  left: -50%;
-  position: relative;
-  text-align: center;
-  margin: auto;
-  color: white;
-  width: 100%;
-}
+  .result {
+    width: 60%;
+    height: 330px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 100px;
+  }
 
-#what-to-randomize-menu-container {
-  display: none;
-  position: absolute;
-  padding: 15px;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  width: 30%;
-  background-color: rgba(255, 255, 255, 0.5);
-  font-weight: lighter;
-  color: #505050;
-  box-sizing: border-box;
-  margin-top: 15%;
-}
+  .result:hover {
+    cursor: default;
+  }
 
-#what-to-randomize-menu-container:hover {
-  cursor: default;
-}
+  .result img {
+    width: 20%;
+    border: 3px solid black;
+    border-radius: 15%;
+  }
 
-#what-to-randomize-menu-container ul li {
-  list-style: none;
-}
+  #randomizer-settings {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    height: 40px;
+    margin: 0 auto 10px auto;
+    width: 100%;
+  }
 
-.result {
-  width: 60%;
-  height: 330px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 100px;
-}
+  #slider,
+  #slider:focus {
+    -webkit-appearance: none;
+    width: 50%;
+    height: 10px;
+    opacity: 0.5;
+    border-radius: 10px;
+    outline: none;
+  }
 
-.result:hover {
-  cursor: default;
-}
+  #slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 25px;
+    height: 25px;
+    background: rgb(16, 34, 133);
+    cursor: pointer;
+    border-radius: 50%;
+  }
 
-.result img {
-  width: 20%;
-  border: 3px solid black;
-  border-radius: 15%;
-}
+  #slider-value {
+    color: white;
+  }
 
-#randomizer-settings {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  height: 40px;
-  margin: 0 auto 10px auto;
-  width: 100%;
-}
+  .randomizer-button-container {
+    text-align: center;
+    margin-bottom: 30px;
+  }
 
-#slider,
-#slider:focus {
-  -webkit-appearance: none;
-  width: 50%;
-  height: 10px;
-  opacity: 0.5;
-  border-radius: 10px;
-  outline: none;
-}
+  #randomizer-button {
+    width: 30%;
+    border: none;
+    margin: auto;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-family: Nunito;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
 
-#slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 25px;
-  height: 25px;
-  background: rgb(16, 34, 133);
-  cursor: pointer;
-  border-radius: 50%;
-}
+  #randomizer-button,
+  #randomizer-button:focus,
+  #randomizer-button:active {
+    outline: none;
+  }
 
-#slider-value {
-  color: white;
-}
+  .description {
+    width: 70%;
+    display: flex;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    margin: 50px auto;
+    color: white;
+    text-align: left;
+    position: relative;
+  }
 
-.randomizer-button-container {
-  text-align: center;
-  margin-bottom: 30px;
-}
+  .description h3 {
+    margin-bottom: 15px;
+  }
 
-#randomizer-button {
-  width: 30%;
-  border: none;
-  margin: auto;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 17px;
-  font-family: Nunito;
-  background-color: rgba(255, 255, 255, 0.5);
-}
+  .mainDescription,
+  .otherDescription {
+    padding: 20px;
+    list-style: none;
+    box-sizing: border-box;
+  }
 
-#randomizer-button,
-#randomizer-button:focus,
-#randomizer-button:active {
-  outline: none;
-}
+  .mainDescription {
+    width: 60%;
+    border-right: 1px solid;
+  }
 
-.description {
-  width: 70%;
-  display: flex;
-  background-color: var(--secondary-color);
-  border-radius: 5px;
-  margin: 50px auto;
-  color: white;
-  text-align: left;
-  position: relative;
-}
+  .otherDescription {
+    width: 40%;
+    height: 100%;
+  }
 
-.description h3 {
-  margin-bottom: 15px;
-}
+  .otherDescription li {
+    list-style: none;
+  }
 
-.mainDescription,
-.otherDescription {
-  padding: 20px;
-  list-style: none;
-  box-sizing: border-box;
-}
+  .madeWith {
+    padding: 20px;
+    height: 100%;
+  }
 
-.mainDescription {
-  width: 60%;
-  border-right: 1px solid;
-}
-
-.otherDescription {
-  width: 40%;
-  height: 100%;
-}
-
-.otherDescription li {
-  list-style: none;
-}
-
-.madeWith {
-  padding: 20px;
-  height: 100%;
-}
-
-.otherInfo {
-  padding: 20px;
-  height: 100%;
+  .otherInfo {
+    padding: 20px;
+    height: 100%;
+  }
 }
 
 @media only screen and (max-width: 850px) {
