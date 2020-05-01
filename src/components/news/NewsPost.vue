@@ -19,7 +19,7 @@
       </button>
     </div>
 
-    <h2 class="news-post-title">{{ title }}</h2>
+    <h1 class="news-post-title">{{ title }}</h1>
     <div v-html="body" class="news-post-body" ref="newsPostBody">
       {{ body }}
     </div>
@@ -108,6 +108,21 @@ export default Vue.extend({
   position: relative;
   white-space: pre-line;
 
+  h1 {
+    font-size: 26px;
+    margin: 12px 0 7px 0;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin: 10px 0 5px 0;
+  }
+
+  h3 {
+    font-size: 18px;
+    margin: 8px 0 3px 0;
+  }
+
   li p {
     display: inline;
   }
@@ -143,7 +158,8 @@ export default Vue.extend({
     }
   }
 
-  h2 {
+  .news-post-title {
+    font-size: 30px;
     margin: 0;
   }
 

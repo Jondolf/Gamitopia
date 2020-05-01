@@ -427,6 +427,21 @@ export default Vue.extend({
   white-space: pre-line;
   color: white;
 
+  h1 {
+    font-size: 26px;
+    margin: 12px 0 7px 0;
+  }
+
+  h2 {
+    font-size: 22px;
+    margin: 10px 0 5px 0;
+  }
+
+  h3 {
+    font-size: 18px;
+    margin: 8px 0 3px 0;
+  }
+
   img {
     width: 75%;
     max-width: 400px;
@@ -495,7 +510,7 @@ export default Vue.extend({
   .news-post-name {
     border: none;
     outline: none;
-    font-size: 25.5px;
+    font-size: 30px;
     border-bottom: 2px solid;
     margin-bottom: 25px;
     width: 100%;
