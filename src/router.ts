@@ -26,6 +26,10 @@ export default new Router({
       component: () => import('./views/News.vue')
     },
     {
+      path: '/news/:id',
+      component: () => import('./views/news/IndividualNewsPostView.vue')
+    },
+    {
       path: '/about',
       name: 'about',
       component: () => import('./views/About.vue')
@@ -95,10 +99,9 @@ export default new Router({
     },
     {
       path: '/target-practise',
-      name: 'target-practise',
+      name: 'targetpractise',
       component: () =>
         import('./views/games/target-practise/TargetPractise.vue')
-
     }
   ]
 });
