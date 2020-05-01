@@ -33,6 +33,29 @@ body::-webkit-scrollbar-thumb:active {
   background-color: rgba(55, 76, 194, 0.85);
 }
 
+// Inline code
+code {
+  display: inline;
+  overflow-x: auto;
+  color: #abb2bf;
+  background: #323640;
+  border-radius: 5px;
+  padding: 4px;
+  margin: 0px 2px;
+}
+
+// Code blocks
+pre code {
+  display: block;
+  overflow-x: auto;
+  color: #abb2bf;
+  background: #323640;
+  border-radius: 5px;
+  width: 100%;
+  padding: 15px;
+  margin: 15px auto;
+}
+
 i {
   color: white;
 }

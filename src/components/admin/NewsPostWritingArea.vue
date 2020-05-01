@@ -206,6 +206,15 @@
           </button>
 
           <button
+            title="Inline code"
+            class="menubar__button"
+            :class="{ 'is-active': isActive.code() }"
+            @click="commands.code"
+          >
+            <i class="material-icons">code</i>
+          </button>
+
+          <button
             title="Code block"
             class="menubar__button"
             :class="{ 'is-active': isActive.code_block() }"
@@ -258,6 +267,7 @@
 <script>
 import Vue from 'vue';
 import hljs from 'highlight.js';
+import html from 'highlight.js/lib/languages/htmlbars';
 import javascript from 'highlight.js/lib/languages/javascript';
 import css from 'highlight.js/lib/languages/css';
 import { Editor, EditorContent, EditorMenuBar, EditorMenuBubble } from 'tiptap';
@@ -330,6 +340,7 @@ export default Vue.extend({
           }),
           new CodeBlockHighlight({
             languages: {
+              html,
               javascript,
               css
             }

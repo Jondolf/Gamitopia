@@ -20,17 +20,6 @@ pre {
   align-items: center;
 }
 
-.hljs {
-  display: block;
-  overflow-x: auto;
-  color: #abb2bf;
-  background: #323640;
-  border-radius: 5px;
-  width: 100%;
-  padding: 15px;
-  margin: 15px auto;
-}
-
 .hljs-comment, .hljs-quote {
   color: #717886;
   font-style: italic;
