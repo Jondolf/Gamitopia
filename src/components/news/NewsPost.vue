@@ -30,7 +30,17 @@
 <script lang="ts">
 import Vue from 'vue';
 import axios from 'axios';
-import hljs from 'highlight.js';
+// @ts-ignore
+import hljs from 'highlight.js/lib/highlight';
+// @ts-ignore
+import xml from 'highlight.js/lib/languages/xml'; // Didn't find HTML so I use XML here
+// @ts-ignore
+import scss from 'highlight.js/lib/languages/scss';
+// @ts-ignore
+import typescript from 'highlight.js/lib/languages/typescript';
+hljs.registerLanguage('xml', xml);
+hljs.registerLanguage('scss', scss);
+hljs.registerLanguage('typescript', typescript);
 
 import { deleteNewsPost } from '@/views/admin/actions/deleteNewsPost';
 
