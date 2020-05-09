@@ -1,23 +1,5 @@
 body {
   color: white;
-  border-color: white;
-  button,
-  input,
-  li {
-    color: white;
-  }
-}
-
-@font-face {
-  font-family: Nunito;
-  src: url(/fonts/Nunito/Nunito-Regular.ttf);
-  font-weight: normal;
-}
-
-@font-face {
-  font-family: Nunito;
-  src: url(/fonts/Nunito/Nunito-Bold.ttf);
-  font-weight: bold;
 }
 
 body::-webkit-scrollbar {
@@ -48,6 +30,14 @@ code {
   border-radius: 5px;
   padding: 4px;
   margin: 0px 2px;
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  line-height: 1.5rem;
+  span {
+    font-family: 'Fira Code', monospace;
+    font-size: 12px;
+    line-height: 1.5rem;
+  }
 }
 
 // Code blocks
@@ -66,9 +56,23 @@ i {
   color: white;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Nunito', sans-serif;
+}
+
 p,
+span,
+button,
+input,
+text-area,
 li {
-  line-height: 1.5rem;
+  font-family: 'Nunito Sans', sans-serif;
+  line-height: 1.65rem;
 }
 
 a,
@@ -82,10 +86,17 @@ a:visited {
   }
 }
 
+.light {
+  border-color: black;
+}
+
+.dark {
+  border-color: white;
+}
+
 button,
 input {
-  font-family: Nunito, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: black;
   border: none;
   outline: none;
   &:focus {
