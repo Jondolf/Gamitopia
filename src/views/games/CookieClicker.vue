@@ -269,7 +269,7 @@ body {
   --clickingContainer: rgb(100, 181, 246);
 }
 
-.darkMode #cookie-clicker {
+.dark.default-dark #cookie-clicker {
   --upgrades: #17223b;
   --clickingContainer: #263859;
   #toggleSoundEffects {

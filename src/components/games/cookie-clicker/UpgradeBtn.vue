@@ -1,5 +1,5 @@
 <template>
-  <div id="upgrade">
+  <div class="upgrade-btn">
     <button v-on:click="$emit('btnClicked')">
       <h4>{{ name }}</h4>
       <p>Level: {{ level }}</p>
@@ -11,7 +11,7 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-  name: 'Upgrade',
+  name: 'UpgradeBtn',
   props: {
     name: String,
     level: Number,
@@ -22,7 +22,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import '@/global.scss';
-#upgrade {
+.upgrade-btn {
   width: 100%;
   border-bottom: 1px solid white;
   background-color: rgb(55, 76, 194);
@@ -47,7 +47,7 @@ export default Vue.extend({
   border: none;
 }
 
-.darkMode #upgrade {
+.dark.default-dark .upgrade-btn {
   background-color: #17223b;
 }
 </style>
