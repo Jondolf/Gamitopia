@@ -276,7 +276,8 @@ export default Vue.extend({
       background-color: rgba(255, 255, 255, 0.7);
       color: black;
       width: 60%;
-      padding: 15px;
+      height: 8vh;
+      padding: 0 15px;
       border: none;
       border-radius: 5px;
       transition: 0.4s;

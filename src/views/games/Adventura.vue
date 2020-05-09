@@ -759,7 +759,7 @@ export default Vue.extend({
 .gameContainer {
   position: relative;
   margin: auto;
-  height: 473px;
+  height: 80vh;
   width: 70%;
   border: 1px solid black;
   border-radius: 5px;
