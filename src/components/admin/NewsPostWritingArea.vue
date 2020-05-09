@@ -86,6 +86,30 @@
           </button>
 
           <button
+            title="Text color"
+            class="menububble__button"
+            :class="{ 'is-active': isActive.textColor() }"
+            @click="commands.textColor"
+          >
+            <i class="material-icons" style="color: rgba(255, 0, 0, 1)"
+              >text_format</i
+            >
+          </button>
+
+          <button
+            title="Highlight"
+            class="menububble__button"
+            :class="{ 'is-active': isActive.highlight() }"
+            @click="commands.highlight"
+          >
+            <i
+              class="material-icons"
+              style="background-color: rgba(255, 255, 0, 0.75)"
+              >text_format</i
+            >
+          </button>
+
+          <button
             class="menububble__button"
             :class="{ 'is-active': isActive.code() }"
             @click="commands.code"
@@ -131,6 +155,30 @@
             @click="commands.underline"
           >
             <i class="material-icons">format_underline</i>
+          </button>
+
+          <button
+            title="Text color"
+            class="menubar__button"
+            :class="{ 'is-active': isActive.textColor() }"
+            @click="commands.textColor"
+          >
+            <i class="material-icons" style="color: rgba(255, 0, 0, 1)"
+              >text_format</i
+            >
+          </button>
+
+          <button
+            title="Highlight"
+            class="menubar__button"
+            :class="{ 'is-active': isActive.highlight() }"
+            @click="commands.highlight"
+          >
+            <i
+              class="material-icons"
+              style="background-color: rgba(255, 255, 0, 0.75)"
+              >text_format</i
+            >
           </button>
 
           <button
@@ -267,7 +315,7 @@
 <script>
 import Vue from 'vue';
 import hljs from 'highlight.js';
-import html from 'highlight.js/lib/languages/htmlbars';
+import xml from 'highlight.js/lib/languages/xml';
 import javascript from 'highlight.js/lib/languages/javascript';
 import css from 'highlight.js/lib/languages/css';
 import { Editor, EditorContent, EditorMenuBar, EditorMenuBubble } from 'tiptap';
@@ -294,6 +342,10 @@ import {
   Image,
   Placeholder
 } from 'tiptap-extensions';
+
+import Highlight from '@/components/admin/text-editor-extras/Highlight';
+import TextColor from '@/components/admin/text-editor-extras/TextColor';
+
 export default Vue.extend({
   components: {
     EditorContent,
@@ -329,6 +381,8 @@ export default Vue.extend({
           new Italic(),
           new Strike(),
           new Underline(),
+          new TextColor(),
+          new Highlight(),
           new History(),
           new Image(),
           new Placeholder({
@@ -340,7 +394,7 @@ export default Vue.extend({
           }),
           new CodeBlockHighlight({
             languages: {
-              html,
+              xml,
               javascript,
               css
             }
