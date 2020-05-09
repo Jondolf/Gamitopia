@@ -132,8 +132,13 @@ export default Vue.extend({
   padding-top: 66px;
 }
 
+.dark.default-dark #snake h2 {
+  color: white;
+}
+
 h2 {
   margin: 30px;
+  color: black;
 }
 
 .game-container button,
@@ -181,7 +186,7 @@ h2 {
   color: white;
 }
 
-.darkMode .game-container {
+.dark.default-dark .game-container {
   border: 2px solid white;
 }
 

@@ -24,7 +24,7 @@ export default Vue.extend({
 
   updated() {
     const body = this.$refs.newsPostBody as HTMLElement;
-    body.querySelectorAll('pre code').forEach(block => {
+    body.querySelectorAll('pre code').forEach((block) => {
       hljs.highlightBlock(block);
     });
   }
@@ -79,11 +79,11 @@ export default Vue.extend({
   }
 }
 
-.darkMode .news-post-form-preview ul li {
+.dark.default-dark .news-post-form-preview ul li {
   color: white;
 }
 
-.news-post-form-preview .darkMode a {
+.news-post-form-preview .dark.default-dark a {
   font-weight: bolder;
   font-style: italic;
 

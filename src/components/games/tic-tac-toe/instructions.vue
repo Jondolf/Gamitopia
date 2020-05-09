@@ -36,6 +36,12 @@ export default Vue.extend({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import '@/global.scss';
+.dark.default-dark .instructions {
+  p,
+  h3 {
+    color: white;
+  }
+}
 .instructions {
   position: absolute;
   top: 0;
@@ -44,8 +50,9 @@ export default Vue.extend({
   background-color: white;
   z-index: 2;
   overflow: auto;
-  h2 {
-    background-color: white;
+  p,
+  h3 {
+    color: black;
   }
   button {
     width: 100%;
@@ -69,18 +76,18 @@ export default Vue.extend({
     font-size: 1vw;
   }
 }
-.darkMode h2 {
+.dark.default-dark h2 {
   background-color: black;
 }
-.darkMode button {
+.dark.default-dark button {
   background-color: rgb(36, 41, 49);
   color: white;
   border-color: white;
 }
-.darkMode button:hover {
+.dark.default-dark button:hover {
   background-color: rgb(50, 57, 68);
 }
-.darkMode .instructions {
+.dark.default-dark .instructions {
   background-color: black;
 }
 @media only screen and (max-width: 1100px) {

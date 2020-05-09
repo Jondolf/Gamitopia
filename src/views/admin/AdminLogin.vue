@@ -88,8 +88,8 @@ export default Vue.extend({
 
 <style lang="scss">
 @import '@/global.scss';
-.darkMode #adminLogin #password,
-.darkMode #adminLogin .confirm-password-btn {
+.dark.default-dark #adminLogin #password,
+.dark.default-dark #adminLogin .confirm-password-btn {
   border: 2px solid white;
 }
 #adminLogin {

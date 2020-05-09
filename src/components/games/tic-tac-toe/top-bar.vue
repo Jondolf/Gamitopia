@@ -48,13 +48,13 @@ export default Vue.extend({
     background-color: rgb(91, 97, 112);
   }
 }
-.darkMode button {
+.dark.default-dark button {
   background-color: rgb(36, 41, 49);
 }
-.darkMode button:hover {
+.dark.default-dark button:hover {
   background-color: rgb(50, 57, 68);
 }
-.darkMode .top-bar {
+.dark.default-dark .top-bar {
   background-color: black;
   border-bottom: 2px solid white;
 }

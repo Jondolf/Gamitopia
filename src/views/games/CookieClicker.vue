@@ -275,10 +275,14 @@ body {
   #toggleSoundEffects {
     color: black;
   }
+  h2 {
+    color: white;
+  }
 }
 
 h2 {
   margin: 30px;
+  color: black;
 }
 
 #gameContainer {

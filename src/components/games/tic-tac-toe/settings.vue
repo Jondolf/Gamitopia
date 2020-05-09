@@ -105,15 +105,27 @@ export default Vue.extend({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import '@/global.scss';
+.dark.default-dark .settings {
+  background-color: black;
+  color: white;
+  p {
+    color: white;
+  }
+}
 .settings {
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: white;
   z-index: 2;
   overflow: auto;
   box-sizing: border-box;
+  background-color: white;
+  color: black;
+
+  p {
+    color: black;
+  }
 
   input {
     -webkit-appearance: none;
@@ -182,15 +194,15 @@ export default Vue.extend({
     background-color: rgb(91, 97, 112);
   }
 }
-.darkMode button {
+.dark.dark.default-dark button {
   background-color: rgb(36, 41, 49);
   color: white;
   border-color: white;
 }
-.darkMode button:hover {
+.dark.dark.default-dark button:hover {
   background-color: rgb(50, 57, 68);
 }
-.darkMode .settings {
+.dark.dark.default-dark .settings {
   background-color: black;
 }
 .grid-size-setting-container {

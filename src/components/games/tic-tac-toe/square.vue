@@ -36,6 +36,7 @@ export default Vue.extend({
   transition: 0.3s;
   overflow: hidden;
   p {
+    color: black;
     display: flex;
     align-items: center;
   }
@@ -44,11 +45,14 @@ export default Vue.extend({
 .grid-square:hover {
   background-color: rgba(127.5, 127.5, 127.5, 1);
 }
-.darkMode .grid-square {
+.dark.default-dark .grid-square {
   background-color: black;
   outline: 2px solid white;
+  p {
+    color: white;
+  }
 }
-.darkMode .grid-square:hover {
+.dark.default-dark .grid-square:hover {
   background-color: rgba(127.5, 127.5, 127.5, 1);
 }
 

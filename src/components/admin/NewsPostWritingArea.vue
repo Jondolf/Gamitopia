@@ -734,10 +734,10 @@ ul[data-type='todo_list'] li {
   border: 1.5px solid white;
 }
 
-.darkMode .news-post-writing-area ul li,
-.darkMode .news-post-writing-area ul li p,
-.darkMode .news-post-writing-area ol li,
-.darkMode .news-post-writing-area ol li p {
+.dark.default-dark .news-post-writing-area ul li,
+.dark.default-dark .news-post-writing-area ul li p,
+.dark.default-dark .news-post-writing-area ol li,
+.dark.default-dark .news-post-writing-area ol li p {
   color: white;
 }
 </style>

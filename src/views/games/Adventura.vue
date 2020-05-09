@@ -733,7 +733,11 @@ export default Vue.extend({
   padding-top: 66px;
   h2 {
     margin: 30px;
+    color: black;
   }
+}
+.dark.default-dark #adventura h2 {
+  color: white;
 }
 
 .fullscreen {

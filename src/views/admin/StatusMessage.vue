@@ -76,7 +76,7 @@ export default Vue.extend({
   }
 }
 
-.darkMode #statusMessage .hide-btn i:hover {
+.dark.default-dark #statusMessage .hide-btn i:hover {
   color: red;
 }
 </style>

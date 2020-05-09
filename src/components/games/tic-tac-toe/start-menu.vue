@@ -96,15 +96,15 @@ export default Vue.extend({
     background-color: rgb(91, 97, 112);
   }
 }
-.darkMode .start-menu {
+.dark.default-dark .start-menu {
   background-color: black;
 }
-.darkMode button {
+.dark.default-dark button {
   background-color: rgb(36, 41, 49);
   color: white;
   border-color: white;
 }
-.darkMode button:hover {
+.dark.default-dark button:hover {
   background-color: rgb(50, 57, 68);
 }
 </style>

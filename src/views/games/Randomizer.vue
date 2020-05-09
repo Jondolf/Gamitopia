@@ -140,11 +140,16 @@ export default Vue.extend({
   }
 }
 
+.dark.default-dark .randomizer h2 {
+  color: white;
+}
+
 .randomizer {
   padding-top: 66px;
 
   h2 {
     margin: 30px;
+    color: black;
   }
 
   img {
@@ -189,6 +194,9 @@ export default Vue.extend({
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    h2 {
+      color: white;
+    }
   }
 
   .fullscreen-game-container {
@@ -230,6 +238,9 @@ export default Vue.extend({
     color: white;
     .top-container {
       z-index: 16;
+    }
+    h2 {
+      color: white;
     }
   }
 

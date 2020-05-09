@@ -186,6 +186,7 @@ export default Vue.extend({
             right: 0;
             padding: 5px 0 5px 0;
             border-radius: 0;
+            color: white;
             background-color: rgba(0, 0, 0, 0.5);
           }
         }
