@@ -21,6 +21,7 @@
       />
       <Settings
         v-if="currentView === 'Settings'"
+        :game="game"
         @startMenu="currentView = 'Start menu'"
         @toggleFullscreen="fullscreenOn = !fullscreenOn"
         @smallBoard="changeBoardSize"
