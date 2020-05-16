@@ -23,10 +23,15 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { game } from './gameLogic';
+import { Game } from './gameLogic';
 
 export default Vue.extend({
   name: 'Settings',
+
+  props: {
+    game: Game
+  },
+
   data() {
     return {
       smallBoard: [
@@ -172,16 +177,16 @@ export default Vue.extend({
     if (localStorage.getItem('snakeSpeed')) {
       this.speed = (1000 - +localStorage.getItem('snakeSpeed')!!) / 100;
     } else {
-      this.speed = (1000 - game.tickSpeed) / 100;
+      this.speed = (1000 - this.game.tickSpeed) / 100;
     }
   },
   watch: {
     tickSpeed() {
       if (this.tickSpeed > -100 && this.tickSpeed < 1000) {
-        game.tickSpeed = this.tickSpeed;
+        this.game.tickSpeed = this.tickSpeed;
         this.speed = (1000 - this.tickSpeed) / 100;
       } else {
-        this.tickSpeed = game.tickSpeed;
+        this.tickSpeed = this.game.tickSpeed;
       }
       localStorage.setItem('snakeSpeed', JSON.stringify(this.tickSpeed));
     }

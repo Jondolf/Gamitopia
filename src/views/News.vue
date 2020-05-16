@@ -27,7 +27,6 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import axios, { AxiosResponse } from 'axios';
 
 import NewsPost from '@/components/news/NewsPost.vue';
 
@@ -48,7 +47,9 @@ export default Vue.extend({
   },
   methods: {
     filterByYear(year: string) {
-      const newsPosts = document.getElementsByClassName('news-post') as any;
+      const newsPosts = document.getElementsByClassName(
+        'news-post'
+      ) as HTMLCollectionOf<HTMLElement>;
       for (const post of newsPosts) {
         const date = post.getElementsByTagName('time')[0] as HTMLTimeElement;
         if (date.innerText.includes(year)) {

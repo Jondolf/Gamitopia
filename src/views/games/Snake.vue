@@ -11,6 +11,7 @@
       <GameArea
         v-if="currentView === 'Game area'"
         :resetGame="resetGame"
+        :game="game"
         @startMenu="currentView = 'Start menu'"
         @toggleResetGame="resetGame = false"
       />

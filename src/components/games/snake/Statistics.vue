@@ -16,7 +16,6 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { game } from './gameLogic';
 
 export default Vue.extend({
   name: 'Statistics',

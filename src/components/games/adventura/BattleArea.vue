@@ -76,8 +76,7 @@ import GetItem from '@/components/games/adventura/getItem.vue';
 import DeathScreen from '@/components/games/adventura/deathScreen.vue';
 import { Melee } from '@/components/games/adventura/melee';
 import { Magic } from '@/components/games/adventura/magic';
-import { Grasslands, Desert, Area } from '@/components/games/adventura/area';
-import getItemVue from './getItem.vue';
+import { Area } from './area';
 export default Vue.extend({
   name: 'BattleArea',
   components: {
@@ -107,7 +106,7 @@ export default Vue.extend({
     damageReceived: [Number, String],
     damageInflicted: [Number, String],
     hasHealed: Boolean,
-    currentArea: Object as () => any,
+    currentArea: Object as () => Area,
     inBattle: Boolean,
     bossToFight: Boolean,
     bossesDefeated: Array,

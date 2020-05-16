@@ -19,7 +19,6 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Axios from 'axios';
 
 import NewsPost from '@/components/news/NewsPost.vue';
 

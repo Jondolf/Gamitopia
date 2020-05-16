@@ -29,7 +29,6 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import axios from 'axios';
 // @ts-ignore
 import hljs from 'highlight.js/lib/core';
 // @ts-ignore
@@ -92,14 +91,14 @@ export default Vue.extend({
 
   updated() {
     const body = this.$refs.newsPostBody as HTMLElement;
-    body.querySelectorAll('code').forEach(block => {
+    body.querySelectorAll('code').forEach((block) => {
       hljs.highlightBlock(block);
     });
   },
 
   mounted() {
     const body = this.$refs.newsPostBody as HTMLElement;
-    body.querySelectorAll('code').forEach(block => {
+    body.querySelectorAll('code').forEach((block) => {
       hljs.highlightBlock(block);
     });
   }

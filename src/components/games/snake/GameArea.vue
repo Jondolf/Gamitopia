@@ -29,7 +29,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import TopBar from './TopBar.vue';
-import { game } from './gameLogic';
+import { Game } from './gameLogic';
 
 export default Vue.extend({
   name: 'GameArea',
@@ -37,11 +37,11 @@ export default Vue.extend({
     TopBar
   },
   props: {
+    game: Game,
     resetGame: Boolean
   },
   data() {
     return {
-      game: game,
       gameArea: null as unknown,
       canvas: null as unknown,
       ctx: null as unknown
@@ -54,16 +54,16 @@ export default Vue.extend({
     changeDirection(e: any) {
       const canvas = this.$refs.canvas as HTMLCanvasElement;
       const ctx = canvas.getContext('2d')!!;
-      if (e.type === 'swipeup' && game.snake.facing !== 'S') {
-        game.snake.facing = 'N';
-      } else if (e.type === 'swiperight' && game.snake.facing !== 'W') {
-        game.snake.facing = 'E';
-      } else if (e.type === 'swipedown' && game.snake.facing !== 'N') {
-        game.snake.facing = 'S';
-      } else if (e.type === 'swipeleft' && game.snake.facing !== 'E') {
-        game.snake.facing = 'W';
+      if (e.type === 'swipeup' && this.game.snake.facing !== 'S') {
+        this.game.snake.facing = 'N';
+      } else if (e.type === 'swiperight' && this.game.snake.facing !== 'W') {
+        this.game.snake.facing = 'E';
+      } else if (e.type === 'swipedown' && this.game.snake.facing !== 'N') {
+        this.game.snake.facing = 'S';
+      } else if (e.type === 'swipeleft' && this.game.snake.facing !== 'E') {
+        this.game.snake.facing = 'W';
       }
-      game.tick(canvas, ctx);
+      this.game.tick(canvas, ctx);
     }
   },
   mounted() {
@@ -74,21 +74,21 @@ export default Vue.extend({
     this.canvas = canvas;
     this.ctx = ctx;
     if (this.resetGame) {
-      game.resetGame(gameArea, canvas, ctx);
+      this.game.resetGame(gameArea, canvas, ctx);
       this.$emit('toggleResetGame');
     }
-    game.graphics.drawGame(canvas, ctx);
-    game.startGame(gameArea, canvas, ctx);
+    this.game.graphics.drawGame(canvas, ctx);
+    this.game.startGame(gameArea, canvas, ctx);
   },
 
   computed: {
     paused() {
-      return game.paused;
+      return this.game.paused;
     }
   },
 
   beforeDestroy() {
-    game.pauseGame();
+    this.game.pauseGame();
   }
 });
 </script>

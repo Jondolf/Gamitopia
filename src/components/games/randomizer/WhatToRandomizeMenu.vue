@@ -59,7 +59,7 @@ export default Vue.extend({
   },
 
   methods: {
-    changeOption(option: Option, index: number): void {
+    changeOption(option: Option): void {
       this.$emit('changeOption', option.name);
       for (const option of this.whatToRandomizeOptions) {
         if (option.className === 'selected-option') {

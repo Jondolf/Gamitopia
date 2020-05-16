@@ -43,7 +43,6 @@
 <script lang="ts">
 import Vue from 'vue';
 import GameBoard from '@/components/games/card-game/GameBoard.vue';
-import ICard from '@/interfaces/Card';
 
 export default Vue.extend({
   name: 'CardGame',

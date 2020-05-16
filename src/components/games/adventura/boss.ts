@@ -29,7 +29,7 @@ export class Boss {
     public weakness: string[],
     public strength: string[],
     public coinsDropped: number,
-    public itemDropped: object,
+    public itemDropped: Melee | Magic,
     public imgSrc: string
   ) {}
 
