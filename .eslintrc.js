@@ -18,10 +18,12 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
     'prettier/prettier': [
       'warn',
       {
-        singleQuote: true
+        singleQuote: true,
+        arrowParens: 'always'
       }
     ]
   }
