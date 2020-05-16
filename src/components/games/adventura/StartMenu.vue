@@ -162,11 +162,16 @@ export default Vue.extend({
         this.unlockedAreas[this.unlockedAreas.length - 1]
           .animatableBackgroundImgSrc !== null
       ) {
-        animatableBackgroundImg.style.backgroundImage = `url(${this.unlockedAreas[this.unlockedAreas.length - 1].animatableBackgroundImgSrc})`;
+        animatableBackgroundImg.style.backgroundImage = `url(${
+          this.unlockedAreas[this.unlockedAreas.length - 1]
+            .animatableBackgroundImgSrc
+        })`;
       } else {
         animatableBackgroundImg.style.display = 'none';
       }
-      backgroundImg.style.backgroundImage = `url(${this.unlockedAreas[this.unlockedAreas.length - 1].backgroundImgSrc})`;
+      backgroundImg.style.backgroundImage = `url(${
+        this.unlockedAreas[this.unlockedAreas.length - 1].backgroundImgSrc
+      })`;
     }
   },
   mounted() {

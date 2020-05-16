@@ -148,7 +148,7 @@ export default Vue.extend({
         ...reversedDiagonalRows
       ];
       const ended = symbolArrays.some(
-        (squares) =>
+        squares =>
           this.sequentialSymbols(squares, this.amountOfSymbolsNeededInARowToWin) //Amount of symbols in a row needed to win
       );
       if (ended && this.player1Turn) {
@@ -160,14 +160,14 @@ export default Vue.extend({
     detectTie() {
       const hasEmptySquare =
         this.grid.filter(
-          (row) => row.filter((square) => square.symbol === '').length
+          row => row.filter(square => square.symbol === '').length
         ).length === 0;
       if (hasEmptySquare) {
         this.gameEnd('Tie');
       }
     },
 
-    gameEnd(condition: String) {
+    gameEnd(condition: string) {
       this.victory = true;
       if (condition === 'X') {
         this.gameEndMessage = 'Player With X Wins!';

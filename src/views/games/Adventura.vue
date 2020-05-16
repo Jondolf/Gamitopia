@@ -620,7 +620,7 @@ export default Vue.extend({
         'adventurabossesDefeated',
         JSON.stringify(this.bossesDefeated)
       );
-      for (let area of this.allAreas) {
+      for (const area of this.allAreas) {
         if (
           this.bossesDefeated.includes(area.bossDefeatedToUnlock) &&
           !this.unlockedAreas.includes(area)

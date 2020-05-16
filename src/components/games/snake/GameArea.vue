@@ -2,7 +2,7 @@
   <div
     id="gameArea"
     ref="gameArea"
-    v-hammer:swipe.horizontal.vertical="e => changeDirection(e)"
+    v-hammer:swipe.horizontal.vertical="(e) => changeDirection(e)"
   >
     <div class="game-area-container">
       <TopBar
@@ -29,7 +29,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import TopBar from './TopBar.vue';
-import { game, graphics, snake } from './gameLogic';
+import { game } from './gameLogic';
 
 export default Vue.extend({
   name: 'GameArea',
@@ -54,14 +54,14 @@ export default Vue.extend({
     changeDirection(e: any) {
       const canvas = this.$refs.canvas as HTMLCanvasElement;
       const ctx = canvas.getContext('2d')!!;
-      if (e.type === 'swipeup' && snake.facing !== 'S') {
-        snake.facing = 'N';
-      } else if (e.type === 'swiperight' && snake.facing !== 'W') {
-        snake.facing = 'E';
-      } else if (e.type === 'swipedown' && snake.facing !== 'N') {
-        snake.facing = 'S';
-      } else if (e.type === 'swipeleft' && snake.facing !== 'E') {
-        snake.facing = 'W';
+      if (e.type === 'swipeup' && game.snake.facing !== 'S') {
+        game.snake.facing = 'N';
+      } else if (e.type === 'swiperight' && game.snake.facing !== 'W') {
+        game.snake.facing = 'E';
+      } else if (e.type === 'swipedown' && game.snake.facing !== 'N') {
+        game.snake.facing = 'S';
+      } else if (e.type === 'swipeleft' && game.snake.facing !== 'E') {
+        game.snake.facing = 'W';
       }
       game.tick(canvas, ctx);
     }
@@ -77,7 +77,7 @@ export default Vue.extend({
       game.resetGame(gameArea, canvas, ctx);
       this.$emit('toggleResetGame');
     }
-    graphics.drawGame(canvas, ctx);
+    game.graphics.drawGame(canvas, ctx);
     game.startGame(gameArea, canvas, ctx);
   },
 

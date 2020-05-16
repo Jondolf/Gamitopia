@@ -21,7 +21,7 @@ import Vue from 'vue';
 import NewsPost from '@/components/news/NewsPost.vue';
 import { getNewsPost } from '../admin/actions/getNewsPost';
 import { formatDate } from '../admin/actions/formatDate';
-import { INews } from '../../interfaces/INews';
+import { News } from '../../interfaces/News';
 export default Vue.extend({
   name: 'IndividualNewsPostView.vue',
 
@@ -31,7 +31,7 @@ export default Vue.extend({
 
   data() {
     return {
-      newsPost: {} as INews,
+      newsPost: {} as News,
       newsPostFound: true
     };
   },

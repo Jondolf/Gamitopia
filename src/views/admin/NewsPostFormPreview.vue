@@ -24,7 +24,7 @@ export default Vue.extend({
 
   updated() {
     const body = this.$refs.newsPostBody as HTMLElement;
-    body.querySelectorAll('pre code').forEach((block) => {
+    body.querySelectorAll('pre code').forEach(block => {
       hljs.highlightBlock(block);
     });
   }

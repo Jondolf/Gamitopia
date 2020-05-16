@@ -33,7 +33,7 @@ import NewsPost from '@/components/news/NewsPost.vue';
 
 import { getNewsPosts } from './admin/actions/getNewsPosts';
 import { formatDate } from './admin/actions/formatDate';
-import { INews } from '../interfaces/INews';
+import { News } from '../interfaces/News';
 
 import globalVariables from '@/global.variables';
 
@@ -42,15 +42,15 @@ export default Vue.extend({
   components: { NewsPost },
   data() {
     return {
-      news: [] as INews[],
+      news: [] as News[],
       isAdmin: globalVariables.isAdmin
     };
   },
   methods: {
     filterByYear(year: string) {
       const newsPosts = document.getElementsByClassName('news-post') as any;
-      for (let post of newsPosts) {
-        let date = post.getElementsByTagName('time')[0] as HTMLTimeElement;
+      for (const post of newsPosts) {
+        const date = post.getElementsByTagName('time')[0] as HTMLTimeElement;
         if (date.innerText.includes(year)) {
           post.style.display = 'block';
         } else if (year === 'Show all') {

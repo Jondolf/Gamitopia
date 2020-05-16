@@ -43,7 +43,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import GameBoard from '@/components/games/card-game/GameBoard.vue';
-import { ICard } from '../../interfaces/ICard';
+import ICard from '@/interfaces/Card';
 
 export default Vue.extend({
   name: 'CardGame',
@@ -205,7 +205,7 @@ export default Vue.extend({
 
   methods: {
     dealDmg(amount: number): void {
-      for (let enemy of this.enemyHand) {
+      for (const enemy of this.enemyHand) {
         enemy.currentHealth -= amount;
       }
     }

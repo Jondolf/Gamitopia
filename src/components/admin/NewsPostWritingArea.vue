@@ -157,29 +157,46 @@
             <i class="material-icons">format_underline</i>
           </button>
 
-          <button
-            title="Text color"
-            class="menubar__button"
-            :class="{ 'is-active': isActive.textColor() }"
-            @click="commands.textColor"
-          >
-            <i class="material-icons" style="color: rgba(255, 0, 0, 1)"
-              >text_format</i
+          <div class="menubar-color-selection-button">
+            <button
+              title="Text color"
+              class="menubar__button"
+              :class="{ 'is-active': isActive.textColor() }"
+              @click="commands.textColor"
             >
-          </button>
+              <span :style="`border-bottom: 2px solid ${currentTextColor}`"
+                >A</span
+              >
+            </button>
+            <v-popover offset="20">
+              <button class="tooltip-target b3">
+                <i class="material-icons">arrow_drop_down</i>
+              </button>
+              <ColorSelection slot="popover" @colorChanged="setTextColor" />
+            </v-popover>
+          </div>
 
-          <button
-            title="Highlight"
-            class="menubar__button"
-            :class="{ 'is-active': isActive.highlight() }"
-            @click="commands.highlight"
-          >
-            <i
-              class="material-icons"
-              style="background-color: rgba(255, 255, 0, 0.75)"
-              >text_format</i
+          <div class="menubar-color-selection-button">
+            <button
+              title="Highlight"
+              class="menubar__button"
+              :class="{ 'is-active': isActive.highlight() }"
+              @click="commands.highlight"
             >
-          </button>
+              <span :style="`background-color: ${currentHighlightColor}`"
+                >A</span
+              >
+            </button>
+            <v-popover offset="20">
+              <button class="tooltip-target b3">
+                <i class="material-icons">arrow_drop_down</i>
+              </button>
+              <ColorSelection
+                slot="popover"
+                @colorChanged="setHighlightColor"
+              />
+            </v-popover>
+          </div>
 
           <button
             title="Paragraph"
@@ -314,7 +331,6 @@
 
 <script>
 import Vue from 'vue';
-import hljs from 'highlight.js';
 import xml from 'highlight.js/lib/languages/xml';
 import javascript from 'highlight.js/lib/languages/javascript';
 import css from 'highlight.js/lib/languages/css';
@@ -346,11 +362,17 @@ import {
 import Highlight from '@/components/admin/text-editor-extras/Highlight';
 import TextColor from '@/components/admin/text-editor-extras/TextColor';
 
+// @ts-ignore
+import { VPopover } from 'v-tooltip';
+import ColorSelection from './ColorSelection.vue';
+
 export default Vue.extend({
   components: {
     EditorContent,
     EditorMenuBar,
-    EditorMenuBubble
+    EditorMenuBubble,
+    ColorSelection,
+    VPopover
   },
 
   props: {
@@ -360,9 +382,16 @@ export default Vue.extend({
   },
 
   data() {
+    let currentTextColor;
+    const currentHighlightColor = 'rgba(255, 255, 0, 1)';
+    const textColor = new TextColor(currentTextColor);
+    const highlight = new Highlight(currentHighlightColor);
     return {
       newsPostBody: '',
-
+      currentTextColor: currentTextColor,
+      currentHighlightColor: currentHighlightColor,
+      textColor: textColor,
+      highlight: highlight,
       editor: new Editor({
         extensions: [
           new Blockquote(),
@@ -381,8 +410,8 @@ export default Vue.extend({
           new Italic(),
           new Strike(),
           new Underline(),
-          new TextColor(),
-          new Highlight(),
+          textColor,
+          highlight,
           new History(),
           new Image(),
           new Placeholder({
@@ -414,6 +443,14 @@ export default Vue.extend({
   },
 
   methods: {
+    setTextColor(color) {
+      this.currentTextColor = color;
+      this.textColor.textColor = color;
+    },
+    setHighlightColor(color) {
+      this.currentHighlightColor = color;
+      this.highlight.highlightColor = color;
+    },
     showLinkMenu(attrs) {
       this.linkUrl = attrs.href;
       this.linkMenuIsActive = true;
@@ -668,6 +705,9 @@ export default Vue.extend({
     }
 
     .menubar {
+      display: flex;
+      align-items: center;
+
       button {
         background-color: rgba(0, 0, 0, 0);
         width: 32px;
@@ -675,6 +715,39 @@ export default Vue.extend({
         margin-left: 5px;
         border-radius: 5px;
         position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .menubar-color-selection-button {
+        background-color: rgba(0, 0, 0, 0);
+        width: 50px;
+        height: 32px;
+        margin-left: 5px;
+        border-radius: 5px;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        .menubar_button {
+          width: 32px;
+          height: 32px;
+        }
+        .v-popover {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .trigger {
+            display: inline-flex !important;
+            button.tooltip-target.b3 {
+              width: 18px;
+              height: 32px;
+              background-color: rgba(white, 0.2);
+            }
+          }
+        }
 
         i,
         span {

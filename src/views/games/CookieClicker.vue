@@ -214,7 +214,7 @@ export default Vue.extend({
 
     playSound(sound: string) {
       if (sound === 'Cookie click' && this.sfxOn) {
-        let cookieClickSound = this.cookieClickSound.cloneNode() as HTMLAudioElement;
+        const cookieClickSound = this.cookieClickSound.cloneNode() as HTMLAudioElement;
         cookieClickSound.play();
       }
     }

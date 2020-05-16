@@ -10,14 +10,14 @@ import {
   IceScroll
 } from '@/components/games/adventura/magic';
 
-let ironSword = new IronSword();
-let fireScroll = new FireScroll();
-let waterScroll = new WaterScroll();
-let iceScroll = new IceScroll();
-let earthScroll = new EarthScroll();
-let airScroll = new AirScroll();
-let lightningScroll = new LightningScroll();
-let healScroll = new HealScroll(6);
+const ironSword = new IronSword();
+const fireScroll = new FireScroll();
+const waterScroll = new WaterScroll();
+const iceScroll = new IceScroll();
+const earthScroll = new EarthScroll();
+const airScroll = new AirScroll();
+const lightningScroll = new LightningScroll();
+const healScroll = new HealScroll(6);
 
 export class Boss {
   constructor(

@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
+import './registerServiceWorker';
 import router from './router';
+import store from './store';
 
 // @ts-ignore
 import { VueHammer } from 'vue2-hammer';
@@ -11,14 +13,19 @@ VueHammer.config.press = {
 
 Vue.config.productionTip = false;
 
-import VueAnalytics from 'vue-analytics';
-Vue.use(VueAnalytics, {
-  id: 'UA-146791846-1',
-  router,
-  checkDuplicatedScript: true
-});
+import VueGtag from 'vue-gtag';
+
+Vue.use(
+  VueGtag,
+  {
+    config: { id: 'UA-146791846-1' },
+    appName: 'Gamitopia'
+  },
+  router
+);
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app');

@@ -21,7 +21,7 @@ import Vue from 'vue';
 // @ts-ignore
 import { VPopover } from 'v-tooltip';
 import Card from './Card.vue';
-import { ICard } from '@/interfaces/ICard';
+import ICard from '@/interfaces/Card';
 
 export default Vue.extend({
   name: 'CardHand',

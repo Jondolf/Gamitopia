@@ -3,6 +3,10 @@ import { Mark } from 'tiptap';
 import { toggleMark } from 'tiptap-commands';
 
 export default class TextColor extends Mark {
+  constructor(private color: string) {
+    super();
+  }
+
   get name() {
     return 'textColor';
   }
@@ -11,7 +15,7 @@ export default class TextColor extends Mark {
     return {
       attrs: {
         color: {
-          default: 'rgba(255, 0, 0, 1)'
+          default: 'inherit'
         }
       },
       parseDOM: [
@@ -19,17 +23,21 @@ export default class TextColor extends Mark {
           tag: 'span'
         }
       ],
-      toDOM: (mark) => [
+      toDOM: mark => [
         'span',
         {
-          style: `color:${mark.attrs.color}`
+          style: `color: ${this.colors}`
         },
         0
       ]
     };
   }
 
+  set textColor(colorRgba: string) {
+    this.color = colorRgba;
+  }
+
   commands({ type }) {
-    return (attrs) => toggleMark(type, attrs);
+    return attrs => toggleMark(type, attrs);
   }
 }

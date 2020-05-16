@@ -1,5 +1,5 @@
 import Axios, { AxiosError } from 'axios';
-import { IAuthResponse } from '@/interfaces/IAuthResponse';
+import { AuthResponse } from '@/interfaces/AuthResponse';
 
 export async function authenticate(
   url: string,
@@ -7,13 +7,13 @@ export async function authenticate(
   password: string
 ) {
   try {
-    const response = await Axios.post<IAuthResponse>(url, {
+    const response = await Axios.post<AuthResponse>(url, {
       username: username,
       password: password
     });
     return response.data.access_token;
   } catch (err) {
-    let error: AxiosError = err;
+    const error: AxiosError = err;
     if (error.response?.status === 401) {
       throw new Error('Wrong username or password');
     }

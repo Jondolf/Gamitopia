@@ -25,7 +25,7 @@ export default Vue.extend({
 
   methods: {
     getHeadsOrTails(): void {
-      let randomNumber = Math.random();
+      const randomNumber = Math.random();
       if (randomNumber > 0.5) {
         this.resultImageSrc = require('@/assets/images/randomizer/coin_heads.png');
         this.resultImageAlt = 'Heads coin';

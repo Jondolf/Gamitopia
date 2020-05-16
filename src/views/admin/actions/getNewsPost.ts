@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { INews } from '@/interfaces/INews';
+import { News } from '@/interfaces/News';
 
 export async function getNewsPost(id: string) {
   try {
-    const response = await axios.get<INews>(`/api/news/${id}`);
+    const response = await axios.get<News>(`/api/news/${id}`);
     return response.data;
   } catch (error) {
     throw new Error(

@@ -41,7 +41,7 @@ export default Vue.extend({
           } else {
             this.statusMessage = '';
           }
-          let rnd = this.getRandomInt(1, 6);
+          const rnd = this.getRandomInt(1, 6);
           this.resultImageSrc = require(`@/assets/images/randomizer/num_${rnd}_dice.jpg`);
           this.resultImageAlt = `Number ${rnd} dice`;
         }, 100 * 2 * i + 100);

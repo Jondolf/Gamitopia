@@ -9,7 +9,7 @@ export async function deleteNewsPost(id: number) {
       }
     });
   } catch (err) {
-    let error: AxiosError = err;
+    const error: AxiosError = err;
     handleUnauthorized(error);
     throw new Error(
       `Something went wrong with deleting #${id} news post. Here's the error: ${error}`

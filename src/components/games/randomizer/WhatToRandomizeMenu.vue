@@ -24,11 +24,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-interface iOption {
-  imageSrc: String;
-  imageAlt: String;
-  name: String;
-  className: String;
+interface Option {
+  imageSrc: string;
+  imageAlt: string;
+  name: string;
+  className: string;
 }
 export default Vue.extend({
   name: 'WhatToRandomizeMenu',
@@ -54,14 +54,14 @@ export default Vue.extend({
           name: 'Throw dice',
           className: 'option'
         }
-      ] as iOption[]
+      ] as Option[]
     };
   },
 
   methods: {
-    changeOption(option: iOption, index: number): void {
+    changeOption(option: Option, index: number): void {
       this.$emit('changeOption', option.name);
-      for (let option of this.whatToRandomizeOptions) {
+      for (const option of this.whatToRandomizeOptions) {
         if (option.className === 'selected-option') {
           option.className = 'option';
         }

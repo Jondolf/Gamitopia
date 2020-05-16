@@ -54,9 +54,7 @@ export default Vue.extend({
   name: 'TargetPractise',
   components: {
     Unity
-  },
-
-  mounted() {}
+  }
 });
 </script>
 

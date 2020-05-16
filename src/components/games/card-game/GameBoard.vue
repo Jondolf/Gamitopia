@@ -12,7 +12,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import CardHand from './CardHand.vue';
-import { ICard } from '../../../interfaces/ICard';
+import ICard from '@/interfaces/Card';
 
 export default Vue.extend({
   name: 'GameBoard',

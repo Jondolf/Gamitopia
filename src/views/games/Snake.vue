@@ -73,7 +73,7 @@ import StartMenu from '@/components/games/snake/StartMenu.vue';
 import GameArea from '@/components/games/snake/GameArea.vue';
 import Statistics from '@/components/games/snake/Statistics.vue';
 import Settings from '@/components/games/snake/Settings.vue';
-import { game, graphics } from '../../components/games/snake/gameLogic';
+import { Game } from '@/components/games/snake/gameLogic';
 
 export default Vue.extend({
   name: 'snake',
@@ -87,19 +87,65 @@ export default Vue.extend({
     return {
       currentView: 'Start menu',
       fullscreenOn: false,
-      resetGame: false
+      resetGame: false,
+      game: new Game(
+        {
+          board: [
+            '##############################',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#            ####            #',
+            '#            ####            #',
+            '#            ####            #',
+            '#            ####            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '#                            #',
+            '##############################'
+          ],
+          wallColor: 'white',
+          boardColor: 'black'
+        },
+        false,
+        0,
+        0,
+        500,
+        0,
+        0,
+        false,
+        null as ((ev: KeyboardEvent) => void) | null
+      )
     };
   },
   methods: {
     changeBoardSize(boardSize: string[], squareSize: number) {
-      game.board = boardSize;
-      graphics.squareSize = squareSize;
+      this.game.gameBoard.board = boardSize;
+      this.game.graphics.squareSize = squareSize;
       this.resetGame = !this.resetGame;
     }
   },
   created() {
     if (localStorage.getItem('snakeSpeed')) {
-      game.tickSpeed = +localStorage.getItem('snakeSpeed')!!;
+      this.game.tickSpeed = +localStorage.getItem('snakeSpeed')!!;
     }
   },
   watch: {
@@ -117,9 +163,9 @@ export default Vue.extend({
     },
     currentView() {
       if (this.currentView !== 'Game area') {
-        game.pauseGame();
+        this.game.pauseGame();
       } else {
-        //game.tick();
+        //this.game.tick();
       }
     }
   }

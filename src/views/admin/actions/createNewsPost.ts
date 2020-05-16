@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { handleUnauthorized } from './handleUnauthorized';
-import { INews } from '@/interfaces/INews';
+import { News } from '@/interfaces/News';
 
 export async function createNewsPost(
   title: string,
@@ -8,7 +8,7 @@ export async function createNewsPost(
   date: string
 ) {
   try {
-    const response = await axios.post<INews>(
+    const response = await axios.post<News>(
       '/api/news',
       {
         title: title,
@@ -24,7 +24,7 @@ export async function createNewsPost(
 
     return response.data;
   } catch (err) {
-    let error: AxiosError = err;
+    const error: AxiosError = err;
     handleUnauthorized(error);
     throw new Error(
       `Something went wrong with creating a news post. Here's the error: ${error}`

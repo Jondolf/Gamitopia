@@ -1,5 +1,5 @@
 import axios, { AxiosError } from 'axios';
-import { INews } from '../../../interfaces/INews';
+import { News } from '../../../interfaces/News';
 import { handleUnauthorized } from './handleUnauthorized';
 
 export async function editNewsPost(
@@ -9,7 +9,7 @@ export async function editNewsPost(
   date: string
 ) {
   try {
-    const response = await axios.put<INews>(
+    const response = await axios.put<News>(
       `/api/news/${id}`,
       { title: title, body: body, date: date },
       {
@@ -20,7 +20,7 @@ export async function editNewsPost(
     );
     return response.data;
   } catch (err) {
-    let error: AxiosError = err;
+    const error: AxiosError = err;
     handleUnauthorized(error);
     throw new Error(
       `Something went wrong with editing #${id} news post. Here's the error: ${error}`

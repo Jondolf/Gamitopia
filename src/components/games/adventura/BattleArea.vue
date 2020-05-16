@@ -309,9 +309,10 @@ export default Vue.extend({
       }, 1002);
     },
     setBackgroundAndGround() {
-      let background = this.$refs.background as HTMLElement;
-      let animatableBackground = this.$refs.animatableBackground as HTMLElement;
-      let ground = this.$refs.ground as HTMLElement;
+      const background = this.$refs.background as HTMLElement;
+      const animatableBackground = this.$refs
+        .animatableBackground as HTMLElement;
+      const ground = this.$refs.ground as HTMLElement;
       if (this.currentArea.backgroundImgSrc !== null) {
         background.style.backgroundImage =
           'url(' + this.currentArea.backgroundImgSrc + ')';
