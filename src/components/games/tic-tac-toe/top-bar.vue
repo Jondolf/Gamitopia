@@ -32,7 +32,7 @@ export default Vue.extend({
   justify-content: center;
   align-items: center;
   button {
-    width: 100%;
+    width: 50%;
     height: 100%;
     background-color: rgba(34, 40, 49, 0.5);
     color: white;
