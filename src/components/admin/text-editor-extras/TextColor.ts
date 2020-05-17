@@ -23,10 +23,10 @@ export default class TextColor extends Mark {
           tag: 'span'
         }
       ],
-      toDOM: mark => [
+      toDOM: (mark) => [
         'span',
         {
-          style: `color: ${this.colors}`
+          style: `color: ${this.color}`
         },
         0
       ]
@@ -38,6 +38,6 @@ export default class TextColor extends Mark {
   }
 
   commands({ type }) {
-    return attrs => toggleMark(type, attrs);
+    return (attrs) => toggleMark(type, attrs);
   }
 }

@@ -23,7 +23,7 @@ export default class Highlight extends Mark {
           tag: 'mark'
         }
       ],
-      toDOM: mark => [
+      toDOM: (mark) => [
         'mark',
         {
           style: `background: ${this.color ? this.color : mark.attrs.color}`
@@ -38,6 +38,6 @@ export default class Highlight extends Mark {
   }
 
   commands({ type }) {
-    return attrs => toggleMark(type, attrs);
+    return (attrs) => toggleMark(type, attrs);
   }
 }
