@@ -12,7 +12,7 @@ import Nav from '@/components/Nav.vue';
 import Footer from '@/components/Footer.vue';
 import * as FastClick from 'fastclick';
 
-import globalVariables from './global.variables';
+import { store } from './store';
 
 export default Vue.extend({
   name: 'app',
@@ -20,9 +20,10 @@ export default Vue.extend({
     Nav,
     Footer
   },
+  store,
   created() {
     if (localStorage.getItem('jwt')) {
-      globalVariables.isAdmin = true;
+      store.commit('changeIsAdmin', true);
     }
   },
   mounted() {

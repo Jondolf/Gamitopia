@@ -2,7 +2,6 @@ import Vue from 'vue';
 import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
-import store from './store';
 
 // @ts-ignore
 import { VueHammer } from 'vue2-hammer';
@@ -26,7 +25,6 @@ Vue.use(
 
 new Vue({
   router,
-  store,
   render: (h) => h(App),
   mounted() {
     document.dispatchEvent(new Event('rendered'));

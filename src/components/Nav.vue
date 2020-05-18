@@ -15,8 +15,6 @@
 import Vue from 'vue';
 import DarkMode from '@/components/DarkMode.vue';
 
-import globalVariables from '@/global.variables';
-
 export default Vue.extend({
   name: 'Nav',
   components: {
@@ -25,7 +23,7 @@ export default Vue.extend({
 
   data() {
     return {
-      isAdmin: globalVariables.isAdmin
+      isAdmin: this.$store.state.isAdmin
     };
   }
 });

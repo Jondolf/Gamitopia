@@ -1,5 +1,6 @@
 import Axios, { AxiosError } from 'axios';
 import { AuthResponse } from '@/interfaces/AuthResponse';
+import { store } from '@/store';
 
 export async function authenticate(
   url: string,
@@ -11,6 +12,7 @@ export async function authenticate(
       username: username,
       password: password
     });
+    store.commit('changeIsAdmin', true);
     return response.data.access_token;
   } catch (err) {
     const error: AxiosError = err;

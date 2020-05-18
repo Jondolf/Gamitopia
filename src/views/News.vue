@@ -34,15 +34,13 @@ import { getNewsPosts } from './admin/actions/getNewsPosts';
 import { formatDate } from './admin/actions/formatDate';
 import { News } from '../interfaces/News';
 
-import globalVariables from '@/global.variables';
-
 export default Vue.extend({
   name: 'news',
   components: { NewsPost },
   data() {
     return {
       news: [] as News[],
-      isAdmin: globalVariables.isAdmin
+      isAdmin: this.$store.state.isAdmin
     };
   },
   methods: {

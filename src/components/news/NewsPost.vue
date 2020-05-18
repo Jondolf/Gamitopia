@@ -1,22 +1,31 @@
 <template>
   <div class="news-post" v-if="!isDeleted">
-    <p v-if="isAdmin" class="news-post-id">#{{ id }}</p>
+    <div class="top-container">
+      <div class="left-container">
+        <router-link :to="`/news/${id}`" :title="`Go to news post #${id}`"
+          >#{{ id }}</router-link
+        >
+        <button @click="copyLink" title="Copy link to clipboard">
+          <i @click="copyLink" class="material-icons">link</i>
+        </button>
+      </div>
 
-    <div v-if="isAdmin" class="admin-tools">
-      <router-link
-        :to="{
-          path: '/admin/edit-news-post',
-          name: 'edit-news-post',
-          params: {
-            id: id
-          }
-        }"
-      >
-        <i class="material-icons">edit</i>
-      </router-link>
-      <button v-on:click="handleDeleteNewsPost(id)">
-        <i class="material-icons">delete</i>
-      </button>
+      <div v-if="isAdmin" class="admin-tools right-container">
+        <router-link
+          :to="{
+            path: '/admin/edit-news-post',
+            name: 'edit-news-post',
+            params: {
+              id: id
+            }
+          }"
+        >
+          <i class="material-icons">edit</i>
+        </router-link>
+        <button v-on:click="handleDeleteNewsPost(id)">
+          <i class="material-icons">delete</i>
+        </button>
+      </div>
     </div>
 
     <h1 class="news-post-title">{{ title }}</h1>
@@ -43,8 +52,6 @@ hljs.registerLanguage('typescript', typescript);
 
 import { deleteNewsPost } from '@/views/admin/actions/deleteNewsPost';
 
-import globalVariables from '@/global.variables';
-
 export default Vue.extend({
   name: 'news-post',
 
@@ -57,7 +64,7 @@ export default Vue.extend({
 
   data() {
     return {
-      isAdmin: globalVariables.isAdmin,
+      isAdmin: this.$store.state.isAdmin,
       isDeleted: false,
       statusMessage: '',
       statusMessageType: '',
@@ -66,6 +73,16 @@ export default Vue.extend({
   },
 
   methods: {
+    copyLink() {
+      const dummy = document.createElement('input') as HTMLInputElement;
+      document.body.appendChild(dummy);
+      dummy.value =
+        'https://gamitopia.herokuapp.com/news/' + this.id.toString();
+      dummy.select();
+      document.execCommand('copy');
+      document.body.removeChild(dummy);
+    },
+
     async handleDeleteNewsPost() {
       if (!window.confirm('Are you sure you want to delete this news post?')) {
         return;
@@ -140,30 +157,59 @@ export default Vue.extend({
     margin: 15px auto;
   }
 
-  .news-post-id {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    color: rgb(200, 200, 200);
-  }
-  .admin-tools {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    button,
-    a {
-      background-color: rgba(0, 0, 0, 0);
-      outline: none;
-      border: none;
-      margin-left: 30px;
-      i {
+  .top-container {
+    display: flex;
+    justify-content: space-between;
+
+    .left-container,
+    .right-container {
+      display: flex;
+      align-items: center;
+      width: 50%;
+
+      button,
+      a {
+        background-color: transparent;
+        outline: none;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 30px;
         color: white;
-        font-size: 25px;
-        transition: 0.4s;
+        font-size: 20px;
+        width: 40px;
+        height: 40px;
+        transition: 0.75s;
+        border-radius: 25%;
+        font-weight: 200;
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.5);
+          border-radius: 50%;
+        }
+        &:first-child {
+          margin-left: 0;
+        }
+        i {
+          color: white;
+          font-size: 25px;
+          transition: 0.4s;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          &:hover {
+            color: rgb(200, 200, 255);
+          }
+        }
       }
-      i:hover {
-        color: rgb(200, 200, 255);
-      }
+    }
+    .left-container {
+      justify-content: flex-start;
+    }
+    .right-container {
+      justify-content: flex-end;
     }
   }
 
@@ -237,8 +283,8 @@ export default Vue.extend({
   color: red;
 }
 
-.dark.default-dark .news-post .admin-tools button i:hover,
-.dark.default-dark .news-post .admin-tools a i:hover {
+.dark.default-dark .news-post .top-container div button i:hover,
+.dark.default-dark .news-post .top-container div a i:hover {
   color: red;
 }
 
