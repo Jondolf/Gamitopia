@@ -2,7 +2,10 @@
   <div class="news-post" v-if="!isDeleted">
     <div class="top-container">
       <div class="left-container">
-        <router-link :to="`/news/${id}`" :title="`Go to news post #${id}`"
+        <router-link
+          v-if="isAdmin"
+          :to="`/news/${id}`"
+          :title="`Go to news post #${id}`"
           >#{{ id }}</router-link
         >
         <button @click="copyLink" title="Copy link to clipboard">
