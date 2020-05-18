@@ -24,11 +24,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import axios from 'axios';
 
-import NewsPostForm from './NewsPostForm.vue';
-import NewsPostFormPreview from './NewsPostFormPreview.vue';
-import NewsPostWritingArea from '@/components/admin/NewsPostWritingArea.vue';
+const NewsPostWritingArea = () =>
+  import('@/components/admin/NewsPostWritingArea.vue');
 import StatusMessage from './StatusMessage.vue';
 
 import { getNewsPost } from './actions/getNewsPost';
@@ -144,14 +142,6 @@ export default Vue.extend({
     margin: 30px auto;
   }
 
-  .edit-container {
-    display: flex;
-    .form-container,
-    .preview-container {
-      width: 50%;
-    }
-  }
-
   .submit-btn {
     margin: 20px;
     height: 40px;
@@ -172,17 +162,6 @@ export default Vue.extend({
   .submit-btn:hover {
     opacity: 0.9;
     border-radius: 10px;
-  }
-}
-
-@media only screen and (max-width: 800px) {
-  .news-post-edit .edit-container {
-    flex-direction: column;
-    width: 100%;
-    .form-container,
-    .preview-container {
-      width: 100%;
-    }
   }
 }
 </style>

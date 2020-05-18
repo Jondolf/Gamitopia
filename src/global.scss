@@ -63,6 +63,7 @@ h4,
 h5,
 h6 {
   font-family: 'Nunito', sans-serif;
+  font-display: swap;
 }
 
 p,
@@ -73,6 +74,11 @@ text-area,
 li {
   font-family: 'Nunito Sans', sans-serif;
   line-height: 1.65rem;
+  font-display: swap;
+}
+
+i {
+  font-display: swap;
 }
 
 a,

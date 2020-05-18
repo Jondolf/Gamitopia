@@ -58,6 +58,13 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
+.light .latest-news-post h2 {
+  color: black;
+}
+.dark .latest-news-post h2 {
+  color: white;
+}
+
 .latest-news-post {
   position: relative;
   overflow: hidden;

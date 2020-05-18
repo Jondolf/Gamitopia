@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-import Home from '../views/Home.vue';
+const Home = () => import('../views/Home.vue');
 
 const isAdmin = localStorage.getItem('jwt');
 

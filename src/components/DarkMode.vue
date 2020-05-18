@@ -65,13 +65,12 @@ export default Vue.extend({
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#darkModeButton:hover {
-  width: 4vw;
-  height: 4vw;
-  font-size: 40px;
-  padding-left: 0.5vw;
+  &:hover {
+    width: 4vw;
+    height: 4vw;
+    font-size: 40px;
+    padding-left: 0.5vw;
+  }
 }
 
 @media only screen and (max-width: 1000px) {

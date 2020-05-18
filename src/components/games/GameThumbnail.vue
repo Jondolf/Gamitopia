@@ -1,5 +1,5 @@
 <template>
-  <div id="game-thumbnail">
+  <div class="game-thumbnail">
     <h3>{{ name }}</h3>
     <router-link :to="link">
       <img :src="imgSrc" :alt="imgAlt" />
@@ -25,7 +25,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import '@/global.scss';
 
-#game-thumbnail {
+.game-thumbnail {
   background-color: var(--secondary-color);
   margin: 5vw;
   display: inline-block;
@@ -55,7 +55,7 @@ export default Vue.extend({
 }
 
 @media only screen and (max-width: 700px) {
-  #game-thumbnail {
+  .game-thumbnail {
     margin: 5vw;
     padding: 0 1.5vw 1.5vw 1.5vw;
     img {
@@ -75,7 +75,7 @@ export default Vue.extend({
 }
 
 @media only screen and (max-width: 500px) {
-  #game-thumbnail {
+  .game-thumbnail {
     margin: 4vw;
     padding: 0 2vw 2vw 2vw;
     img {
@@ -94,7 +94,7 @@ export default Vue.extend({
 }
 
 @media only screen and (max-width: 350px) {
-  #game-thumbnail {
+  .game-thumbnail {
     margin: 4vw;
     padding: 0 2.5vw 2.5vw 2.5vw;
     img {

@@ -7,12 +7,12 @@
     <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)">
       Fullscreen
     </div>
-    <Unity
+    <!--<Unity
       src="./Build/TargetPractise.json"
       width="700"
       height="438"
       unityLoader="./Build/UnityLoader.js"
-    ></Unity>
+    ></Unity>-->
 
     <div class="description">
       <div class="mainDescription">
@@ -48,12 +48,12 @@
 <script lang="ts">
 import Vue from 'vue';
 // @ts-ignore
-import Unity from 'vue-unity-webgl';
+//import Unity from 'vue-unity-webgl';
 
 export default Vue.extend({
   name: 'TargetPractise',
   components: {
-    Unity
+    //  Unity
   }
 });
 </script>

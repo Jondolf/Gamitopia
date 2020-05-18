@@ -383,7 +383,7 @@ export default Vue.extend({
 
   data() {
     let currentTextColor;
-    const currentHighlightColor = 'rgba(255, 255, 0, 1)';
+    let currentHighlightColor;
     const textColor = new TextColor(currentTextColor);
     const highlight = new Highlight(currentHighlightColor);
     return {

@@ -1,10 +1,10 @@
 <template>
-  <div id="newest-game">
+  <div class="newest-game">
     <h1>Newest Game</h1>
     <h3>Snake</h3>
     <router-link to="/snake">
       <img
-        src="@/assets/images/snake-thumbnail.jpg"
+        src="@/assets/images/game-thumbnails/snake_thumbnail.jpg"
         alt="Snake game"
         id="newest-game-img"
       />
@@ -23,24 +23,24 @@ export default Vue.extend({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
 @import '@/global.scss';
-#newest-game-img {
+.newest-game-img {
   width: 28vw;
   border-radius: 5px;
   margin: 25px;
   transition: 1s;
 }
 
-#newest-game-img:hover {
+.newest-game-img:hover {
   width: 33vw;
 }
-#newest-game {
+.newest-game {
   background-color: var(--secondary-color);
   text-align: center;
   padding: 20px;
   color: white;
 }
 
-h2 {
+h1 {
   margin: 65px auto 20px auto;
 }
 h3 {
@@ -48,10 +48,10 @@ h3 {
 }
 
 @media only screen and (max-width: 700px) {
-  #newest-game-img {
+  .newest-game-img {
     width: 38vw;
   }
-  #newest-game-img:hover {
+  .newest-game-img:hover {
     width: 44vw;
   }
   h3 {
@@ -64,10 +64,10 @@ h3 {
 }
 
 @media only screen and (max-width: 500px) {
-  #newest-game-img {
+  .newest-game-img {
     width: 48vw;
   }
-  #newest-game-img:hover {
+  .newest-game-img:hover {
     width: 55vw;
   }
   h3 {
@@ -79,10 +79,10 @@ h3 {
 }
 
 @media only screen and (max-width: 350px) {
-  #newest-game-img {
+  .newest-game-img {
     width: 58vw;
   }
-  #newest-game-img:hover {
+  .newest-game-img:hover {
     width: 66vw;
   }
   h3 {

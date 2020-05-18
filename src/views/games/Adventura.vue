@@ -208,11 +208,11 @@
 import Vue from 'vue';
 
 //Components
-import TopBar from '@/components/games/adventura/TopBar.vue';
-import BattleArea from '@/components/games/adventura/BattleArea.vue';
 import StartMenu from '@/components/games/adventura/StartMenu.vue';
-import AreaMap from '@/components/games/adventura/areaMap.vue';
-import Shop from '@/components/games/adventura/shop.vue';
+const TopBar = () => import('@/components/games/adventura/TopBar.vue');
+const AreaMap = () => import('@/components/games/adventura/areaMap.vue');
+const BattleArea = () => import('@/components/games/adventura/BattleArea.vue');
+const Shop = () => import('@/components/games/adventura/shop.vue');
 
 //Weapons
 import { Melee, IronSword } from '@/components/games/adventura/melee';
@@ -317,7 +317,7 @@ export default Vue.extend({
       currentView: 'Start menu',
       inBattle: false,
 
-      currentArea: {} as any,
+      currentArea: {} as Area,
       currentEnemy: {} as Enemy
     };
   },
