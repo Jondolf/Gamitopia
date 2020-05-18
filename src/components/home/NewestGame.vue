@@ -1,22 +1,27 @@
 <template>
   <div class="newest-game">
     <h1>Newest Game</h1>
-    <h3>Snake</h3>
-    <router-link to="/snake">
+    <h3>{{ newestGame.name }}</h3>
+    <router-link :to="newestGame.route">
       <img
-        src="@/assets/images/game-thumbnails/snake_thumbnail.jpg"
-        alt="Snake game"
-        id="newest-game-img"
+        :src="newestGame.thumbnailImgSrc"
+        :alt="newestGame.thumbnailImgAlt"
       />
     </router-link>
-    <h6>3.1.2020</h6>
+    <h6>{{ newestGame.releaseDate }}</h6>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-  name: 'NewestGame'
+  name: 'NewestGame',
+
+  data() {
+    return {
+      newestGame: this.$store.state.games.games[0]
+    };
+  }
 });
 </script>
 

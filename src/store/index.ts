@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import games from './games';
 
 Vue.use(Vuex);
 
@@ -13,5 +14,7 @@ export const store = new Vuex.Store({
     }
   },
   actions: {},
-  modules: {}
+  modules: {
+    games: games
+  }
 });

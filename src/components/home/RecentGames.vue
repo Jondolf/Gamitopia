@@ -3,29 +3,13 @@
     <h2>Recent Games</h2>
     <div class="game-container">
       <GameThumbnail
-        :name="'Snake'"
-        :link="'/snake'"
-        :imgSrc="require('@/assets/images/game-thumbnails/snake_thumbnail.jpg')"
-        :imgAlt="'Snake game'"
-        :date="'3.1.2020'"
-      />
-      <GameThumbnail
-        :name="'Adventura'"
-        :link="'/adventura'"
-        :imgSrc="
-          require('@/assets/images/game-thumbnails/adventura_thumbnail.jpg')
-        "
-        :imgAlt="'Adventura game'"
-        :date="'24.12.2019'"
-      />
-      <GameThumbnail
-        :name="'Tic-Tac-Toe'"
-        :link="'/tic-tac-toe'"
-        :imgSrc="
-          require('@/assets/images/game-thumbnails/tic_tac_toe_thumbnail.jpg')
-        "
-        :imgAlt="'Tic-Tac-Toe game'"
-        :date="'12.10.2019'"
+        v-for="(game, index) in games"
+        :key="index"
+        :name="game.name"
+        :route="game.route"
+        :thumbnailImgSrc="game.thumbnailImgSrc"
+        :thumbnailImgAlt="game.thumbnailImgAlt"
+        :releaseDate="game.releaseDate"
       />
     </div>
   </div>
@@ -38,6 +22,15 @@ export default Vue.extend({
   name: 'RecentGames',
   components: {
     GameThumbnail
+  },
+  data() {
+    return {
+      games: [
+        this.$store.state.games.games[0],
+        this.$store.state.games.games[1],
+        this.$store.state.games.games[2]
+      ]
+    };
   }
 });
 </script>

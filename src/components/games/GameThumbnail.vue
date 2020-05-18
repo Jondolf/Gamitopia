@@ -1,10 +1,10 @@
 <template>
   <div class="game-thumbnail">
     <h3>{{ name }}</h3>
-    <router-link :to="link">
-      <img :src="imgSrc" :alt="imgAlt" />
+    <router-link :to="route">
+      <img :src="thumbnailImgSrc" :alt="thumbnailImgAlt" />
     </router-link>
-    <h6>{{ date }}</h6>
+    <h6>{{ releaseDate }}</h6>
   </div>
 </template>
 
@@ -14,10 +14,10 @@ export default Vue.extend({
   name: 'GameThumbnail',
   props: {
     name: String,
-    link: String,
-    imgSrc: String,
-    imgAlt: String,
-    date: String
+    route: String,
+    thumbnailImgSrc: String,
+    thumbnailImgAlt: String,
+    releaseDate: String
   }
 });
 </script>
