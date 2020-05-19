@@ -14,7 +14,8 @@ const routes: Array<RouteConfig> = [
     component: Home,
     meta: {
       title: 'Home | Gamitopia'
-    }
+    },
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/games',
@@ -22,7 +23,8 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/Games.vue'),
     meta: {
       title: 'Games | Gamitopia'
-    }
+    },
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/news',
@@ -30,7 +32,8 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/News.vue'),
     meta: {
       title: 'News | Gamitopia'
-    }
+    },
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/news/:id',
@@ -38,7 +41,8 @@ const routes: Array<RouteConfig> = [
     beforeEnter: (to, from, next) => {
       document.title = `News post #${to.params.id} | Gamitopia`;
       next();
-    }
+    },
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/about',
@@ -46,7 +50,8 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/About.vue'),
     meta: {
       title: 'About | Gamitopia'
-    }
+    },
+    pathToRegexpOptions: { strict: true }
   },
 
   // Admin
@@ -56,7 +61,8 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/admin/AdminLogin.vue'),
     meta: {
       title: 'Admin login | Gamitopia'
-    }
+    },
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/admin/create-news-post',
@@ -71,7 +77,8 @@ const routes: Array<RouteConfig> = [
     },
     meta: {
       title: 'Create news post | Gamitopia'
-    }
+    },
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/admin/edit-news-post/:id',
@@ -84,7 +91,8 @@ const routes: Array<RouteConfig> = [
       } else {
         next('admin/login');
       }
-    }
+    },
+    pathToRegexpOptions: { strict: true }
   },
 
   // Games
@@ -94,7 +102,8 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/games/CookieClicker.vue'),
     meta: {
       title: 'Cookie Clicker | Gamitopia'
-    }
+    },
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/randomizer',
@@ -102,7 +111,8 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/games/Randomizer.vue'),
     meta: {
       title: 'Randomizer | Gamitopia'
-    }
+    },
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/tic-tac-toe',
@@ -110,7 +120,8 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/games/Tic-Tac-Toe.vue'),
     meta: {
       title: 'Tic-tac-toe | Gamitopia'
-    }
+    },
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/adventura',
@@ -118,7 +129,8 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/games/Adventura.vue'),
     meta: {
       title: 'Adventura | Gamitopia'
-    }
+    },
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/snake',
@@ -126,7 +138,8 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/games/Snake.vue'),
     meta: {
       title: 'Snake | Gamitopia'
-    }
+    },
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/card',
@@ -134,7 +147,8 @@ const routes: Array<RouteConfig> = [
     component: () => import('../views/games/CardGame.vue'),
     meta: {
       title: 'Card game | Gamitopia'
-    }
+    },
+    pathToRegexpOptions: { strict: true }
   },
   {
     path: '/target-practise',
@@ -143,7 +157,8 @@ const routes: Array<RouteConfig> = [
       import('../views/games/target-practise/TargetPractise.vue'),
     meta: {
       title: 'Target Practise | Gamitopia'
-    }
+    },
+    pathToRegexpOptions: { strict: true }
   }
 ];
 
