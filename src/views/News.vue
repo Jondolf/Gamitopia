@@ -1,6 +1,6 @@
 <template>
   <div class="news">
-    <router-link to="/admin/create-news-post" v-if="isAdmin"
+    <router-link to="/admin/create-news-post/" v-if="isAdmin"
       ><button class="create-news-post-btn">Create new</button>
     </router-link>
 

@@ -4,7 +4,7 @@
       <div class="left-container">
         <router-link
           v-if="isAdmin"
-          :to="`/news/${id}`"
+          :to="`/news/${id}/`"
           :title="`Go to news post #${id}`"
           >#{{ id }}</router-link
         >

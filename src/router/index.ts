@@ -17,7 +17,7 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/games',
+    path: '/games/',
     name: 'games',
     component: () => import('../views/Games.vue'),
     meta: {
@@ -25,7 +25,7 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/news',
+    path: '/news/',
     name: 'news',
     component: () => import('../views/News.vue'),
     meta: {
@@ -33,7 +33,7 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/news/:id',
+    path: '/news/:id/',
     component: () => import('../views/news/IndividualNewsPostView.vue'),
     beforeEnter: (to, from, next) => {
       document.title = `News post #${to.params.id} | Gamitopia`;
@@ -41,7 +41,7 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/about',
+    path: '/about/',
     name: 'about',
     component: () => import('../views/About.vue'),
     meta: {
@@ -51,7 +51,7 @@ const routes: Array<RouteConfig> = [
 
   // Admin
   {
-    path: '/admin/login',
+    path: '/admin/login/',
     name: 'admin-login',
     component: () => import('../views/admin/AdminLogin.vue'),
     meta: {
@@ -59,7 +59,7 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/admin/create-news-post',
+    path: '/admin/create-news-post/',
     name: 'create-news-post',
     component: () => import('../views/admin/NewsPostCreate.vue'),
     beforeEnter: (to, from, next) => {
@@ -74,7 +74,7 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/admin/edit-news-post/:id',
+    path: '/admin/edit-news-post/:id/',
     name: 'edit-news-post',
     component: () => import('../views/admin/NewsPostEdit.vue'),
     beforeEnter: (to, from, next) => {
@@ -89,7 +89,7 @@ const routes: Array<RouteConfig> = [
 
   // Games
   {
-    path: '/cookie-clicker',
+    path: '/cookie-clicker/',
     name: 'cookie-clicker',
     component: () => import('../views/games/CookieClicker.vue'),
     meta: {
@@ -97,7 +97,7 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/randomizer',
+    path: '/randomizer/',
     name: 'randomizer',
     component: () => import('../views/games/Randomizer.vue'),
     meta: {
@@ -105,7 +105,7 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/tic-tac-toe',
+    path: '/tic-tac-toe/',
     name: 'tic-tac-toe',
     component: () => import('../views/games/Tic-Tac-Toe.vue'),
     meta: {
@@ -113,7 +113,7 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/adventura',
+    path: '/adventura/',
     name: 'adventura',
     component: () => import('../views/games/Adventura.vue'),
     meta: {
@@ -121,7 +121,7 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/snake',
+    path: '/snake/',
     name: '/snake',
     component: () => import('../views/games/Snake.vue'),
     meta: {
@@ -129,7 +129,7 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/card',
+    path: '/card/',
     name: '/card',
     component: () => import('../views/games/CardGame.vue'),
     meta: {
@@ -137,7 +137,7 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/target-practise',
+    path: '/target-practise/',
     name: 'targetpractise',
     component: () =>
       import('../views/games/target-practise/TargetPractise.vue'),
