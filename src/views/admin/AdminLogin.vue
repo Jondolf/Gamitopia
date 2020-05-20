@@ -1,5 +1,5 @@
 <template>
-  <div id="adminLogin">
+  <div class="admin-login">
     <DarkModeButton />
     <h1>Log in as admin</h1>
     <form @submit.prevent="handleAuthenticate">
@@ -7,7 +7,7 @@
         type="text"
         name="username"
         placeholder="Username"
-        id="username"
+        class="username"
         v-model="username"
         ref="username"
         required
@@ -16,7 +16,7 @@
         type="password"
         name="password"
         placeholder="Password"
-        id="password"
+        class="password"
         v-model="password"
         ref="password"
         required
@@ -25,7 +25,7 @@
         <input
           type="checkbox"
           name="show-password"
-          id="checkbox"
+          class="checkbox"
           v-on:click="togglePasswordVisibility()"
         />
         <label for="checkbox"> Show password</label>
@@ -38,9 +38,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Axios from 'axios';
 
-import GameThumbnails from '@/components/games/GameThumbnails.vue';
 import DarkModeButton from '@/components/DarkMode.vue';
 
 import { authenticate } from './actions/authenticate';
@@ -88,11 +86,19 @@ export default Vue.extend({
 
 <style lang="scss">
 @import '@/global.scss';
-.dark.default-dark #adminLogin #password,
-.dark.default-dark #adminLogin .confirm-password-btn {
+.dark.default-dark .admin-login .password,
+.dark.default-dark .admin-login .confirm-password-btn {
   border: 2px solid white;
 }
-#adminLogin {
+.dark .admin-login {
+  color: white;
+
+  .password,
+  .confirm-password-btn {
+    border: 2px solid white;
+  }
+}
+.admin-login {
   position: fixed;
   top: 0;
   right: 0;
@@ -111,6 +117,7 @@ export default Vue.extend({
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  color: black;
   form {
     display: flex;
     flex-direction: column;
@@ -125,13 +132,13 @@ export default Vue.extend({
     top: 10px;
     left: 10px;
   }
-  #username,
-  #password,
+  .username,
+  .password,
   .confirm-password-btn {
     border: 2px solid black;
   }
-  #username,
-  #password {
+  .username,
+  .password {
     margin: 20px 0;
     height: 70px;
     padding-left: 10px;
@@ -144,12 +151,12 @@ export default Vue.extend({
     overflow: hidden;
     box-sizing: border-box;
     font-size: 18px;
+    &:hover {
+      border-radius: 10px;
+      background-color: rgb(255, 255, 255);
+    }
   }
-  #username:hover,
-  #password:hover {
-    border-radius: 10px;
-    background-color: rgb(255, 255, 255);
-  }
+
   .show-password-container,
   .login-error {
     width: 100%;
@@ -173,6 +180,11 @@ export default Vue.extend({
     font-size: 18px;
     font-weight: bold;
     position: relative;
+    &:hover {
+      opacity: 0.9;
+      border-radius: 10px;
+    }
+
     a {
       width: 100%;
       height: 100%;
@@ -188,10 +200,6 @@ export default Vue.extend({
       justify-content: center;
       align-items: center;
     }
-  }
-  .confirm-password-btn:hover {
-    opacity: 0.9;
-    border-radius: 10px;
   }
 }
 </style>
