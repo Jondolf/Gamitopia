@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <i v-on:click="toggleDarkMode" id="darkModeButton" class="material-icons">{{
-      iconText
-    }}</i>
-  </div>
+  <button class="dark-mode-toggle-button">
+    <i
+      v-on:click="toggleDarkMode"
+      class="dark-mode-toggle-button material-icons"
+      >{{ iconText }}</i
+    >
+  </button>
 </template>
 
 <script lang="ts">
@@ -54,58 +56,22 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import '@/global.scss';
-#darkModeButton {
-  width: 3vw;
-  height: 3vw;
-  font-size: 35px;
-  padding: 1vw;
+.dark-mode-toggle-button {
+  width: 45px;
+  height: 45px;
+  margin: 0 10px;
   border-radius: 5px;
-  transition: 1s;
+  transition: 0.5s;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  &:hover {
-    width: 4vw;
-    height: 4vw;
-    font-size: 40px;
-    padding-left: 0.5vw;
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  #darkModeButton {
-    width: 4vw;
-    height: 4vw;
-  }
-  #darkModeButton:hover {
-    width: 5vw;
-    height: 5vw;
-    padding-left: 0.5vw;
-  }
-}
-
-@media only screen and (max-width: 700px) {
-  #darkModeButton {
-    width: 5vw;
-    height: 5vw;
-  }
-  #darkModeButton:hover {
-    width: 6vw;
-    height: 6vw;
-    padding-left: 0.5vw;
-  }
-}
-
-@media only screen and (max-width: 500px) {
-  #darkModeButton {
-    width: 7vw;
-    height: 7vw;
-  }
-  #darkModeButton:hover {
-    width: 8.5vw;
-    height: 8.5vw;
-    padding-left: 0.5vw;
+  background-color: transparent;
+  i {
+    font-size: 35px;
+    &:hover {
+      font-size: 40px;
+    }
   }
 }
 </style>

@@ -93,6 +93,10 @@ export default Vue.extend({
 .dark .admin-login {
   color: white;
 
+  .dark-mode-toggle-button i {
+    color: white;
+  }
+
   .password,
   .confirm-password-btn {
     border: 2px solid white;
@@ -127,10 +131,13 @@ export default Vue.extend({
   input {
     font-family: Nunito;
   }
-  #darkModeButton {
+  .dark-mode-toggle-button {
     position: absolute;
     top: 10px;
     left: 10px;
+    i {
+      color: black;
+    }
   }
   .username,
   .password,
