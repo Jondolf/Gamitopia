@@ -1,15 +1,22 @@
 <template>
   <div class="news">
+    <h1 class="page-title-header">News</h1>
     <router-link to="/admin/create-news-post/" v-if="isAdmin"
       ><button class="create-news-post-btn">Create new</button>
     </router-link>
 
-    <div class="filter">
+    <div class="options">
+      <h2>Collapse/expand posts</h2>
+      <div class="btn-container">
+        <button @click="collapseAll">Collapse all</button>
+        <button @click="expandAll">Expand all</button>
+      </div>
+
       <h2>Filter</h2>
       <div class="btn-container">
-        <button v-on:click="filterByYear('Show all')">All</button>
-        <button v-on:click="filterByYear('2020')">2020</button>
-        <button v-on:click="filterByYear('2019')">2019</button>
+        <button @click="filterByYear('Show all')">All</button>
+        <button @click="filterByYear('2020')">2020</button>
+        <button @click="filterByYear('2019')">2019</button>
       </div>
     </div>
     <div class="news-posts-container">
@@ -20,6 +27,7 @@
         :title="newsPost.title"
         :body="newsPost.body"
         :date="handleFormatDate(newsPost.date)"
+        :areAllCollapsed="areAllPostsCollapsed"
       />
     </div>
   </div>
@@ -40,10 +48,20 @@ export default Vue.extend({
   data() {
     return {
       news: [] as News[],
+      areAllPostsCollapsed: false,
       isAdmin: this.$store.state.isAdmin
     };
   },
   methods: {
+    collapseAll() {
+      this.areAllPostsCollapsed = true;
+      localStorage.setItem('areAllPostsCollapsed', 'true');
+    },
+    expandAll() {
+      this.areAllPostsCollapsed = false;
+      localStorage.setItem('areAllPostsCollapsed', 'false');
+    },
+
     filterByYear(year: string) {
       const newsPosts = document.getElementsByClassName(
         'news-post'
@@ -63,6 +81,14 @@ export default Vue.extend({
     handleFormatDate: formatDate
   },
 
+  created() {
+    if (localStorage.getItem('areAllPostsCollapsed')) {
+      this.areAllPostsCollapsed = JSON.parse(
+        localStorage.getItem('areAllPostsCollapsed')!
+      );
+    }
+  },
+
   async mounted() {
     this.news = await getNewsPosts();
   }
@@ -71,6 +97,13 @@ export default Vue.extend({
 
 <style lang="scss">
 @import '@/global.scss';
+
+h1.page-title-header {
+  color: black;
+  text-align: center;
+  padding: 10px 0;
+}
+
 a:visited {
   color: white;
 }
@@ -97,7 +130,7 @@ a:hover {
   .create-news-post-btn:hover {
     border-radius: 10px;
   }
-  .filter {
+  .options {
     width: 50%;
     padding: 25px;
     border-radius: 5px;

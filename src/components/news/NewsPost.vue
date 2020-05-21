@@ -1,38 +1,57 @@
 <template>
   <div class="news-post" v-if="!isDeleted">
     <div class="top-container">
+      <router-link
+        v-if="isAdmin"
+        :to="`/news/${id}/`"
+        :title="`Go to news post #${id}`"
+        class="news-post-id"
+        >#{{ id }}</router-link
+      >
       <div class="left-container">
-        <router-link
-          v-if="isAdmin"
-          :to="`/news/${id}/`"
-          :title="`Go to news post #${id}`"
-          >#{{ id }}</router-link
-        >
         <button @click="copyLink" title="Copy link to clipboard">
           <i @click="copyLink" class="material-icons">link</i>
         </button>
+        <h1 class="news-post-title">{{ title }}</h1>
       </div>
 
-      <div v-if="isAdmin" class="admin-tools right-container">
-        <router-link
-          :to="{
-            path: '/admin/edit-news-post',
-            name: 'edit-news-post',
-            params: {
-              id: id
-            }
-          }"
+      <div class="right-container">
+        <button
+          @click="isCollapsed = !isCollapsed"
+          class="toggle-collapse-button"
         >
-          <i class="material-icons">edit</i>
-        </router-link>
-        <button v-on:click="handleDeleteNewsPost(id)">
-          <i class="material-icons">delete</i>
+          <i v-if="isCollapsed" class="material-icons" title="expand">
+            expand_more
+          </i>
+          <i v-if="!isCollapsed" class="material-icons" title="collapse">
+            expand_less
+          </i>
         </button>
+        <div v-if="isAdmin" class="admin-tools">
+          <router-link
+            :to="{
+              path: '/admin/edit-news-post',
+              name: 'edit-news-post',
+              params: {
+                id: id
+              }
+            }"
+          >
+            <i class="material-icons">edit</i>
+          </router-link>
+          <button v-on:click="handleDeleteNewsPost(id)">
+            <i class="material-icons">delete</i>
+          </button>
+        </div>
       </div>
     </div>
 
-    <h1 class="news-post-title">{{ title }}</h1>
-    <div v-html="body" class="news-post-body" ref="newsPostBody">
+    <div
+      v-html="body"
+      :style="[!isCollapsed ? { height: computedBodyHeight } : {}]"
+      class="news-post-body"
+      ref="newsPostBody"
+    >
       {{ body }}
     </div>
     <time :datetime="date" class="news-post-date">{{ date }}</time>
@@ -62,7 +81,8 @@ export default Vue.extend({
     id: Number,
     title: String,
     body: String,
-    date: String
+    date: String,
+    areAllCollapsed: Boolean
   },
 
   data() {
@@ -71,11 +91,29 @@ export default Vue.extend({
       isDeleted: false,
       statusMessage: '',
       statusMessageType: '',
-      showStatus: false
+      showStatus: false,
+      computedBodyHeight: '0',
+      isCollapsed: false
     };
   },
 
   methods: {
+    initBodyHeight() {
+      const body = this.$refs.newsPostBody as HTMLElement;
+      body.style.height = 'auto';
+      body.style.position = 'absolute';
+      body.style.visibility = 'hidden';
+      body.style.display = 'block';
+
+      const height = getComputedStyle(body).height;
+      this.computedBodyHeight = height;
+
+      body.style.position = 'relative';
+      body.style.visibility = 'visible';
+      body.style.display = 'block';
+      body.style.height = '0';
+    },
+
     copyLink() {
       const dummy = document.createElement('input') as HTMLInputElement;
       document.body.appendChild(dummy);
@@ -109,18 +147,37 @@ export default Vue.extend({
     }
   },
 
+  watch: {
+    areAllCollapsed() {
+      if (this.areAllCollapsed) {
+        this.isCollapsed = true;
+      } else {
+        this.isCollapsed = false;
+      }
+    }
+  },
+
   updated() {
-    const body = this.$refs.newsPostBody as HTMLElement;
-    body.querySelectorAll('code').forEach((block) => {
-      hljs.highlightBlock(block);
-    });
+    if (!this.isCollapsed) {
+      const body = this.$refs.newsPostBody as HTMLElement;
+      body.querySelectorAll('code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    }
   },
 
   mounted() {
     const body = this.$refs.newsPostBody as HTMLElement;
-    body.querySelectorAll('code').forEach((block) => {
-      hljs.highlightBlock(block);
-    });
+    this.initBodyHeight();
+    if (this.areAllCollapsed) {
+      this.isCollapsed = true;
+    }
+    if (!this.isCollapsed) {
+      const body = this.$refs.newsPostBody as HTMLElement;
+      body.querySelectorAll('code').forEach((block) => {
+        hljs.highlightBlock(block);
+      });
+    }
   }
 });
 </script>
@@ -136,6 +193,7 @@ export default Vue.extend({
   border-radius: 5px;
   position: relative;
   white-space: pre-line;
+  overflow: hidden;
 
   h1 {
     font-size: 26px;
@@ -164,6 +222,31 @@ export default Vue.extend({
     display: flex;
     justify-content: space-between;
 
+    .news-post-id {
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      background-color: transparent;
+      outline: none;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 25px;
+      color: white;
+      font-size: 20px;
+      width: 40px;
+      height: 40px;
+      transition: 0.75s;
+      border-radius: 25%;
+      font-weight: 200;
+      &:hover {
+        color: rgb(200, 200, 255);
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+      }
+    }
+
     .left-container,
     .right-container {
       display: flex;
@@ -178,7 +261,7 @@ export default Vue.extend({
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-left: 30px;
+        margin-left: 25px;
         color: white;
         font-size: 20px;
         width: 40px;
@@ -192,6 +275,9 @@ export default Vue.extend({
         }
         &:first-child {
           margin-left: 0;
+        }
+        a {
+          height: 100%;
         }
         i {
           color: white;
@@ -213,6 +299,14 @@ export default Vue.extend({
     }
     .right-container {
       justify-content: flex-end;
+      .admin-tools {
+        display: flex;
+        align-items: center;
+        button,
+        a:first-child {
+          margin-left: 25px;
+        }
+      }
     }
   }
 
@@ -225,6 +319,9 @@ export default Vue.extend({
     margin-top: 15px;
     margin-bottom: 15px;
     line-height: 1.5rem;
+    height: 0;
+    overflow: hidden;
+    transition: 2s;
     img {
       width: 75%;
       max-width: 400px;
@@ -279,19 +376,13 @@ export default Vue.extend({
   color: white;
 }
 
-.dark.default-dark .news-post a {
-  font-weight: bolder;
+.dark.default-dark .news-post a:hover {
   font-style: italic;
-
   color: red;
 }
 
 .dark.default-dark .news-post .top-container div button i:hover,
 .dark.default-dark .news-post .top-container div a i:hover {
   color: red;
-}
-
-.dark.default-dark .news-post .news-post-id {
-  color: rgb(122, 122, 122);
 }
 </style>
