@@ -1,10 +1,10 @@
 <template>
   <div class="game-thumbnail">
-    <h3>{{ name }}</h3>
+    <span>{{ name }}</span>
     <router-link :to="route">
       <img :src="thumbnailImgSrc" :alt="thumbnailImgAlt" />
     </router-link>
-    <h6>{{ releaseDate }}</h6>
+    <time>{{ releaseDate }}</time>
   </div>
 </template>
 
@@ -48,9 +48,14 @@ export default Vue.extend({
     width: 20vw;
   }
 
-  h3,
-  h6 {
+  span,
+  time {
     margin: auto 0.5vw;
+    display: block;
+  }
+
+  time {
+    font-size: 12px;
   }
 }
 
@@ -64,10 +69,10 @@ export default Vue.extend({
     img:hover {
       width: 34vw;
     }
-    h3 {
+    span {
       font-size: 16px;
     }
-    h6 {
+    time {
       font-size: 10px;
       margin: auto 1.5vw;
     }
@@ -84,10 +89,10 @@ export default Vue.extend({
     img:hover {
       width: 46vw;
     }
-    h3 {
+    span {
       font-size: 15px;
     }
-    h6 {
+    time {
       font-size: 9px;
     }
   }
@@ -103,10 +108,10 @@ export default Vue.extend({
     img:hover {
       width: 58vw;
     }
-    h3 {
+    span {
       font-size: 14px;
     }
-    h6 {
+    time {
       font-size: 8px;
     }
   }
