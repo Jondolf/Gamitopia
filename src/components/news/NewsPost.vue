@@ -237,9 +237,6 @@ export default Vue.extend({
   }
 
   .top-container {
-    display: flex;
-    justify-content: space-between;
-
     .news-post-id {
       position: absolute;
       left: 5px;
@@ -269,7 +266,6 @@ export default Vue.extend({
     .right-container {
       display: flex;
       align-items: center;
-      width: 50%;
 
       button,
       a {
@@ -314,9 +310,13 @@ export default Vue.extend({
     }
     .left-container {
       justify-content: flex-start;
+      margin-right: 30px;
     }
     .right-container {
       justify-content: flex-end;
+      position: absolute;
+      top: 30px;
+      right: 20px;
       .admin-tools {
         display: flex;
         align-items: center;
