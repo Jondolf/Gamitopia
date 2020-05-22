@@ -104,13 +104,17 @@ h1.page-title-header {
   padding: 10px 0;
 }
 
+.dark h1.page-title-header {
+  color: white;
+}
+
 a:visited {
   color: white;
 }
 a:hover {
   color: rgb(200, 200, 255);
 }
-.dark.default-dark .filter button {
+.dark .news .options button {
   color: white;
 }
 
