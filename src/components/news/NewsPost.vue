@@ -148,11 +148,25 @@ export default Vue.extend({
   },
 
   watch: {
+    isCollapsed() {
+      const body = this.$refs.newsPostBody as HTMLElement;
+      if (!this.isCollapsed && body.style.height === this.computedBodyHeight) {
+        setTimeout(() => {
+          const body = this.$refs.newsPostBody as HTMLElement;
+          this.computedBodyHeight = body.scrollHeight + 'px';
+        }, 1500);
+      }
+    },
+
     areAllCollapsed() {
       if (this.areAllCollapsed) {
         this.isCollapsed = true;
       } else {
         this.isCollapsed = false;
+        setTimeout(() => {
+          const body = this.$refs.newsPostBody as HTMLElement;
+          this.computedBodyHeight = body.scrollHeight + 'px';
+        }, 1500);
       }
     }
   },
@@ -167,7 +181,6 @@ export default Vue.extend({
   },
 
   mounted() {
-    const body = this.$refs.newsPostBody as HTMLElement;
     this.initBodyHeight();
     if (this.areAllCollapsed) {
       this.isCollapsed = true;
@@ -177,6 +190,9 @@ export default Vue.extend({
       body.querySelectorAll('code').forEach((block) => {
         hljs.highlightBlock(block);
       });
+      setTimeout(() => {
+        this.computedBodyHeight = body.scrollHeight + 'px';
+      }, 1500);
     }
   }
 });
@@ -321,7 +337,7 @@ export default Vue.extend({
     line-height: 1.5rem;
     height: 0;
     overflow: hidden;
-    transition: 2s;
+    transition: 1.5s;
     img {
       width: 75%;
       max-width: 400px;
