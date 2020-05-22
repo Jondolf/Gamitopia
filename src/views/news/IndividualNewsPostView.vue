@@ -7,6 +7,7 @@
       :title="newsPost.title"
       :body="newsPost.body"
       :date="handleFormatDate(newsPost.date)"
+      :canCollapse="true"
     />
 
     <div v-if="!newsPostFound" class="not-found-container">

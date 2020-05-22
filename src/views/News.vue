@@ -27,6 +27,7 @@
         :title="newsPost.title"
         :body="newsPost.body"
         :date="handleFormatDate(newsPost.date)"
+        :canCollapse="true"
         :areAllCollapsed="areAllPostsCollapsed"
       />
     </div>

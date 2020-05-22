@@ -17,6 +17,7 @@
 
       <div class="right-container">
         <button
+          v-if="canCollapse"
           @click="isCollapsed = !isCollapsed"
           class="toggle-collapse-button"
         >
@@ -82,6 +83,7 @@ export default Vue.extend({
     title: String,
     body: String,
     date: String,
+    canCollapse: Boolean,
     areAllCollapsed: Boolean
   },
 
@@ -150,7 +152,7 @@ export default Vue.extend({
   watch: {
     isCollapsed() {
       const body = this.$refs.newsPostBody as HTMLElement;
-      if (!this.isCollapsed && body.style.height === this.computedBodyHeight) {
+      if (!this.isCollapsed && body.style.height !== this.computedBodyHeight) {
         setTimeout(() => {
           const body = this.$refs.newsPostBody as HTMLElement;
           this.computedBodyHeight = body.scrollHeight + 'px';
