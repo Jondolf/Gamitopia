@@ -5,12 +5,8 @@ import { GameInfo } from '@/interfaces/GameInfo';
 Vue.use(Vuex);
 
 type GameKey =
-  | 'calculator'
-  | 'snake'
-  | 'adventura'
-  | 'ticTacToe'
-  | 'randomizer'
-  | 'cookieClicker'; // For proper typing
+  /* | 'calculator' | */
+  'snake' | 'adventura' | 'ticTacToe' | 'randomizer' | 'cookieClicker'; // For proper typing
 
 type AllGames = {
   [key in GameKey]: GameInfo;
@@ -19,6 +15,7 @@ type AllGames = {
 // TODO add update histories to game descriptions. This could be collapsible. Look at commit history from GitHub (maybe). Make them objects, like: updates: [{ date: ??, message: ?? }, { date: ??, message: ?? }, ...]
 
 const allGames: AllGames = {
+  /*
   calculator: {
     name: 'Calculator',
     route: '/calculator/',
@@ -31,6 +28,7 @@ const allGames: AllGames = {
       support: ['']
     }
   },
+  */
   snake: {
     name: 'Snake',
     route: '/snake/',
