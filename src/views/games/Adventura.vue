@@ -168,39 +168,10 @@
         @openMap="currentView = 'Map'"
       />
     </div>
-    <div class="description">
-      <div class="mainDescription">
-        <h3>Description</h3>
-        <p>
-          Fight enemies as you go through the many areas of Adventura while
-          getting stronger and stronger.
-          <br />
-          <br />
-          Adventura is a turn based combat game where you fight enemies and
-          bosses to open new, more difficult areas. To survive in those harder
-          areas, you have to buy upgrades from the shop using the coins you
-          gather from your enemies.
-          <br />
-          <br />
-          For more detailed instructions, check out the instructions from the
-          game itself.
-        </p>
-      </div>
-      <div class="otherDescription">
-        <div class="madeWith">
-          <h3>Made with:</h3>
-          <ul>
-            <li>HTML</li>
-            <li>SCSS</li>
-            <li>TypeScript</li>
-          </ul>
-        </div>
-        <div class="otherInfo">
-          <h3>Other Info</h3>
-          <p>Fullscreen support: yes</p>
-        </div>
-      </div>
-    </div>
+
+    <GameDescription
+      :game="$store.state.games.allGames.adventura"
+    ></GameDescription>
   </div>
 </template>
 
@@ -208,6 +179,7 @@
 import Vue from 'vue';
 
 //Components
+import GameDescription from '@/components/games/GameDescription.vue';
 import StartMenu from '@/components/games/adventura/StartMenu.vue';
 const TopBar = () => import('@/components/games/adventura/TopBar.vue');
 const AreaMap = () => import('@/components/games/adventura/areaMap.vue');
@@ -246,8 +218,9 @@ import { Enemy } from '../../components/games/adventura/enemy';
 import { Boss } from '../../components/games/adventura/boss';
 
 export default Vue.extend({
-  name: 'adventura',
+  name: 'Adventura',
   components: {
+    GameDescription,
     TopBar,
     BattleArea,
     StartMenu,

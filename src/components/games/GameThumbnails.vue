@@ -25,7 +25,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      games: this.$store.state.games.games
+      games: this.$store.state.games.allGames
     };
   }
 });

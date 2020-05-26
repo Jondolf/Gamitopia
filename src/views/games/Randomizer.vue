@@ -29,61 +29,22 @@
       <RandomizeContent :whatToRandomize="whatToRandomize"></RandomizeContent>
     </div>
 
-    <div class="description">
-      <div class="mainDescription">
-        <h3>Description</h3>
-        <p>
-          Press the button in the bottom to randomize. Click the menu button to
-          open a small list of things to randomize. Click on a list item and
-          press the randomizer button to randomize.
-          <br />
-          <br />Number Range: Get a random number from 0 to 10 (with default
-          settings). You can move the slider below the randomizer button to
-          change the range of numbers to randomize, for example 0 to 100 or 0 to
-          255.
-          <br />
-          <br />Heads or Tails: Get either heads or tails. This could be useful
-          if you have to decide between two things. For example, should I eat
-          pizza or lasagna? Heads or tails?
-          <br />
-          <br />Roll Dice: Get a random number (shown on the dice) between 1 and
-          6. This could be useful, for example, if you want to play board games
-          but don't have a dice with you.
-        </p>
-      </div>
-      <div class="otherDescription">
-        <div class="madeWith">
-          <h3>Made with:</h3>
-          <ul>
-            <li>Vue.js</li>
-            <li>
-              <ul>
-                <li>HTML</li>
-                <li>SCSS</li>
-                <li>TypeScript</li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <div class="otherInfo">
-          <h3>Other Info</h3>
-          <p>Dark mode support: no</p>
-          <br />
-          <p>Fullscreen support: yes</p>
-        </div>
-      </div>
-    </div>
+    <GameDescription
+      :game="$store.state.games.allGames.randomizer"
+    ></GameDescription>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import GameDescription from '@/components/games/GameDescription.vue';
 import RandomizeContent from '@/components/games/randomizer/RandomizeContent.vue';
 import WhatToRandomizeMenu from '@/components/games/randomizer/WhatToRandomizeMenu.vue';
 export default Vue.extend({
   name: 'Randomizer',
 
   components: {
+    GameDescription,
     RandomizeContent,
     WhatToRandomizeMenu
   },
@@ -404,52 +365,6 @@ export default Vue.extend({
   #randomizer-button:active {
     outline: none;
   }
-
-  .description {
-    width: 70%;
-    display: flex;
-    background-color: var(--secondary-color);
-    border-radius: 5px;
-    margin: 50px auto;
-    color: white;
-    text-align: left;
-    position: relative;
-  }
-
-  .description h3 {
-    margin-bottom: 15px;
-  }
-
-  .mainDescription,
-  .otherDescription {
-    padding: 20px;
-    list-style: none;
-    box-sizing: border-box;
-  }
-
-  .mainDescription {
-    width: 60%;
-    border-right: 1px solid;
-  }
-
-  .otherDescription {
-    width: 40%;
-    height: 100%;
-  }
-
-  .otherDescription li {
-    list-style: none;
-  }
-
-  .madeWith {
-    padding: 20px;
-    height: 100%;
-  }
-
-  .otherInfo {
-    padding: 20px;
-    height: 100%;
-  }
 }
 
 @media only screen and (max-width: 850px) {
@@ -508,20 +423,6 @@ export default Vue.extend({
 }
 
 @media only screen and (max-width: 620px) {
-  .description {
-    flex-direction: column;
-    padding: 10px;
-  }
-  .mainDescription {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid;
-    padding: 20px;
-  }
-  .otherDescription {
-    width: 100%;
-    padding: 0;
-  }
   #randomizer-container .header-container {
     font-size: 12px;
     margin-top: 18px;

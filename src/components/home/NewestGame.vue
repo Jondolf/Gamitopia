@@ -19,7 +19,7 @@ export default Vue.extend({
 
   data() {
     return {
-      newestGame: this.$store.state.games.games[0]
+      newestGame: this.$store.state.games.newestGame
     };
   }
 });

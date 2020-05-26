@@ -60,37 +60,16 @@
         </div>
       </div>
     </div>
-    <div class="description">
-      <div class="mainDescription">
-        <h3>Description</h3>
-        <p>
-          Click the cookie to bake cookies. Use your baked cookies to buy
-          upgrades. Upgrades help you bake more cookies faster. Try to bake as
-          many cookies as you can!
-        </p>
-      </div>
-      <div class="otherDescription">
-        <div class="madeWith">
-          <h3>Made with:</h3>
-          <ul>
-            <li>HTML</li>
-            <li>SCSS</li>
-            <li>TypeScript</li>
-          </ul>
-        </div>
-        <div class="otherInfo">
-          <h3>Other Info</h3>
-          <p>Dark mode support: yes</p>
-          <br />
-          <p>Fullscreen support: no</p>
-        </div>
-      </div>
-    </div>
+
+    <GameDescription
+      :game="$store.state.games.allGames.cookieClicker"
+    ></GameDescription>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import GameDescription from '@/components/games/GameDescription.vue';
 import UpgradeContainer from '@/components/games/cookie-clicker/UpgradeContainer.vue';
 import Cookie from '@/components/games/cookie-clicker/Cookie.vue';
 import SoundControlBtn from '@/components/games/cookie-clicker/SoundControlBtn.vue';
@@ -105,6 +84,7 @@ import {
 export default Vue.extend({
   name: 'cookie-clicker',
   components: {
+    GameDescription,
     UpgradeContainer,
     Cookie,
     SoundControlBtn,
@@ -362,81 +342,12 @@ h2 {
   padding: 0 0 35px 0;
 }
 
-.description {
-  width: 70%;
-  display: flex;
-  background-color: var(--secondary-color);
-  border-radius: 5px;
-  margin: 50px auto;
-  color: white;
-  text-align: left;
-  position: relative;
-}
-
-.description h3 {
-  margin-bottom: 15px;
-}
-
-.mainDescription,
-.otherDescription {
-  padding: 20px;
-  list-style: none;
-  box-sizing: border-box;
-}
-
-.mainDescription {
-  width: 60%;
-  border-right: 1px solid;
-}
-
-.otherDescription {
-  width: 40%;
-  height: 100%;
-}
-
-.otherDescription li {
-  list-style: none;
-}
-
-.madeWith {
-  padding: 20px;
-  height: 100%;
-}
-
-.otherInfo {
-  padding: 20px;
-  height: 100%;
-}
-
 @media only screen and (max-width: 800px) {
   .cookieClickingContainer {
     width: 100%;
   }
   #cookie {
     margin-bottom: 70px;
-  }
-}
-
-@media only screen and (max-width: 620px) {
-  .description {
-    flex-direction: column;
-    padding: 10px;
-  }
-  .mainDescription {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid;
-    padding: 20px;
-  }
-  .otherDescription {
-    width: 100%;
-    padding: 0;
-  }
-}
-
-@media only screen and (max-width: 460px) {
-  .description p {
-    font-size: 14px;
   }
 }
 </style>

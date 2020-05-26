@@ -26,9 +26,9 @@ export default Vue.extend({
   data() {
     return {
       games: [
-        this.$store.state.games.games[0],
-        this.$store.state.games.games[1],
-        this.$store.state.games.games[2]
+        this.$store.state.games.recentGames[0],
+        this.$store.state.games.recentGames[1],
+        this.$store.state.games.recentGames[2]
       ]
     };
   }
