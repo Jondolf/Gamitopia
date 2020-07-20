@@ -1,6 +1,7 @@
 <template>
   <div id="snake">
-    <h2>Snake</h2>
+    <GameHeader :game="snakeInfo" />
+
     <div class="game-container" ref="gameContainer">
       <StartMenu
         v-if="currentView === 'Start menu'"
@@ -30,15 +31,15 @@
       />
     </div>
 
-    <GameDescription
-      :game="$store.state.games.allGames.snake"
-    ></GameDescription>
+    <GameDescription :game="snakeInfo" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import GameHeader from '@/components/games/GameHeader.vue';
 import GameDescription from '@/components/games/GameDescription.vue';
+
 import StartMenu from '@/components/games/snake/StartMenu.vue';
 const GameArea = () => import('@/components/games/snake/GameArea.vue');
 const Statistics = () => import('@/components/games/snake/Statistics.vue');
@@ -48,6 +49,7 @@ import { Game } from '@/components/games/snake/gameLogic';
 export default Vue.extend({
   name: 'snake',
   components: {
+    GameHeader,
     GameDescription,
     StartMenu,
     GameArea,
@@ -56,6 +58,8 @@ export default Vue.extend({
   },
   data() {
     return {
+      snakeInfo: this.$store.state.games.allGames.snake,
+
       currentView: 'Start menu',
       fullscreenOn: false,
       resetGame: false,
@@ -147,15 +151,6 @@ export default Vue.extend({
 @import '@/global.scss';
 #snake {
   padding-top: 66px;
-}
-
-.dark.default-dark #snake h2 {
-  color: white;
-}
-
-h2 {
-  margin: 30px;
-  color: black;
 }
 
 .game-container button,

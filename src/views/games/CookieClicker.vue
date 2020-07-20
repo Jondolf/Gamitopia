@@ -1,5 +1,7 @@
 <template>
   <div id="cookie-clicker">
+    <GameHeader :game="cookieClickerInfo" />
+
     <audio v-if="musicOn" loop="true" autoplay ref="backgroundMusic">
       <source
         src="@/assets/sound/cookie-clicker-background-music.mp3"
@@ -12,7 +14,7 @@
         type="audio/mp3"
       />
     </audio>
-    <h2>Cookie Clicker</h2>
+
     <div id="gameContainer">
       <UpgradeContainer
         :pointsPerClick="pointsPerClick"
@@ -61,15 +63,16 @@
       </div>
     </div>
 
-    <GameDescription
-      :game="$store.state.games.allGames.cookieClicker"
-    ></GameDescription>
+    <GameDescription :game="cookieClickerInfo" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import GameHeader from '@/components/games/GameHeader.vue';
 import GameDescription from '@/components/games/GameDescription.vue';
+import { GameInfo } from '../../interfaces/GameInfo';
+
 import UpgradeContainer from '@/components/games/cookie-clicker/UpgradeContainer.vue';
 import Cookie from '@/components/games/cookie-clicker/Cookie.vue';
 import SoundControlBtn from '@/components/games/cookie-clicker/SoundControlBtn.vue';
@@ -84,6 +87,7 @@ import {
 export default Vue.extend({
   name: 'cookie-clicker',
   components: {
+    GameHeader,
     GameDescription,
     UpgradeContainer,
     Cookie,
@@ -93,6 +97,9 @@ export default Vue.extend({
 
   data() {
     return {
+      cookieClickerInfo: this.$store.state.games.allGames
+        .cookieClicker as GameInfo,
+
       pointsPerClick: new PointsPerClick(),
       speedOfPointsByTime: new SpeedOfPointsByTime(2000),
       amountOfPointsByTime: new AmountOfPointsByTime(),
@@ -255,14 +262,6 @@ body {
   #toggleSoundEffects {
     color: black;
   }
-  h2 {
-    color: white;
-  }
-}
-
-h2 {
-  margin: 30px;
-  color: black;
 }
 
 #gameContainer {

@@ -1,13 +1,14 @@
 <template>
   <div class="randomizer">
-    <h2>Randomizer</h2>
+    <GameHeader :game="randomizerInfo" />
+
     <div class="game-container" ref="gameContainer">
       <keep-alive>
         <WhatToRandomizeMenu
           v-if="isWhatToRandomizeMenuOpen"
           @changeOption="changeOption"
           @closeWhatToRandomizeMenu="isWhatToRandomizeMenuOpen = false"
-        ></WhatToRandomizeMenu>
+        />
       </keep-alive>
 
       <div class="top-container">
@@ -26,24 +27,26 @@
         </button>
       </div>
 
-      <RandomizeContent :whatToRandomize="whatToRandomize"></RandomizeContent>
+      <RandomizeContent :whatToRandomize="whatToRandomize" />
     </div>
 
-    <GameDescription
-      :game="$store.state.games.allGames.randomizer"
-    ></GameDescription>
+    <GameDescription :game="randomizerInfo" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import GameHeader from '@/components/games/GameHeader.vue';
 import GameDescription from '@/components/games/GameDescription.vue';
+import { GameInfo } from '../../interfaces/GameInfo';
+
 import RandomizeContent from '@/components/games/randomizer/RandomizeContent.vue';
 import WhatToRandomizeMenu from '@/components/games/randomizer/WhatToRandomizeMenu.vue';
 export default Vue.extend({
   name: 'Randomizer',
 
   components: {
+    GameHeader,
     GameDescription,
     RandomizeContent,
     WhatToRandomizeMenu
@@ -51,6 +54,8 @@ export default Vue.extend({
 
   data() {
     return {
+      randomizerInfo: this.$store.state.games.allGames.randomizer as GameInfo,
+
       whatToRandomize: 'Number range',
       isFullscreen: false,
       fullscreenIconName: 'fullscreen',
@@ -101,17 +106,8 @@ export default Vue.extend({
   }
 }
 
-.dark.default-dark .randomizer h2 {
-  color: white;
-}
-
 .randomizer {
   padding-top: 66px;
-
-  h2 {
-    margin: 30px;
-    color: black;
-  }
 
   img {
     -webkit-user-drag: none;

@@ -1,5 +1,7 @@
 <template>
   <div id="adventura">
+    <GameHeader :game="adventuraInfo" />
+
     <audio
       loop="true"
       id="backgroundMusic"
@@ -8,14 +10,6 @@
       type="audio/mp3"
       autoplay
     />
-    <!--<audio
-      loop="true"
-      id="backgroundMusic"
-      v-if="currentView === 'Map' && musicOn"
-      :src="require('@/assets/sound/adventura-map.mp3')"
-      type="audio/mp3"
-      autoplay
-    />-->
     <audio
       loop="true"
       id="backgroundMusic"
@@ -37,7 +31,7 @@
       ref="clickSound"
       type="audio/mp3"
     />
-    <h2>Adventura</h2>
+
     <div class="gameContainer" ref="gameContainer">
       <TopBar
         v-if="inBattle"
@@ -169,17 +163,16 @@
       />
     </div>
 
-    <GameDescription
-      :game="$store.state.games.allGames.adventura"
-    ></GameDescription>
+    <GameDescription :game="adventuraInfo" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-
-//Components
+import GameHeader from '@/components/games/GameHeader.vue';
 import GameDescription from '@/components/games/GameDescription.vue';
+import { GameInfo } from '../../interfaces/GameInfo';
+
 import StartMenu from '@/components/games/adventura/StartMenu.vue';
 const TopBar = () => import('@/components/games/adventura/TopBar.vue');
 const AreaMap = () => import('@/components/games/adventura/areaMap.vue');
@@ -220,6 +213,7 @@ import { Boss } from '../../components/games/adventura/boss';
 export default Vue.extend({
   name: 'Adventura',
   components: {
+    GameHeader,
     GameDescription,
     TopBar,
     BattleArea,
@@ -239,6 +233,8 @@ export default Vue.extend({
     // Themed
     const landOfTheDead = new LandOfTheDead();
     return {
+      adventuraInfo: this.$store.state.games.allGames.adventura as GameInfo,
+
       allAreas: [grasslands, desert, forest, castle, blueAbyss, snowlands], // Not themed ones
 
       //Weapons
@@ -704,13 +700,6 @@ export default Vue.extend({
 @import '@/global.scss';
 #adventura {
   padding-top: 66px;
-  h2 {
-    margin: 30px;
-    color: black;
-  }
-}
-.dark.default-dark #adventura h2 {
-  color: white;
 }
 
 .fullscreen {
@@ -749,51 +738,5 @@ export default Vue.extend({
   user-select: none;
   touch-action: manipulation;
   overflow: hidden;
-}
-
-.description {
-  width: 70%;
-  display: flex;
-  background-color: var(--secondary-color);
-  border-radius: 5px;
-  margin: 50px auto;
-  color: white;
-  text-align: left;
-  position: relative;
-}
-
-.description h3 {
-  margin-bottom: 15px;
-}
-
-.mainDescription,
-.otherDescription {
-  padding: 20px;
-  list-style: none;
-  box-sizing: border-box;
-}
-
-.mainDescription {
-  width: 60%;
-  border-right: 1px solid;
-}
-
-.otherDescription {
-  width: 40%;
-  height: 100%;
-}
-
-.otherDescription li {
-  list-style: none;
-}
-
-.madeWith {
-  padding: 20px;
-  height: 100%;
-}
-
-.otherInfo {
-  padding: 20px;
-  height: 100%;
 }
 </style>
