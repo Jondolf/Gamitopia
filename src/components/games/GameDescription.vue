@@ -50,7 +50,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .game-description {
-  width: 70%;
+  width: 80%;
   display: flex;
   background-color: var(--color-primary);
   border-radius: 5px;
