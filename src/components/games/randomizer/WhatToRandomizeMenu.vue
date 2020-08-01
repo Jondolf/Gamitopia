@@ -112,6 +112,7 @@ export default Vue.extend({
     }
     h3 {
       font-size: 25px;
+      text-align: left;
     }
   }
 
