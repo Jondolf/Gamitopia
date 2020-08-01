@@ -52,7 +52,7 @@ body,
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   position: relative;
-  background-color: var(--primary-color);
+  background-color: var(--color-light);
   width: 100%;
 }
 #app {
