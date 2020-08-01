@@ -27,25 +27,24 @@ export default Vue.extend({
 
 .game-thumbnail {
   background-color: var(--color-primary);
-  margin: 5vw;
+  margin: 3.5vw;
   display: inline-block;
   border-radius: 5px;
   justify-content: center;
   align-items: center;
   color: white;
   transition: 1s;
-  max-height: 50vw;
   padding: 0 1vw 0.75vw 1vw;
 
   img {
-    width: 18vw;
+    width: 22vw;
     border-radius: 5px;
     margin: 20px, 0;
     transition: 1s;
   }
 
   img:hover {
-    width: 20vw;
+    width: 24vw;
   }
 
   span,
@@ -61,13 +60,13 @@ export default Vue.extend({
 
 @media only screen and (max-width: 700px) {
   .game-thumbnail {
-    margin: 5vw;
+    margin: 3vw;
     padding: 0 1.5vw 1.5vw 1.5vw;
     img {
-      width: 30vw;
+      width: 36vw;
     }
     img:hover {
-      width: 34vw;
+      width: 40vw;
     }
     span {
       font-size: 16px;
@@ -81,38 +80,19 @@ export default Vue.extend({
 
 @media only screen and (max-width: 500px) {
   .game-thumbnail {
-    margin: 4vw;
+    margin: 2.5vw;
     padding: 0 2vw 2vw 2vw;
     img {
-      width: 40vw;
-    }
-    img:hover {
-      width: 46vw;
-    }
-    span {
-      font-size: 15px;
-    }
-    time {
-      font-size: 9px;
-    }
-  }
-}
-
-@media only screen and (max-width: 350px) {
-  .game-thumbnail {
-    margin: 4vw;
-    padding: 0 2.5vw 2.5vw 2.5vw;
-    img {
-      width: 50vw;
-    }
-    img:hover {
       width: 58vw;
     }
+    img:hover {
+      width: 64vw;
+    }
     span {
-      font-size: 14px;
+      font-size: 18px;
     }
     time {
-      font-size: 8px;
+      font-size: 12px;
     }
   }
 }

@@ -31,25 +31,26 @@ export default Vue.extend({
 .newest-game {
   background-color: var(--color-primary);
   text-align: center;
-  padding: 20px;
+  height: 70vh;
+  padding: 5vh;
   color: white;
 
   h2 {
-    margin: 65px auto 20px auto;
+    margin: 5vh auto 2vh auto;
     font-size: 35px;
   }
   span {
-    margin: 20px auto 10px auto;
+    margin: auto;
     font-size: 18px;
   }
 
   img {
-    width: 28vw;
+    width: 45vh;
     border-radius: 5px;
     margin: 25px;
     transition: 1s;
     &:hover {
-      width: 33vw;
+      width: 50vh;
     }
   }
 
@@ -63,54 +64,13 @@ export default Vue.extend({
   }
 }
 
-@media only screen and (max-width: 700px) {
-  .newest-game {
-    img {
-      width: 38vw;
-      &:hover {
-        width: 44vw;
-      }
-    }
-    span {
-      font-size: 16px;
-    }
-    time {
-      font-size: 10px;
-      margin: auto 1.5vw;
-    }
-  }
-}
-
 @media only screen and (max-width: 500px) {
   .newest-game {
     img {
-      width: 48vw;
+      width: 64vw;
       &:hover {
-        width: 55vw;
+        width: 70vw;
       }
-    }
-    span {
-      font-size: 15px;
-    }
-    time {
-      font-size: 9px;
-    }
-  }
-}
-
-@media only screen and (max-width: 350px) {
-  .newest-game {
-    img {
-      width: 58vw;
-      &:hover {
-        width: 66vw;
-      }
-    }
-    span {
-      font-size: 14px;
-    }
-    time {
-      font-size: 8px;
     }
   }
 }
