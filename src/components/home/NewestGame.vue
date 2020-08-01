@@ -29,7 +29,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import '@/global.scss';
 .newest-game {
-  background-color: var(--secondary-color);
+  background-color: var(--color-primary);
   text-align: center;
   padding: 20px;
   color: white;

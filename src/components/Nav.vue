@@ -33,7 +33,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import '@/global.scss';
 nav {
-  background-color: var(--secondary-color);
+  background-color: var(--color-primary);
   color: white;
   padding: 0 20px;
   width: 100%;

@@ -102,7 +102,7 @@ export default Vue.extend({
     background: linear-gradient(
       180deg,
       rgba(250, 231, 231, 0) 70%,
-      var(--secondary-color) 100%
+      var(--color-primary) 100%
     );
   }
 }

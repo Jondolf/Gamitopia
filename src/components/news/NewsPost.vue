@@ -203,7 +203,7 @@ export default Vue.extend({
 <style lang="scss">
 .news-post {
   width: 70%;
-  background-color: var(--secondary-color);
+  background-color: var(--color-primary);
   color: white;
   margin: 20px auto;
   padding: 30px;
@@ -369,7 +369,7 @@ export default Vue.extend({
     ol {
       padding: 10px;
       border-radius: 5px;
-      background-color: var(--primary-color);
+      background-color: var(--color-light);
       margin: 15px auto;
       li,
       li p {

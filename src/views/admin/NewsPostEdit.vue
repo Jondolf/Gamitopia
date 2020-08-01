@@ -140,6 +140,7 @@ export default Vue.extend({
 
   h2 {
     margin: 30px auto;
+    color: var(--color-light-contrast);
   }
 
   .submit-btn {
@@ -148,7 +149,7 @@ export default Vue.extend({
     min-width: 10%;
     width: auto;
     border-radius: 5px;
-    background-color: var(--secondary-color);
+    background-color: var(--color-primary);
     color: white;
     transition: 0.2s;
     outline: none;

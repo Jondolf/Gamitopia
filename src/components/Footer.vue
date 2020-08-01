@@ -13,7 +13,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import '@/global.scss';
 #footer {
-  background-color: var(--secondary-color);
+  background-color: var(--color-primary);
   width: 100%;
   text-align: center;
   color: white;

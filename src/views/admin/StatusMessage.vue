@@ -47,7 +47,7 @@ export default Vue.extend({
 <style lang="scss" scoped>
 @import '@/global.scss';
 #statusMessage {
-  background-color: var(--secondary-color);
+  background-color: var(--color-primary);
   border-radius: 5px;
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.75);
   width: 25%;

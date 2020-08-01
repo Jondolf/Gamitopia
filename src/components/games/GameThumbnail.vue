@@ -26,7 +26,7 @@ export default Vue.extend({
 @import '@/global.scss';
 
 .game-thumbnail {
-  background-color: var(--secondary-color);
+  background-color: var(--color-primary);
   margin: 5vw;
   display: inline-block;
   border-radius: 5px;

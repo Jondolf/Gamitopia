@@ -509,7 +509,7 @@ export default Vue.extend({
 @import '@/global.scss';
 .news-post-writing-area {
   width: 70%;
-  background-color: var(--secondary-color);
+  background-color: var(--color-primary);
   margin: 20px auto;
   padding: 30px;
   text-align: left;
@@ -688,7 +688,7 @@ export default Vue.extend({
     ol {
       padding: 10px;
       border-radius: 5px;
-      background-color: var(--primary-color);
+      background-color: var(--color-light);
       margin: 15px auto;
       li,
       li p {

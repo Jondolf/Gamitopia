@@ -129,7 +129,7 @@ a:hover {
     border-radius: 5px;
     opacity: none;
     color: white;
-    background-color: var(--secondary-color);
+    background-color: var(--color-primary);
     transition: 0.4s;
   }
   .create-news-post-btn:hover {
@@ -140,7 +140,7 @@ a:hover {
     padding: 25px;
     border-radius: 5px;
     text-align: left;
-    background-color: var(--secondary-color);
+    background-color: var(--color-primary);
     margin: auto;
     h2 {
       color: white;
@@ -153,7 +153,7 @@ a:hover {
       padding-top: 15px;
     }
     button {
-      background-color: var(--primary-color);
+      background-color: var(--color-light);
       color: black;
       width: 33%;
       padding: 15px 0 15px 0;

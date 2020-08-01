@@ -19,9 +19,6 @@ export default Vue.extend({
 <style lang="scss">
 .game-header h2 {
   margin: 30px;
-  color: black;
-}
-.dark.default-dark .game-header h2 {
-  color: white;
+  color: var(--color-light-contrast);
 }
 </style>

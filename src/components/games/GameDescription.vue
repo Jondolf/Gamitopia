@@ -52,7 +52,7 @@ export default Vue.extend({
 .game-description {
   width: 70%;
   display: flex;
-  background-color: var(--secondary-color);
+  background-color: var(--color-primary);
   border-radius: 5px;
   margin: 50px auto;
   color: white;

@@ -112,7 +112,7 @@ export default Vue.extend({
   flex-direction: column;
   align-items: center;
   z-index: 20;
-  background-color: var(--primary-color);
+  background-color: var(--color-light);
   padding-top: 10%;
   cursor: default;
   -webkit-touch-callout: none;
@@ -178,7 +178,7 @@ export default Vue.extend({
     min-width: 40%;
     width: auto;
     border-radius: 5px;
-    background-color: var(--secondary-color);
+    background-color: var(--color-primary);
     color: white;
     transition: 0.2s;
     outline: none;

@@ -71,7 +71,7 @@ export default Vue.extend({
   .about-container {
     min-height: 200px;
     width: 80%;
-    background-color: var(--secondary-color);
+    background-color: var(--color-primary);
     color: white;
     margin: 30px auto;
     display: flex;
