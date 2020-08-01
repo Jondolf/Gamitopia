@@ -25,7 +25,7 @@ export default Vue.extend({
 .upgrade-btn {
   width: 100%;
   border-bottom: 1px solid white;
-  background-color: rgb(55, 76, 194);
+  background-color: var(--upgrades);
   button {
     color: white;
     width: 100%;
@@ -41,13 +41,5 @@ export default Vue.extend({
   button:hover {
     background-color: rgba(255, 255, 255, 0.2);
   }
-}
-
-#upgrade:last-child {
-  border: none;
-}
-
-.dark.default-dark .upgrade-btn {
-  background-color: #17223b;
 }
 </style>

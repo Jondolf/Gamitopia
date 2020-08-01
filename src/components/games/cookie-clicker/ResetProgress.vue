@@ -1,5 +1,5 @@
 <template>
-  <div id="resetProgress">
+  <div class="reset-progress">
     <h4>Are you sure you want to reset your progress?</h4>
     <ul>
       <button v-on:click="$emit('reset')" id="resetGame">Confirm reset</button>
@@ -16,9 +16,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import '@/global.scss';
-
-#resetProgress {
+.reset-progress {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -31,47 +29,47 @@ export default Vue.extend({
   border-radius: 5px;
   overflow: hidden;
   border: 2px solid black;
-}
 
-#resetProgress h4 {
-  padding: 10px;
-}
+  h4 {
+    padding: 10px;
+  }
 
-#resetProgress button {
-  width: 50%;
-  color: black;
-  border: none;
-  font-size: 20px;
-  font-family: Nunito;
-  background-color: rgba(255, 255, 255, 0);
-  padding: 10px;
-  transition: 0.4s;
-}
+  button {
+    width: 50%;
+    color: black;
+    border: none;
+    font-size: 20px;
+    font-family: Nunito;
+    background-color: rgba(255, 255, 255, 0);
+    padding: 10px;
+    transition: 0.4s;
+  }
 
-#resetProgress button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
+  button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
 
-#resetProgress ul {
-  display: flex;
-  justify-content: space-between;
-  background-color: rgb(197, 202, 233);
+  ul {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(197, 202, 233);
+  }
 }
 
 @media only screen and (max-width: 550px) {
-  #resetProgress ul button {
+  .reset-progress ul button {
     font-size: 16px;
   }
 }
 
 @media only screen and (max-width: 500px) {
-  #resetProgress {
+  .reset-progress {
     font-size: 14px;
   }
 }
 
 @media only screen and (max-width: 460px) {
-  #resetProgress ul button {
+  .reset-progress ul button {
     font-size: 12px;
   }
 }

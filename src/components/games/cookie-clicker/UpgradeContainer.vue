@@ -1,6 +1,6 @@
 <template>
-  <div id="upgradeContainer" ref="upgradeContainer">
-    <button v-on:click="openUpgradesMenu()" id="openUpgradesMenu">
+  <div class="upgrade-container" ref="upgradeContainer">
+    <button v-on:click="openUpgradesMenu()" class="open-upgrades-menu">
       <p>Open upgrades</p>
     </button>
     <div class="upgrade-btn-container">
@@ -30,8 +30,10 @@
 import Vue from 'vue';
 import UpgradeBtn from './UpgradeBtn.vue';
 import { Upgrade } from './upgrade';
+
 export default Vue.extend({
   name: 'UpgradeContainer',
+
   components: {
     UpgradeBtn
   },
@@ -41,11 +43,13 @@ export default Vue.extend({
     speedOfPointsByTime: Object as () => Upgrade,
     amountOfPointsByTime: Object as () => Upgrade
   },
+
   data() {
     return {
       upgradesMenuOpen: false
     };
   },
+
   methods: {
     openUpgradesMenu() {
       const upgradeContainer = this.$refs.upgradeContainer as HTMLButtonElement;
@@ -60,7 +64,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import '@/global.scss';
-#upgradeContainer {
+.upgrade-container {
   width: 40%;
   text-align: left;
   -webkit-transition: 1s 0s ease-out;
@@ -68,11 +72,12 @@ export default Vue.extend({
   -o-transition: 1s 0s ease-out;
   transition: 1s 0s ease-out;
 
-  #openUpgradesMenu {
+  .open-upgrades-menu {
     display: none;
   }
 
   .upgrade-btn-container {
+    border-right: 1px solid var(--color-light-contrast);
     display: flex;
     flex-direction: column;
     flex-flow: wrap;
@@ -82,7 +87,7 @@ export default Vue.extend({
 }
 
 @media only screen and (max-width: 800px) {
-  #upgradeContainer {
+  .upgrade-container {
     position: absolute;
     top: 90%;
     left: 0;
@@ -91,7 +96,7 @@ export default Vue.extend({
     z-index: 2;
     background-color: var(--upgrades);
 
-    #openUpgradesMenu {
+    .open-upgrades-menu {
       display: block;
       width: 100%;
       height: 10%;
@@ -101,14 +106,14 @@ export default Vue.extend({
       font-size: 16px;
       font-family: Nunito, sans-serif;
       transition: 0.4s;
-    }
-
-    #openUpgradesMenu:hover {
-      background-color: rgba(255, 255, 255, 0.2);
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
     }
 
     .upgrade-btn-container {
       height: 90%;
+      border: none;
       border-top: 2px solid white;
     }
   }

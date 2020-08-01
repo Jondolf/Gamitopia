@@ -1,10 +1,7 @@
 <template>
-  <button
-    v-on:click="$emit('btnClicked')"
-    ref="soundToggle"
-    class="material-icons"
-    id="soundControlBtn"
-  ></button>
+  <button v-on:click="$emit('btnClicked')" class="sound-control-btn">
+    <i class="material-icons" ref="soundToggleIcon"></i>
+  </button>
 </template>
 
 <script lang="ts">
@@ -19,21 +16,21 @@ export default Vue.extend({
   },
 
   mounted() {
-    const soundToggle = this.$refs.soundToggle as HTMLButtonElement;
+    const soundToggleIcon = this.$refs.soundToggleIcon as HTMLButtonElement;
     if (this.soundOn) {
-      soundToggle.innerText = this.soundOnText;
+      soundToggleIcon.innerText = this.soundOnText;
     } else {
-      soundToggle.innerText = this.soundOffText;
+      soundToggleIcon.innerText = this.soundOffText;
     }
   },
 
   watch: {
     soundOn() {
-      const soundToggle = this.$refs.soundToggle as HTMLButtonElement;
+      const soundToggleIcon = this.$refs.soundToggleIcon as HTMLButtonElement;
       if (this.soundOn) {
-        soundToggle.innerText = this.soundOnText;
+        soundToggleIcon.innerText = this.soundOnText;
       } else {
-        soundToggle.innerText = this.soundOffText;
+        soundToggleIcon.innerText = this.soundOffText;
       }
     }
   }
@@ -42,7 +39,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import '@/global.scss';
-#soundControlBtn {
+.sound-control-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,13 +53,14 @@ export default Vue.extend({
   background-repeat: no-repeat;
   background-position: center center;
   transition: 0.4s;
-
-  // Google's icon font
   font-family: 'Material Icons';
   font-size: 35px;
-}
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+  }
 
-#soundControlBtn:hover {
-  background-color: rgba(255, 255, 255, 0.7);
+  i {
+    color: black;
+  }
 }
 </style>

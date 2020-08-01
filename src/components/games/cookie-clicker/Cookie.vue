@@ -28,8 +28,9 @@ export default Vue.extend({
   }
 }
 .cookie {
-  width: 20vw;
-  height: 20vw;
+  width: 60%;
+  max-width: 350px;
+  padding-top: 100%;
   margin: 20px;
   background-color: rgba(0, 0, 0, 0);
   border-radius: 30%;
@@ -48,8 +49,9 @@ export default Vue.extend({
 
 @media only screen and (max-width: 800px) {
   .cookie {
-    width: 40vw;
-    height: 40vw;
+    width: 80%;
+    max-width: 315px;
+    margin-bottom: 0;
   }
 }
 </style>
