@@ -4,21 +4,21 @@ body {
 
 body::-webkit-scrollbar {
   width: 12px;
-  background-color: var(--scrollbar-color);
+  background-color: var(--color-scrollbar);
 }
 
 body::-webkit-scrollbar-thumb {
   border-radius: 6px;
   border: 3px solid white;
-  background-color: var(--scrollbar-handle-color);
+  background-color: var(--color-scrollbar-handle);
   &:active {
-    background-color: var(--scrollbar-handle-active-color);
+    background-color: var(--color-scrollbar-handle-active);
   }
 }
 
 ::selection {
-  background-color: var(--selection-bg-color);
-  color: var(--selection-color);
+  background-color: var(--color-selection-bg);
+  color: var(--color-selection);
 }
 
 // Inline code
@@ -120,25 +120,27 @@ input {
 }
 
 .light.default-light {
-  --primary-color: white;
-  --secondary-color: rgb(55, 76, 194);
-  --scrollbar-color: rgb(255, 255, 255);
-  --scrollbar-handle-color: rgb(55, 76, 194, 0.5);
-  --scrollbar-handle-active-color: rgb(55, 76, 194, 0.85);
-  --selection-bg-color: rgb(125, 160, 255);
-  --selection-color: white;
-  --link-visited-color: white;
-  --link-hover-color: rgb(200, 200, 255);
+  --color-light: white;
+  --color-light-contrast: black;
+  --color-primary: rgb(55, 76, 194);
+  --color-scrollbar: rgb(255, 255, 255);
+  --color-scrollbar-handle: rgb(55, 76, 194, 0.5);
+  --color-scrollbar-handle-active: rgb(55, 76, 194, 0.85);
+  --bg-color-selection: rgb(125, 160, 255);
+  --color-selection: white;
+  --color-link-visited: white;
+  --color-link-hover: rgb(200, 200, 255);
 }
 
 .dark.default-dark {
-  --primary-color: rgb(57, 62, 70);
-  --secondary-color: rgb(34, 40, 49);
-  --scrollbar-color: rgb(29, 35, 46);
-  --scrollbar-handle-color: rgb(20, 26, 37);
-  --scrollbar-handle-active-color: rgb(5, 7, 22);
-  --selection-bg-color: rgb(255, 160, 160);
-  --selection-color: white;
-  --link-visited-color: white;
-  --link-hover-color: red;
+  --color-light: rgb(57, 62, 70);
+  --color-light-contrast: white;
+  --color-primary: rgb(34, 40, 49);
+  --color-scrollbar: rgb(29, 35, 46);
+  --color-scrollbar-handle: rgb(20, 26, 37);
+  --color-scrollbar-handle-active: rgb(5, 7, 22);
+  --bg-color-selection: rgb(255, 160, 160);
+  --color-selection: white;
+  --color-link-visited: white;
+  --color-link-hover: red;
 }
