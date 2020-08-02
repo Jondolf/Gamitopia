@@ -107,7 +107,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/tic-tac-toe/',
     name: 'tic-tac-toe',
-    component: () => import('../views/games/Tic-Tac-Toe.vue'),
+    component: () => import('../views/games/TicTacToe.vue'),
     meta: {
       title: 'Tic-tac-toe | Gamitopia'
     }
