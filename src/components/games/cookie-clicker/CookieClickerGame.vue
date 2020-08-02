@@ -25,13 +25,7 @@
       @reset="resetProgress()"
     />
     <div class="cookie-clicking-container">
-      <div class="audio-container">
-        <SoundControlBtn
-          :soundOnText="'music_note'"
-          :soundOffText="'music_off'"
-          :soundOn="musicOn"
-          @btnClicked="musicOn = !musicOn"
-        />
+      <div class="settings-container">
         <button
           v-on:click="resetProgressVisibility = !resetProgressVisibility"
           class="open-reset-menu"
@@ -39,11 +33,25 @@
           Reset
         </button>
         <SoundControlBtn
+          :soundOnText="'music_note'"
+          :soundOffText="'music_off'"
+          :soundOn="musicOn"
+          @btnClicked="musicOn = !musicOn"
+        />
+        <SoundControlBtn
           :soundOnText="'volume_up'"
           :soundOffText="'volume_off'"
           :soundOn="sfxOn"
           @btnClicked="sfxOn = !sfxOn"
         />
+        <button
+          @click="$emit('toggleFullscreen')"
+          class="toggle-fullscreen-button"
+        >
+          <i class="material-icons">{{
+            isFullscreen ? 'fullscreen_exit' : 'fullscreen'
+          }}</i>
+        </button>
       </div>
       <p class="points">
         Cookies Baked:
@@ -76,11 +84,16 @@ import {
 
 export default Vue.extend({
   name: 'CookieClickerGame',
+
   components: {
     UpgradeContainer,
     Cookie,
     SoundControlBtn,
     ResetProgress
+  },
+
+  props: {
+    isFullscreen: Boolean
   },
 
   data() {
@@ -261,13 +274,38 @@ export default Vue.extend({
     }
   }
 
-  .audio-container {
+  .settings-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 90%;
     margin: auto;
     padding: 10px;
+
+    .toggle-fullscreen-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      overflow: hidden;
+      background-color: white;
+      border: 1px solid black;
+      background-size: 70%;
+      background-repeat: no-repeat;
+      background-position: center center;
+      transition: 0.4s;
+      font-family: 'Material Icons';
+      font-size: 35px;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.7);
+      }
+
+      i {
+        color: black;
+      }
+    }
   }
 
   .points {
@@ -279,12 +317,21 @@ export default Vue.extend({
   .cookie-container {
     position: absolute;
     top: 113px;
-    right: 0;
-    left: 0;
+    right: 20%;
+    left: 20%;
     bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+}
+
+.dark.default-dark .cookie-clicker-game {
+  --upgrades: #17223b;
+  --clicking-container: #263859;
+
+  .toggle-sound-effects {
+    color: black;
   }
 }
 
@@ -295,15 +342,6 @@ export default Vue.extend({
     .cookie-container {
       bottom: 10%;
     }
-  }
-}
-
-.dark.default-dark .cookie-clicker-game {
-  --upgrades: #17223b;
-  --clicking-container: #263859;
-
-  .toggle-sound-effects {
-    color: black;
   }
 }
 </style>

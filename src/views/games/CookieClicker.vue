@@ -3,8 +3,11 @@
     :game="$store.state.games.allGames.cookieClicker"
     id="cookieClicker"
   >
-    <GameContainer width="80vw" height="80vh" :isFullscreen="false">
-      <CookieClickerGame />
+    <GameContainer width="80vw" height="80vh" :isFullscreen="isFullscreen">
+      <CookieClickerGame
+        @toggleFullscreen="isFullscreen = !isFullscreen"
+        :isFullscreen="isFullscreen"
+      />
     </GameContainer>
   </GamePage>
 </template>
@@ -22,6 +25,12 @@ export default Vue.extend({
     GamePage,
     GameContainer,
     CookieClickerGame
+  },
+
+  data() {
+    return {
+      isFullscreen: false
+    };
   }
 });
 </script>
