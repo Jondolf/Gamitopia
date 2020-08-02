@@ -36,9 +36,9 @@ export default Vue.extend({
   border: 2px solid var(--color-light-contrast);
   border-radius: 5px;
   font-family: 'Nunito', 'Nunito Sans', sans-serif;
+  touch-action: manipulation;
   box-sizing: border-box;
   overflow: hidden;
-
   &.fullscreen {
     border: none;
     border-radius: 0;
@@ -48,6 +48,13 @@ export default Vue.extend({
     bottom: 0;
     left: 0;
     z-index: 20;
+  }
+
+  img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
   }
 }
 </style>
