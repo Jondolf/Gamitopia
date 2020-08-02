@@ -1,8 +1,8 @@
 <template>
-  <div id="statistics">
+  <div class="statistics">
     <h2>Statistics</h2>
     <div class="button-container">
-      <button v-on:click="changeView('startMenu')">Go back</button>
+      <button @click="changeView('startMenu')">Go back</button>
     </div>
     <div class="statistics-container">
       <p>
@@ -19,6 +19,7 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'Statistics',
+
   data() {
     return {
       hiscore: JSON.parse(localStorage.getItem('snakeHiscore')!!) || 0,
@@ -26,6 +27,7 @@ export default Vue.extend({
       leastMoves: JSON.parse(localStorage.getItem('snakeLeastMoves')!!) || 0
     };
   },
+
   methods: {
     changeView(view: string) {
       this.$emit(view);
@@ -35,16 +37,17 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import '@/global.scss';
-#statistics {
+.statistics {
   width: 100%;
   height: 100%;
   background-color: black;
   overflow: auto;
+
   h2 {
     margin: 0;
     padding: 15px;
   }
+
   .button-container {
     width: 80%;
     display: flex;
@@ -52,6 +55,7 @@ export default Vue.extend({
     justify-content: space-between;
     align-items: center;
     margin: auto;
+
     button {
       background-color: rgba(255, 255, 255, 0.7);
       border-radius: 5px;
@@ -63,11 +67,12 @@ export default Vue.extend({
       padding: 10px;
       font-size: 16px;
       transition: 0.4s;
-    }
-    button:hover {
-      background-color: rgba(255, 255, 255, 1);
+      &:hover {
+        background-color: rgba(255, 255, 255, 1);
+      }
     }
   }
+
   p {
     text-align: left;
     width: 80%;

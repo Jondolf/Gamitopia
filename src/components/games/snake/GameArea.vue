@@ -1,25 +1,19 @@
 <template>
   <div
-    id="gameArea"
+    class="game-area"
     ref="gameArea"
     v-hammer:swipe.horizontal.vertical="(e) => changeDirection(e)"
   >
     <div class="game-area-container">
       <TopBar
-        :score="game.score"
-        :timesMoved="game.timesMoved"
         @startMenu="changeView('startMenu')"
         @resetGame="game.resetGame(gameArea, canvas, ctx)"
+        :score="game.score"
+        :timesMoved="game.timesMoved"
       />
       <div class="canvas-container">
         <p v-if="paused">Paused (Press P or move to continue)</p>
-        <canvas
-          width="450px"
-          height="450px"
-          id="canvas"
-          ref="canvas"
-          tabindex="1"
-        >
+        <canvas width="450px" height="450px" ref="canvas" tabindex="1">
         </canvas>
       </div>
     </div>
@@ -33,13 +27,16 @@ import { Game } from './gameLogic';
 
 export default Vue.extend({
   name: 'GameArea',
+
   components: {
     TopBar
   },
+
   props: {
     game: Game,
     resetGame: Boolean
   },
+
   data() {
     return {
       gameArea: null as unknown,
@@ -47,10 +44,12 @@ export default Vue.extend({
       ctx: null as unknown
     };
   },
+
   methods: {
     changeView(view: string) {
       this.$emit(view);
     },
+
     changeDirection(e: any) {
       const canvas = this.$refs.canvas as HTMLCanvasElement;
       const ctx = canvas.getContext('2d')!!;
@@ -66,6 +65,7 @@ export default Vue.extend({
       this.game.tick(canvas, ctx);
     }
   },
+
   mounted() {
     const gameArea = this.$refs.gameArea as HTMLElement;
     const canvas = this.$refs.canvas as HTMLCanvasElement;
@@ -81,23 +81,23 @@ export default Vue.extend({
     this.game.startGame(gameArea, canvas, ctx);
   },
 
+  beforeDestroy() {
+    this.game.pauseGame();
+  },
+
   computed: {
     paused() {
       return this.game.paused;
     }
-  },
-
-  beforeDestroy() {
-    this.game.pauseGame();
   }
 });
 </script>
 
 <style lang="scss">
-@import '@/global.scss';
-#gameArea {
+.game-area {
   height: 100%;
   border: none;
+
   .game-area-container {
     width: 100%;
     height: 100%;
@@ -108,11 +108,13 @@ export default Vue.extend({
     align-items: center;
     flex-direction: column;
   }
+
   canvas,
   .canvas-container {
     width: 400px;
     height: 400px;
     position: relative;
+
     p {
       position: absolute;
       top: 20px;
@@ -121,6 +123,7 @@ export default Vue.extend({
       z-index: 2;
     }
   }
+
   @media only screen and (max-width: 550px) {
     .game-area-container canvas,
     .canvas-container {
@@ -128,6 +131,7 @@ export default Vue.extend({
       height: 350px;
     }
   }
+
   @media only screen and (max-width: 400px) {
     .game-area-container canvas,
     .canvas-container {
