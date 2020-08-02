@@ -1,32 +1,32 @@
 <template>
   <div class="settings">
     <h2>Settings</h2>
-    <button v-on:click="this.toggleSettingsVisibility">
+    <button @click="this.toggleSettingsVisibility">
       Back To Home Menu
     </button>
     <div class="grid-size-setting-container">
-      <div class="sizeInput">
+      <div class="size-input">
         <input
           type="range"
           max="10"
           min="1"
+          @input="setGridSize"
           :value="gridWidthProp"
-          v-on:input="setGridSize"
           ref="gridWidthInput"
-          id="gridWidthInput"
+          class="grid-width-input"
         />
         <p>Width</p>
       </div>
       <p>{{ numberToDisplay }}</p>
-      <div class="sizeInput">
+      <div class="size-input">
         <input
           type="range"
           max="10"
           min="1"
+          @input="setGridSize"
           :value="gridHeightProp"
-          v-on:input="setGridSize"
           ref="gridHeightInput"
-          id="gridHeightInput"
+          class="grid-height-input"
         />
         <p>Height</p>
       </div>
@@ -35,51 +35,28 @@
       type="range"
       max="10"
       min="1"
+      @input="setRowNeededToWin"
       :value="this.symbolsNeededInARow"
-      v-on:input="setRowNeededToWin"
       ref="rowToWinInput"
-      id="rowToWinInput"
+      class="row-to-win-input"
     />
-    <p id="numbersNeededInARowToWin">{{ numbersNeededInARowToWin }}</p>
+    <p class="numbers-needed-in-a-row-to-win">{{ numbersNeededInARowToWin }}</p>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+
 export default Vue.extend({
-  name: 'Start-Menu',
-  components: {},
-  methods: {
-    toggleSettingsVisibility() {
-      this.$emit('openSettingsBtnClicked');
-    },
-    setGridWidth(width: number) {
-      this.$emit('gridWidthChanged', width);
-    },
-    setGridHeight(height: number) {
-      this.$emit('gridHeightChanged', height);
-    },
-    displayNum() {
-      this.numberToDisplay =
-        this.gridWidth.toString() + 'x' + this.gridHeight.toString();
-    },
-    setGridSize() {
-      const gridWidthInput = this.$refs.gridWidthInput as HTMLInputElement;
-      const gridHeightInput = this.$refs.gridHeightInput as HTMLInputElement;
-      this.gridWidth = gridWidthInput.value;
-      this.gridHeight = gridHeightInput.value;
-      this.setGridWidth(+this.gridWidth);
-      this.setGridHeight(+this.gridHeight);
-      this.displayNum();
-    },
-    setRowNeededToWin() {
-      const rowToWinInput = this.$refs.rowToWinInput as HTMLInputElement;
-      this.numbersNeededInARowToWin =
-        'Numbers needed in a row required to win: ' + rowToWinInput.value;
-      this.$emit('rowToWinChanged', rowToWinInput.value);
-    }
+  name: 'StartMenu',
+
+  props: {
+    symbolsNeededInARow: Number,
+    gridWidthProp: Number,
+    gridHeightProp: Number
   },
-  data: function() {
+
+  data() {
     return {
       gridWidthInput: this.$refs.gridWidthInput as HTMLInputElement,
       gridHeightInput: this.$refs.gridHeightInput as HTMLInputElement,
@@ -90,11 +67,43 @@ export default Vue.extend({
       numbersNeededInARowToWin: 'Numbers in a row required to win: '
     };
   },
-  props: {
-    symbolsNeededInARow: Number,
-    gridWidthProp: Number,
-    gridHeightProp: Number
+
+  methods: {
+    toggleSettingsVisibility() {
+      this.$emit('openSettingsBtnClicked');
+    },
+
+    setGridWidth(width: number) {
+      this.$emit('gridWidthChanged', width);
+    },
+
+    setGridHeight(height: number) {
+      this.$emit('gridHeightChanged', height);
+    },
+
+    displayNum() {
+      this.numberToDisplay =
+        this.gridWidth.toString() + 'x' + this.gridHeight.toString();
+    },
+
+    setGridSize() {
+      const gridWidthInput = this.$refs.gridWidthInput as HTMLInputElement;
+      const gridHeightInput = this.$refs.gridHeightInput as HTMLInputElement;
+      this.gridWidth = gridWidthInput.value;
+      this.gridHeight = gridHeightInput.value;
+      this.setGridWidth(+this.gridWidth);
+      this.setGridHeight(+this.gridHeight);
+      this.displayNum();
+    },
+
+    setRowNeededToWin() {
+      const rowToWinInput = this.$refs.rowToWinInput as HTMLInputElement;
+      this.numbersNeededInARowToWin =
+        'Numbers needed in a row required to win: ' + rowToWinInput.value;
+      this.$emit('rowToWinChanged', rowToWinInput.value);
+    }
   },
+
   mounted() {
     this.setGridSize();
     this.setRowNeededToWin();
@@ -102,16 +111,7 @@ export default Vue.extend({
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
-.dark.default-dark .settings {
-  background-color: black;
-  color: white;
-  p {
-    color: white;
-  }
-}
 .settings {
   position: absolute;
   top: 0;
@@ -122,6 +122,10 @@ export default Vue.extend({
   box-sizing: border-box;
   background-color: white;
   color: black;
+
+  h2 {
+    margin: 15px 0;
+  }
 
   p {
     color: black;
@@ -138,10 +142,9 @@ export default Vue.extend({
     -webkit-transition: 0.2s;
     transition: opacity 0.2s;
     border-radius: 30px;
-  }
-
-  input:hover {
-    opacity: 1;
+    &:hover {
+      opacity: 1;
+    }
   }
 
   input::-webkit-slider-thumb {
@@ -163,6 +166,7 @@ export default Vue.extend({
     outline: none;
     border: none;
   }
+
   button {
     width: 100%;
     height: 20%;
@@ -174,51 +178,59 @@ export default Vue.extend({
     border-right: none;
     background-color: rgba(34, 40, 49, 0.5);
     transition: 0.4s;
-  }
-  .grid-size-setting-container .sizeInput,
-  .grid-size-setting-container {
-    #gridWidthInput,
-    #gridHeightInput {
-      width: 100%;
+    &:hover {
+      background-color: rgb(91, 97, 112);
     }
   }
-  #numbersNeededInARowToWin {
+
+  .grid-size-setting-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 5%;
+
+    h3 {
+      border: 1px solid;
+      padding: 5px;
+      margin-bottom: 15px;
+      font-size: 3vw;
+    }
+
+    button {
+      border: 1px solid;
+      margin: 5px;
+      padding: 5px;
+    }
+
+    .size-input {
+      margin: 0 10px 0 10px;
+
+      .grid-width-input,
+      .grid-height-input {
+        width: 100%;
+      }
+    }
+  }
+
+  .numbers-needed-in-a-row-to-win {
     font-size: 13px;
   }
+}
 
-  .sizeInput {
-    margin: 0 10px 0 10px;
-  }
-
-  button:hover {
-    background-color: rgb(91, 97, 112);
-  }
-}
-.dark.dark.default-dark button {
-  background-color: rgb(36, 41, 49);
-  color: white;
-  border-color: white;
-}
-.dark.dark.default-dark button:hover {
-  background-color: rgb(50, 57, 68);
-}
-.dark.dark.default-dark .settings {
+.dark .settings {
   background-color: black;
-}
-.grid-size-setting-container {
-  display: flex;
-  justify-content: space-between;
-  padding: 5%;
-  h3 {
-    border: 1px solid;
-    padding: 5px;
-    margin-bottom: 15px;
-    font-size: 3vw;
+  color: white;
+
+  p {
+    color: white;
   }
+
   button {
-    border: 1px solid;
-    margin: 5px;
-    padding: 5px;
+    background-color: rgb(36, 41, 49);
+    color: white;
+    border-color: white;
+    &:hover {
+      background-color: rgb(50, 57, 68);
+    }
   }
 }
 

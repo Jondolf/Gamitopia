@@ -1,22 +1,22 @@
 <template>
-  <div id="grid-container" ref="appWidth">
+  <div class="grid-container">
     <TopBar
       @clicked="restartGame"
       @startMenuBtnClicked="toggleStartMenuVisibility"
     />
 
-    <div id="grid" ref="grid">
+    <div class="grid" ref="grid">
       <VictoryScreen
         v-if="victory"
-        v-bind:gameEndMessage="this.gameEndMessage"
-        @clicked="restartGame"
+        @restart="restartGame"
+        :gameEndMessage="this.gameEndMessage"
       />
-      <div v-for="(row, index) in grid" v-bind:key="index" id="row">
+      <div v-for="(row, index) in grid" :key="index" :id="'row' + index">
         <Square
           v-for="(square, index2) in row"
-          v-on:click.native="addSymbol(square)"
-          v-bind:grid="square.symbol"
-          v-bind:key="index2"
+          @click.native="addSymbol(square)"
+          :grid="square.symbol"
+          :key="index2"
           :squareSize="squareSize"
           :fontSize="fontSize"
         ></Square>
@@ -27,9 +27,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Square from '@/components/games/tic-tac-toe/square.vue';
-import VictoryScreen from '@/components/games/tic-tac-toe/tic-tac-toe-victory-screen.vue';
-import TopBar from '@/components/games/tic-tac-toe/top-bar.vue';
+import Square from '@/components/games/tic-tac-toe/Square.vue';
+import VictoryScreen from '@/components/games/tic-tac-toe/TicTacToeVictoryScreen.vue';
+import TopBar from '@/components/games/tic-tac-toe/TopBar.vue';
 
 export interface SquareData {
   symbol: string;
@@ -37,15 +37,40 @@ export interface SquareData {
 
 export default Vue.extend({
   name: 'Grid',
+
   components: {
     Square,
     VictoryScreen,
     TopBar
   },
+
+  props: {
+    gridWidth: Number,
+    gridHeight: Number,
+    amountOfSymbolsNeededInARowToWin: Number
+  },
+
+  data() {
+    return {
+      player1Turn: true,
+      player2Turn: false,
+      squareSize: '10vw',
+      fontSize: '',
+      victory: false,
+      gameEndMessage: '',
+      grid: [
+        [{ symbol: '' }, { symbol: '' }, { symbol: '' }],
+        [{ symbol: '' }, { symbol: '' }, { symbol: '' }],
+        [{ symbol: '' }, { symbol: '' }, { symbol: '' }]
+      ]
+    };
+  },
+
   methods: {
     toggleStartMenuVisibility() {
       this.$emit('openStartMenuBtnClicked');
     },
+
     addSymbol(square: SquareData) {
       if (square.symbol === '' && this.player1Turn === true) {
         this.addCross(square);
@@ -57,19 +82,20 @@ export default Vue.extend({
         this.changeTurn();
       }
     },
+
     changeTurn() {
       this.player1Turn = !this.player1Turn;
       this.player2Turn = !this.player2Turn;
     },
+
     addCross: function(square: SquareData) {
       square.symbol = 'X';
     },
+
     addNought: function(square: SquareData) {
       square.symbol = 'O';
     },
-    /*this.detectXVictory3x3();
-      this.detectOVictory3x3();
-      this.detectTie3x3();*/
+
     sequentialSymbols(symbols: SquareData[], count: number) {
       const result: [number, string, number] = symbols.reduce(
         (
@@ -92,6 +118,7 @@ export default Vue.extend({
       );
       return count <= result[2];
     },
+
     detectVictory() {
       this.detectTie();
       const rows = this.grid;
@@ -107,12 +134,7 @@ export default Vue.extend({
           }
         }
       };
-      const getDiagonalRows = function(
-        grid: object,
-        gameEnd: Function,
-        gridWidth: number,
-        gridHeight: number
-      ) {
+      const getDiagonalRows = () => {
         for (let i = -rows.length + 1; i < columns.length; i++) {
           const diagonalRow: any = [];
           diagonalRows.push(diagonalRow);
@@ -123,11 +145,7 @@ export default Vue.extend({
           }
         }
       };
-      const getReversedDiagonalRows = function(
-        gameEnd: Function,
-        gridWidth: number,
-        gridHeight: number
-      ) {
+      const getReversedDiagonalRows = () => {
         for (let i = -rows.length + 1; i < columns.length; i++) {
           const diagonalRow: SquareData[] = [];
           reversedDiagonalRows.push(diagonalRow);
@@ -139,8 +157,8 @@ export default Vue.extend({
         }
       };
       getColumns();
-      getDiagonalRows(this.grid, this.gameEnd, this.gridWidth, this.gridHeight);
-      getReversedDiagonalRows(this.gameEnd, this.gridWidth, this.gridHeight);
+      getDiagonalRows();
+      getReversedDiagonalRows();
       const symbolArrays = [
         ...rows,
         ...columns,
@@ -148,7 +166,7 @@ export default Vue.extend({
         ...reversedDiagonalRows
       ];
       const ended = symbolArrays.some(
-        squares =>
+        (squares) =>
           this.sequentialSymbols(squares, this.amountOfSymbolsNeededInARowToWin) //Amount of symbols in a row needed to win
       );
       if (ended && this.player1Turn) {
@@ -157,10 +175,11 @@ export default Vue.extend({
         this.gameEnd('O');
       }
     },
+
     detectTie() {
       const hasEmptySquare =
         this.grid.filter(
-          row => row.filter(square => square.symbol === '').length
+          (row) => row.filter((square) => square.symbol === '').length
         ).length === 0;
       if (hasEmptySquare) {
         this.gameEnd('Tie');
@@ -177,6 +196,7 @@ export default Vue.extend({
         this.gameEndMessage = 'Tie';
       }
     },
+
     restartGame() {
       this.player1Turn = true;
       this.player2Turn = false;
@@ -188,6 +208,7 @@ export default Vue.extend({
         }
       }
     },
+
     setGridSize() {
       this.grid = [];
       for (let i = 0; i < this.gridWidth; i++) {
@@ -201,60 +222,41 @@ export default Vue.extend({
       this.getFontSize();
       this.restartGame();
     },
+
     getSquareSize() {
       const gridElement = this.$refs.grid as HTMLElement;
       this.squareSize =
         (
-          gridElement.clientWidth /
+          Math.min(gridElement.clientWidth, gridElement.clientHeight) /
           Math.max(this.grid.length, this.grid[0].length)
         ).toString() + 'px';
     },
+
     getFontSize() {
       const gridElement = this.$refs.grid as HTMLElement;
       this.fontSize =
         Math.floor(
-          gridElement.clientWidth /
+          Math.min(gridElement.clientWidth, gridElement.clientHeight) /
             Math.max(this.grid.length, this.grid[0].length) -
             20
         ).toString() + 'px';
     }
   },
-  data: function() {
-    return {
-      player1Turn: true,
-      player2Turn: false,
-      squareSize: '10vw',
-      fontSize: '',
-      victory: false,
-      gameEndMessage: '',
-      grid: [
-        [{ symbol: '' }, { symbol: '' }, { symbol: '' }],
-        [{ symbol: '' }, { symbol: '' }, { symbol: '' }],
-        [{ symbol: '' }, { symbol: '' }, { symbol: '' }]
-      ]
-    };
-  },
-  props: {
-    gridWidth: Number,
-    gridHeight: Number,
-    amountOfSymbolsNeededInARowToWin: Number
-  },
+
   watch: {
-    gridWidth: function() {
+    gridWidth() {
       this.setGridSize();
     },
-    gridHeight: function() {
+
+    gridHeight() {
       this.setGridSize();
     },
-    amountOfSymbolsNeededInARowToWin: function() {
+
+    amountOfSymbolsNeededInARowToWin() {
       this.setGridSize();
     }
   },
-  created() {
-    function setSquareSize() {
-      setSquareSize();
-    }
-  },
+
   mounted() {
     this.$nextTick(function() {
       window.addEventListener('resize', this.getSquareSize);
@@ -265,59 +267,43 @@ export default Vue.extend({
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
-
-#grid-container {
-  width: 75vw;
-  height: 85vw;
+.grid-container {
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   margin: auto;
   background-color: gray;
   display: flex;
   flex-direction: column;
-}
-.dark.default-dark #grid-container {
-  background-color: rgb(50, 50, 50);
-}
 
-#grid {
-  height: 100%;
-  width: 100%;
-  margin: auto;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  color: #0c0f14;
-  position: relative;
-  cursor: default;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  touch-action: manipulation;
-}
-
-.dark.default-dark #grid {
-  color: white;
-  border-color: white;
-}
-@media only screen and (min-width: 600px) {
-  #grid-container {
-    width: 45vw;
-    height: 51vw;
+  .grid {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    color: #0c0f14;
+    position: relative;
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 }
 
-@media only screen and (min-width: 1100px) {
-  #grid-container {
-    width: 33vw;
-    height: 37vw;
+.dark.default-dark .grid-container {
+  background-color: rgb(50, 50, 50);
+
+  .grid {
+    color: white;
+    border-color: white;
   }
 }
 </style>

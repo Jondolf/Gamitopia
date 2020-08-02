@@ -1,31 +1,25 @@
 <template>
-  <div class="grid-square" :style="{ width: squareSize, height: squareSize }">
+  <div class="square" :style="{ width: squareSize, height: squareSize }">
     <p :style="{ fontSize: fontSize }">{{ grid }}</p>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+
 export default Vue.extend({
-  name: 'Grid-Square',
-  components: {},
+  name: 'Square',
+
   props: {
     grid: String,
     squareSize: String,
     fontSize: String
-  },
-
-  methods: {},
-  data: function() {
-    return {};
   }
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
-.grid-square {
+.square {
   outline: 2px solid black;
   font-size: 11vw;
   background-color: white;
@@ -35,6 +29,10 @@ export default Vue.extend({
   align-items: center;
   transition: 0.3s;
   overflow: hidden;
+  &:hover {
+    background-color: rgba(127.5, 127.5, 127.5, 1);
+  }
+
   p {
     color: black;
     display: flex;
@@ -42,28 +40,26 @@ export default Vue.extend({
   }
 }
 
-.grid-square:hover {
-  background-color: rgba(127.5, 127.5, 127.5, 1);
-}
-.dark.default-dark .grid-square {
+.dark .square {
   background-color: black;
   outline: 2px solid white;
+  &:hover {
+    background-color: rgba(127.5, 127.5, 127.5, 1);
+  }
+
   p {
     color: white;
   }
 }
-.dark.default-dark .grid-square:hover {
-  background-color: rgba(127.5, 127.5, 127.5, 1);
-}
 
 @media only screen and (min-width: 600px) {
-  .grid-square {
+  .square {
     font-size: 8vw;
   }
 }
 
 @media only screen and (min-width: 1100px) {
-  .grid-square {
+  .square {
     font-size: 5vw;
   }
 }

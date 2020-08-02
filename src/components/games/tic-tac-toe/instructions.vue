@@ -1,7 +1,7 @@
 <template>
   <div class="instructions">
     <h2>Instructions</h2>
-    <button v-on:click="toggleInstructionsVisibility">
+    <button @click="toggleInstructionsVisibility">
       Back To Home Menu
     </button>
     <p>
@@ -22,9 +22,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
+
 export default Vue.extend({
   name: 'Instructions',
-  components: {},
+
   methods: {
     toggleInstructionsVisibility() {
       this.$emit('toggleInstructionsBtnClicked');
@@ -33,15 +34,7 @@ export default Vue.extend({
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
-.dark.default-dark .instructions {
-  p,
-  h3 {
-    color: white;
-  }
-}
 .instructions {
   position: absolute;
   top: 0;
@@ -50,10 +43,16 @@ export default Vue.extend({
   background-color: white;
   z-index: 2;
   overflow: auto;
+
+  h2 {
+    margin: 15px 0;
+  }
+
   p,
   h3 {
     color: black;
   }
+
   button {
     width: 100%;
     height: 20%;
@@ -65,36 +64,45 @@ export default Vue.extend({
     border-right: none;
     transition: 0.4s;
     background-color: rgb(144, 147, 152);
+    &:hover {
+      background-color: rgb(91, 97, 112);
+    }
   }
 
-  button:hover {
-    background-color: rgb(91, 97, 112);
-  }
   p {
     padding: 0.6vw;
     text-align: left;
     font-size: 1vw;
   }
 }
-.dark.default-dark h2 {
-  background-color: black;
-}
-.dark.default-dark button {
-  background-color: rgb(36, 41, 49);
-  color: white;
-  border-color: white;
-}
-.dark.default-dark button:hover {
-  background-color: rgb(50, 57, 68);
-}
+
 .dark.default-dark .instructions {
   background-color: black;
+  p,
+  h3 {
+    color: white;
+  }
+
+  h2 {
+    background-color: black;
+  }
+
+  button {
+    background-color: rgb(36, 41, 49);
+    color: white;
+    border-color: white;
+    &:hover {
+      background-color: rgb(50, 57, 68);
+    }
+  }
 }
+
 @media only screen and (max-width: 1100px) {
   .instructions p {
     font-size: 1.4vw;
   }
 }
+
 @media only screen and (max-width: 600px) {
   .instructions p {
     font-size: 2vw;
