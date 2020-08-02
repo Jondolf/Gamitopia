@@ -33,12 +33,18 @@ export default Vue.extend({
 .game-container {
   position: relative;
   margin: auto;
+  background-color: black;
   border: 2px solid var(--color-light-contrast);
   border-radius: 5px;
   font-family: 'Nunito', 'Nunito Sans', sans-serif;
-  touch-action: manipulation;
   box-sizing: border-box;
   overflow: hidden;
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   &.fullscreen {
     border: none;
     border-radius: 0;
