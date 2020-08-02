@@ -77,7 +77,7 @@ const allGames: AllGames = {
       
       Currently you can only play the game locally against someone else.`,
       madeWith: ['Vue', 'HTML', 'SCSS', 'TypeScript'],
-      support: ['Fullscreen support: no', 'Dark mode support: yes']
+      support: ['Fullscreen support: yes', 'Dark mode support: yes']
     }
   },
   randomizer: {

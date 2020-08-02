@@ -14,6 +14,7 @@
       @gridWidthChanged="changeGridWidth"
       @gridHeightChanged="changeGridHeight"
       @rowToWinChanged="changeRowToWin"
+      @toggleFullscreen="$emit('toggleFullscreen')"
       :symbolsNeededInARow="symbolsNeededInARow"
       :gridWidthProp="gridWidth"
       :gridHeightProp="gridHeight"

@@ -263,6 +263,11 @@ export default Vue.extend({
       window.addEventListener('resize', this.getFontSize);
     });
     this.setGridSize();
+  },
+
+  destroyed() {
+    window.removeEventListener('resize', this.getSquareSize);
+    window.removeEventListener('resize', this.getFontSize);
   }
 });
 </script>

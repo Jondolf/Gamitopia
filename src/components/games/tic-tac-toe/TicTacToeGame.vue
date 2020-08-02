@@ -8,6 +8,7 @@
       @gridWidthChanged="changeGridWidth"
       @gridHeightChanged="changeGridHeight"
       @rowToWinChanged="changeRowToWin"
+      @toggleFullscreen="$emit('toggleFullscreen')"
     />
     <Grid
       @openStartMenuBtnClicked="this.toggleStartMenuVisibility"
@@ -45,6 +46,7 @@ export default Vue.extend({
 
   methods: {
     toggleStartMenuVisibility() {
+      window.dispatchEvent(new Event('resize')); // Trigger grid resize
       this.startMenuVisibility = !this.startMenuVisibility;
     },
 

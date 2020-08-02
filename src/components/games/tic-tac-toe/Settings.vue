@@ -41,6 +41,9 @@
       class="row-to-win-input"
     />
     <p class="numbers-needed-in-a-row-to-win">{{ numbersNeededInARowToWin }}</p>
+    <button @click="$emit('toggleFullscreen')" class="toggle-fullscreen-button">
+      Toggle fullscreen
+    </button>
   </div>
 </template>
 
@@ -213,6 +216,19 @@ export default Vue.extend({
 
   .numbers-needed-in-a-row-to-win {
     font-size: 13px;
+  }
+
+  .toggle-fullscreen-button {
+    width: 20%;
+    height: auto;
+    background-color: transparent;
+    border: 2px solid var(--color-light-contrast);
+    border-radius: 5px;
+    color: var(--color-light-contrast);
+    margin-top: 5%;
+    &:hover {
+      background-color: transparent;
+    }
   }
 }
 
