@@ -4,7 +4,7 @@ const gameRoutes: Array<RouteConfig> = [
   {
     path: '/cookie-clicker/',
     name: 'cookie-clicker',
-    component: () => import('../views/games/CookieClicker.vue'),
+    component: () => import('@/views/games/CookieClicker.vue'),
     meta: {
       title: 'Cookie Clicker | Gamitopia'
     }
@@ -12,7 +12,7 @@ const gameRoutes: Array<RouteConfig> = [
   {
     path: '/randomizer/',
     name: 'randomizer',
-    component: () => import('../views/games/Randomizer.vue'),
+    component: () => import('@/views/games/Randomizer.vue'),
     meta: {
       title: 'Randomizer | Gamitopia'
     }
@@ -20,7 +20,7 @@ const gameRoutes: Array<RouteConfig> = [
   {
     path: '/tic-tac-toe/',
     name: 'tic-tac-toe',
-    component: () => import('../views/games/TicTacToe.vue'),
+    component: () => import('@/views/games/TicTacToe.vue'),
     meta: {
       title: 'Tic-tac-toe | Gamitopia'
     }
@@ -28,7 +28,7 @@ const gameRoutes: Array<RouteConfig> = [
   {
     path: '/adventura/',
     name: 'adventura',
-    component: () => import('../views/games/Adventura.vue'),
+    component: () => import('@/views/games/Adventura.vue'),
     meta: {
       title: 'Adventura | Gamitopia'
     }
@@ -36,23 +36,15 @@ const gameRoutes: Array<RouteConfig> = [
   {
     path: '/snake/',
     name: '/snake',
-    component: () => import('../views/games/Snake.vue'),
+    component: () => import('@/views/games/Snake.vue'),
     meta: {
       title: 'Snake | Gamitopia'
     }
   },
   {
-    path: '/calculator/',
-    name: '/calculator',
-    component: () => import('../views/games/Calculator.vue'),
-    meta: {
-      title: 'Calculator | Gamitopia'
-    }
-  },
-  {
     path: '/card/',
-    name: '/card',
-    component: () => import('../views/games/CardGame.vue'),
+    name: 'card',
+    component: () => import('@/views/games/CardGame.vue'),
     meta: {
       title: 'Card game | Gamitopia'
     }
@@ -61,7 +53,7 @@ const gameRoutes: Array<RouteConfig> = [
     path: '/target-practise/',
     name: 'targetpractise',
     component: () =>
-      import('../views/games/target-practise/TargetPractise.vue'),
+      import('@/views/games/target-practise/TargetPractise.vue'),
     meta: {
       title: 'Target Practise | Gamitopia'
     }
