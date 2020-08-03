@@ -25,6 +25,7 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 .top-bar {
+  width: 100%;
   height: 10vw;
   border-bottom: 2px solid black;
   background-color: white;

@@ -40,6 +40,7 @@ export default Vue.extend({
     outline: none;
     border: none;
     background-color: white;
+    color: black;
     font-family: Nunito;
     border-radius: 5px;
     &:hover {

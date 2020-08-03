@@ -219,7 +219,7 @@ export default Vue.extend({
   }
 
   .toggle-fullscreen-button {
-    width: 20%;
+    padding: 10px;
     height: auto;
     background-color: transparent;
     border: 2px solid var(--color-light-contrast);
