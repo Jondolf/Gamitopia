@@ -6,22 +6,79 @@
     </router-link>
 
     <div class="options">
-      <h2>Collapse/expand posts</h2>
-      <div class="btn-container">
-        <button @click="collapseAll">Collapse all</button>
-        <button @click="expandAll">Expand all</button>
+      <div class="top-container">
+        <div class="collapse-expand-container">
+          <button @click="collapseAll">Collapse all</button>
+          <button @click="expandAll">Expand all</button>
+        </div>
+
+        <div class="year-selection-container">
+          <div class="all-years-checkbox-container">
+            <input
+              type="checkbox"
+              checked
+              @click="
+                allowedYears = ($event.target.checked
+                  ? getAllYears()
+                  : []
+                ).sort();
+                handleAllYearsCheckBoxCheck($event.target.checked);
+                filterNewsPostsByYear();
+              "
+              name="allYears"
+              id="allYears"
+              ref="allYearsCheckbox"
+            />
+            <label for="allYears">All</label>
+          </div>
+
+          <div
+            v-for="index in new Date().getFullYear() - 2019 + 1"
+            :key="index"
+            class="checkbox-container"
+          >
+            <input
+              type="checkbox"
+              checked
+              @change="
+                allowedYears = allowedYears.sort();
+                allowedYears.includes(2019 + index - 1)
+                  ? allowedYears.splice(
+                      allowedYears.indexOf(2019 + index - 1),
+                      1
+                    )
+                  : allowedYears.push(2019 + index - 1);
+                allowedYears = allowedYears.sort();
+                handleYearCheckBoxCheck();
+                filterNewsPostsByYear();
+              "
+              :name="`year${2019 + index - 1}`"
+              :id="`year${2019 + index - 1}`"
+              class="year-checkbox"
+            />
+            <label :for="`year${2019 + index - 1}`">{{
+              2019 + index - 1
+            }}</label>
+          </div>
+        </div>
       </div>
 
-      <h2>Filter</h2>
-      <div class="btn-container">
-        <button @click="filterByYear('Show all')">All</button>
-        <button @click="filterByYear('2020')">2020</button>
-        <button @click="filterByYear('2019')">2019</button>
-      </div>
+      <NewsSearch
+        @filterNews="
+          (filteredNewsPosts) => {
+            filteredNews = filteredNewsPosts;
+            filterNewsPostsByYear();
+          }
+        "
+        :newsPosts="news"
+        :isCaseSensitive="false"
+        placeholderText="Type in the name of the news post"
+      />
     </div>
+
     <div class="news-posts-container">
       <NewsPost
-        v-for="newsPost in news"
+        v-for="newsPost in filteredNews"
         :key="newsPost.id"
         :id="newsPost.id"
         :title="newsPost.title"
@@ -37,6 +94,7 @@
 <script lang="ts">
 import Vue from 'vue';
 
+import NewsSearch from '@/components/news/NewsSearch.vue';
 import NewsPost from '@/components/news/NewsPost.vue';
 
 import { getNewsPosts } from './admin/actions/getNewsPosts';
@@ -44,34 +102,73 @@ import { formatDate } from './admin/actions/formatDate';
 import { News } from '../interfaces/News';
 
 export default Vue.extend({
-  name: 'news',
-  components: { NewsPost },
+  name: 'News',
+
+  components: {
+    NewsSearch,
+    NewsPost
+  },
+
   data() {
     return {
       news: [] as News[],
+      filteredNews: [] as News[],
+      allowedYears: [2020, 2019],
       areAllPostsCollapsed: false,
       isAdmin: this.$store.state.isAdmin
     };
   },
+
   methods: {
     collapseAll() {
       this.areAllPostsCollapsed = true;
       localStorage.setItem('areAllPostsCollapsed', 'true');
     },
+
     expandAll() {
       this.areAllPostsCollapsed = false;
       localStorage.setItem('areAllPostsCollapsed', 'false');
     },
 
-    filterByYear(year: string) {
+    getAllYears(): number[] {
+      const currentYear = new Date().getFullYear();
+      const years = [];
+      for (let i = 2019; i <= currentYear; i++) {
+        years.push(i);
+      }
+      console.log(this.allowedYears, years);
+      return years;
+    },
+
+    handleYearCheckBoxCheck() {
+      const amountOfCheckBoxes = document.getElementsByClassName(
+        'year-checkbox'
+      ).length;
+      const allYearsCheckbox = this.$refs.allYearsCheckbox as HTMLInputElement;
+      allYearsCheckbox.checked = this.allowedYears.length >= amountOfCheckBoxes;
+      allYearsCheckbox.indeterminate =
+        this.allowedYears.length > 0 &&
+        this.allowedYears.length < amountOfCheckBoxes;
+      console.log(this.allowedYears);
+    },
+
+    handleAllYearsCheckBoxCheck(isChecked: boolean) {
+      const checkBoxes = document.getElementsByClassName(
+        'year-checkbox'
+      ) as HTMLCollectionOf<HTMLInputElement>;
+      for (const checkbox of checkBoxes) {
+        checkbox.checked = isChecked;
+      }
+    },
+
+    filterNewsPostsByYear() {
       const newsPosts = document.getElementsByClassName(
         'news-post'
       ) as HTMLCollectionOf<HTMLElement>;
       for (const post of newsPosts) {
         const date = post.getElementsByTagName('time')[0] as HTMLTimeElement;
-        if (date.innerText.includes(year)) {
-          post.style.display = 'block';
-        } else if (year === 'Show all') {
+        const year = +date.innerText.split('.')[2];
+        if (this.allowedYears.includes(year)) {
           post.style.display = 'block';
         } else {
           post.style.display = 'none';
@@ -92,38 +189,33 @@ export default Vue.extend({
 
   async mounted() {
     this.news = await getNewsPosts();
+    this.filteredNews = this.news;
   }
 });
 </script>
 
 <style lang="scss">
-@import '@/global.scss';
-
 h1.page-title-header {
-  color: black;
+  color: var(--color-light-contrast);
   text-align: center;
   padding: 10px 0;
 }
 
-.dark h1.page-title-header {
-  color: white;
-}
-
-a:visited {
-  color: white;
-}
-a:hover {
-  color: rgb(200, 200, 255);
-}
-.dark .news .options button {
-  color: white;
+a {
+  &:visited {
+    color: white;
+  }
+  &:hover {
+    color: rgb(200, 200, 255);
+  }
 }
 
 .news {
   padding-top: 86px;
+
   .create-news-post-btn {
-    width: 10%;
-    height: 35px;
+    width: 25%;
+    height: 45px;
     margin-bottom: 20px;
     border: none;
     border-radius: 5px;
@@ -131,45 +223,79 @@ a:hover {
     color: white;
     background-color: var(--color-primary);
     transition: 0.4s;
+    &:hover {
+      border-radius: 10px;
+    }
   }
-  .create-news-post-btn:hover {
-    border-radius: 10px;
-  }
+
   .options {
-    width: 50%;
-    padding: 25px;
+    width: 70%;
+    padding: 30px;
     border-radius: 5px;
     text-align: left;
     background-color: var(--color-primary);
     margin: auto;
-    h2 {
-      color: white;
-    }
-    .btn-container {
-      width: 100%;
+
+    .top-container {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 15px;
-    }
-    button {
-      background-color: var(--color-light);
-      color: black;
-      width: 33%;
-      padding: 15px 0 15px 0;
-      border: none;
-      outline: none;
-      margin: 0 15px 0 0;
-      border-radius: 5px;
-      transition: 0.4s;
-    }
-    button:last-child {
-      margin: 0;
-    }
-    button:hover {
-      padding: 18px;
+      padding-bottom: 15px;
+
+      .collapse-expand-container {
+        width: 50%;
+        margin-right: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        button {
+          background-color: var(--color-light);
+          color: var(--color-light-contrast);
+          width: 100%;
+          padding: 10px 0 10px 0;
+          border: none;
+          outline: none;
+          margin-top: 10px;
+          border-radius: 5px;
+          transition: 0.4s;
+          &:hover {
+            padding: 15px;
+          }
+          &:first-child {
+            margin: 0;
+          }
+        }
+      }
+
+      .year-selection-container {
+        width: 50%;
+        margin-left: 15px;
+        display: flex;
+        flex-direction: column;
+
+        div {
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        input {
+          margin-right: 10px;
+        }
+
+        label {
+          display: inline;
+        }
+
+        .checkbox-container {
+          padding-left: 15px;
+        }
+      }
     }
   }
+
   .news-posts-container {
     display: flex;
     flex-direction: column-reverse;
