@@ -143,7 +143,6 @@ export default Vue.extend({
       for (let i = 2019; i <= currentYear; i++) {
         years.push(i);
       }
-      console.log(this.allowedYears, years);
       return years;
     },
 
@@ -156,7 +155,6 @@ export default Vue.extend({
       allYearsCheckbox.indeterminate =
         this.allowedYears.length > 0 &&
         this.allowedYears.length < amountOfCheckBoxes;
-      console.log(this.allowedYears);
     },
 
     handleAllYearsCheckBoxCheck(isChecked: boolean) {
