@@ -2,8 +2,15 @@
   <div class="news">
     <h1 class="page-title-header">News</h1>
     <router-link to="/admin/create-news-post/" v-if="isAdmin"
-      ><button class="create-news-post-btn">Create new</button>
+      ><button class="create-news-post-button">Create news post</button>
     </router-link>
+    <button
+      v-if="isAdmin"
+      @click="copyNewsPostsAsJSONToClipboard()"
+      class="copy-news-posts-as-json-button"
+    >
+      Copy news posts as JSON
+    </button>
 
     <div class="options">
       <div class="top-container">
@@ -83,7 +90,7 @@
         :id="newsPost.id"
         :title="newsPost.title"
         :body="newsPost.body"
-        :date="handleFormatDate(newsPost.date)"
+        :date="formatDate(newsPost.date)"
         :canCollapse="true"
         :areAllCollapsed="areAllPostsCollapsed"
       />
@@ -176,7 +183,16 @@ export default Vue.extend({
       }
     },
 
-    handleFormatDate: formatDate
+    copyNewsPostsAsJSONToClipboard() {
+      const el = document.createElement('textarea');
+      el.value = JSON.stringify(this.news);
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+    },
+
+    formatDate
   },
 
   created() {
@@ -213,9 +229,9 @@ a {
 .news {
   padding-top: 86px;
 
-  .create-news-post-btn {
-    width: 25%;
-    height: 45px;
+  .create-news-post-button,
+  .copy-news-posts-as-json-button {
+    padding: 10px;
     margin-bottom: 20px;
     border: none;
     border-radius: 5px;
@@ -226,6 +242,10 @@ a {
     &:hover {
       border-radius: 10px;
     }
+  }
+
+  .create-news-post-button {
+    margin-right: 10px;
   }
 
   .options {
