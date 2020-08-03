@@ -46,6 +46,7 @@ export default Vue.extend({
 
   img {
     width: 45vh;
+    max-width: 70vw;
     border-radius: 5px;
     margin: 25px;
     transition: 1s;
