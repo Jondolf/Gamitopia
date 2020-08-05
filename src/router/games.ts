@@ -42,6 +42,14 @@ const gameRoutes: Array<RouteConfig> = [
     }
   },
   {
+    path: '/calculator/',
+    name: 'calculator',
+    component: () => import('@/views/games/Calculator.vue'),
+    meta: {
+      title: 'Calculator | Gamitopia'
+    }
+  },
+  {
     path: '/card/',
     name: 'card',
     component: () => import('@/views/games/CardGame.vue'),

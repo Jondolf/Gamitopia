@@ -4,6 +4,7 @@ export interface GameInfo {
   thumbnailImgSrc: string;
   thumbnailImgAlt: string;
   releaseDate: string;
+  googlePlayStoreLink?: string;
   description: {
     mainDescription: string;
     madeWith: string[];

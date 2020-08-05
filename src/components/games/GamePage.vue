@@ -2,6 +2,10 @@
   <div class="game-page">
     <GameHeader :game="game" />
     <slot><!-- Game container comes here --></slot>
+    <GooglePlayLink
+      v-if="game.googlePlayStoreLink"
+      :link="game.googlePlayStoreLink"
+    />
     <GameDescription :game="game" />
   </div>
 </template>
@@ -10,6 +14,7 @@
 import Vue from 'vue';
 import GameHeader from '@/components/games/GameHeader.vue';
 import GameDescription from '@/components/games/GameDescription.vue';
+import GooglePlayLink from '@/components/games/GooglePlayLink.vue';
 import { GameInfo } from '../../interfaces/GameInfo';
 
 export default Vue.extend({
@@ -17,7 +22,8 @@ export default Vue.extend({
 
   components: {
     GameHeader,
-    GameDescription
+    GameDescription,
+    GooglePlayLink
   },
 
   props: {

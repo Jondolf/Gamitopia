@@ -4,9 +4,7 @@ import { GameInfo } from '@/interfaces/GameInfo';
 
 Vue.use(Vuex);
 
-type GameKey =
-  /* | 'calculator' | */
-  'snake' | 'adventura' | 'ticTacToe' | 'randomizer' | 'cookieClicker'; // For proper typing
+type GameKey = 'calculator' | 'snake' | 'adventura' | 'ticTacToe' | 'randomizer' | 'cookieClicker'; // For proper typing
 
 type AllGames = {
   [key in GameKey]: GameInfo;
@@ -15,20 +13,30 @@ type AllGames = {
 // TODO add update histories to game descriptions. This could be collapsible. Look at commit history from GitHub (maybe). Make them objects, like: updates: [{ date: ??, message: ?? }, { date: ??, message: ?? }, ...]
 
 const allGames: AllGames = {
-  /*
   calculator: {
     name: 'Calculator',
     route: '/calculator/',
-    thumbnailImgSrc: require('@/assets/images/game-thumbnails/snake_thumbnail.jpg'),
-    thumbnailImgAlt: 'Calculator game',
-    releaseDate: '3.1.2020',
+    thumbnailImgSrc: require('@/assets/images/game-thumbnails/calculator_thumbnail.jpg'),
+    thumbnailImgAlt: 'Calculator app',
+    releaseDate: '5.8.2020',
+    googlePlayStoreLink: 'https://play.google.com/store/apps/details?id=com.gamitopia.calculator',
     description: {
-      mainDescription: ``,
-      madeWith: [''],
-      support: ['']
+      mainDescription: `The full version of Calculator is available on the Google Play store for free! The link is: https://play.google.com/store/apps/details?id=com.gamitopia.calculator
+      
+      Note: The version here on Gamitopia has very limited features compared to the downloadable app, so make sure to check out the app!
+      
+      Calculator also has a separate GitHub repository, which you can find at: https://github.com/Jondolf/Calculator
+      
+      The full version (the Android app version)
+      The full version has a calculator, many unit converters (including a currency converter), a tool for creating beautiful charts, a graphing calculator and more.
+      The app has many color themes and customization options, so you can make the app your own.
+      
+      The web version (this version)
+      The web version of Calculator only has the calculator and no customization. The web version is made with Vue and the app version is made with Ionic Angular, so it would be difficult to keep them both updated.`,
+      madeWith: ['Vue (web version), Ionic Angular (Android app version)', 'HTML', 'SCSS', 'TypeScript'],
+      support: ['Fullscreen support: yes']
     }
   },
-  */
   snake: {
     name: 'Snake',
     route: '/snake/',
