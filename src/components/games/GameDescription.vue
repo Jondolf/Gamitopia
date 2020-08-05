@@ -1,10 +1,10 @@
 <template>
   <div class="game-description">
     <div class="main">
-      <h2>{{ game.name }}</h2>
-      <h3>Description</h3>
+      <h1>{{ game.name }}</h1>
+      <h2>Description</h2>
       <p v-html="parsedMainDescription"></p>
-      <img :src="game.imgSrc" :alt="game.imgAlt" />
+      <img :src="game.thumbnailImgSrc" :alt="game.thumbnailImgAlt" />
       <time>Released on {{ game.releaseDate }}</time>
     </div>
     <div class="other">
@@ -53,8 +53,10 @@ export default Vue.extend({
 .game-description {
   width: 80%;
   display: flex;
+  flex-direction: column;
   background-color: var(--color-primary);
   border-radius: 5px;
+  padding: 20px;
   margin: 50px auto;
   color: white;
   text-align: left;
@@ -66,6 +68,7 @@ export default Vue.extend({
     padding-bottom: 20px;
     color: white;
   }
+
   h3 {
     margin-bottom: 15px;
   }
@@ -83,51 +86,29 @@ export default Vue.extend({
 
   .main,
   .other {
-    padding: 20px;
+    width: 100%;
     box-sizing: border-box;
   }
 
   .main {
-    width: 60%;
-    border-right: 1px solid;
+    padding-bottom: 20px;
+    border-bottom: 1px solid;
+
     p {
       white-space: pre-line;
     }
   }
 
   .other {
-    width: 40%;
-    height: 100%;
+    padding-top: 20px;
+
     ul li {
       list-style: disc inside;
     }
   }
 
   .made-with {
-    height: 100%;
     margin-bottom: 10px;
-  }
-
-  .support {
-    height: 100%;
-  }
-}
-
-@media only screen and (max-width: 620px) {
-  .game-description {
-    flex-direction: column;
-    padding: 10px;
-
-    .main {
-      width: 100%;
-      border-right: none;
-      border-bottom: 1px solid;
-      padding: 20px;
-    }
-
-    .other {
-      width: 100%;
-    }
   }
 }
 
