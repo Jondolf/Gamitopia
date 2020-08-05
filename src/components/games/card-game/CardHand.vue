@@ -1,6 +1,6 @@
 <template>
   <div class="hand">
-    <VPopover v-for="(card, index) in cards" :key="index" :trigger="'hover'">
+    <!--<VPopover v-for="(card, index) in cards" :key="index" :trigger="'hover'">
       <Card
         :card="card"
         :style="`transform: rotate(${getRotationAngle(index)}deg)`"
@@ -12,23 +12,23 @@
         class="large"
         slot="popover"
       />
-    </VPopover>
+    </VPopover>-->
   </div>
 </template>
 
 <script>
 import Vue from 'vue';
 // @ts-ignore
-import { VPopover } from 'v-tooltip';
-import Card from './Card.vue';
+// import { VPopover } from 'v-tooltip';
+// import Card from './Card.vue';
 import ICard from '@/interfaces/Card';
 
 export default Vue.extend({
   name: 'CardHand',
 
   components: {
-    VPopover,
-    Card
+    // VPopover,
+    // Card
   },
 
   props: {
