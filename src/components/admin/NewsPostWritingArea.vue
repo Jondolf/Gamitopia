@@ -157,47 +157,6 @@
             <i class="material-icons">format_underline</i>
           </button>
 
-          <div class="menubar-color-selection-button">
-            <button
-              title="Text color"
-              class="menubar__button"
-              :class="{ 'is-active': isActive.textColor() }"
-              @click="commands.textColor"
-            >
-              <span :style="`border-bottom: 2px solid ${currentTextColor}`"
-                >A</span
-              >
-            </button>
-            <v-popover offset="20">
-              <button class="tooltip-target b3">
-                <i class="material-icons">arrow_drop_down</i>
-              </button>
-              <ColorSelection slot="popover" @color-changed="setTextColor" />
-            </v-popover>
-          </div>
-
-          <div class="menubar-color-selection-button">
-            <button
-              title="Highlight"
-              class="menubar__button"
-              :class="{ 'is-active': isActive.highlight() }"
-              @click="commands.highlight"
-            >
-              <span :style="`background-color: ${currentHighlightColor}`"
-                >A</span
-              >
-            </button>
-            <v-popover offset="20">
-              <button class="tooltip-target b3">
-                <i class="material-icons">arrow_drop_down</i>
-              </button>
-              <ColorSelection
-                slot="popover"
-                @color-changed="setHighlightColor"
-              />
-            </v-popover>
-          </div>
-
           <button
             title="Paragraph"
             class="menubar__button"
@@ -359,20 +318,11 @@ import {
   Placeholder
 } from 'tiptap-extensions';
 
-import Highlight from '@/components/admin/text-editor-extras/Highlight';
-import TextColor from '@/components/admin/text-editor-extras/TextColor';
-
-// @ts-ignore
-import { VPopover } from 'v-tooltip';
-import ColorSelection from './ColorSelection.vue';
-
 export default Vue.extend({
   components: {
     EditorContent,
     EditorMenuBar,
-    EditorMenuBubble,
-    ColorSelection,
-    VPopover
+    EditorMenuBubble
   },
 
   props: {
@@ -382,16 +332,8 @@ export default Vue.extend({
   },
 
   data() {
-    let currentTextColor;
-    let currentHighlightColor;
-    const textColor = new TextColor(currentTextColor);
-    const highlight = new Highlight(currentHighlightColor);
     return {
       newsPostBody: '',
-      currentTextColor: currentTextColor,
-      currentHighlightColor: currentHighlightColor,
-      textColor: textColor,
-      highlight: highlight,
       editor: new Editor({
         extensions: [
           new Blockquote(),
@@ -410,8 +352,6 @@ export default Vue.extend({
           new Italic(),
           new Strike(),
           new Underline(),
-          textColor,
-          highlight,
           new History(),
           new Image(),
           new Placeholder({
