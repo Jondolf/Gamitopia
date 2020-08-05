@@ -206,8 +206,8 @@ export default Vue.extend({
   },
 
   created() {
-    if (localStorage.getItem('cookie-clicker-points')) {
-      this.points = JSON.parse(localStorage.getItem('cookie-clicker-points')!!);
+    if (localStorage.getItem('cookieClickerPoints')) {
+      this.points = JSON.parse(localStorage.getItem('cookieClickerPoints')!!);
     }
     if (localStorage.getItem('cookieClickerPointsPerClick')) {
       this.pointsPerClick = Upgrade.fromJSON(
@@ -234,10 +234,7 @@ export default Vue.extend({
 
   watch: {
     points() {
-      localStorage.setItem(
-        'cookie-clicker-points',
-        JSON.stringify(this.points)
-      );
+      localStorage.setItem('cookieClickerPoints', JSON.stringify(this.points));
     }
   }
 });
