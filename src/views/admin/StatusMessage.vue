@@ -1,6 +1,6 @@
 <template>
   <div id="statusMessage" ref="statusMessage">
-    <button v-on:click="hide()" class="hide-btn">
+    <button @click="hide()" class="hide-btn">
       <i class="material-icons">close</i>
     </button>
     <p class="message" ref="message">{{ message }}</p>

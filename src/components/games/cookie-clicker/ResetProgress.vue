@@ -2,8 +2,8 @@
   <div class="reset-progress">
     <h4>Are you sure you want to reset your progress?</h4>
     <ul>
-      <button v-on:click="$emit('reset')" id="resetGame">Confirm reset</button>
-      <button v-on:click="$emit('cancel')" id="cancelReset">Cancel</button>
+      <button @click="$emit('reset')" id="resetGame">Confirm reset</button>
+      <button @click="$emit('cancel')" id="cancelReset">Cancel</button>
     </ul>
   </div>
 </template>

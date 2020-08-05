@@ -6,15 +6,15 @@
     </button>
     <Instructions
       v-if="instructionsVisibility"
-      @toggleInstructionsBtnClicked="toggleInstructionsVisibility"
+      @toggle-instructions-btn-clicked="toggleInstructionsVisibility"
     />
     <Settings
       v-if="this.settingsVisibility"
-      @openSettingsBtnClicked="this.toggleSettingsVisibility"
-      @gridWidthChanged="changeGridWidth"
-      @gridHeightChanged="changeGridHeight"
-      @rowToWinChanged="changeRowToWin"
-      @toggleFullscreen="$emit('toggleFullscreen')"
+      @open-settings-btn-clicked="this.toggleSettingsVisibility"
+      @grid-width-changed="changeGridWidth"
+      @grid-height-changed="changeGridHeight"
+      @row-to-win-changed="changeRowToWin"
+      @toggle-fullscreen="$emit('toggle-fullscreen')"
       :symbolsNeededInARow="symbolsNeededInARow"
       :gridWidthProp="gridWidth"
       :gridHeightProp="gridHeight"
@@ -50,7 +50,7 @@ export default Vue.extend({
 
   methods: {
     toggleStartMenuVisibility() {
-      this.$emit('startMenuBtnClicked');
+      this.$emit('start-menu-btn-clicked');
     },
 
     toggleSettingsVisibility() {
@@ -62,17 +62,17 @@ export default Vue.extend({
     },
 
     changeGridWidth(value: string) {
-      this.$emit('gridWidthChanged', +value);
+      this.$emit('grid-width-changed', +value);
       this.gridWidth = +value;
     },
 
     changeGridHeight(value: string) {
-      this.$emit('gridHeightChanged', +value);
+      this.$emit('grid-height-changed', +value);
       this.gridHeight = +value;
     },
 
     changeRowToWin(value: string) {
-      this.$emit('rowToWinChanged', +value);
+      this.$emit('row-to-win-changed', +value);
       this.symbolsNeededInARow = +value;
     }
   }

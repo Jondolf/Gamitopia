@@ -35,7 +35,7 @@
         </div>
       </div>
       <div class="middle-container">
-        <button v-on:click="openMap">Back to map</button>
+        <button @click="openMap">Back to map</button>
         <p>
           <strong>{{ currentArea.name }}</strong>
         </p>
@@ -93,8 +93,10 @@
 import Vue from 'vue';
 import { Enemy } from './enemy';
 import { Area } from './area';
+
 export default Vue.extend({
-  name: 'Top-Bar',
+  name: 'TopBar',
+
   props: {
     playerName: String,
     enemyName: String,
@@ -111,6 +113,7 @@ export default Vue.extend({
     currentArea: Object,
     inBattle: Boolean
   },
+
   data() {
     return {
       maxHealth: 0,
@@ -118,11 +121,13 @@ export default Vue.extend({
       maxEnemyMana: 0
     };
   },
+
   methods: {
     openMap() {
-      this.$emit('openMap');
+      this.$emit('open-map');
     }
   },
+
   created() {
     if (this.inBattle) {
       setTimeout(() => {
@@ -136,6 +141,7 @@ export default Vue.extend({
       }, 2);
     }
   },
+
   watch: {
     coins: function() {
       const coinElement = this.$refs.coin as HTMLElement;
@@ -186,9 +192,7 @@ export default Vue.extend({
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
 @keyframes GET-COIN {
   0% {
     width: 14px;

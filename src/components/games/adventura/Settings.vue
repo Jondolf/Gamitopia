@@ -3,16 +3,16 @@
     <div class="ui-elements">
       <h1>Settings</h1>
       <div class="btn-container">
-        <button v-on:click="closeSettings">Go back</button>
-        <button v-on:click="toggleFullscreen">
+        <button @click="closeSettings">Go back</button>
+        <button @click="toggleFullscreen">
           <span v-if="fullscreenOn">Fullscreen on</span
           ><span v-if="!fullscreenOn">Fullscreen off</span>
         </button>
-        <button v-on:click="toggleMusic">
+        <button @click="toggleMusic">
           <span v-if="musicOn">Music on</span
           ><span v-if="!musicOn">Music off</span>
         </button>
-        <button v-on:click="toggleSfx">
+        <button @click="toggleSfx">
           <span v-if="sfxOn">Sound effects on</span
           ><span v-if="!sfxOn">Sound effects off</span>
         </button>
@@ -23,38 +23,34 @@
 
 <script lang="ts">
 import Vue from 'vue';
+
 export default Vue.extend({
-  name: 'settings',
-  components: {},
+  name: 'Settings',
+
   props: {
     fullscreenOn: Boolean,
     musicOn: Boolean,
     sfxOn: Boolean
   },
-  data() {
-    return {};
-  },
+
   methods: {
     closeSettings() {
-      this.$emit('closeSettings');
+      this.$emit('close-settings');
     },
     toggleFullscreen() {
-      this.$emit('toggleFullscreen');
+      this.$emit('toggle-fullscreen');
     },
     toggleMusic() {
-      this.$emit('toggleMusic');
+      this.$emit('toggle-music');
     },
     toggleSfx() {
-      this.$emit('toggleSfx');
+      this.$emit('toggle-sfx');
     }
   }
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
-
 @keyframes BACKGROUND-MOVE {
   0% {
     background-position-x: 0;

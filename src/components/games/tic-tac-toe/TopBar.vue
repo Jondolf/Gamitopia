@@ -17,7 +17,7 @@ export default Vue.extend({
     },
 
     openStartMenu() {
-      this.$emit('startMenuBtnClicked');
+      this.$emit('start-menu-btn-clicked');
     }
   }
 });

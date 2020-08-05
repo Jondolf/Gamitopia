@@ -2,21 +2,23 @@
   <div class="tic-tac-toe-game">
     <StartMenu
       v-if="this.startMenuVisibility === true"
-      @startMenuBtnClicked="this.toggleStartMenuVisibility"
-      @activateThreeByThreeGrid="this.activateThreeByThreeGrid"
-      @activateFourByFourGrid="this.activateFourByFourGrid"
-      @gridWidthChanged="changeGridWidth"
-      @gridHeightChanged="changeGridHeight"
-      @rowToWinChanged="changeRowToWin"
-      @toggleFullscreen="$emit('toggleFullscreen')"
+      @start-menu-btn-clicked="this.toggleStartMenuVisibility"
+      @activate-three-by-three-grid="this.activateThreeByThreeGrid"
+      @activate-four-by-four-grid="this.activateFourByFourGrid"
+      @grid-width-changed="changeGridWidth"
+      @grid-height-changed="changeGridHeight"
+      @row-to-win-changed="changeRowToWin"
+      @toggle-fullscreen="$emit('toggle-fullscreen')"
     />
     <Grid
-      @openStartMenuBtnClicked="this.toggleStartMenuVisibility"
-      :threeByThreeGrid="this.threeByThreeGridActive"
-      :fourByFourGrid="this.fourByFourGridActive"
-      :gridWidth="gridWidth"
-      :gridHeight="gridHeight"
-      :amountOfSymbolsNeededInARowToWin="amountOfSymbolsNeededInARowToWin"
+      @open-start-menu-btn-clicked="this.toggleStartMenuVisibility"
+      :three-by-three-grid="this.threeByThreeGridActive"
+      :four-by-four-grid="this.fourByFourGridActive"
+      :grid-width="gridWidth"
+      :grid-height="gridHeight"
+      :amount-of-symbols-needed-in-a-row-to-win="
+        amountOfSymbolsNeededInARowToWin
+      "
     />
   </div>
 </template>

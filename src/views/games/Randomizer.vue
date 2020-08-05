@@ -2,7 +2,7 @@
   <GamePage :game="$store.state.games.allGames.randomizer" id="randomizer">
     <GameContainer width="80vw" height="80vh" :isFullscreen="isFullscreen">
       <RandomizerGame
-        @toggleFullscreen="isFullscreen = !isFullscreen"
+        @toggle-fullscreen="isFullscreen = !isFullscreen"
         :isFullscreen="isFullscreen"
       />
     </GameContainer>

@@ -1,6 +1,6 @@
 <template>
   <div class="upgrade-container" ref="upgradeContainer">
-    <button v-on:click="openUpgradesMenu()" class="open-upgrades-menu">
+    <button @click="openUpgradesMenu()" class="open-upgrades-menu">
       <p>Open upgrades</p>
     </button>
     <div class="upgrade-btn-container">
@@ -8,19 +8,19 @@
         :name="pointsPerClick.name"
         :level="pointsPerClick.level"
         :cost="pointsPerClick.cost"
-        @btnClicked="$emit('btnClicked', pointsPerClick, 'Not unique')"
+        @btn-clicked="$emit('btn-clicked', pointsPerClick, 'Not unique')"
       />
       <UpgradeBtn
         :name="speedOfPointsByTime.name"
         :level="speedOfPointsByTime.level"
         :cost="speedOfPointsByTime.cost"
-        @btnClicked="$emit('btnClicked', speedOfPointsByTime, 'Unique')"
+        @btn-clicked="$emit('btn-clicked', speedOfPointsByTime, 'Unique')"
       />
       <UpgradeBtn
         :name="amountOfPointsByTime.name"
         :level="amountOfPointsByTime.level"
         :cost="amountOfPointsByTime.cost"
-        @btnClicked="$emit('btnClicked', amountOfPointsByTime, 'Unique')"
+        @btn-clicked="$emit('btn-clicked', amountOfPointsByTime, 'Unique')"
       />
     </div>
   </div>

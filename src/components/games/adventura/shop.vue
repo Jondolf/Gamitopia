@@ -1,6 +1,6 @@
 <template>
   <div class="shop">
-    <button v-on:click="openMap" class="open-map">Area Map</button>
+    <button @click="openMap" class="open-map">Area Map</button>
     <div class="shop-container">
       <div class="stats">
         <h2 class="header">Shop</h2>
@@ -18,31 +18,31 @@
         </p>
       </div>
       <div class="buyItemBtnContainer">
-        <button v-on:click="buyItem('health')">
+        <button @click="buyItem('health')">
           <p>Max health +1</p>
           <p>Cost: {{ newHealthUpgradeCost }}</p>
           <p></p>
           <p>Lvl: {{ healthLevel }}</p>
         </button>
-        <button v-on:click="buyItem('mana')">
+        <button @click="buyItem('mana')">
           <p>Max mana +1</p>
           <p>Cost: {{ newManaUpgradeCost }}</p>
           <p></p>
           <p>Lvl: {{ manaLevel }}</p>
         </button>
-        <button v-on:click="buyItem('sword')">
+        <button @click="buyItem('sword')">
           <p>Iron sword +1</p>
           <p>Cost: {{ newSwordUpgradeCost }}</p>
           <p>Dmg: {{ ironSword.minDamage }}-{{ ironSword.maxDamage }}</p>
           <p>Lvl: {{ swordLevel }}</p>
         </button>
-        <button v-on:click="buyItem('heal')">
+        <button @click="buyItem('heal')">
           <p>Heal +1</p>
           <p>Cost: {{ newHealUpgradeCost }}</p>
           <p>Heal: {{ healScroll.heal }}</p>
           <p>Lvl: {{ healLevel }}</p>
         </button>
-        <button v-on:click="buyItem('fire')">
+        <button @click="buyItem('fire')">
           <p>Fire +1</p>
           <p>Cost: {{ newFireUpgradeCost }}</p>
           <p>Dmg: {{ fireScroll.minDamage }}-{{ fireScroll.maxDamage }}</p>
@@ -50,7 +50,7 @@
         </button>
         <button
           v-if="unlockedMoves.includes('Water scroll')"
-          v-on:click="buyItem('water')"
+          @click="buyItem('water')"
         >
           <p>Water +1</p>
           <p>Cost: {{ newWaterUpgradeCost }}</p>
@@ -66,7 +66,7 @@
         </button>
         <button
           v-if="unlockedMoves.includes('Ice scroll')"
-          v-on:click="buyItem('ice')"
+          @click="buyItem('ice')"
         >
           <p>Ice +1</p>
           <p>Cost: {{ newIceUpgradeCost }}</p>
@@ -82,7 +82,7 @@
 
         <button
           v-if="unlockedMoves.includes('Earth scroll')"
-          v-on:click="buyItem('earth')"
+          @click="buyItem('earth')"
         >
           <p>Earth +1</p>
           <p>Cost: {{ newEarthUpgradeCost }}</p>
@@ -98,7 +98,7 @@
 
         <button
           v-if="unlockedMoves.includes('Air scroll')"
-          v-on:click="buyItem('air')"
+          @click="buyItem('air')"
         >
           <p>Air +1</p>
           <p>Cost: {{ newAirUpgradeCost }}</p>
@@ -114,7 +114,7 @@
 
         <button
           v-if="unlockedMoves.includes('Lightning scroll')"
-          v-on:click="buyItem('lightning')"
+          @click="buyItem('lightning')"
         >
           <p>Lightning +1</p>
           <p>Cost: {{ newLightningUpgradeCost }}</p>
@@ -138,9 +138,10 @@
 import Vue from 'vue';
 import { Melee } from './melee';
 import { Magic } from './magic';
+
 export default Vue.extend({
-  name: 'shop',
-  components: {},
+  name: 'Shop',
+
   props: {
     //Weapons
     ironSword: Object as () => Melee,
@@ -159,6 +160,7 @@ export default Vue.extend({
     visibleCoinAmount: String,
     unlockedMoves: Array
   },
+
   data() {
     return {
       healthLevel: 1,
@@ -184,9 +186,10 @@ export default Vue.extend({
       newHealUpgradeCost: 30
     };
   },
+
   methods: {
     openMap() {
-      this.$emit('openMap');
+      this.$emit('open-map');
     },
     saveToLocalStorage(
       item: string,
@@ -215,8 +218,8 @@ export default Vue.extend({
       switch (item) {
         case 'health':
           if (this.coins >= this.newHealthUpgradeCost) {
-            this.$emit('itemBought', this.newHealthUpgradeCost);
-            this.$emit('healthUpgraded');
+            this.$emit('item-bought', this.newHealthUpgradeCost);
+            this.$emit('health-upgraded');
             this.newHealthUpgradeCost = Math.round(
               this.newHealthUpgradeCost * Math.pow(1.05, this.healthLevel)
             );
@@ -232,8 +235,8 @@ export default Vue.extend({
 
         case 'mana':
           if (this.coins >= this.newManaUpgradeCost) {
-            this.$emit('itemBought', this.newManaUpgradeCost);
-            this.$emit('manaUpgraded');
+            this.$emit('item-bought', this.newManaUpgradeCost);
+            this.$emit('mana-upgraded');
             this.newManaUpgradeCost = Math.round(
               this.newManaUpgradeCost * Math.pow(1.05, this.manaLevel)
             );
@@ -248,8 +251,8 @@ export default Vue.extend({
           break;
         case 'sword':
           if (this.coins >= this.newSwordUpgradeCost) {
-            this.$emit('itemBought', this.newSwordUpgradeCost);
-            this.$emit('swordUpgraded');
+            this.$emit('item-bought', this.newSwordUpgradeCost);
+            this.$emit('sword-upgraded');
             this.newSwordUpgradeCost = Math.round(
               this.newSwordUpgradeCost * Math.pow(1.05, this.swordLevel)
             );
@@ -264,8 +267,8 @@ export default Vue.extend({
           break;
         case 'fire':
           if (this.coins >= this.newFireUpgradeCost) {
-            this.$emit('itemBought', this.newFireUpgradeCost);
-            this.$emit('fireUpgraded');
+            this.$emit('item-bought', this.newFireUpgradeCost);
+            this.$emit('fire-upgraded');
             this.newFireUpgradeCost = Math.round(
               this.newFireUpgradeCost * Math.pow(1.05, this.fireLevel)
             );
@@ -280,8 +283,8 @@ export default Vue.extend({
           break;
         case 'water':
           if (this.coins >= this.newWaterUpgradeCost) {
-            this.$emit('itemBought', this.newWaterUpgradeCost);
-            this.$emit('waterUpgraded');
+            this.$emit('item-bought', this.newWaterUpgradeCost);
+            this.$emit('water-upgraded');
             this.newWaterUpgradeCost = Math.round(
               this.newWaterUpgradeCost * Math.pow(1.05, this.waterLevel)
             );
@@ -296,8 +299,8 @@ export default Vue.extend({
           break;
         case 'ice':
           if (this.coins >= this.newIceUpgradeCost) {
-            this.$emit('itemBought', this.newIceUpgradeCost);
-            this.$emit('iceUpgraded');
+            this.$emit('item-bought', this.newIceUpgradeCost);
+            this.$emit('ice-upgraded');
             this.newIceUpgradeCost = Math.round(
               this.newIceUpgradeCost * Math.pow(1.05, this.iceLevel)
             );
@@ -312,8 +315,8 @@ export default Vue.extend({
           break;
         case 'earth':
           if (this.coins >= this.newEarthUpgradeCost) {
-            this.$emit('itemBought', this.newEarthUpgradeCost);
-            this.$emit('earthUpgraded');
+            this.$emit('item-bought', this.newEarthUpgradeCost);
+            this.$emit('earth-upgraded');
             this.newEarthUpgradeCost = Math.round(
               this.newEarthUpgradeCost * Math.pow(1.05, this.earthLevel)
             );
@@ -328,8 +331,8 @@ export default Vue.extend({
           break;
         case 'air':
           if (this.coins >= this.newAirUpgradeCost) {
-            this.$emit('itemBought', this.newAirUpgradeCost);
-            this.$emit('airUpgraded');
+            this.$emit('item-bought', this.newAirUpgradeCost);
+            this.$emit('air-upgraded');
             this.newAirUpgradeCost = Math.round(
               this.newAirUpgradeCost * Math.pow(1.05, this.airLevel)
             );
@@ -344,8 +347,8 @@ export default Vue.extend({
           break;
         case 'lightning':
           if (this.coins >= this.newLightningUpgradeCost) {
-            this.$emit('itemBought', this.newLightningUpgradeCost);
-            this.$emit('lightningUpgraded');
+            this.$emit('item-bought', this.newLightningUpgradeCost);
+            this.$emit('lightning-upgraded');
             this.newLightningUpgradeCost = Math.round(
               this.newLightningUpgradeCost * Math.pow(1.05, this.lightningLevel)
             );
@@ -360,8 +363,8 @@ export default Vue.extend({
           break;
         case 'heal':
           if (this.coins >= this.newHealUpgradeCost) {
-            this.$emit('itemBought', this.newHealUpgradeCost);
-            this.$emit('healUpgraded');
+            this.$emit('item-bought', this.newHealUpgradeCost);
+            this.$emit('heal-upgraded');
             this.newHealUpgradeCost = Math.round(
               this.newHealUpgradeCost * Math.pow(1.05, this.healLevel)
             );
@@ -435,9 +438,7 @@ export default Vue.extend({
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
 .shop {
   background-color: rgb(0, 0, 0);
   height: 100%;

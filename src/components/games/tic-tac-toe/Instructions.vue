@@ -28,7 +28,7 @@ export default Vue.extend({
 
   methods: {
     toggleInstructionsVisibility() {
-      this.$emit('toggleInstructionsBtnClicked');
+      this.$emit('toggle-instructions-btn-clicked');
     }
   }
 });

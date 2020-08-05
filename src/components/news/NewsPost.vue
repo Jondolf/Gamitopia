@@ -40,7 +40,7 @@
           >
             <i class="material-icons">edit</i>
           </router-link>
-          <button v-on:click="handleDeleteNewsPost(id)">
+          <button @click="handleDeleteNewsPost(id)">
             <i class="material-icons">delete</i>
           </button>
         </div>

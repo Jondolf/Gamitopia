@@ -7,11 +7,11 @@
       <div class="btn-container">
         <button
           v-if="checkIfGameStarted('continue')"
-          v-on:click="changeView('map')"
+          @click="changeView('map')"
         >
           Continue adventure
         </button>
-        <button v-on:click="checkIfGameStarted('reset')">
+        <button @click="checkIfGameStarted('reset')">
           Start new adventure
         </button>
         <div class="dark-overlay" v-if="confirmResetBtnVisibility"></div>
@@ -22,11 +22,11 @@
             over.
           </p>
           <div class="confirm-reset-btn-container">
-            <button v-on:click="confirmResetBtnVisibility = false">
+            <button @click="confirmResetBtnVisibility = false">
               Cancel
             </button>
             <button
-              v-on:click="
+              @click="
                 resetProgress();
                 changeView('map');
               "
@@ -35,23 +35,23 @@
             </button>
           </div>
         </div>
-        <button v-on:click="changeView('instructions')">Instructions</button>
-        <button v-on:click="changeView('settings')">Settings</button>
+        <button @click="changeView('instructions')">Instructions</button>
+        <button @click="changeView('settings')">Settings</button>
       </div>
     </div>
     <Instructions
       v-if="currentView === 'Instructions'"
-      @closeInstructions="changeView('startMenu')"
+      @close-instructions="changeView('startMenu')"
     />
     <Settings
       v-if="currentView === 'Settings'"
       :fullscreenOn="fullscreenOn"
       :musicOn="musicOn"
       :sfxOn="sfxOn"
-      @closeSettings="changeView('startMenu')"
-      @toggleFullscreen="toggleFullscreen"
-      @toggleMusic="toggleMusic"
-      @toggleSfx="toggleSfx"
+      @close-settings="changeView('startMenu')"
+      @toggle-fullscreen="toggleFullscreen"
+      @toggle-music="toggleMusic"
+      @toggle-sfx="toggleSfx"
     />
   </div>
 </template>
@@ -61,12 +61,15 @@ import Vue from 'vue';
 import { Area } from './area';
 import Settings from './Settings.vue';
 import Instructions from './Instructions.vue';
+
 export default Vue.extend({
-  name: 'start-menu',
+  name: 'StartMenu',
+
   components: {
     Settings,
     Instructions
   },
+
   props: {
     unlockedAreas: Array as () => Area[],
     currentView: String,
@@ -74,15 +77,18 @@ export default Vue.extend({
     musicOn: Boolean,
     sfxOn: Boolean
   },
+
   data() {
     return {
       confirmResetBtnVisibility: false
     };
   },
+
   methods: {
     changeView(viewName: string) {
       this.$emit(viewName);
     },
+
     checkIfGameStarted(param: string) {
       if (param === 'continue') {
         if (localStorage.getItem('coins')) {
@@ -97,6 +103,7 @@ export default Vue.extend({
         }
       }
     },
+
     resetProgress() {
       if (localStorage.getItem('coins')) {
         setTimeout(() => {
@@ -145,15 +152,19 @@ export default Vue.extend({
       localStorage.removeItem('adventuralightningMaxDamage');
       localStorage.removeItem('adventurahealAmount');
     },
+
     toggleFullscreen() {
-      this.$emit('toggleFullscreen');
+      this.$emit('toggle-fullscreen');
     },
+
     toggleMusic() {
-      this.$emit('toggleMusic');
+      this.$emit('toggle-music');
     },
+
     toggleSfx() {
-      this.$emit('toggleSfx');
+      this.$emit('toggle-sfx');
     },
+
     setBackgroundImg() {
       const animatableBackgroundImg = this.$refs
         .animatableBackgroundImg as HTMLElement;
@@ -174,16 +185,14 @@ export default Vue.extend({
       })`;
     }
   },
+
   mounted() {
     this.setBackgroundImg();
   }
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
-
 @keyframes BACKGROUND-MOVE {
   0% {
     background-position-x: 0;

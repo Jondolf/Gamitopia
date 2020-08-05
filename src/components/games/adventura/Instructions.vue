@@ -3,7 +3,7 @@
     <div class="ui-elements">
       <h1>Instructions</h1>
       <div class="btn-container">
-        <button v-on:click="closeInstructions">Go back</button>
+        <button @click="closeInstructions">Go back</button>
       </div>
       <div class="instructions-text">
         <p>
@@ -84,24 +84,17 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-  name: 'instructions',
-  components: {},
-  props: {},
-  data() {
-    return {};
-  },
+  name: 'Instructions',
+
   methods: {
     closeInstructions() {
-      this.$emit('closeInstructions');
+      this.$emit('close-instructions');
     }
   }
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
-
 @keyframes HEADER-ANIMATION {
   0% {
     font-size: 25px;

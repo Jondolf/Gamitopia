@@ -79,7 +79,7 @@ export default Vue.extend({
 
   methods: {
     setColor(color: Color) {
-      this.$emit('colorChanged', color.rgba);
+      this.$emit('color-changed', color.rgba);
       for (const recentColor of this.recentColors) {
         if (color.rgba === recentColor.rgba) {
           return;

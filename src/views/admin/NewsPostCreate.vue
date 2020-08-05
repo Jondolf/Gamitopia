@@ -14,9 +14,9 @@
       :title.sync="title"
       :originalBody="originalBody"
       :date.sync="date"
-      @bodyChanged="updateBody"
+      @body-changed="updateBody"
     />
-    <button v-on:click="handleCreateNewsPost()" class="submit-btn">
+    <button @click="handleCreateNewsPost()" class="submit-btn">
       Save
     </button>
   </div>

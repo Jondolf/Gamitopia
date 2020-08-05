@@ -1,10 +1,8 @@
 <template>
   <button class="dark-mode-toggle-button">
-    <i
-      v-on:click="toggleDarkMode"
-      class="dark-mode-toggle-button material-icons"
-      >{{ iconText }}</i
-    >
+    <i @click="toggleDarkMode" class="dark-mode-toggle-button material-icons">{{
+      iconText
+    }}</i>
   </button>
 </template>
 

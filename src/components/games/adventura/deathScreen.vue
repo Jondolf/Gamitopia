@@ -2,30 +2,28 @@
   <div class="death-screen">
     <h3>You died.</h3>
     <p>You lost {{ coinsLost }} coins.</p>
-    <button v-on:click="openMap">Back to map</button>
+    <button @click="openMap">Back to map</button>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-  name: 'Death-Screen',
-  components: {},
+  name: 'DeathScreen',
+
   props: {
     coinsLost: Number
   },
+
   methods: {
     openMap() {
-      this.$emit('openMap');
+      this.$emit('open-map');
     }
-  },
-  watch: {}
+  }
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
 .death-screen {
   background-color: rgba(0, 0, 0, 0.5);
   width: 33%;

@@ -71,7 +71,7 @@
       </div>
 
       <NewsSearch
-        @filterNews="
+        @filter-news="
           (filteredNewsPosts) => {
             filteredNews = filteredNewsPosts;
             filterNewsPostsByYear();

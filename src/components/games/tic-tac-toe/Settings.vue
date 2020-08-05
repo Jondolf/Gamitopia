@@ -41,7 +41,10 @@
       class="row-to-win-input"
     />
     <p class="numbers-needed-in-a-row-to-win">{{ numbersNeededInARowToWin }}</p>
-    <button @click="$emit('toggleFullscreen')" class="toggle-fullscreen-button">
+    <button
+      @click="$emit('toggle-fullscreen')"
+      class="toggle-fullscreen-button"
+    >
       Toggle fullscreen
     </button>
   </div>
@@ -73,15 +76,15 @@ export default Vue.extend({
 
   methods: {
     toggleSettingsVisibility() {
-      this.$emit('openSettingsBtnClicked');
+      this.$emit('open-settings-btn-clicked');
     },
 
     setGridWidth(width: number) {
-      this.$emit('gridWidthChanged', width);
+      this.$emit('grid-width-changed', width);
     },
 
     setGridHeight(height: number) {
-      this.$emit('gridHeightChanged', height);
+      this.$emit('grid-height-changed', height);
     },
 
     displayNum() {
@@ -103,7 +106,7 @@ export default Vue.extend({
       const rowToWinInput = this.$refs.rowToWinInput as HTMLInputElement;
       this.numbersNeededInARowToWin =
         'Numbers needed in a row required to win: ' + rowToWinInput.value;
-      this.$emit('rowToWinChanged', rowToWinInput.value);
+      this.$emit('row-to-win-changed', rowToWinInput.value);
     }
   },
 

@@ -172,7 +172,7 @@
               <button class="tooltip-target b3">
                 <i class="material-icons">arrow_drop_down</i>
               </button>
-              <ColorSelection slot="popover" @colorChanged="setTextColor" />
+              <ColorSelection slot="popover" @color-changed="setTextColor" />
             </v-popover>
           </div>
 
@@ -193,7 +193,7 @@
               </button>
               <ColorSelection
                 slot="popover"
-                @colorChanged="setHighlightColor"
+                @color-changed="setHighlightColor"
               />
             </v-popover>
           </div>
@@ -476,7 +476,7 @@ export default Vue.extend({
 
   watch: {
     html() {
-      this.$emit('bodyChanged', this.html);
+      this.$emit('body-changed', this.html);
     },
 
     originalTitle() {

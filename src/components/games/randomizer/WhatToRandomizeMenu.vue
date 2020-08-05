@@ -1,7 +1,7 @@
 <template>
   <div class="what-to-randomize-menu">
     <div class="top-bar">
-      <button @click="$emit('closeWhatToRandomizeMenu')">
+      <button @click="$emit('close-what-to-randomize-menu')">
         <i class="material-icons">close</i>
       </button>
       <h3>What to randomize</h3>
@@ -24,12 +24,14 @@
 
 <script lang="ts">
 import Vue from 'vue';
+
 interface Option {
   imageSrc: string;
   imageAlt: string;
   name: string;
   className: string;
 }
+
 export default Vue.extend({
   name: 'WhatToRandomizeMenu',
 
@@ -60,7 +62,7 @@ export default Vue.extend({
 
   methods: {
     changeOption(option: Option): void {
-      this.$emit('changeOption', option.name);
+      this.$emit('change-option', option.name);
       for (const option of this.whatToRandomizeOptions) {
         if (option.className === 'selected-option') {
           option.className = 'option';

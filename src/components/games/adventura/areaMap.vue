@@ -1,10 +1,10 @@
 <template>
   <div class="area-map">
     <div class="top-btn-container">
-      <button v-on:click="openStartMenu" class="top-btn">
+      <button @click="openStartMenu" class="top-btn">
         Back to main menu
       </button>
-      <button v-on:click="openShop" class="top-btn">Shop</button>
+      <button @click="openShop" class="top-btn">Shop</button>
     </div>
 
     <div class="area-map-btn-container">
@@ -78,25 +78,25 @@ export default Vue.extend({
   },
   methods: {
     openShop() {
-      this.$emit('openShop');
+      this.$emit('open-shop');
     },
     openStartMenu() {
-      this.$emit('openStartMenu');
+      this.$emit('open-start-menu');
     },
     goToArea(area: any) {
       if (area === this.areas.grasslands) {
-        this.$emit('newCurrentArea', area);
+        this.$emit('new-current-area', area);
       }
       if (this.bossesDefeated.includes(area.bossDefeatedToUnlock)) {
-        this.$emit('newCurrentArea', area);
+        this.$emit('new-current-area', area);
       }
     },
     getBoss(area: any) {
       if (area === this.areas.grasslands) {
-        this.$emit('bossArea', area, area.areaBoss);
+        this.$emit('boss-area', area, area.areaBoss);
       }
       if (this.bossesDefeated.includes(area.bossDefeatedToUnlock)) {
-        this.$emit('bossArea', area, area.areaBoss);
+        this.$emit('boss-area', area, area.areaBoss);
       }
     }
   }

@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue';
 // @ts-ignore
 import { VPopover } from 'v-tooltip';
@@ -32,11 +32,11 @@ export default Vue.extend({
   },
 
   props: {
-    cards: Array as () => ICard[]
+    cards: Array
   },
 
   methods: {
-    getRotationAngle(index: number) {
+    getRotationAngle(index) {
       const maxAngle = 45;
       const angleInBetween = maxAngle / (this.cards.length - 1);
       return -(maxAngle / 2) + index * angleInBetween;

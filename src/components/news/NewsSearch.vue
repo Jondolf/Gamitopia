@@ -42,7 +42,7 @@ export default Vue.extend({
     handleFilterNews(newSearchText: string) {
       this.searchText = newSearchText;
       this.filterNews();
-      this.$emit('filterNews', this.filteredNewsPosts);
+      this.$emit('filter-news', this.filteredNewsPosts);
     },
 
     filterNews() {

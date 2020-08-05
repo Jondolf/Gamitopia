@@ -1,5 +1,5 @@
 <template>
-  <button v-on:click="$emit('btnClicked')" class="sound-control-btn">
+  <button @click="$emit('btn-clicked')" class="sound-control-btn">
     <i class="material-icons" ref="soundToggleIcon"></i>
   </button>
 </template>

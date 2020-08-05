@@ -2,7 +2,7 @@
   <GamePage :game="$store.state.games.allGames.snake" id="snake">
     <GameContainer width="80vw" height="80vh" :isFullscreen="isFullscreen">
       <SnakeGame
-        @toggleFullscreen="isFullscreen = !isFullscreen"
+        @toggle-fullscreen="isFullscreen = !isFullscreen"
         :isFullscreen="isFullscreen"
       />
     </GameContainer>

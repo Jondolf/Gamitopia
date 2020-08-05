@@ -11,6 +11,7 @@ import Vue from 'vue';
 import Nav from '@/components/Nav.vue';
 import Footer from '@/components/Footer.vue';
 import * as FastClick from 'fastclick';
+import Decimal from 'decimal.js';
 
 import { store } from './store';
 
@@ -29,6 +30,8 @@ export default Vue.extend({
   mounted() {
     //@ts-ignore
     FastClick.attach(document.body);
+
+    Decimal.set({ precision: 100, rounding: 4 });
   }
 });
 </script>

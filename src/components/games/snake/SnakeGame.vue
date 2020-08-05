@@ -2,7 +2,7 @@
   <div class="snake-game">
     <StartMenu
       v-if="currentView === 'Start menu'"
-      @gameArea="currentView = 'Game area'"
+      @game-area="currentView = 'Game area'"
       @statistics="currentView = 'Statistics'"
       @settings="currentView = 'Settings'"
     />
@@ -10,21 +10,21 @@
       v-if="currentView === 'Game area'"
       :resetGame="resetGame"
       :game="game"
-      @startMenu="currentView = 'Start menu'"
-      @toggleResetGame="resetGame = false"
+      @start-menu="currentView = 'Start menu'"
+      @toggle-reset-game="resetGame = false"
     />
     <Statistics
       v-if="currentView === 'Statistics'"
-      @startMenu="currentView = 'Start menu'"
+      @start-menu="currentView = 'Start menu'"
     />
     <Settings
       v-if="currentView === 'Settings'"
       :game="game"
-      @startMenu="currentView = 'Start menu'"
-      @toggleFullscreen="$emit('toggleFullscreen')"
-      @smallBoard="changeBoardSize"
-      @mediumBoard="changeBoardSize"
-      @largeBoard="changeBoardSize"
+      @start-menu="currentView = 'Start menu'"
+      @toggle-fullscreen="$emit('toggle-fullscreen')"
+      @small-board="changeBoardSize"
+      @medium-board="changeBoardSize"
+      @large-board="changeBoardSize"
     />
   </div>
 </template>

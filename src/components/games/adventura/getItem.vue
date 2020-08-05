@@ -2,7 +2,7 @@
   <div class="get-item">
     <h3>You got an item!</h3>
     <p>{{ itemToUnlock }}</p>
-    <button v-on:click="openMap">Back to map</button>
+    <button @click="openMap">Back to map</button>
   </div>
 </template>
 
@@ -18,14 +18,16 @@ import {
   LightningScroll,
   HealScroll
 } from '@/components/games/adventura/magic';
+
 export default Vue.extend({
-  name: 'Choose-Move',
-  components: {},
+  name: 'ChooseMove',
+
   props: {
     getItem: Boolean,
     currentArea: Object,
     itemToUnlock: String
   },
+
   data() {
     return {
       ironSword: new IronSword(),
@@ -37,18 +39,16 @@ export default Vue.extend({
       healScroll: new HealScroll(6)
     };
   },
+
   methods: {
     openMap() {
-      this.$emit('openMap');
+      this.$emit('open-map');
     }
-  },
-  watch: {}
+  }
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
 .get-item {
   background-color: rgba(0, 0, 0, 0.5);
   width: 33%;

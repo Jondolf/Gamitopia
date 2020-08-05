@@ -17,7 +17,7 @@
       :pointsPerClick="pointsPerClick"
       :speedOfPointsByTime="speedOfPointsByTime"
       :amountOfPointsByTime="amountOfPointsByTime"
-      @btnClicked="upgradeItem"
+      @btn-clicked="upgradeItem"
     />
     <ResetProgress
       v-if="resetProgressVisibility"
@@ -27,7 +27,7 @@
     <div class="cookie-clicking-container">
       <div class="settings-container">
         <button
-          v-on:click="resetProgressVisibility = !resetProgressVisibility"
+          @click="resetProgressVisibility = !resetProgressVisibility"
           class="open-reset-menu"
         >
           Reset
@@ -36,16 +36,16 @@
           :soundOnText="'music_note'"
           :soundOffText="'music_off'"
           :soundOn="musicOn"
-          @btnClicked="musicOn = !musicOn"
+          @btn-clicked="musicOn = !musicOn"
         />
         <SoundControlBtn
           :soundOnText="'volume_up'"
           :soundOffText="'volume_off'"
           :soundOn="sfxOn"
-          @btnClicked="sfxOn = !sfxOn"
+          @btn-clicked="sfxOn = !sfxOn"
         />
         <button
-          @click="$emit('toggleFullscreen')"
+          @click="$emit('toggle-fullscreen')"
           class="toggle-fullscreen-button"
         >
           <i class="material-icons">{{
@@ -59,7 +59,7 @@
       </p>
       <div class="cookie-container">
         <Cookie
-          @cookieClicked="
+          @cookie-clicked="
             points += pointsPerClick.pointsToAdd;
             playSound('Cookie click');
           "

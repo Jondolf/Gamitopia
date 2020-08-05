@@ -2,7 +2,7 @@
   <div class="grid-container">
     <TopBar
       @clicked="restartGame"
-      @startMenuBtnClicked="toggleStartMenuVisibility"
+      @start-menu-btn-clicked="toggleStartMenuVisibility"
     />
 
     <div class="grid" ref="grid">
@@ -68,7 +68,7 @@ export default Vue.extend({
 
   methods: {
     toggleStartMenuVisibility() {
-      this.$emit('openStartMenuBtnClicked');
+      this.$emit('open-start-menu-btn-clicked');
     },
 
     addSymbol(square: SquareData) {

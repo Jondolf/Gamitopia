@@ -3,8 +3,8 @@
     <keep-alive>
       <WhatToRandomizeMenu
         v-if="isWhatToRandomizeMenuOpen"
-        @changeOption="changeOption"
-        @closeWhatToRandomizeMenu="isWhatToRandomizeMenuOpen = false"
+        @change-option="changeOption"
+        @close-what-to-randomize-menu="isWhatToRandomizeMenuOpen = false"
       />
     </keep-alive>
 
@@ -17,7 +17,7 @@
       </button>
       <h2>{{ whatToRandomize }}</h2>
       <button
-        @click="$emit('toggleFullscreen')"
+        @click="$emit('toggle-fullscreen')"
         class="toggle-fullscreen-button"
       >
         <i class="material-icons">{{

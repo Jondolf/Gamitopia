@@ -2,49 +2,49 @@
   <div class="choose-move">
     <button
       v-if="unlockedMoves.includes('Iron sword')"
-      v-on:click="strikeWithSword(ironSword.damage)"
+      @click="strikeWithSword(ironSword.damage)"
     >
       Strike with sword 0MP
     </button>
     <button
       v-if="unlockedMoves.includes('Heal scroll')"
-      v-on:click="heal(healScroll.heal, healScroll.manaToConsume)"
+      @click="heal(healScroll.heal, healScroll.manaToConsume)"
     >
       Heal {{ healScroll.manaToConsume }}MP
     </button>
     <button
       v-if="unlockedMoves.includes('Fire scroll')"
-      v-on:click="blastFire(fireScroll.damage, fireScroll.manaToConsume)"
+      @click="blastFire(fireScroll.damage, fireScroll.manaToConsume)"
     >
       Blast fire {{ fireScroll.manaToConsume }}MP
     </button>
     <button
       v-if="unlockedMoves.includes('Water scroll')"
-      v-on:click="blastWater(waterScroll.damage, waterScroll.manaToConsume)"
+      @click="blastWater(waterScroll.damage, waterScroll.manaToConsume)"
     >
       Blast water {{ waterScroll.manaToConsume }}MP
     </button>
     <button
       v-if="unlockedMoves.includes('Ice scroll')"
-      v-on:click="blastIce(iceScroll.damage, iceScroll.manaToConsume)"
+      @click="blastIce(iceScroll.damage, iceScroll.manaToConsume)"
     >
       Blast ice {{ iceScroll.manaToConsume }}MP
     </button>
     <button
       v-if="unlockedMoves.includes('Earth scroll')"
-      v-on:click="blastEarth(earthScroll.damage, earthScroll.manaToConsume)"
+      @click="blastEarth(earthScroll.damage, earthScroll.manaToConsume)"
     >
       Blast earth {{ earthScroll.manaToConsume }}MP
     </button>
     <button
       v-if="unlockedMoves.includes('Air scroll')"
-      v-on:click="blastAir(airScroll.damage, airScroll.manaToConsume)"
+      @click="blastAir(airScroll.damage, airScroll.manaToConsume)"
     >
       Blast air {{ airScroll.manaToConsume }}MP
     </button>
     <button
       v-if="unlockedMoves.includes('Lightning scroll')"
-      v-on:click="
+      @click="
         blastLightning(lightningScroll.damage, lightningScroll.manaToConsume)
       "
     >
@@ -58,8 +58,8 @@ import Vue from 'vue';
 import { Melee } from '@/components/games/adventura/melee';
 import { Magic } from '@/components/games/adventura/magic';
 export default Vue.extend({
-  name: 'Choose-Move',
-  components: {},
+  name: 'ChooseMove',
+
   props: {
     unlockedMoves: Array,
     ironSword: Melee,
@@ -71,42 +71,37 @@ export default Vue.extend({
     lightningScroll: Magic,
     healScroll: Magic
   },
-  data() {
-    return {};
-  },
+
   methods: {
     strikeWithSword(amount: number) {
-      this.$emit('strikeWithSword', amount);
+      this.$emit('strike-with-sword', amount);
     },
     blastFire(amount: number, manaToConsume: number) {
-      this.$emit('blastFire', amount, manaToConsume);
+      this.$emit('blast-fire', amount, manaToConsume);
     },
     blastWater(amount: number, manaToConsume: number) {
-      this.$emit('blastWater', amount, manaToConsume);
+      this.$emit('blast-water', amount, manaToConsume);
     },
     blastIce(amount: number, manaToConsume: number) {
-      this.$emit('blastIce', amount, manaToConsume);
+      this.$emit('blast-ice', amount, manaToConsume);
     },
     blastEarth(amount: number, manaToConsume: number) {
-      this.$emit('blastEarth', amount, manaToConsume);
+      this.$emit('blast-earth', amount, manaToConsume);
     },
     blastAir(amount: number, manaToConsume: number) {
-      this.$emit('blastAir', amount, manaToConsume);
+      this.$emit('blast-air', amount, manaToConsume);
     },
     blastLightning(amount: number, manaToConsume: number) {
-      this.$emit('blastLightning', amount, manaToConsume);
+      this.$emit('blast-lightning', amount, manaToConsume);
     },
     heal(amount: number, manaToConsume: number) {
       this.$emit('heal', amount, manaToConsume);
     }
-  },
-  watch: {}
+  }
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
 .choose-move {
   background-color: rgba(0, 0, 0, 0.5);
   width: 33%;

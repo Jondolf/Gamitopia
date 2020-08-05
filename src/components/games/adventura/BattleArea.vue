@@ -16,13 +16,13 @@
       :lightningScroll="lightningScroll"
       :healScroll="healScroll"
       :unlockedMoves="unlockedMoves"
-      @strikeWithSword="strikeWithSword"
-      @blastFire="blastFire"
-      @blastWater="blastWater"
-      @blastIce="blastIce"
-      @blastEarth="blastEarth"
-      @blastAir="blastAir"
-      @blastLightning="blastLightning"
+      @strike-with-sword="strikeWithSword"
+      @blast-fire="blastFire"
+      @blast-water="blastWater"
+      @blast-ice="blastIce"
+      @blast-earth="blastEarth"
+      @blast-air="blastAir"
+      @blast-lightning="blastLightning"
       @heal="heal"
     />
     <GetItem
@@ -32,9 +32,9 @@
       :currentArea="currentArea"
       :getItem="getItem"
       :itemToUnlock="itemToUnlock"
-      @openMap="openMap"
+      @open-map="openMap"
     />
-    <DeathScreen v-if="playerDead" :coinsLost="coinsLost" @openMap="openMap" />
+    <DeathScreen v-if="playerDead" :coinsLost="coinsLost" @open-map="openMap" />
     <div ref="animatableBackground" id="animatable-background">
       <div ref="background" id="background"></div>
     </div>
@@ -132,7 +132,7 @@ export default Vue.extend({
   },
   methods: {
     openMap() {
-      this.$emit('openMap');
+      this.$emit('open-map');
     },
     playSound(sound: string) {
       if (this.sfxOn && sound !== 'enemy') {
@@ -180,10 +180,10 @@ export default Vue.extend({
     strikeWithSword(amount: number) {
       if (this.playerTurn) {
         if (!this.missAttack('player')) {
-          this.$emit('strikeWithSword', amount);
+          this.$emit('strike-with-sword', amount);
           this.playSound('sword');
         } else {
-          this.$emit('strikeWithSword', 0);
+          this.$emit('strike-with-sword', 0);
         }
         this.changeTurn();
       }
@@ -191,10 +191,10 @@ export default Vue.extend({
     blastFire(amount: number, manaToConsume: number) {
       if (this.playerTurn && this.mana - manaToConsume >= 0) {
         if (!this.missAttack('player')) {
-          this.$emit('blastFire', amount, manaToConsume);
+          this.$emit('blast-fire', amount, manaToConsume);
           this.playSound('fire');
         } else {
-          this.$emit('blastFire', 0, manaToConsume);
+          this.$emit('blast-fire', 0, manaToConsume);
         }
         this.changeTurn();
       }
@@ -202,10 +202,10 @@ export default Vue.extend({
     blastWater(amount: number, manaToConsume: number) {
       if (this.playerTurn && this.mana - manaToConsume >= 0) {
         if (!this.missAttack('player')) {
-          this.$emit('blastWater', amount, manaToConsume);
+          this.$emit('blast-water', amount, manaToConsume);
           this.playSound('water');
         } else {
-          this.$emit('blastWater', 0, manaToConsume);
+          this.$emit('blast-water', 0, manaToConsume);
         }
         this.changeTurn();
       }
@@ -213,10 +213,10 @@ export default Vue.extend({
     blastIce(amount: number, manaToConsume: number) {
       if (this.playerTurn && this.mana - manaToConsume >= 0) {
         if (!this.missAttack('player')) {
-          this.$emit('blastIce', amount, manaToConsume);
+          this.$emit('blast-ice', amount, manaToConsume);
           this.playSound('ice');
         } else {
-          this.$emit('blastIce', 0, manaToConsume);
+          this.$emit('blast-ice', 0, manaToConsume);
         }
         this.changeTurn();
       }
@@ -224,10 +224,10 @@ export default Vue.extend({
     blastEarth(amount: number, manaToConsume: number) {
       if (this.playerTurn && this.mana - manaToConsume >= 0) {
         if (!this.missAttack('player')) {
-          this.$emit('blastEarth', amount, manaToConsume);
+          this.$emit('blast-earth', amount, manaToConsume);
           this.playSound('earth');
         } else {
-          this.$emit('blastEarth', 0, manaToConsume);
+          this.$emit('blast-earth', 0, manaToConsume);
         }
         this.changeTurn();
       }
@@ -235,10 +235,10 @@ export default Vue.extend({
     blastAir(amount: number, manaToConsume: number) {
       if (this.playerTurn && this.mana - manaToConsume >= 0) {
         if (!this.missAttack('player')) {
-          this.$emit('blastAir', amount, manaToConsume);
+          this.$emit('blast-air', amount, manaToConsume);
           this.playSound('air');
         } else {
-          this.$emit('blastAir', 0, manaToConsume);
+          this.$emit('blast-air', 0, manaToConsume);
         }
         this.changeTurn();
       }
@@ -246,10 +246,10 @@ export default Vue.extend({
     blastLightning(amount: number, manaToConsume: number) {
       if (this.playerTurn && this.mana - manaToConsume >= 0) {
         if (!this.missAttack('player')) {
-          this.$emit('blastLightning', amount, manaToConsume);
+          this.$emit('blast-lightning', amount, manaToConsume);
           this.playSound('lightning');
         } else {
-          this.$emit('blastLightning', 0, manaToConsume);
+          this.$emit('blast-lightning', 0, manaToConsume);
         }
         this.changeTurn();
       }
@@ -270,17 +270,17 @@ export default Vue.extend({
         if (this.enemyTurn && !this.getNewEnemy && !this.getItem) {
           this.changeTurn();
           if (!this.missAttack('enemy')) {
-            this.$emit('enemyStrike', amount);
+            this.$emit('enemy-strike', amount);
             this.playSound('enemy');
           } else {
-            this.$emit('enemyStrike', 0);
+            this.$emit('enemy-strike', 0);
           }
         }
       }, 1);
     },
     emitEnemyStatus() {
       this.$emit(
-        'setEnemyStatus',
+        'set-enemy-status',
         this.enemy.health,
         this.enemy.mana,
         this.enemy.weakness,
@@ -322,7 +322,7 @@ export default Vue.extend({
       }
       ground.style.backgroundImage = 'url(' + this.groundBackgroundImgSrc + ')';
 
-      this.$emit('currentArea', this.currentArea);
+      this.$emit('current-area', this.currentArea);
     }
   },
   watch: {
@@ -359,7 +359,7 @@ export default Vue.extend({
         this.getNewEnemy === false &&
         this.hasHealed === false
       ) {
-        this.$emit('getMana', 1);
+        this.$emit('get-mana', 1);
         const damageHasBeenReceived = this.$refs
           .damageHasBeenReceived as HTMLElement;
         if (this.enemyHealth !== 0) {
@@ -386,7 +386,7 @@ export default Vue.extend({
     getNewEnemy: function() {
       if (this.getNewEnemy === true && this.bossToFight === false) {
         this.getEnemy('Enemy');
-        this.$emit('newEnemyGotten');
+        this.$emit('new-enemy-gotten');
       }
     },
     groundBackgroundImgSrc: function() {
@@ -406,7 +406,7 @@ export default Vue.extend({
   created() {
     setTimeout(() => {
       this.emitEnemyStatus();
-      this.$emit('enemyName', this.enemy.name);
+      this.$emit('enemy-name', this.enemy.name);
     }, 1);
   },
   mounted() {
@@ -418,9 +418,7 @@ export default Vue.extend({
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
 @keyframes BACKGROUND-MOVE {
   0% {
     background-position-x: 0;

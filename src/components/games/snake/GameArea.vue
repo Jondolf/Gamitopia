@@ -6,8 +6,8 @@
   >
     <div class="game-area-container">
       <TopBar
-        @startMenu="changeView('startMenu')"
-        @resetGame="game.resetGame(gameArea, canvas, ctx)"
+        @start-menu="changeView('startMenu')"
+        @reset-game="game.resetGame(gameArea, canvas, ctx)"
         :score="game.score"
         :timesMoved="game.timesMoved"
       />
@@ -75,7 +75,7 @@ export default Vue.extend({
     this.ctx = ctx;
     if (this.resetGame) {
       this.game.resetGame(gameArea, canvas, ctx);
-      this.$emit('toggleResetGame');
+      this.$emit('toggle-reset-game');
     }
     this.game.graphics.drawGame(canvas, ctx);
     this.game.startGame(gameArea, canvas, ctx);

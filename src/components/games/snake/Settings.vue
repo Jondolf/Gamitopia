@@ -173,7 +173,7 @@ export default Vue.extend({
     },
 
     toggleFullscreen() {
-      this.$emit('toggleFullscreen');
+      this.$emit('toggle-fullscreen');
     }
   },
 

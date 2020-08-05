@@ -2,7 +2,7 @@
   <GamePage :game="$store.state.games.allGames.ticTacToe" id="ticTacToe">
     <GameContainer width="80vw" height="80vh" :isFullscreen="isFullscreen">
       <TicTacToeGame
-        @toggleFullscreen="isFullscreen = !isFullscreen"
+        @toggle-fullscreen="isFullscreen = !isFullscreen"
         :isFullscreen="isFullscreen"
       />
     </GameContainer>

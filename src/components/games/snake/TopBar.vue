@@ -30,7 +30,7 @@ export default Vue.extend({
     },
 
     resetGame() {
-      this.$emit('resetGame');
+      this.$emit('reset-game');
     }
   }
 });

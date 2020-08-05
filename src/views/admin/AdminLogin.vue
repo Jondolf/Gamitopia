@@ -26,7 +26,7 @@
           type="checkbox"
           name="show-password"
           class="checkbox"
-          v-on:click="togglePasswordVisibility()"
+          @click="togglePasswordVisibility()"
         />
         <label for="checkbox"> Show password</label>
       </div>

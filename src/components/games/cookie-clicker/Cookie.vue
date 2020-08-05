@@ -1,5 +1,5 @@
 <template>
-  <button @click="$emit('cookieClicked')" class="cookie" ref="cookie" />
+  <button @click="$emit('cookie-clicked')" class="cookie" ref="cookie" />
 </template>
 
 <script lang="ts">

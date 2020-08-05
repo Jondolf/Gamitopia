@@ -1,6 +1,6 @@
 <template>
   <div class="upgrade-btn">
-    <button v-on:click="$emit('btnClicked')">
+    <button @click="$emit('btn-clicked')">
       <h4>{{ name }}</h4>
       <p>Level: {{ level }}</p>
       <p>Cost: {{ cost }}</p>
@@ -10,8 +10,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
+
 export default Vue.extend({
   name: 'UpgradeBtn',
+
   props: {
     name: String,
     level: Number,
@@ -21,11 +23,11 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import '@/global.scss';
 .upgrade-btn {
   width: 100%;
   border-bottom: 1px solid white;
   background-color: var(--upgrades);
+
   button {
     color: white;
     width: 100%;
@@ -37,9 +39,9 @@ export default Vue.extend({
     padding: 0 10px 0 10px;
     background-color: rgba(255, 255, 255, 0);
     transition: 0.3s;
-  }
-  button:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
   }
 }
 </style>
