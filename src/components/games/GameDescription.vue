@@ -1,24 +1,26 @@
 <template>
   <div class="game-description">
     <div class="main">
-      <h2>{{ name }}</h2>
+      <h2>{{ game.name }}</h2>
       <h3>Description</h3>
-      <p>
-        {{ mainDescription }}
-      </p>
-      <img :src="imgSrc" :alt="imgAlt" />
-      <time>Released on {{ releaseDate }}</time>
+      <p v-html="parsedMainDescription"></p>
+      <img :src="game.imgSrc" :alt="game.imgAlt" />
+      <time>Released on {{ game.releaseDate }}</time>
     </div>
     <div class="other">
       <div class="made-with">
         <h3>Made with:</h3>
         <ul>
-          <li v-for="(item, index) in madeWith" :key="index">{{ item }}</li>
+          <li v-for="(item, index) in game.description.madeWith" :key="index">
+            {{ item }}
+          </li>
         </ul>
       </div>
       <div class="support">
         <h3>Support</h3>
-        <p v-for="(item, index) in support" :key="index">{{ item }}</p>
+        <p v-for="(item, index) in game.description.support" :key="index">
+          {{ item }}
+        </p>
       </div>
     </div>
   </div>
@@ -27,6 +29,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { GameInfo } from '../../interfaces/GameInfo';
+
 export default Vue.extend({
   name: 'GameDescription',
 
@@ -35,14 +38,12 @@ export default Vue.extend({
   },
 
   data() {
+    const md = require('markdown-it')({
+      linkify: true,
+      typographer: true
+    });
     return {
-      name: this.game.name,
-      mainDescription: this.game.description.mainDescription,
-      imgSrc: this.game.thumbnailImgSrc,
-      imgAlt: this.game.thumbnailImgAlt,
-      releaseDate: this.game.releaseDate,
-      madeWith: this.game.description.madeWith,
-      support: this.game.description.support
+      parsedMainDescription: md.render(this.game.description.mainDescription)
     };
   }
 });
