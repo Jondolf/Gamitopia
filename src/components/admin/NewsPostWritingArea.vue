@@ -359,14 +359,6 @@ export default Vue.extend({
   },
 
   methods: {
-    setTextColor(color) {
-      this.currentTextColor = color;
-      this.textColor.textColor = color;
-    },
-    setHighlightColor(color) {
-      this.currentHighlightColor = color;
-      this.highlight.highlightColor = color;
-    },
     showLinkMenu(attrs) {
       this.linkUrl = attrs.href;
       this.linkMenuIsActive = true;
