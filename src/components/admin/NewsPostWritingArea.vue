@@ -428,17 +428,17 @@ export default Vue.extend({
 
   h1 {
     font-size: 26px;
-    margin: 12px 0 7px 0;
+    margin: 25px 0 20px 0;
   }
 
   h2 {
     font-size: 22px;
-    margin: 10px 0 5px 0;
+    margin: 20px 0 15px 0;
   }
 
   h3 {
     font-size: 18px;
-    margin: 8px 0 3px 0;
+    margin: 15px 0 10px 0;
   }
 
   img {
