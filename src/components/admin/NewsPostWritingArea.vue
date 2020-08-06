@@ -86,30 +86,6 @@
           </button>
 
           <button
-            title="Text color"
-            class="menububble__button"
-            :class="{ 'is-active': isActive.textColor() }"
-            @click="commands.textColor"
-          >
-            <i class="material-icons" style="color: rgba(255, 0, 0, 1)"
-              >text_format</i
-            >
-          </button>
-
-          <button
-            title="Highlight"
-            class="menububble__button"
-            :class="{ 'is-active': isActive.highlight() }"
-            @click="commands.highlight"
-          >
-            <i
-              class="material-icons"
-              style="background-color: rgba(255, 255, 0, 0.75)"
-              >text_format</i
-            >
-          </button>
-
-          <button
             class="menububble__button"
             :class="{ 'is-active': isActive.code() }"
             @click="commands.code"
