@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, reactive, watch } from 'vue';
 import { Game } from './gameLogic';
 
 export default defineComponent({
@@ -34,8 +34,8 @@ export default defineComponent({
     game: { type: Game, required: true }
   },
 
-  data() {
-    return {
+  setup(props, { emit }) {
+    const boards = reactive({
       smallBoard: [
         // 15x15
         '###############',
@@ -141,58 +141,60 @@ export default defineComponent({
         '#                                                #',
         '#                                                #',
         '##################################################'
-      ],
-      tickSpeed: 500,
-      speed: 5
-    };
-  },
+      ]
+    });
+    const tickSpeed = ref(500);
+    const speed = ref(5);
 
-  methods: {
-    changeView(view: string) {
-      this.$emit(view);
-    },
+    if (localStorage.getItem('snakeSpeed')) {
+      speed.value =
+        (1000 - +JSON.parse(localStorage.getItem('snakeSpeed')!)) / 100;
+    } else {
+      speed.value = (1000 - props.game.tickSpeed) / 100;
+    }
 
-    changeBoardSize(size: string) {
+    function changeView(view: string) {
+      emit(view);
+    }
+
+    function changeBoardSize(size: string) {
       if (size === 'small') {
-        this.$emit(
+        emit(
           size + '-board',
-          this.smallBoard,
-          450 / this.smallBoard[0].length
+          boards.smallBoard,
+          450 / boards.smallBoard[0].length
         );
       } else if (size === 'medium') {
-        this.$emit(
+        emit(
           size + '-board',
-          this.mediumBoard,
-          450 / this.mediumBoard[0].length
+          boards.mediumBoard,
+          450 / boards.mediumBoard[0].length
         );
       } else if (size === 'large') {
-        this.$emit(
+        emit(
           size + '-board',
-          this.largeBoard,
-          450 / this.largeBoard[0].length
+          boards.largeBoard,
+          450 / boards.largeBoard[0].length
         );
       }
     }
-  },
 
-  created() {
-    if (localStorage.getItem('snakeSpeed')) {
-      this.speed = (1000 - +localStorage.getItem('snakeSpeed')!!) / 100;
-    } else {
-      this.speed = (1000 - this.game.tickSpeed) / 100;
-    }
-  },
-
-  watch: {
-    tickSpeed() {
-      if (this.tickSpeed > -100 && this.tickSpeed < 1000) {
-        this.$emit('change-tick-speed', this.tickSpeed);
-        this.speed = (1000 - this.tickSpeed) / 100;
+    watch(tickSpeed, (tickSpeed) => {
+      if (tickSpeed > -100 && tickSpeed < 1000) {
+        emit('change-tick-speed', tickSpeed);
+        speed.value = (1000 - tickSpeed) / 100;
       } else {
-        this.tickSpeed = this.game.tickSpeed;
+        tickSpeed = props.game.tickSpeed;
       }
-      localStorage.setItem('snakeSpeed', JSON.stringify(this.tickSpeed));
-    }
+      localStorage.setItem('snakeSpeed', JSON.stringify(tickSpeed));
+    });
+
+    return {
+      tickSpeed,
+      speed,
+      changeView,
+      changeBoardSize
+    };
   }
 });
 </script>

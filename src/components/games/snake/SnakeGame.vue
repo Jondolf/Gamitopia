@@ -19,6 +19,7 @@
       @change-tick-speed="changeTickSpeed"
     />
     <GameArea
+      v-else-if="currentView === 'Game area'"
       :resetGame="resetGame"
       :game="game"
       @go-back="currentView = 'Start menu'"
@@ -29,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, watch, reactive } from 'vue';
 import StartMenu from './StartMenu.vue';
 import GameArea from './GameArea.vue';
 import Statistics from './Statistics.vue';
@@ -46,11 +47,11 @@ export default defineComponent({
     Settings
   },
 
-  data() {
-    return {
-      currentView: 'Start menu',
-      resetGame: false,
-      game: new Game(
+  setup() {
+    const currentView = ref('Start menu');
+    const resetGame = ref(false);
+    const game = reactive(
+      new Game(
         {
           board: [
             '##############################',
@@ -96,41 +97,45 @@ export default defineComponent({
         false,
         null as ((ev: KeyboardEvent) => void) | null
       )
-    };
-  },
+    );
 
-  methods: {
-    changeCurrentView(newView: string) {
-      this.currentView = newView;
-    },
-
-    changeSnakeDirection(newDirection: string) {
-      this.game.snake.facing = newDirection;
-    },
-
-    changeBoardSize(newBoard: string[], newSquareSize: number) {
-      this.game.gameBoard.board = newBoard;
-      this.game.graphics.squareSize = newSquareSize;
-      this.resetGame = !this.resetGame;
-    },
-
-    changeTickSpeed(newSpeed: number) {
-      this.game.tickSpeed = newSpeed;
+    function changeCurrentView(newView: string) {
+      currentView.value = newView;
     }
-  },
 
-  created() {
+    function changeSnakeDirection(newDirection: string) {
+      game.snake.facing = newDirection;
+    }
+
+    function changeBoardSize(newBoard: string[], newSquareSize: number) {
+      game.gameBoard.board = newBoard;
+      game.graphics.squareSize = newSquareSize;
+      resetGame.value = !resetGame.value;
+    }
+
+    function changeTickSpeed(newSpeed: number) {
+      game.tickSpeed = newSpeed;
+    }
+
     if (localStorage.getItem('snakeSpeed')) {
-      this.game.tickSpeed = +localStorage.getItem('snakeSpeed')!!;
+      game.tickSpeed = +localStorage.getItem('snakeSpeed')!!;
     }
-  },
 
-  watch: {
-    currentView() {
-      if (this.currentView !== 'Game area') {
-        this.game.pauseGame();
+    watch(currentView, (currentView) => {
+      if (currentView !== 'Game area') {
+        game.pauseGame();
       }
-    }
+    });
+
+    return {
+      currentView,
+      resetGame,
+      game,
+      changeCurrentView,
+      changeSnakeDirection,
+      changeBoardSize,
+      changeTickSpeed
+    };
   }
 });
 </script>

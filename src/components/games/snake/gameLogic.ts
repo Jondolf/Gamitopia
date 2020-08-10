@@ -8,7 +8,7 @@ class Snake {
     public parts: Coordinate[],
     public facing: string,
     private game: Game
-  ) {}
+  ) { }
 
   nextLocation() {
     const snakeHead = this.parts[0];
@@ -33,7 +33,7 @@ class Snake {
         if (
           !localStorage.getItem('snakeMostMoves') ||
           this.game.timesMoved >
-            JSON.parse(localStorage.getItem('snakeMostMoves')!!)
+          JSON.parse(localStorage.getItem('snakeMostMoves')!!)
         ) {
           localStorage.setItem(
             'snakeMostMoves',
@@ -43,7 +43,7 @@ class Snake {
         if (
           !localStorage.getItem('snakeLeastMoves') ||
           this.game.timesMoved <
-            JSON.parse(localStorage.getItem('snakeLeastMoves')!!)
+          JSON.parse(localStorage.getItem('snakeLeastMoves')!!)
         ) {
           localStorage.setItem(
             'snakeLeastMoves',
@@ -82,7 +82,7 @@ class Fruit {
     public color: string,
     public fruitArray: Coordinate[] | object[],
     private game: Game
-  ) {}
+  ) { }
 
   addFruit() {
     const randomY = Math.floor(
@@ -111,14 +111,20 @@ class Graphics {
     private game: Game,
     private snake: Snake,
     private fruit: Fruit
-  ) {}
+  ) { }
+
+  drawGame(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
+    ctx.clearRect(0, 0, canvas.width, canvas.width);
+    this.drawBoard(ctx);
+    this.drawOnBoard(ctx, this.fruit.fruitArray, this.fruit.color); // Fruit drawn before snake to prevent fruit spawning on top of snake
+    this.drawOnBoard(ctx, this.snake.parts, this.snake.color);
+  }
 
   drawBoard(ctx: CanvasRenderingContext2D) {
-    let currentYOffset = 0; // position on the y-axis
+    let currentYOffset = 0; // Position on the y-axis
 
     for (const line of this.game.gameBoard.board) {
-      //line = line.split('');
-      let currentXOffset = 0; // position on the x-axis
+      let currentXOffset = 0; // Position on the x-axis
 
       for (const char of line) {
         if (char === '#') {
@@ -157,14 +163,6 @@ class Graphics {
         this.squareSize
       );
     }
-  }
-
-  drawGame(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
-    ctx.clearRect(0, 0, canvas.width, canvas.width);
-
-    this.drawBoard(ctx);
-    this.drawOnBoard(ctx, this.fruit.fruitArray, this.fruit.color); // fruit drawn before snake to prevent fruit spawning on top of snake
-    this.drawOnBoard(ctx, this.snake.parts, this.snake.color);
   }
 }
 
@@ -322,7 +320,7 @@ export class Game {
     }
   }
 
-  // collision detection
+  // Collision detection
   isEmpty(location: any) {
     return this.gameBoard.board[location.y][location.x] === ' ';
   }

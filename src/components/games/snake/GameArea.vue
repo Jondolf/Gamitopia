@@ -7,21 +7,22 @@
     <div class="game-area-container">
       <TopBar
         @go-back="$emit('go-back')"
-        @reset-game="game.resetGame(gameArea, canvas, ctx)"
+        @reset-game="
+          gameArea && canvas && ctx ? game.resetGame(gameArea, canvas, ctx) : ''
+        "
         :score="game.score"
         :timesMoved="game.timesMoved"
       />
       <div class="canvas-container">
         <p v-if="game.paused">Paused (Press P or move to continue)</p>
-        <canvas width="450px" height="450px" ref="canvas" tabindex="1">
-        </canvas>
+        <canvas width="450" height="450" ref="canvas" tabindex="1"> </canvas>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, onMounted, onBeforeUnmount } from 'vue';
 import TopBar from './TopBar.vue';
 import { Game } from './gameLogic';
 
@@ -37,50 +38,50 @@ export default defineComponent({
     resetGame: Boolean
   },
 
-  data() {
-    return {
-      gameArea: (null as unknown) as HTMLElement,
-      canvas: (null as unknown) as HTMLCanvasElement,
-      ctx: (null as unknown) as CanvasRenderingContext2D
-    };
-  },
+  setup(props, { emit }) {
+    const gameArea = ref<HTMLElement | null>(null);
+    const canvas = ref<HTMLCanvasElement | null>(null);
+    const ctx = ref<CanvasRenderingContext2D | null>(null);
 
-  methods: {
-    changeDirection(e: Event) {
-      const canvas = this.$refs.canvas as HTMLCanvasElement;
-      const ctx = canvas.getContext('2d')!!;
-      let direction = '';
-      if (e.type === 'swipeup' && this.game.snake.facing !== 'S') {
-        direction = 'N';
-      } else if (e.type === 'swiperight' && this.game.snake.facing !== 'W') {
-        direction = 'E';
-      } else if (e.type === 'swipedown' && this.game.snake.facing !== 'N') {
-        direction = 'S';
-      } else if (e.type === 'swipeleft' && this.game.snake.facing !== 'E') {
-        direction = 'W';
+    function changeDirection(e: Event) {
+      if (canvas.value && ctx.value) {
+        let direction = '';
+        if (e.type === 'swipeup' && props.game.snake.facing !== 'S') {
+          direction = 'N';
+        } else if (e.type === 'swiperight' && props.game.snake.facing !== 'W') {
+          direction = 'E';
+        } else if (e.type === 'swipedown' && props.game.snake.facing !== 'N') {
+          direction = 'S';
+        } else if (e.type === 'swipeleft' && props.game.snake.facing !== 'E') {
+          direction = 'W';
+        }
+        emit('change-snake-direction', direction);
+        props.game.tick(canvas.value, ctx.value);
       }
-      this.$emit('change-snake-direction', direction);
-      this.game.tick(canvas, ctx);
     }
-  },
 
-  mounted() {
-    const gameArea = this.$refs.gameArea as HTMLElement;
-    const canvas = this.$refs.canvas as HTMLCanvasElement;
-    const ctx = canvas.getContext('2d')!!;
-    this.gameArea = gameArea;
-    this.canvas = canvas;
-    this.ctx = ctx;
-    if (this.resetGame) {
-      this.game.resetGame(gameArea, canvas, ctx);
-      this.$emit('toggle-reset-game');
-    }
-    this.game.graphics.drawGame(canvas, ctx);
-    this.game.startGame(gameArea, canvas, ctx);
-  },
+    onMounted(() => {
+      if (gameArea.value && canvas.value) {
+        ctx.value = canvas.value.getContext('2d');
+        if (props.resetGame) {
+          props.game.resetGame(gameArea.value, canvas.value, ctx.value!);
+          emit('toggle-reset-game');
+        }
+        props.game.graphics.drawGame(canvas.value, ctx.value!);
+        props.game.startGame(gameArea.value, canvas.value, ctx.value!);
+      }
+    });
 
-  beforeUnmount() {
-    this.game.pauseGame();
+    onBeforeUnmount(() => {
+      props.game.pauseGame();
+    });
+
+    return {
+      gameArea,
+      canvas,
+      ctx,
+      changeDirection
+    };
   }
 });
 </script>
