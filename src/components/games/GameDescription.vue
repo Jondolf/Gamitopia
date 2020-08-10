@@ -61,6 +61,7 @@ export default defineComponent({
   color: white;
   text-align: left;
   position: relative;
+  box-sizing: border-box;
 
   h2 {
     padding: 0;
