@@ -113,10 +113,7 @@
       :fullscreenOn="isFullscreen"
       :musicOn="musicOn"
       :sfxOn="sfxOn"
-      @start-menu="currentView = 'Start menu'"
-      @map="currentView = 'Map'"
-      @instructions="currentView = 'Instructions'"
-      @settings="currentView = 'Settings'"
+      @change-current-view="changeCurrentView"
       @toggle-fullscreen="$emit('toggle-fullscreen')"
       @toggle-music="musicOn = !musicOn"
       @toggle-sfx="sfxOn = !sfxOn"
@@ -273,7 +270,7 @@ export default defineComponent({
       musicOn: true,
       sfxOn: true,
 
-      //Component visibility
+      // Component visibility
       currentView: 'Start menu',
       inBattle: false,
 
@@ -282,6 +279,10 @@ export default defineComponent({
     };
   },
   methods: {
+    changeCurrentView(newView: string) {
+      this.currentView = newView;
+    },
+
     upgradeItem(item: any, itemName: string) {
       if (item === this.maxHealth) {
         this.maxHealth++;

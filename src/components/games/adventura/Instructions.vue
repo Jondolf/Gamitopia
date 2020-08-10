@@ -3,7 +3,7 @@
     <div class="ui-elements">
       <h1>Instructions</h1>
       <div class="btn-container">
-        <button @click="closeInstructions">Go back</button>
+        <button @click="$emit('go-back')">Go back</button>
       </div>
       <div class="instructions-text">
         <p>
@@ -83,14 +83,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-export default defineComponent({
-  name: 'Instructions',
 
-  methods: {
-    closeInstructions() {
-      this.$emit('close-instructions');
-    }
-  }
+export default defineComponent({
+  name: 'Instructions'
 });
 </script>
 
@@ -142,6 +137,7 @@ export default defineComponent({
     background-color: rgba(255, 255, 255, 0.7);
     color: black;
     width: 60%;
+    margin-bottom: 15px;
     padding: 15px;
     border: none;
     border-radius: 5px;

@@ -3,16 +3,16 @@
     <div class="ui-elements">
       <h1>Settings</h1>
       <div class="btn-container">
-        <button @click="closeSettings">Go back</button>
-        <button @click="toggleFullscreen">
+        <button @click="$emit('go-back')">Go back</button>
+        <button @click="$emit('toggle-fullscreen')">
           <span v-if="fullscreenOn">Fullscreen on</span
           ><span v-if="!fullscreenOn">Fullscreen off</span>
         </button>
-        <button @click="toggleMusic">
+        <button @click="$emit('toggle-music')">
           <span v-if="musicOn">Music on</span
           ><span v-if="!musicOn">Music off</span>
         </button>
-        <button @click="toggleSfx">
+        <button @click="$emit('toggle-sfx')">
           <span v-if="sfxOn">Sound effects on</span
           ><span v-if="!sfxOn">Sound effects off</span>
         </button>
@@ -31,21 +31,6 @@ export default defineComponent({
     fullscreenOn: Boolean,
     musicOn: Boolean,
     sfxOn: Boolean
-  },
-
-  methods: {
-    closeSettings() {
-      this.$emit('close-settings');
-    },
-    toggleFullscreen() {
-      this.$emit('toggle-fullscreen');
-    },
-    toggleMusic() {
-      this.$emit('toggle-music');
-    },
-    toggleSfx() {
-      this.$emit('toggle-sfx');
-    }
   }
 });
 </script>
@@ -100,6 +85,7 @@ export default defineComponent({
       background-color: rgba(255, 255, 255, 0.7);
       color: black;
       width: 60%;
+      margin-bottom: 15px;
       padding: 15px;
       border: none;
       border-radius: 5px;

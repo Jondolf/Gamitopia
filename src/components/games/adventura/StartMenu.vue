@@ -45,14 +45,14 @@
     </div>
     <Instructions
       v-if="currentView === 'Instructions'"
-      @close-instructions="$emit('close-instructions')"
+      @go-back="$emit('change-current-view', 'Start menu')"
     />
     <Settings
       v-if="currentView === 'Settings'"
       :fullscreenOn="fullscreenOn"
       :musicOn="musicOn"
       :sfxOn="sfxOn"
-      @close-settings="$emit('change-current-view', 'Start menu')"
+      @go-back="$emit('change-current-view', 'Start menu')"
       @toggle-fullscreen="$emit('toggle-fullscreen')"
       @toggle-music="$emit('toggle-music')"
       @toggle-sfx="$emit('toggle-sfx')"
@@ -99,7 +99,7 @@ export default defineComponent({
         if (localStorage.getItem('coins')) {
           this.confirmResetBtnVisibility = true;
         } else {
-          this.$emit('change-current-view', 'map');
+          this.$emit('change-current-view', 'Map');
         }
       }
     },
@@ -278,8 +278,8 @@ export default defineComponent({
       background-color: rgba(255, 255, 255, 0.7);
       color: black;
       width: 60%;
-      height: 8vh;
-      padding: 0 15px;
+      margin-bottom: 15px;
+      padding: 15px;
       border: none;
       border-radius: 5px;
       transition: 0.4s;
