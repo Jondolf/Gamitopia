@@ -1,8 +1,5 @@
-import Vuex from 'vuex';
-import Vue from 'vue';
 import { GameInfo } from '@/interfaces/GameInfo';
-
-Vue.use(Vuex);
+import { createStore } from 'vuex';
 
 type GameKey = 'calculator' | 'snake' | 'adventura' | 'ticTacToe' | 'randomizer' | 'cookieClicker'; // For proper typing
 
@@ -150,7 +147,7 @@ const recentGames = [
   allGames[Object.keys(allGames)[2] as GameKey]
 ] as GameInfo[];
 
-export default new Vuex.Store({
+export default createStore({
   state: {
     allGames: allGames,
     newestGame: newestGame,

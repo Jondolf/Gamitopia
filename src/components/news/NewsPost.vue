@@ -40,7 +40,7 @@
           >
             <i class="material-icons">edit</i>
           </router-link>
-          <button @click="handleDeleteNewsPost(id)">
+          <button @click="handleDeleteNewsPost()">
             <i class="material-icons">delete</i>
           </button>
         </div>
@@ -52,15 +52,14 @@
       :style="[!isCollapsed ? { height: computedBodyHeight } : {}]"
       class="news-post-body"
       ref="newsPostBody"
-    >
-      {{ body }}
-    </div>
+    ></div>
     <time :datetime="date" class="news-post-date">{{ date }}</time>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
+import { useStore } from 'vuex';
 // @ts-ignore
 import hljs from 'highlight.js/lib/core';
 // @ts-ignore
@@ -75,11 +74,14 @@ hljs.registerLanguage('typescript', typescript);
 
 import { deleteNewsPost } from '@/views/admin/actions/deleteNewsPost';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'news-post',
 
   props: {
-    id: Number,
+    id: {
+      type: Number,
+      required: true
+    },
     title: String,
     body: String,
     date: String,
@@ -89,7 +91,7 @@ export default Vue.extend({
 
   data() {
     return {
-      isAdmin: this.$store.state.isAdmin,
+      isAdmin: useStore().state.isAdmin,
       isDeleted: false,
       statusMessage: '',
       statusMessageType: '',

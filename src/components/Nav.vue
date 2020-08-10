@@ -12,26 +12,27 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
+import { useStore } from 'vuex';
 import DarkMode from '@/components/DarkMode.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Nav',
+
   components: {
     DarkMode
   },
 
-  data() {
+  setup() {
+    const isAdmin = useStore().state.isAdmin;
     return {
-      isAdmin: this.$store.state.isAdmin
+      isAdmin
     };
   }
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
 nav {
   background-color: var(--color-primary);
   color: white;

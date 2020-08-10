@@ -37,14 +37,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
 import DarkModeButton from '@/components/DarkMode.vue';
 
 import { authenticate } from './actions/authenticate';
 import router from '../../router';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'admin-login',
   components: {
     DarkModeButton
@@ -85,7 +85,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import '@/global.scss';
 .dark.default-dark .admin-login .password,
 .dark.default-dark .admin-login .confirm-password-btn {
   border: 2px solid white;

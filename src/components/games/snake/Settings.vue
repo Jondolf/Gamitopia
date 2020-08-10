@@ -2,8 +2,10 @@
   <div class="settings">
     <h2>Settings</h2>
     <div class="button-container">
-      <button @click="changeView('startMenu')">Go back</button>
-      <button @click="toggleFullscreen()">Toggle fullscreen</button>
+      <button @click="$emit('change-current-view', 'Start menu')">
+        Go back
+      </button>
+      <button @click="$emit('toggle-fullscreen')">Toggle fullscreen</button>
       <h3>Board size</h3>
       <h6>(Changing the board size resets your game)</h6>
       <div class="board-size-modifier-container">
@@ -22,14 +24,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import { Game } from './gameLogic';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Settings',
 
   props: {
-    game: Game
+    game: { type: Game, required: true }
   },
 
   data() {
@@ -153,27 +155,23 @@ export default Vue.extend({
     changeBoardSize(size: string) {
       if (size === 'small') {
         this.$emit(
-          size + 'Board',
+          size + '-board',
           this.smallBoard,
           450 / this.smallBoard[0].length
         );
       } else if (size === 'medium') {
         this.$emit(
-          size + 'Board',
+          size + '-board',
           this.mediumBoard,
           450 / this.mediumBoard[0].length
         );
       } else if (size === 'large') {
         this.$emit(
-          size + 'Board',
+          size + '-board',
           this.largeBoard,
           450 / this.largeBoard[0].length
         );
       }
-    },
-
-    toggleFullscreen() {
-      this.$emit('toggle-fullscreen');
     }
   },
 
@@ -188,7 +186,7 @@ export default Vue.extend({
   watch: {
     tickSpeed() {
       if (this.tickSpeed > -100 && this.tickSpeed < 1000) {
-        this.game.tickSpeed = this.tickSpeed;
+        this.$emit('change-tick-speed', this.tickSpeed);
         this.speed = (1000 - this.tickSpeed) / 100;
       } else {
         this.tickSpeed = this.game.tickSpeed;

@@ -3,7 +3,7 @@
     <h2>Recent Games</h2>
     <div class="game-container">
       <GameThumbnail
-        v-for="(game, index) in games"
+        v-for="(game, index) in recentGames"
         :key="index"
         :name="game.name"
         :route="game.route"
@@ -16,38 +16,28 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
+import { useStore } from 'vuex';
 import GameThumbnail from '@/components/games/GameThumbnail.vue';
-export default Vue.extend({
+
+export default defineComponent({
   name: 'RecentGames',
+
   components: {
     GameThumbnail
   },
-  data() {
-    return {
-      games: [
-        this.$store.state.games.recentGames[0],
-        this.$store.state.games.recentGames[1],
-        this.$store.state.games.recentGames[2]
-      ]
-    };
+
+  setup() {
+    const recentGames = useStore().state.games.recentGames;
+    return recentGames;
   }
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
-
-.light h2 {
-  color: black;
-}
-.dark h2 {
-  color: white;
-}
-
 h2 {
   margin: 65px auto 20px auto;
+  color: var(--color-light-contrast);
 }
 
 .new-img {

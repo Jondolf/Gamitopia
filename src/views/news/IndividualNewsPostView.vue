@@ -2,7 +2,6 @@
   <div class="individual-news-post-view">
     <NewsPost
       v-if="newsPostFound"
-      :key="newsPost.id"
       :id="newsPost.id"
       :title="newsPost.title"
       :body="newsPost.body"
@@ -10,7 +9,7 @@
       :canCollapse="true"
     />
 
-    <div v-if="!newsPostFound" class="not-found-container">
+    <div v-else class="not-found-container">
       <h1>Unfortunately this news post was not found.</h1>
       <router-link to="/news/">You can go view all news here.</router-link>
     </div>
@@ -18,12 +17,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
+import { useRoute } from 'vue-router';
 import NewsPost from '@/components/news/NewsPost.vue';
-import { getNewsPost } from '../admin/actions/getNewsPost';
 import { formatDate } from '../admin/actions/formatDate';
+import { getNewsPost } from '../admin/actions/getNewsPost';
 import { News } from '../../interfaces/News';
-export default Vue.extend({
+
+export default defineComponent({
   name: 'IndividualNewsPostView.vue',
 
   components: {
@@ -43,7 +44,9 @@ export default Vue.extend({
 
   async mounted() {
     try {
-      const newsPostData = await getNewsPost(this.$route.params.id);
+      const newsPostData = await getNewsPost(
+        ((useRoute().params as unknown) as Record<string, string>).id
+      );
       this.newsPost = newsPostData;
     } catch (error) {
       this.newsPostFound = false;

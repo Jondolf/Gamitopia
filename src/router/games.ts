@@ -1,6 +1,6 @@
-import { RouteConfig } from 'vue-router';
+import { RouteRecordRaw } from 'vue-router';
 
-const gameRoutes: Array<RouteConfig> = [
+const gameRoutes: Array<RouteRecordRaw> = [
   {
     path: '/cookie-clicker/',
     name: 'cookie-clicker',

@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import { GameInfo } from '@/interfaces/GameInfo';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'GameHeader',
   props: {
     game: Object as () => GameInfo

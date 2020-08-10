@@ -6,13 +6,13 @@
   >
     <div class="game-area-container">
       <TopBar
-        @start-menu="changeView('startMenu')"
+        @go-back="$emit('go-back')"
         @reset-game="game.resetGame(gameArea, canvas, ctx)"
         :score="game.score"
         :timesMoved="game.timesMoved"
       />
       <div class="canvas-container">
-        <p v-if="paused">Paused (Press P or move to continue)</p>
+        <p v-if="game.paused">Paused (Press P or move to continue)</p>
         <canvas width="450px" height="450px" ref="canvas" tabindex="1">
         </canvas>
       </div>
@@ -21,11 +21,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import TopBar from './TopBar.vue';
 import { Game } from './gameLogic';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'GameArea',
 
   components: {
@@ -33,35 +33,33 @@ export default Vue.extend({
   },
 
   props: {
-    game: Game,
+    game: { type: Game, required: true },
     resetGame: Boolean
   },
 
   data() {
     return {
-      gameArea: null as unknown,
-      canvas: null as unknown,
-      ctx: null as unknown
+      gameArea: (null as unknown) as HTMLElement,
+      canvas: (null as unknown) as HTMLCanvasElement,
+      ctx: (null as unknown) as CanvasRenderingContext2D
     };
   },
 
   methods: {
-    changeView(view: string) {
-      this.$emit(view);
-    },
-
-    changeDirection(e: any) {
+    changeDirection(e: Event) {
       const canvas = this.$refs.canvas as HTMLCanvasElement;
       const ctx = canvas.getContext('2d')!!;
+      let direction = '';
       if (e.type === 'swipeup' && this.game.snake.facing !== 'S') {
-        this.game.snake.facing = 'N';
+        direction = 'N';
       } else if (e.type === 'swiperight' && this.game.snake.facing !== 'W') {
-        this.game.snake.facing = 'E';
+        direction = 'E';
       } else if (e.type === 'swipedown' && this.game.snake.facing !== 'N') {
-        this.game.snake.facing = 'S';
+        direction = 'S';
       } else if (e.type === 'swipeleft' && this.game.snake.facing !== 'E') {
-        this.game.snake.facing = 'W';
+        direction = 'W';
       }
+      this.$emit('change-snake-direction', direction);
       this.game.tick(canvas, ctx);
     }
   },
@@ -81,14 +79,8 @@ export default Vue.extend({
     this.game.startGame(gameArea, canvas, ctx);
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.game.pauseGame();
-  },
-
-  computed: {
-    paused() {
-      return this.game.paused;
-    }
   }
 });
 </script>

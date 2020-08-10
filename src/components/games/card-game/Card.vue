@@ -21,10 +21,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import ICard from '@/interfaces/Card';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Card',
 
   props: {

@@ -162,12 +162,12 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import StartMenu from './StartMenu.vue';
-const TopBar = () => import('./TopBar.vue');
-const AreaMap = () => import('./areaMap.vue');
-const BattleArea = () => import('./BattleArea.vue');
-const Shop = () => import('./shop.vue');
+import TopBar from './TopBar.vue';
+import AreaMap from './areaMap.vue';
+import BattleArea from './BattleArea.vue';
+import Shop from './shop.vue';
 
 //Weapons
 import { Melee, IronSword } from './melee';
@@ -200,7 +200,7 @@ import { Enemy } from './enemy';
 //Bosses
 import { Boss } from './boss';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'AdventuraGame',
 
   components: {

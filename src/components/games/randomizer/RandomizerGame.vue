@@ -31,11 +31,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import RandomizeContent from '@/components/games/randomizer/RandomizeContent.vue';
 import WhatToRandomizeMenu from '@/components/games/randomizer/WhatToRandomizeMenu.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'RandomizerGame',
 
   components: {
@@ -63,7 +63,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import '@/global.scss';
 @keyframes animategradient {
   0% {
     background-position: 0% 50%;

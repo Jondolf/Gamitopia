@@ -11,9 +11,9 @@
     <h2>Edit news post</h2>
 
     <NewsPostWritingArea
-      :title.sync="title"
+      v-model:title="title"
       :originalBody="originalBody"
-      :date.sync="date"
+      v-model:date="date"
       @body-changed="updateBody"
     />
     <button @click="handleEditNewsPost()" class="submit-btn">
@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
 const NewsPostWritingArea = () =>
   import('@/components/admin/NewsPostWritingArea.vue');
@@ -32,7 +32,7 @@ import StatusMessage from './StatusMessage.vue';
 import { getNewsPost } from './actions/getNewsPost';
 import { editNewsPost } from './actions/editNewsPost';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'NewsPostEdit',
   components: {
     NewsPostWritingArea,
@@ -126,15 +126,13 @@ export default Vue.extend({
     window.addEventListener('beforeunload', this.preventNav);
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('beforeunload', this.preventNav);
   }
 });
 </script>
 
 <style lang="scss" scoped>
-@import '@/global.scss';
-
 .news-post-edit {
   padding-top: 66px;
 

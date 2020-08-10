@@ -42,7 +42,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import {
   Grasslands,
   Desert,
@@ -54,7 +54,7 @@ import {
 } from '@/components/games/adventura/area';
 import { Enemy } from './enemy';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'area-map',
   components: {},
   props: {
@@ -104,7 +104,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import '@/global.scss';
 .area-map {
   background-color: black;
   position: absolute;

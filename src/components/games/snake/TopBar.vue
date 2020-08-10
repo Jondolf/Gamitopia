@@ -1,10 +1,10 @@
 <template>
   <div class="top-bar">
     <div class="btn-container">
-      <button @click="changeView('startMenu')">
+      <button @click="$emit('go-back')">
         Back
       </button>
-      <button @click="resetGame()">Reset</button>
+      <button @click="$emit('reset-game')">Reset</button>
     </div>
     <div class="stats">
       <p>Score: {{ score }}</p>
@@ -14,24 +14,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'TopBar',
 
   props: {
     score: Number,
     timesMoved: Number
-  },
-
-  methods: {
-    changeView(view: string) {
-      this.$emit(view);
-    },
-
-    resetGame() {
-      this.$emit('reset-game');
-    }
   }
 });
 </script>

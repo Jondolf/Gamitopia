@@ -70,14 +70,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import ChooseMove from '@/components/games/adventura/ChooseMove.vue';
 import GetItem from '@/components/games/adventura/getItem.vue';
 import DeathScreen from '@/components/games/adventura/deathScreen.vue';
 import { Melee } from '@/components/games/adventura/melee';
 import { Magic } from '@/components/games/adventura/magic';
 import { Area } from './area';
-export default Vue.extend({
+export default defineComponent({
   name: 'BattleArea',
   components: {
     ChooseMove,

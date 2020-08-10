@@ -8,8 +8,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-export default Vue.extend({
+import { defineComponent } from 'vue';
+export default defineComponent({
   name: 'status-message',
 
   props: {
@@ -43,9 +43,7 @@ export default Vue.extend({
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
 #statusMessage {
   background-color: var(--color-primary);
   border-radius: 5px;

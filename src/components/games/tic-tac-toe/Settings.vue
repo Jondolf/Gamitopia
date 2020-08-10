@@ -51,9 +51,9 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'StartMenu',
 
   props: {
@@ -223,6 +223,7 @@ export default Vue.extend({
 
   .toggle-fullscreen-button {
     padding: 10px;
+    width: auto;
     height: auto;
     background-color: transparent;
     border: 2px solid var(--color-light-contrast);

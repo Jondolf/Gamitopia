@@ -13,21 +13,21 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-export default Vue.extend({
+import { defineComponent } from 'vue';
+import { useStore } from 'vuex';
+
+export default defineComponent({
   name: 'NewestGame',
 
   data() {
     return {
-      newestGame: this.$store.state.games.newestGame
+      newestGame: useStore().state.games.newestGame
     };
   }
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
 .newest-game {
   background-color: var(--color-primary);
   text-align: center;
@@ -39,6 +39,7 @@ export default Vue.extend({
     margin: 5vh auto 2vh auto;
     font-size: 35px;
   }
+
   span {
     margin: auto;
     font-size: 18px;

@@ -1,5 +1,5 @@
 <template>
-  <GamePage :game="$store.state.games.allGames.randomizer" id="randomizer">
+  <GamePage :game="randomizerState" id="randomizer">
     <GameContainer width="80vw" height="80vh" :isFullscreen="isFullscreen">
       <RandomizerGame
         @toggle-fullscreen="isFullscreen = !isFullscreen"
@@ -10,12 +10,13 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
+import { useStore } from 'vuex';
 import GamePage from '@/components/games/GamePage.vue';
 import GameContainer from '@/components/games/GameContainer.vue';
 import RandomizerGame from '@/components/games/randomizer/RandomizerGame.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Randomizer',
 
   components: {
@@ -26,7 +27,8 @@ export default Vue.extend({
 
   data() {
     return {
-      isFullscreen: false
+      isFullscreen: false,
+      randomizerState: useStore().state.games.allGames.randomizer
     };
   }
 });

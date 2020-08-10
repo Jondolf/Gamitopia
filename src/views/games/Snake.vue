@@ -1,5 +1,5 @@
 <template>
-  <GamePage :game="$store.state.games.allGames.snake" id="snake">
+  <GamePage :game="snakeState" id="snake">
     <GameContainer width="80vw" height="80vh" :isFullscreen="isFullscreen">
       <SnakeGame
         @toggle-fullscreen="isFullscreen = !isFullscreen"
@@ -10,12 +10,13 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
+import { useStore } from 'vuex';
 import GamePage from '@/components/games/GamePage.vue';
 import GameContainer from '@/components/games/GameContainer.vue';
 import SnakeGame from '@/components/games/snake/SnakeGame.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Snake',
 
   components: {
@@ -26,7 +27,8 @@ export default Vue.extend({
 
   data() {
     return {
-      isFullscreen: false
+      isFullscreen: false,
+      snakeState: useStore().state.games.allGames.snake
     };
   }
 });

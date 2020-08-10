@@ -27,11 +27,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import UpgradeBtn from './UpgradeBtn.vue';
 import { Upgrade } from './upgrade';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'UpgradeContainer',
 
   components: {
@@ -63,7 +63,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import '@/global.scss';
 .upgrade-container {
   width: 40%;
   text-align: left;

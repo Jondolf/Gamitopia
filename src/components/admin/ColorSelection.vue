@@ -26,14 +26,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
 interface Color {
   name: string;
   rgba: string;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'ColorSelection',
 
   data() {

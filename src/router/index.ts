@@ -1,37 +1,36 @@
-import Vue from 'vue';
-import VueRouter, { RouteConfig } from 'vue-router';
-import gameRoutes from './games';
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import Home from "../views/Home.vue";
 import adminRoutes from './admin';
+import gameRoutes from './games';
 
-Vue.use(VueRouter);
-
-const routes: Array<RouteConfig> = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'home',
-    component: () => import('../views/Home.vue'),
+    name: 'Home',
+    component: Home,
     meta: {
       title: 'Home | Gamitopia'
     }
   },
   {
-    path: '/games/',
-    name: 'games',
+    path: '/games',
+    name: 'Games',
     component: () => import('../views/Games.vue'),
     meta: {
       title: 'Games | Gamitopia'
     }
   },
   {
-    path: '/news/',
-    name: 'news',
+    path: '/news',
+    name: 'News',
     component: () => import('../views/News.vue'),
     meta: {
       title: 'News | Gamitopia'
     }
   },
   {
-    path: '/news/:id/',
+    path: '/news/:id',
+    name: 'NewsPost',
     component: () => import('../views/news/IndividualNewsPostView.vue'),
     beforeEnter: (to, from, next) => {
       document.title = `News post #${to.params.id} | Gamitopia`;
@@ -39,8 +38,8 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/about/',
-    name: 'about',
+    path: '/about',
+    name: 'About',
     component: () => import('../views/About.vue'),
     meta: {
       title: 'About | Gamitopia'
@@ -51,15 +50,9 @@ const routes: Array<RouteConfig> = [
   ...adminRoutes
 ];
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes
-});
-
-router.beforeEach((to, from, next) => {
-  document.title = to.meta.title;
-  next();
 });
 
 export default router;

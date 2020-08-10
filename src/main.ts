@@ -1,32 +1,20 @@
-import Vue from 'vue';
-import App from './App.vue';
-import './registerServiceWorker';
-import router from './router';
-
-// @ts-ignore
+import Decimal from 'decimal.js';
+import { createApp } from "vue";
 import { VueHammer } from 'vue2-hammer';
-Vue.use(VueHammer);
+import App from "./App.vue";
+import './assets/global.scss';
+import "./registerServiceWorker";
+import router from "./router";
+import store from "./store";
+
+Decimal.set({ precision: 100, rounding: 4 });
+
 VueHammer.config.press = {
   time: 0
 };
 
-Vue.config.productionTip = false;
-
-import VueGtag from 'vue-gtag';
-
-Vue.use(
-  VueGtag,
-  {
-    config: { id: 'UA-146791846-1' },
-    appName: 'Gamitopia'
-  },
-  router
-);
-
-new Vue({
-  router,
-  render: (h) => h(App),
-  mounted() {
-    document.dispatchEvent(new Event('rendered'));
-  }
-}).$mount('#app');
+createApp(App)
+  .use(store)
+  .use(router)
+  .use(VueHammer as any)
+  .mount("#app");

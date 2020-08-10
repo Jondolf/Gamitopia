@@ -90,11 +90,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import { Enemy } from './enemy';
 import { Area } from './area';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'TopBar',
 
   props: {

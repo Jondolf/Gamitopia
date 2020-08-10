@@ -7,11 +7,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import NewestGame from '@/components/home/NewestGame.vue';
 import RecentGames from '@/components/home/RecentGames.vue';
 import LatestNewsPost from '@/components/home/LatestNewsPost.vue';
-export default Vue.extend({
+export default defineComponent({
   name: 'home',
   components: {
     NewestGame,

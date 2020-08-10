@@ -16,10 +16,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import { News } from '@/interfaces/News';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'NewsSearch',
 
   props: {

@@ -11,13 +11,13 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import GameHeader from '@/components/games/GameHeader.vue';
 import GameDescription from '@/components/games/GameDescription.vue';
 import GooglePlayLink from '@/components/games/GooglePlayLink.vue';
 import { GameInfo } from '../../interfaces/GameInfo';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'GamePage',
 
   components: {

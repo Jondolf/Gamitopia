@@ -3,15 +3,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-export default Vue.extend({
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'Footer'
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
 #footer {
   background-color: var(--color-primary);
   width: 100%;
@@ -21,6 +20,7 @@ export default Vue.extend({
   display: flex;
   justify-content: center;
   align-items: center;
+
   i {
     font-size: 20px;
     margin-right: 5px;

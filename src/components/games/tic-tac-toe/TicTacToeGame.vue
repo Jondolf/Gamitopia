@@ -24,10 +24,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import Grid from '@/components/games/tic-tac-toe/Grid.vue';
 import StartMenu from '@/components/games/tic-tac-toe/StartMenu.vue';
-export default Vue.extend({
+export default defineComponent({
   name: 'TicTacToeGame',
 
   components: {

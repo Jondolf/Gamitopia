@@ -9,8 +9,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-export default Vue.extend({
+import { defineComponent } from 'vue';
+export default defineComponent({
   name: 'GameThumbnail',
   props: {
     name: String,
@@ -23,8 +23,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import '@/global.scss';
-
 .game-thumbnail {
   background-color: var(--color-primary);
   margin: 3.5vw;

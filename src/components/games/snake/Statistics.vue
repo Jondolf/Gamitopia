@@ -2,7 +2,9 @@
   <div class="statistics">
     <h2>Statistics</h2>
     <div class="button-container">
-      <button @click="changeView('startMenu')">Go back</button>
+      <button @click="$emit('change-current-view', 'Start menu')">
+        Go back
+      </button>
     </div>
     <div class="statistics-container">
       <p>
@@ -15,9 +17,9 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Statistics',
 
   data() {
@@ -26,12 +28,6 @@ export default Vue.extend({
       mostMoves: JSON.parse(localStorage.getItem('snakeMostMoves')!!) || 0,
       leastMoves: JSON.parse(localStorage.getItem('snakeLeastMoves')!!) || 0
     };
-  },
-
-  methods: {
-    changeView(view: string) {
-      this.$emit(view);
-    }
   }
 });
 </script>

@@ -25,11 +25,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import Settings from '@/components/games/tic-tac-toe/Settings.vue';
 import Instructions from '@/components/games/tic-tac-toe/Instructions.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'StartMenu',
 
   components: {

@@ -135,11 +135,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import { Melee } from './melee';
 import { Magic } from './magic';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Shop',
 
   props: {

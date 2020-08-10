@@ -1,5 +1,5 @@
 <template>
-  <div class="news">
+  <div id="news">
     <h1 class="page-title-header">News</h1>
     <router-link to="/admin/create-news-post/" v-if="isAdmin"
       ><button class="create-news-post-button">Create news post</button>
@@ -99,7 +99,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
+import { useStore } from 'vuex';
 
 import NewsSearch from '@/components/news/NewsSearch.vue';
 import NewsPost from '@/components/news/NewsPost.vue';
@@ -108,7 +109,7 @@ import { getNewsPosts } from './admin/actions/getNewsPosts';
 import { formatDate } from './admin/actions/formatDate';
 import { News } from '../interfaces/News';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'News',
 
   components: {
@@ -122,7 +123,7 @@ export default Vue.extend({
       filteredNews: [] as News[],
       allowedYears: [2020, 2019],
       areAllPostsCollapsed: false,
-      isAdmin: this.$store.state.isAdmin
+      isAdmin: useStore().state.isAdmin
     };
   },
 
@@ -224,7 +225,7 @@ a {
   }
 }
 
-.news {
+#news {
   padding-top: 86px;
 
   .create-news-post-button,

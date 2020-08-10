@@ -30,14 +30,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import CalculatorMoreCommandsMenu from '@/components/games/calculator/CalculatorMoreCommandsMenu.vue';
 import CalculatorButtonContainer from '@/components/games/calculator/CalculatorButtonContainer.vue';
 import CalculatorInput from '@/components/games/calculator/CalculatorInput.vue';
 import { Calculator } from '@/components/games/calculator/calculator';
 import Decimal from 'decimal.js';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Calculator',
 
   components: {
@@ -276,7 +276,7 @@ export default Vue.extend({
     document.addEventListener('keydown', this.handleEvent);
   },
 
-  destroyed() {
+  unmounted() {
     document.removeEventListener('keydown', this.handleEvent);
   }
 });

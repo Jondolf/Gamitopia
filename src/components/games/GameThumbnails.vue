@@ -16,34 +16,30 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
+import { useStore } from 'vuex';
 import GameThumbnail from './GameThumbnail.vue';
-export default Vue.extend({
+
+export default defineComponent({
   name: 'GameThumbnails',
+
   components: {
     GameThumbnail
   },
+
   data() {
     return {
-      games: this.$store.state.games.allGames
+      games: useStore().state.games.allGames
     };
   }
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-@import '@/global.scss';
-.light h2 {
-  color: black;
-}
-.dark h2 {
-  color: white;
-}
-
 h2 {
   padding-top: 50px;
   margin: 0;
+  color: var(--color-light-contrast);
 }
 
 .game-container {

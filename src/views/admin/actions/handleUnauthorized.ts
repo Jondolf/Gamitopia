@@ -1,7 +1,8 @@
 import { AxiosError } from 'axios';
-import { store } from '@/store';
+import { useStore } from 'vuex';
 
 export function handleUnauthorized(error: AxiosError) {
+  const store = useStore();
   if (error.response?.status === 401) {
     localStorage.removeItem('jwt');
     confirm('You are unauthorized and have been logged out.');

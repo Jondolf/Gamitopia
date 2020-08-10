@@ -11,9 +11,9 @@
     <h2>Create news post</h2>
 
     <NewsPostWritingArea
-      :title.sync="title"
+      v-model:title="title"
       :originalBody="originalBody"
-      :date.sync="date"
+      v-model:date="date"
       @body-changed="updateBody"
     />
     <button @click="handleCreateNewsPost()" class="submit-btn">
@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
 const NewsPostWritingArea = () =>
   import('@/components/admin/NewsPostWritingArea.vue');
@@ -32,7 +32,7 @@ import StatusMessage from './StatusMessage.vue';
 import { createNewsPost } from './actions/createNewsPost';
 import router from '../../router';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'NewsPostCreate',
   components: {
     NewsPostWritingArea,
@@ -107,15 +107,13 @@ export default Vue.extend({
     window.addEventListener('beforeunload', this.preventNav);
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('beforeunload', this.preventNav);
   }
 });
 </script>
 
 <style lang="scss">
-@import '@/global.scss';
-
 .news-post-create {
   padding-top: 66px;
 

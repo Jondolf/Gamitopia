@@ -2,24 +2,24 @@
   <div class="start-menu">
     <h2>Snake</h2>
     <div class="button-container">
-      <button @click="changeView('gameArea')">Start game</button>
-      <button @click="changeView('statistics')">Statistics</button>
-      <button @click="changeView('settings')">Settings</button>
+      <button @click="$emit('change-current-view', 'Game area')">
+        Start game
+      </button>
+      <button @click="$emit('change-current-view', 'Statistics')">
+        Statistics
+      </button>
+      <button @click="$emit('change-current-view', 'Settings')">
+        Settings
+      </button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
-export default Vue.extend({
-  name: 'StartMenu',
-
-  methods: {
-    changeView(view: string) {
-      this.$emit(view);
-    }
-  }
+export default defineComponent({
+  name: 'StartMenu'
 });
 </script>
 

@@ -54,10 +54,10 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import { Melee } from '@/components/games/adventura/melee';
 import { Magic } from '@/components/games/adventura/magic';
-export default Vue.extend({
+export default defineComponent({
   name: 'ChooseMove',
 
   props: {

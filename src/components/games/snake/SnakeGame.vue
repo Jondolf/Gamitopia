@@ -2,42 +2,41 @@
   <div class="snake-game">
     <StartMenu
       v-if="currentView === 'Start menu'"
-      @game-area="currentView = 'Game area'"
-      @statistics="currentView = 'Statistics'"
-      @settings="currentView = 'Settings'"
-    />
-    <GameArea
-      v-if="currentView === 'Game area'"
-      :resetGame="resetGame"
-      :game="game"
-      @start-menu="currentView = 'Start menu'"
-      @toggle-reset-game="resetGame = false"
+      @change-current-view="changeCurrentView"
     />
     <Statistics
-      v-if="currentView === 'Statistics'"
-      @start-menu="currentView = 'Start menu'"
+      v-else-if="currentView === 'Statistics'"
+      @change-current-view="changeCurrentView"
     />
     <Settings
-      v-if="currentView === 'Settings'"
+      v-else-if="currentView === 'Settings'"
       :game="game"
-      @start-menu="currentView = 'Start menu'"
+      @change-current-view="changeCurrentView"
       @toggle-fullscreen="$emit('toggle-fullscreen')"
       @small-board="changeBoardSize"
       @medium-board="changeBoardSize"
       @large-board="changeBoardSize"
+      @change-tick-speed="changeTickSpeed"
+    />
+    <GameArea
+      :resetGame="resetGame"
+      :game="game"
+      @go-back="currentView = 'Start menu'"
+      @toggle-reset-game="resetGame = false"
+      @change-snake-direction="changeSnakeDirection"
     />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import StartMenu from '@/components/games/snake/StartMenu.vue';
-const GameArea = () => import('@/components/games/snake/GameArea.vue');
-const Statistics = () => import('@/components/games/snake/Statistics.vue');
-const Settings = () => import('@/components/games/snake/Settings.vue');
-import { Game } from '@/components/games/snake/gameLogic';
+import { defineComponent } from 'vue';
+import StartMenu from './StartMenu.vue';
+import GameArea from './GameArea.vue';
+import Statistics from './Statistics.vue';
+import Settings from './Settings.vue';
+import { Game } from './gameLogic';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'SnakeGame',
 
   components: {
@@ -101,10 +100,22 @@ export default Vue.extend({
   },
 
   methods: {
-    changeBoardSize(boardSize: string[], squareSize: number) {
-      this.game.gameBoard.board = boardSize;
-      this.game.graphics.squareSize = squareSize;
+    changeCurrentView(newView: string) {
+      this.currentView = newView;
+    },
+
+    changeSnakeDirection(newDirection: string) {
+      this.game.snake.facing = newDirection;
+    },
+
+    changeBoardSize(newBoard: string[], newSquareSize: number) {
+      this.game.gameBoard.board = newBoard;
+      this.game.graphics.squareSize = newSquareSize;
       this.resetGame = !this.resetGame;
+    },
+
+    changeTickSpeed(newSpeed: number) {
+      this.game.tickSpeed = newSpeed;
     }
   },
 

@@ -265,7 +265,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import xml from 'highlight.js/lib/languages/xml';
 import javascript from 'highlight.js/lib/languages/javascript';
 import css from 'highlight.js/lib/languages/css';
@@ -294,7 +294,7 @@ import {
   Placeholder
 } from 'tiptap-extensions';
 
-export default Vue.extend({
+export default defineComponent({
   components: {
     EditorContent,
     EditorMenuBar,
@@ -407,14 +407,13 @@ export default Vue.extend({
     }
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.editor.destroy();
   }
 });
 </script>
 
 <style lang="scss">
-@import '@/global.scss';
 .news-post-writing-area {
   width: 70%;
   background-color: var(--color-primary);

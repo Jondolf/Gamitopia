@@ -1,9 +1,9 @@
 .DS_Store
 node_modules
 /dist
-todo
 
 /newsPostBackup.json
+
 
 # local env files
 .env.local
@@ -13,6 +13,7 @@ todo
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
 # Editor directories and files
 .idea

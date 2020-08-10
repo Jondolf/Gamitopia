@@ -1,19 +1,19 @@
-import { RouteConfig } from "vue-router";
+import { RouteRecordRaw } from "vue-router";
 
 const isAdmin = localStorage.getItem('jwt');
 
-const adminRoutes: Array<RouteConfig> = [
+const adminRoutes: Array<RouteRecordRaw> = [
   {
-    path: '/admin/login/',
-    name: 'admin-login',
+    path: '/admin/login',
+    name: 'AdminLogin',
     component: () => import('../views/admin/AdminLogin.vue'),
     meta: {
       title: 'Admin login | Gamitopia'
     }
   },
   {
-    path: '/admin/create-news-post/',
-    name: 'create-news-post',
+    path: '/admin/create-news-post',
+    name: 'CreateNewsPost',
     component: () => import('../views/admin/NewsPostCreate.vue'),
     beforeEnter: (to, from, next) => {
       if (isAdmin) {
@@ -27,8 +27,8 @@ const adminRoutes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/admin/edit-news-post/:id/',
-    name: 'edit-news-post',
+    path: '/admin/edit-news-post/:id',
+    name: 'EditNewsPost',
     component: () => import('../views/admin/NewsPostEdit.vue'),
     beforeEnter: (to, from, next) => {
       if (isAdmin) {

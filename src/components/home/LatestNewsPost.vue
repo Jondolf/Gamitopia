@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 
 import NewsPost from '@/components/news/NewsPost.vue';
 
@@ -26,7 +26,7 @@ import { News } from '@/interfaces/News';
 import { getLatestNewsPost } from '@/views/admin/actions/getNewsPostLatest';
 import { formatDate } from '@/views/admin/actions/formatDate';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'LatestNewsPost',
 
   components: {

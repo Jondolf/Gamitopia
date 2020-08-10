@@ -1,19 +1,22 @@
 <template>
   <div class="randomize-content">
     <keep-alive>
-      <NumberRange v-if="whatToRandomize === 'Number range'"></NumberRange>
-      <HeadsOrTails v-if="whatToRandomize === 'Heads or tails'"></HeadsOrTails>
-      <ThrowDice v-if="whatToRandomize === 'Throw dice'"></ThrowDice>
+      <div>
+        <NumberRange v-if="whatToRandomize === 'Number range'" />
+        <HeadsOrTails v-if="whatToRandomize === 'Heads or tails'" />
+        <ThrowDice v-if="whatToRandomize === 'Throw dice'" />
+      </div>
     </keep-alive>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import NumberRange from './what-to-randomize/NumberRange.vue';
 import HeadsOrTails from './what-to-randomize/HeadsOrTails.vue';
 import ThrowDice from './what-to-randomize/ThrowDice.vue';
-export default Vue.extend({
+
+export default defineComponent({
   name: 'RandomizeContent',
 
   components: {

@@ -1,10 +1,7 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createStore } from "vuex";
 import games from './games';
 
-Vue.use(Vuex);
-
-export const store = new Vuex.Store({
+export default createStore({
   state: {
     isAdmin: false
   },
@@ -13,8 +10,7 @@ export const store = new Vuex.Store({
       state.isAdmin = bool;
     }
   },
-  actions: {},
   modules: {
-    games: games
+    games
   }
 });

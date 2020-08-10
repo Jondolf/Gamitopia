@@ -7,8 +7,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-export default Vue.extend({
+import { defineComponent } from 'vue';
+export default defineComponent({
   name: 'DarkMode',
   data() {
     return {
@@ -53,7 +53,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import '@/global.scss';
 .dark-mode-toggle-button {
   width: 45px;
   height: 45px;

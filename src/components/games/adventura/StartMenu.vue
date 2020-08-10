@@ -7,7 +7,7 @@
       <div class="btn-container">
         <button
           v-if="checkIfGameStarted('continue')"
-          @click="changeView('map')"
+          @click="$emit('change-current-view', 'Map')"
         >
           Continue adventure
         </button>
@@ -27,42 +27,46 @@
             </button>
             <button
               @click="
-                resetProgress();
-                changeView('map');
+                $emit('reset-progress');
+                $emit('change-current-view', 'Map');
               "
             >
               Reset progress
             </button>
           </div>
         </div>
-        <button @click="changeView('instructions')">Instructions</button>
-        <button @click="changeView('settings')">Settings</button>
+        <button @click="$emit('change-current-view', 'Instructions')">
+          Instructions
+        </button>
+        <button @click="$emit('change-current-view', 'Settings')">
+          Settings
+        </button>
       </div>
     </div>
     <Instructions
       v-if="currentView === 'Instructions'"
-      @close-instructions="changeView('startMenu')"
+      @close-instructions="$emit('close-instructions')"
     />
     <Settings
       v-if="currentView === 'Settings'"
       :fullscreenOn="fullscreenOn"
       :musicOn="musicOn"
       :sfxOn="sfxOn"
-      @close-settings="changeView('startMenu')"
-      @toggle-fullscreen="toggleFullscreen"
-      @toggle-music="toggleMusic"
-      @toggle-sfx="toggleSfx"
+      @close-settings="$emit('change-current-view', 'Start menu')"
+      @toggle-fullscreen="$emit('toggle-fullscreen')"
+      @toggle-music="$emit('toggle-music')"
+      @toggle-sfx="$emit('toggle-sfx')"
     />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import { Area } from './area';
 import Settings from './Settings.vue';
 import Instructions from './Instructions.vue';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'StartMenu',
 
   components: {
@@ -71,7 +75,7 @@ export default Vue.extend({
   },
 
   props: {
-    unlockedAreas: Array as () => Area[],
+    unlockedAreas: { type: Array as () => Area[], required: true },
     currentView: String,
     fullscreenOn: Boolean,
     musicOn: Boolean,
@@ -85,10 +89,6 @@ export default Vue.extend({
   },
 
   methods: {
-    changeView(viewName: string) {
-      this.$emit(viewName);
-    },
-
     checkIfGameStarted(param: string) {
       if (param === 'continue') {
         if (localStorage.getItem('coins')) {
@@ -99,7 +99,7 @@ export default Vue.extend({
         if (localStorage.getItem('coins')) {
           this.confirmResetBtnVisibility = true;
         } else {
-          this.changeView('map');
+          this.$emit('change-current-view', 'map');
         }
       }
     },
@@ -151,18 +151,6 @@ export default Vue.extend({
       localStorage.removeItem('adventuraairMaxDamage');
       localStorage.removeItem('adventuralightningMaxDamage');
       localStorage.removeItem('adventurahealAmount');
-    },
-
-    toggleFullscreen() {
-      this.$emit('toggle-fullscreen');
-    },
-
-    toggleMusic() {
-      this.$emit('toggle-music');
-    },
-
-    toggleSfx() {
-      this.$emit('toggle-sfx');
     },
 
     setBackgroundImg() {

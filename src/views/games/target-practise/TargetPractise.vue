@@ -46,11 +46,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 // @ts-ignore
 //import Unity from 'vue-unity-webgl';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'TargetPractise',
   components: {
     //  Unity

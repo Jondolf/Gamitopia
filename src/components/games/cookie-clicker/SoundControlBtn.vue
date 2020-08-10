@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-export default Vue.extend({
+import { defineComponent } from 'vue';
+export default defineComponent({
   name: 'SoundControlBtn',
 
   props: {
@@ -38,7 +38,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import '@/global.scss';
 .sound-control-btn {
   display: flex;
   align-items: center;

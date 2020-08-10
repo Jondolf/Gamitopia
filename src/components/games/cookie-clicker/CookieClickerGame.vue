@@ -70,7 +70,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import UpgradeContainer from '@/components/games/cookie-clicker/UpgradeContainer.vue';
 import Cookie from '@/components/games/cookie-clicker/Cookie.vue';
 import SoundControlBtn from '@/components/games/cookie-clicker/SoundControlBtn.vue';
@@ -82,7 +82,7 @@ import {
   AmountOfPointsByTime
 } from '@/components/games/cookie-clicker/upgrade';
 
-export default Vue.extend({
+export default defineComponent({
   name: 'CookieClickerGame',
 
   components: {
@@ -241,7 +241,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import '@/global.scss';
 .cookie-clicker-game {
   width: 100%;
   height: 100%;

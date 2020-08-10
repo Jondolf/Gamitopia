@@ -14,7 +14,7 @@
       <div v-for="(row, index) in grid" :key="index" :id="'row' + index">
         <Square
           v-for="(square, index2) in row"
-          @click.native="addSymbol(square)"
+          @click="addSymbol(square)"
           :grid="square.symbol"
           :key="index2"
           :squareSize="squareSize"
@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import Square from '@/components/games/tic-tac-toe/Square.vue';
 import VictoryScreen from '@/components/games/tic-tac-toe/TicTacToeVictoryScreen.vue';
 import TopBar from '@/components/games/tic-tac-toe/TopBar.vue';
@@ -35,7 +35,7 @@ export interface SquareData {
   symbol: string;
 }
 
-export default Vue.extend({
+export default defineComponent({
   name: 'Grid',
 
   components: {
@@ -45,9 +45,9 @@ export default Vue.extend({
   },
 
   props: {
-    gridWidth: Number,
-    gridHeight: Number,
-    amountOfSymbolsNeededInARowToWin: Number
+    gridWidth: { type: Number, required: true },
+    gridHeight: { type: Number, required: true },
+    amountOfSymbolsNeededInARowToWin: { type: Number, required: true }
   },
 
   data() {
@@ -258,14 +258,12 @@ export default Vue.extend({
   },
 
   mounted() {
-    this.$nextTick(function() {
-      window.addEventListener('resize', this.getSquareSize);
-      window.addEventListener('resize', this.getFontSize);
-    });
+    window.addEventListener('resize', this.getSquareSize);
+    window.addEventListener('resize', this.getFontSize);
     this.setGridSize();
   },
 
-  destroyed() {
+  unmounted() {
     window.removeEventListener('resize', this.getSquareSize);
     window.removeEventListener('resize', this.getFontSize);
   }
