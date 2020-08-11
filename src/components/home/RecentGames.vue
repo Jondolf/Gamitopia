@@ -29,7 +29,7 @@ export default defineComponent({
 
   setup() {
     const recentGames = useStore().state.games.recentGames;
-    return recentGames;
+    return { recentGames };
   }
 });
 </script>

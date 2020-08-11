@@ -1,11 +1,7 @@
 <template>
   <div class="news-post" v-if="!isDeleted">
     <div class="top-container">
-      <router-link
-        v-if="isAdmin"
-        :to="`/news/${id}/`"
-        :title="`Go to news post #${id}`"
-        class="news-post-id"
+      <router-link v-if="isAdmin" :to="`/news/${id}`" :title="`Go to news post #${id}`" class="news-post-id"
         >#{{ id }}</router-link
       >
       <div class="left-container">
@@ -16,11 +12,7 @@
       </div>
 
       <div class="right-container">
-        <button
-          v-if="canCollapse"
-          @click="isCollapsed = !isCollapsed"
-          class="toggle-collapse-button"
-        >
+        <button v-if="canCollapse" @click="isCollapsed = !isCollapsed" class="toggle-collapse-button">
           <i v-if="isCollapsed" class="material-icons" title="expand">
             expand_more
           </i>
@@ -30,9 +22,10 @@
         </button>
         <div v-if="isAdmin" class="admin-tools">
           <router-link
+            v-if="id"
             :to="{
               path: '/admin/edit-news-post',
-              name: 'edit-news-post',
+              name: 'EditNewsPost',
               params: {
                 id: id
               }
@@ -51,14 +44,14 @@
       v-html="body"
       :style="[!isCollapsed ? { height: computedBodyHeight } : {}]"
       class="news-post-body"
-      ref="newsPostBody"
+      ref="newsPostBodyContainer"
     ></div>
     <time :datetime="date" class="news-post-date">{{ date }}</time>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, watch, watchEffect, onMounted } from 'vue';
 import { useStore } from 'vuex';
 // @ts-ignore
 import hljs from 'highlight.js/lib/core';
@@ -75,129 +68,126 @@ hljs.registerLanguage('typescript', typescript);
 import { deleteNewsPost } from '@/views/admin/actions/deleteNewsPost';
 
 export default defineComponent({
-  name: 'news-post',
+  name: 'NewsPost',
 
   props: {
     id: {
       type: Number,
-      required: true
+      required: true,
+      default: NaN
     },
     title: String,
     body: String,
     date: String,
     canCollapse: Boolean,
-    areAllCollapsed: Boolean
+    areAllCollapsed: {
+      type: Boolean,
+      required: true
+    }
   },
 
-  data() {
-    return {
-      isAdmin: useStore().state.isAdmin,
-      isDeleted: false,
-      statusMessage: '',
-      statusMessageType: '',
-      showStatus: false,
-      computedBodyHeight: '0',
-      isCollapsed: false
-    };
-  },
+  setup(props) {
+    const isAdmin: boolean = useStore().state.isAdmin;
+    const isCollapsed = ref(false);
+    const showStatus = ref(false);
+    const isDeleted = ref(false);
+    const statusMessage = ref('');
+    const statusMessageType = ref('');
+    const newsPostBodyContainer = ref<HTMLDivElement>(null!);
+    const computedBodyHeight = ref('0');
 
-  methods: {
-    initBodyHeight() {
-      const body = this.$refs.newsPostBody as HTMLElement;
-      body.style.height = 'auto';
-      body.style.position = 'absolute';
-      body.style.visibility = 'hidden';
-      body.style.display = 'block';
+    function initBodyHeight() {
+      newsPostBodyContainer.value.style.height = 'auto';
+      newsPostBodyContainer.value.style.position = 'absolute';
+      newsPostBodyContainer.value.style.visibility = 'hidden';
+      newsPostBodyContainer.value.style.display = 'block';
 
-      const height = getComputedStyle(body).height;
-      this.computedBodyHeight = height;
+      const height = getComputedStyle(newsPostBodyContainer.value).height;
+      computedBodyHeight.value = height;
 
-      body.style.position = 'relative';
-      body.style.visibility = 'visible';
-      body.style.display = 'block';
-      body.style.height = '0';
-    },
+      newsPostBodyContainer.value.style.position = 'relative';
+      newsPostBodyContainer.value.style.visibility = 'visible';
+      newsPostBodyContainer.value.style.display = 'block';
+      newsPostBodyContainer.value.style.height = '0';
+    }
 
-    copyLink() {
+    function copyLink() {
       const dummy = document.createElement('input') as HTMLInputElement;
       document.body.appendChild(dummy);
-      dummy.value =
-        'https://gamitopia.herokuapp.com/news/' + this.id.toString();
+      dummy.value = 'https://gamitopia.herokuapp.com/news/' + props.id.toString();
       dummy.select();
       document.execCommand('copy');
       document.body.removeChild(dummy);
-    },
+    }
 
-    async handleDeleteNewsPost() {
+    async function handleDeleteNewsPost() {
       if (!window.confirm('Are you sure you want to delete this news post?')) {
         return;
       }
       try {
-        await deleteNewsPost(this.id);
-        this.displayStatus(
-          `Successfully deleted #${this.id} news post`,
-          'Success'
-        );
-        this.isDeleted = true;
+        await deleteNewsPost(props.id);
+        displayStatus(`Successfully deleted #${props.id} news post`, 'Success');
+        isDeleted.value = true;
       } catch (error) {
-        this.displayStatus(error.message, 'Error');
+        displayStatus(error.message, 'Error');
       }
-    },
-
-    displayStatus(message: string, messageType: string) {
-      this.statusMessage = message;
-      this.statusMessageType = messageType;
-      this.showStatus = true;
     }
-  },
 
-  watch: {
-    isCollapsed() {
-      const body = this.$refs.newsPostBody as HTMLElement;
-      if (!this.isCollapsed && body.style.height !== this.computedBodyHeight) {
+    function displayStatus(message: string, messageType: string) {
+      statusMessage.value = message;
+      statusMessageType.value = messageType;
+      showStatus.value = true;
+    }
+
+    watch(isCollapsed, (newIsCollapsed) => {
+      if (!newIsCollapsed && newsPostBodyContainer.value.style.height !== computedBodyHeight.value) {
         setTimeout(() => {
-          const body = this.$refs.newsPostBody as HTMLElement;
-          this.computedBodyHeight = body.scrollHeight + 'px';
+          computedBodyHeight.value = newsPostBodyContainer.value.scrollHeight + 'px';
         }, 1500);
       }
-    },
+    });
 
-    areAllCollapsed() {
-      if (this.areAllCollapsed) {
-        this.isCollapsed = true;
-      } else {
-        this.isCollapsed = false;
+    watch(
+      () => props.areAllCollapsed,
+      (newAreAllCollapsed) => {
+        isCollapsed.value = newAreAllCollapsed;
+      }
+    );
+
+    watchEffect(() => {
+      if (!isCollapsed.value && newsPostBodyContainer.value) {
+        newsPostBodyContainer.value.querySelectorAll('code').forEach((block) => {
+          hljs.highlightBlock(block);
+        });
+      }
+    });
+
+    onMounted(() => {
+      initBodyHeight();
+      if (props.areAllCollapsed) {
+        isCollapsed.value = true;
+      }
+      if (!isCollapsed.value) {
+        newsPostBodyContainer.value.querySelectorAll('code').forEach((block) => {
+          hljs.highlightBlock(block);
+        });
         setTimeout(() => {
-          const body = this.$refs.newsPostBody as HTMLElement;
-          this.computedBodyHeight = body.scrollHeight + 'px';
+          if (newsPostBodyContainer.value !== null) {
+            computedBodyHeight.value = newsPostBodyContainer.value.scrollHeight + 'px';
+          }
         }, 1500);
       }
-    }
-  },
+    });
 
-  updated() {
-    if (!this.isCollapsed) {
-      const body = this.$refs.newsPostBody as HTMLElement;
-      body.querySelectorAll('code').forEach((block) => {
-        hljs.highlightBlock(block);
-      });
-    }
-  },
-
-  mounted() {
-    this.initBodyHeight();
-    if (this.areAllCollapsed) {
-      this.isCollapsed = true;
-    }
-    if (!this.isCollapsed) {
-      const body = this.$refs.newsPostBody as HTMLElement;
-      body.querySelectorAll('code').forEach((block) => {
-        hljs.highlightBlock(block);
-      });
-      setTimeout(() => {
-        this.computedBodyHeight = body.scrollHeight + 'px';
-      }, 1500);
-    }
+    return {
+      isAdmin,
+      isDeleted,
+      isCollapsed,
+      computedBodyHeight,
+      newsPostBodyContainer,
+      copyLink,
+      handleDeleteNewsPost
+    };
   }
 });
 </script>
@@ -214,21 +204,6 @@ export default defineComponent({
   position: relative;
   white-space: pre-line;
   overflow: hidden;
-
-  h1 {
-    font-size: 26px;
-    margin: 25px 0 20px 0;
-  }
-
-  h2 {
-    font-size: 22px;
-    margin: 20px 0 15px 0;
-  }
-
-  h3 {
-    font-size: 18px;
-    margin: 15px 0 10px 0;
-  }
 
   li p {
     display: inline;

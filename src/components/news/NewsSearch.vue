@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { News } from '@/interfaces/News';
 
 export default defineComponent({
@@ -31,35 +31,34 @@ export default defineComponent({
     placeholderText: String
   },
 
-  data() {
-    return {
-      searchText: '',
-      filteredNewsPosts: [] as News[]
-    };
-  },
+  setup(props, { emit }) {
+    const searchText = ref('');
+    const filteredNewsPosts = ref<News[]>([]);
 
-  methods: {
-    handleFilterNews(newSearchText: string) {
-      this.searchText = newSearchText;
-      this.filterNews();
-      this.$emit('filter-news', this.filteredNewsPosts);
-    },
+    function handleFilterNews(newSearchText: string) {
+      searchText.value = newSearchText;
+      filterNews();
+      emit('filter-news', filteredNewsPosts);
+    }
 
-    filterNews() {
-      if (this.newsPosts) {
-        if (this.searchText === '') {
-          this.filteredNewsPosts = this.newsPosts;
+    function filterNews() {
+      if (props.newsPosts) {
+        if (searchText.value === '') {
+          filteredNewsPosts.value = props.newsPosts;
           return;
         }
-        this.filteredNewsPosts = this.newsPosts.filter((newsPost: News) =>
-          this.isCaseSensitive
-            ? newsPost.title.includes(this.searchText)
-            : newsPost.title
-                .toLowerCase()
-                .includes(this.searchText.toLowerCase())
+        filteredNewsPosts.value = props.newsPosts.filter((newsPost: News) =>
+          props.isCaseSensitive
+            ? newsPost.title.includes(searchText.value)
+            : newsPost.title.toLowerCase().includes(searchText.value.toLowerCase())
         );
       }
     }
+
+    return {
+      searchText,
+      handleFilterNews
+    };
   }
 });
 </script>

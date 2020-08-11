@@ -1,19 +1,12 @@
 <template>
   <div class="latest-news-post">
     <h2>Latest News Post</h2>
-    <NewsPost
-      :id="newsPost.id"
-      :title="newsPost.title"
-      :body="newsPost.body"
-      :date="handleFormatDate(date)"
-    />
+    <NewsPost :id="newsPost.id" :title="newsPost.title" :body="newsPost.body" :date="handleFormatDate(date)" />
     <p>{{ errorMessage }}</p>
 
     <div class="news-post-gradient"></div>
 
-    <router-link :to="'/news/' + newsPost.id" class="read-all"
-      >Read here</router-link
-    >
+    <router-link :to="'/news/' + newsPost.id" class="read-all">Read here</router-link>
   </div>
 </template>
 
@@ -37,7 +30,7 @@ export default defineComponent({
     return {
       errorMessage: '',
       newsPost: {} as News,
-      date: '' // date in data as well to avoid an error where date is not found due to it not being found from the database yet
+      date: '' // Date in data as well to avoid an error where date is not found due to it not being found from the database yet
     };
   },
 
@@ -99,11 +92,7 @@ export default defineComponent({
     padding: 30px;
     width: 70%;
     border-radius: 5px;
-    background: linear-gradient(
-      180deg,
-      rgba(250, 231, 231, 0) 70%,
-      var(--color-primary) 100%
-    );
+    background: linear-gradient(180deg, rgba(250, 231, 231, 0) 70%, var(--color-primary) 100%);
   }
 }
 </style>

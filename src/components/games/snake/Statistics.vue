@@ -22,7 +22,7 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'Statistics',
 
-  data() {
+  setup() {
     return {
       hiscore: JSON.parse(localStorage.getItem('snakeHiscore')!!) || 0,
       mostMoves: JSON.parse(localStorage.getItem('snakeMostMoves')!!) || 0,

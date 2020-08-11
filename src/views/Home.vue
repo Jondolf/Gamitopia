@@ -11,8 +11,10 @@ import { defineComponent } from 'vue';
 import NewestGame from '@/components/home/NewestGame.vue';
 import RecentGames from '@/components/home/RecentGames.vue';
 import LatestNewsPost from '@/components/home/LatestNewsPost.vue';
+
 export default defineComponent({
-  name: 'home',
+  name: 'Home',
+
   components: {
     NewestGame,
     RecentGames,

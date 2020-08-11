@@ -39,9 +39,9 @@ export default defineComponent({
   },
 
   setup(props, { emit }) {
-    const gameArea = ref<HTMLElement | null>(null);
-    const canvas = ref<HTMLCanvasElement | null>(null);
-    const ctx = ref<CanvasRenderingContext2D | null>(null);
+    const gameArea = ref<HTMLElement>(null!);
+    const canvas = ref<HTMLCanvasElement>(null!);
+    const ctx = ref<CanvasRenderingContext2D>(null!);
 
     function changeDirection(e: Event) {
       if (canvas.value && ctx.value) {
@@ -61,15 +61,13 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      if (gameArea.value && canvas.value) {
-        ctx.value = canvas.value.getContext('2d');
-        if (props.resetGame) {
-          props.game.resetGame(gameArea.value, canvas.value, ctx.value!);
-          emit('toggle-reset-game');
-        }
-        props.game.graphics.drawGame(canvas.value, ctx.value!);
-        props.game.startGame(gameArea.value, canvas.value, ctx.value!);
+      ctx.value = canvas.value.getContext('2d')!;
+      if (props.resetGame) {
+        props.game.resetGame(gameArea.value, canvas.value, ctx.value!);
+        emit('toggle-reset-game');
       }
+      props.game.graphics.drawGame(canvas.value, ctx.value!);
+      props.game.startGame(gameArea.value, canvas.value, ctx.value!);
     });
 
     onBeforeUnmount(() => {

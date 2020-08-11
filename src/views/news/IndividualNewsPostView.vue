@@ -1,11 +1,11 @@
 <template>
-  <div class="individual-news-post-view">
+  <div id="individualNewsPostView">
     <NewsPost
       v-if="newsPostFound"
       :id="newsPost.id"
       :title="newsPost.title"
       :body="newsPost.body"
-      :date="handleFormatDate(newsPost.date)"
+      :date="formatDate(newsPost.date)"
       :canCollapse="true"
     />
 
@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import NewsPost from '@/components/news/NewsPost.vue';
 import { formatDate } from '../admin/actions/formatDate';
@@ -31,47 +31,42 @@ export default defineComponent({
     NewsPost
   },
 
-  data() {
-    return {
-      newsPost: {} as News,
-      newsPostFound: true
-    };
-  },
+  setup() {
+    const newsPost = ref<News>({ id: NaN, title: '', body: '', date: '' });
+    const newsPostFound = ref(true);
 
-  methods: {
-    handleFormatDate: formatDate
-  },
-
-  async mounted() {
-    try {
-      const newsPostData = await getNewsPost(
-        ((useRoute().params as unknown) as Record<string, string>).id
-      );
-      this.newsPost = newsPostData;
-    } catch (error) {
-      this.newsPostFound = false;
+    async function handleGetNewsPost() {
+      try {
+        const newsPostData = await getNewsPost(((useRoute().params as unknown) as Record<string, string>).id);
+        newsPost.value = newsPostData;
+      } catch (error) {
+        newsPostFound.value = false;
+      }
     }
+
+    onMounted(async () => await handleGetNewsPost());
+
+    return {
+      newsPost,
+      newsPostFound,
+      formatDate
+    };
   }
 });
 </script>
 
 <style lang="scss">
-.individual-news-post-view {
+#individualNewsPostView {
   padding-top: 66px;
+
   .not-found-container {
     text-align: center;
     padding: 35px 25px;
-    color: black;
-    a {
-      color: black;
-    }
-  }
-}
+    color: var(--color-light-contrast);
 
-.dark.default-dark .individual-news-post-view .not-found-container {
-  color: white;
-  a {
-    color: white;
+    a {
+      color: var(--color-light-contrast);
+    }
   }
 }
 </style>

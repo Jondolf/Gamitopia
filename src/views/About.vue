@@ -4,8 +4,8 @@
       <div class="about-gamitopia">
         <h2>About Gamitopia</h2>
         <p>
-          Gamitopia is a website with completely free games made by me. My goal
-          is to make fun games and projects and learn programming along the way.
+          Gamitopia is a website with completely free games made by me. My goal is to make fun games and projects and
+          learn programming along the way.
         </p>
         <h3>Made with:</h3>
         <br />
@@ -21,13 +21,10 @@
       <div class="about-me">
         <h2>About me</h2>
         <p>
-          I am a Finnish junior high school student who has worked with HTML,
-          CSS and JavaScript for roughly 3-4 years. I have also worked with Vue,
-          SCSS and TypeScript.
+          I am a Finnish junior high school student who has worked with HTML, CSS and JavaScript for roughly 3-4 years.
+          I have also worked with Vue, SCSS and TypeScript.
           <br />
-          <a href="https://github.com/Jondolf" target="_blank"
-            >The link to my GitHub profile</a
-          >
+          <a href="https://github.com/Jondolf" target="_blank">The link to my GitHub profile</a>
         </p>
         <h3>Languages that I have used (and more)</h3>
         <ul>
@@ -56,9 +53,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+
 export default defineComponent({
-  name: 'about',
-  components: {}
+  name: 'About'
 });
 </script>
 

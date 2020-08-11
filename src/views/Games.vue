@@ -7,8 +7,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import GameThumbnails from '@/components/games/GameThumbnails.vue';
+
 export default defineComponent({
-  name: 'home',
+  name: 'Games',
+
   components: {
     GameThumbnails
   }

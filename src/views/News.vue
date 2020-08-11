@@ -4,11 +4,7 @@
     <router-link to="/admin/create-news-post/" v-if="isAdmin"
       ><button class="create-news-post-button">Create news post</button>
     </router-link>
-    <button
-      v-if="isAdmin"
-      @click="copyNewsPostsAsJSONToClipboard()"
-      class="copy-news-posts-as-json-button"
-    >
+    <button v-if="isAdmin" @click="copyNewsPostsAsJSONToClipboard()" class="copy-news-posts-as-json-button">
       Copy news posts as JSON
     </button>
 
@@ -25,10 +21,7 @@
               type="checkbox"
               checked
               @click="
-                allowedYears = ($event.target.checked
-                  ? getAllYears()
-                  : []
-                ).sort();
+                allowedYears = ($event.target.checked ? getYearsFrom2019ToNow() : []).sort();
                 handleAllYearsCheckBoxCheck($event.target.checked);
                 filterNewsPostsByYear();
               "
@@ -39,21 +32,14 @@
             <label for="allYears">All</label>
           </div>
 
-          <div
-            v-for="index in new Date().getFullYear() - 2019 + 1"
-            :key="index"
-            class="checkbox-container"
-          >
+          <div v-for="index in new Date().getFullYear() - 2019 + 1" :key="index" class="checkbox-container">
             <input
               type="checkbox"
               checked
               @change="
                 allowedYears = allowedYears.sort();
                 allowedYears.includes(2019 + index - 1)
-                  ? allowedYears.splice(
-                      allowedYears.indexOf(2019 + index - 1),
-                      1
-                    )
+                  ? allowedYears.splice(allowedYears.indexOf(2019 + index - 1), 1)
                   : allowedYears.push(2019 + index - 1);
                 allowedYears = allowedYears.sort();
                 handleYearCheckBoxCheck();
@@ -63,9 +49,7 @@
               :id="`year${2019 + index - 1}`"
               class="year-checkbox"
             />
-            <label :for="`year${2019 + index - 1}`">{{
-              2019 + index - 1
-            }}</label>
+            <label :for="`year${2019 + index - 1}`">{{ 2019 + index - 1 }}</label>
           </div>
         </div>
       </div>
@@ -99,7 +83,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
 
 import NewsSearch from '@/components/news/NewsSearch.vue';
@@ -117,94 +101,94 @@ export default defineComponent({
     NewsPost
   },
 
-  data() {
-    return {
-      news: [] as News[],
-      filteredNews: [] as News[],
-      allowedYears: [2020, 2019],
-      areAllPostsCollapsed: false,
-      isAdmin: useStore().state.isAdmin
-    };
-  },
+  setup() {
+    const news = ref<News[]>([]);
+    const filteredNews = ref<News[]>([]);
+    const allowedYears: number[] = [];
+    const areAllPostsCollapsed = ref(false);
+    const isAdmin: boolean = useStore().state.isAdmin;
 
-  methods: {
-    collapseAll() {
-      this.areAllPostsCollapsed = true;
-      localStorage.setItem('areAllPostsCollapsed', 'true');
-    },
+    const allYearsCheckbox = ref<HTMLInputElement>(null!);
 
-    expandAll() {
-      this.areAllPostsCollapsed = false;
-      localStorage.setItem('areAllPostsCollapsed', 'false');
-    },
-
-    getAllYears(): number[] {
+    function getYearsFrom2019ToNow(): number[] {
       const currentYear = new Date().getFullYear();
-      const years = [];
-      for (let i = 2019; i <= currentYear; i++) {
-        years.push(i);
+      const years: number[] = [];
+      for (let year = 2019; year < currentYear; year++) {
+        years.push(year);
       }
       return years;
-    },
+    }
 
-    handleYearCheckBoxCheck() {
-      const amountOfCheckBoxes = document.getElementsByClassName(
-        'year-checkbox'
-      ).length;
-      const allYearsCheckbox = this.$refs.allYearsCheckbox as HTMLInputElement;
-      allYearsCheckbox.checked = this.allowedYears.length >= amountOfCheckBoxes;
-      allYearsCheckbox.indeterminate =
-        this.allowedYears.length > 0 &&
-        this.allowedYears.length < amountOfCheckBoxes;
-    },
+    function collapseAll() {
+      areAllPostsCollapsed.value = true;
+      localStorage.setItem('areAllPostsCollapsed', 'true');
+    }
 
-    handleAllYearsCheckBoxCheck(isChecked: boolean) {
-      const checkBoxes = document.getElementsByClassName(
-        'year-checkbox'
-      ) as HTMLCollectionOf<HTMLInputElement>;
+    function expandAll() {
+      areAllPostsCollapsed.value = false;
+      localStorage.setItem('areAllPostsCollapsed', 'false');
+    }
+
+    function handleYearCheckBoxCheck() {
+      const amountOfCheckBoxes = document.getElementsByClassName('year-checkbox').length;
+      allYearsCheckbox.value.checked = allowedYears.length >= amountOfCheckBoxes;
+      allYearsCheckbox.value.indeterminate = allowedYears.length > 0 && allowedYears.length < amountOfCheckBoxes;
+    }
+
+    function handleAllYearsCheckBoxCheck(isChecked: boolean) {
+      const checkBoxes = document.getElementsByClassName('year-checkbox') as HTMLCollectionOf<HTMLInputElement>;
       for (const checkbox of checkBoxes) {
         checkbox.checked = isChecked;
       }
-    },
+    }
 
-    filterNewsPostsByYear() {
-      const newsPosts = document.getElementsByClassName(
-        'news-post'
-      ) as HTMLCollectionOf<HTMLElement>;
+    function filterNewsPostsByYear() {
+      const newsPosts = document.getElementsByClassName('news-post') as HTMLCollectionOf<HTMLElement>;
       for (const post of newsPosts) {
         const date = post.getElementsByTagName('time')[0] as HTMLTimeElement;
         const year = +date.innerText.split('.')[2];
-        if (this.allowedYears.includes(year)) {
+        if (allowedYears.includes(year)) {
           post.style.display = 'block';
         } else {
           post.style.display = 'none';
         }
       }
-    },
+    }
 
-    copyNewsPostsAsJSONToClipboard() {
+    function copyNewsPostsAsJSONToClipboard() {
       const el = document.createElement('textarea');
-      el.value = JSON.stringify(this.news);
+      el.value = JSON.stringify(news);
       document.body.appendChild(el);
       el.select();
       document.execCommand('copy');
       document.body.removeChild(el);
-    },
-
-    formatDate
-  },
-
-  created() {
-    if (localStorage.getItem('areAllPostsCollapsed')) {
-      this.areAllPostsCollapsed = JSON.parse(
-        localStorage.getItem('areAllPostsCollapsed')!
-      );
     }
-  },
 
-  async mounted() {
-    this.news = await getNewsPosts();
-    this.filteredNews = this.news;
+    if (localStorage.getItem('areAllPostsCollapsed')) {
+      areAllPostsCollapsed.value = JSON.parse(localStorage.getItem('areAllPostsCollapsed')!);
+    }
+
+    onMounted(async () => {
+      news.value = await getNewsPosts();
+      filteredNews.value = news.value;
+    });
+
+    return {
+      news,
+      filteredNews,
+      allowedYears,
+      isAdmin,
+      allYearsCheckbox,
+      areAllPostsCollapsed,
+      getYearsFrom2019ToNow,
+      collapseAll,
+      expandAll,
+      handleYearCheckBoxCheck,
+      handleAllYearsCheckBoxCheck,
+      filterNewsPostsByYear,
+      copyNewsPostsAsJSONToClipboard,
+      formatDate
+    };
   }
 });
 </script>

@@ -1,12 +1,7 @@
 <template>
   <div class="calculator">
-    <button
-      @click="$emit('toggle-fullscreen')"
-      class="toggle-fullscreen-button"
-    >
-      <i class="material-icons">{{
-        isFullscreen ? 'fullscreen' : 'fullscreen_exit'
-      }}</i>
+    <button @click="$emit('toggle-fullscreen')" class="toggle-fullscreen-button">
+      <i class="material-icons">{{ isFullscreen ? 'fullscreen' : 'fullscreen_exit' }}</i>
     </button>
 
     <CalculatorInput
@@ -64,9 +59,7 @@ export default defineComponent({
       this.calculator.isDeg = !this.calculator.isDeg;
       this.calculation === '0'
         ? this.resetCalculation()
-        : (this.currentResult = `=${this.calculator
-            .countCalculation(this.calculation)
-            .toString()}`);
+        : (this.currentResult = `=${this.calculator.countCalculation(this.calculation).toString()}`);
     },
 
     addSymbolToCalculation(symbol: string | number): void {
@@ -74,60 +67,32 @@ export default defineComponent({
         return;
       }
 
-      const operators = [
-        '+',
-        '-',
-        'x',
-        '÷',
-        '^',
-        'mod',
-        'sin',
-        'cos',
-        'tan',
-        'log',
-        'ln',
-        'lg'
-      ];
+      const operators = ['+', '-', 'x', '÷', '^', 'mod', 'sin', 'cos', 'tan', 'log', 'ln', 'lg'];
       const numberSymbols = '0123456789πe';
       const lastSymbolOfCalc = this.calculation[this.calculation.length - 1];
 
       // Don't allow two operators in a row
-      if (
-        operators.includes(symbol.toString()) &&
-        operators.includes(lastSymbolOfCalc.toString())
-      ) {
+      if (operators.includes(symbol.toString()) && operators.includes(lastSymbolOfCalc.toString())) {
         return;
       }
       // Don't allow operator as first symbol (except minus symbol)
-      if (
-        operators.includes(symbol.toString()) &&
-        this.calculation === '0' &&
-        symbol !== '-'
-      ) {
+      if (operators.includes(symbol.toString()) && this.calculation === '0' && symbol !== '-') {
         return;
       }
       // Parentheses restrictions
       if (
         symbol === '(' &&
-        (numberSymbols.includes(lastSymbolOfCalc.toString()) ||
-          lastSymbolOfCalc === ')') &&
+        (numberSymbols.includes(lastSymbolOfCalc.toString()) || lastSymbolOfCalc === ')') &&
         this.calculation !== '0'
       ) {
         return;
       } else if (symbol === ')' && operators.includes(lastSymbolOfCalc)) {
         return;
-      } else if (
-        operators.includes(symbol.toString()) &&
-        lastSymbolOfCalc === '(' &&
-        symbol !== '-'
-      ) {
+      } else if (operators.includes(symbol.toString()) && lastSymbolOfCalc === '(' && symbol !== '-') {
         return;
       }
       // Don't allow numbers right after closing parentheses
-      if (
-        numberSymbols.includes(symbol.toString()) &&
-        lastSymbolOfCalc === ')'
-      ) {
+      if (numberSymbols.includes(symbol.toString()) && lastSymbolOfCalc === ')') {
         return;
       }
       // Calculate calculation and clear current result field if equals symbol is pressed
@@ -152,16 +117,10 @@ export default defineComponent({
       if (this.calculation.length === 1 || this.calculation[0] === '=') {
         this.resetCalculation();
       } else if (this.checkIfTwoCharMathFunction()) {
-        this.calculation = this.calculation.slice(
-          0,
-          this.calculation.length - 2
-        );
+        this.calculation = this.calculation.slice(0, this.calculation.length - 2);
         this.calculation === '' ? this.resetCalculation() : this.calculation;
       } else if (this.checkIfThreeCharMathFunction()) {
-        this.calculation = this.calculation.slice(
-          0,
-          this.calculation.length - 3
-        );
+        this.calculation = this.calculation.slice(0, this.calculation.length - 3);
         this.calculation === '' ? this.resetCalculation() : this.calculation;
       } else {
         this.calculation = this.removeLastChar(this.calculation);
@@ -174,8 +133,7 @@ export default defineComponent({
     countCalculation(): string {
       const result = this.calculator.countCalculation(this.calculation);
       const significantDigits = 15;
-      const amountOfDigits: number = result.toString().replace(/\./g, '')
-        .length;
+      const amountOfDigits: number = result.toString().replace(/\./g, '').length;
       const roundedResult =
         amountOfDigits > significantDigits
           ? result.toPrecision(significantDigits) // If there are more digits than significantDigits, use scientific notation
@@ -184,9 +142,7 @@ export default defineComponent({
     },
 
     formatNumber(num: number | string | Decimal): string {
-      const numSplitAtDot = num.toString().includes('.')
-        ? num.toString().split('.')
-        : [num.toString()];
+      const numSplitAtDot = num.toString().includes('.') ? num.toString().split('.') : [num.toString()];
       // Add spaces between digits, but not to the digits e.g. 1 250 010.12504
       const formattedNum =
         numSplitAtDot.length === 1
@@ -215,17 +171,13 @@ export default defineComponent({
     // Used for deleting entire words
     checkIfTwoCharMathFunction(): boolean {
       const twoCharMathFunctions = 'ln lg';
-      const twoLastLettersOfCalculation = this.calculation.slice(
-        this.calculation.length - 2
-      );
+      const twoLastLettersOfCalculation = this.calculation.slice(this.calculation.length - 2);
       return twoCharMathFunctions.includes(twoLastLettersOfCalculation);
     },
     // Used for deleting entire words
     checkIfThreeCharMathFunction(): boolean {
       const threeCharMathFunctions = 'mod sin cos tan log';
-      const threeLastLettersOfCalculation = this.calculation.slice(
-        this.calculation.length - 3
-      );
+      const threeLastLettersOfCalculation = this.calculation.slice(this.calculation.length - 3);
       return threeCharMathFunctions.includes(threeLastLettersOfCalculation);
     },
 
