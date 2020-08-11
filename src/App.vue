@@ -12,7 +12,6 @@ import { defineComponent, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import Nav from '@/components/Nav.vue';
 import Footer from '@/components/Footer.vue';
-import store from './store';
 
 export default defineComponent({
   name: 'App',
@@ -21,8 +20,6 @@ export default defineComponent({
     Nav,
     Footer
   },
-
-  store,
 
   setup() {
     const store = useStore();
