@@ -2,15 +2,7 @@
   <div class="recent-games">
     <h2>Recent Games</h2>
     <div class="game-container">
-      <GameThumbnail
-        v-for="(game, index) in recentGames"
-        :key="index"
-        :name="game.name"
-        :route="game.route"
-        :thumbnailImgSrc="game.thumbnailImgSrc"
-        :thumbnailImgAlt="game.thumbnailImgAlt"
-        :releaseDate="game.releaseDate"
-      />
+      <GameThumbnail v-for="(game, index) in recentGames" :key="index" :game="game" />
     </div>
   </div>
 </template>

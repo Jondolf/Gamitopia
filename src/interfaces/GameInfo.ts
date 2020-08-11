@@ -6,7 +6,8 @@ export interface GameInfo {
   releaseDate: string;
   googlePlayStoreLink?: string;
   description: {
-    mainDescription: string;
+    shortDescription: string;
+    longDescription: string;
     madeWith: string[];
     support?: string[];
   };

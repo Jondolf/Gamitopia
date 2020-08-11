@@ -2,15 +2,7 @@
   <div class="game-thumbnails">
     <h2>All games</h2>
     <div class="game-container">
-      <GameThumbnail
-        v-for="(game, index) in games"
-        :key="index"
-        :name="game.name"
-        :route="game.route"
-        :thumbnailImgSrc="game.thumbnailImgSrc"
-        :thumbnailImgAlt="game.thumbnailImgAlt"
-        :releaseDate="game.releaseDate"
-      />
+      <GameThumbnail v-for="(game, index) in games" :key="index" :game="game" />
     </div>
   </div>
 </template>

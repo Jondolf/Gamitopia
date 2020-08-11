@@ -16,7 +16,7 @@
           </li>
         </ul>
       </div>
-      <div class="support">
+      <div v-if="game.description.support" class="support">
         <h3>Support</h3>
         <p v-for="(item, index) in game.description.support" :key="index">
           {{ item }}
@@ -34,16 +34,19 @@ export default defineComponent({
   name: 'GameDescription',
 
   props: {
-    game: Object as () => GameInfo // From Vuex store
+    game: {
+      type: Object as () => GameInfo, // From Vuex store
+      required: true
+    }
   },
 
-  data() {
+  setup(props) {
     const md = require('markdown-it')({
       linkify: true,
       typographer: true
     });
     return {
-      parsedMainDescription: md.render(this.game.description.mainDescription)
+      parsedMainDescription: md.render(props.game.description.longDescription)
     };
   }
 });

@@ -12,13 +12,14 @@ type AllGames = {
 const allGames: AllGames = {
   calculator: {
     name: 'Calculator',
-    route: '/calculator/',
+    route: '/calculator',
     thumbnailImgSrc: require('@/assets/images/game-thumbnails/calculator_thumbnail.jpg'),
     thumbnailImgAlt: 'Calculator app',
     releaseDate: '5.8.2020',
     googlePlayStoreLink: 'https://play.google.com/store/apps/details?id=com.gamitopia.calculator',
     description: {
-      mainDescription:
+      shortDescription: `Calculate, convert units, create charts and graphs, all in one customizable app.`,
+      longDescription:
         `*The full version of Calculator is available on the Google Play store for free **[here](https://play.google.com/store/apps/details?id=com.gamitopia.calculator)***
 Note: The version here on Gamitopia has very limited features compared to the downloadable app, so make sure to check out the app!
 
@@ -37,12 +38,13 @@ The web version is made with Vue and the app version is made with Ionic Angular,
   },
   snake: {
     name: 'Snake',
-    route: '/snake/',
+    route: '/snake',
     thumbnailImgSrc: require('@/assets/images/game-thumbnails/snake_thumbnail.jpg'),
     thumbnailImgAlt: 'Snake game',
     releaseDate: '3.1.2020',
     description: {
-      mainDescription:
+      shortDescription: `Collect as much fruit as you can by slithering around as a snake. Don't hit your own tail!`,
+      longDescription:
         `Snake is a classic game where you move a snake up, down, left or right and try to gather as many fruit as you can whilst trying to avoid hitting walls or slithering into your own tail. As you get more fruit, your tail grows longer making it more and more difficult to get around without hitting your own tail.
 Your goal is to get as many fruit as you can. If you hit a wall or your own tail, the snake dies and you will have to try again.
 
@@ -55,12 +57,13 @@ The game works with a keyboard (WASD or arrow keys) or with a touch screen (swip
   },
   adventura: {
     name: 'Adventura',
-    route: '/adventura/',
+    route: '/adventura',
     thumbnailImgSrc: require('@/assets/images/game-thumbnails/adventura_thumbnail.jpg'),
     thumbnailImgAlt: 'Adventura game',
     releaseDate: '24.12.2019',
     description: {
-      mainDescription:
+      shortDescription: `Fight enemies and bosses, gather equipment, buy upgrades and travel the word of Adventura.`,
+      longDescription:
         `Fight enemies as you go through the many areas of Adventura while getting stronger and stronger, collecting new gear and weapons.
 
 Adventura is a turn based combat game where you fight enemies and bosses to open new, more difficult areas. To survive in those harder areas, you have to buy upgrades from the shop using the coins you gather from your enemies.
@@ -72,12 +75,13 @@ For more detailed instructions, check out the instructions from the game itself.
   },
   ticTacToe: {
     name: 'Tic-Tac-Toe',
-    route: '/tic-tac-toe/',
+    route: '/tic-tac-toe',
     thumbnailImgSrc: require('@/assets/images/game-thumbnails/tic_tac_toe_thumbnail.jpg'),
     thumbnailImgAlt: 'Tic-Tac-Toe game',
     releaseDate: '12.10.2019',
     description: {
-      mainDescription:
+      shortDescription: `A two-player game where you try to get a row of 3 on a 3x3 grid (with normal settings).`,
+      longDescription:
         `Tic-Tac-Toe or Noughts and Crosses is a classic game where you put crosses (X's) or noughts (O's) onto a grid, traditionally a 3x3 grid.
 
 ### Instructions
@@ -94,12 +98,13 @@ Currently you can only play the game locally against someone else.`,
   },
   randomizer: {
     name: 'Randomizer',
-    route: '/randomizer/',
+    route: '/randomizer',
     thumbnailImgSrc: require('@/assets/images/game-thumbnails/randomizer_thumbnail.jpg'),
     thumbnailImgAlt: 'Randomizer game',
     releaseDate: '30.9.2019',
     description: {
-      mainDescription:
+      shortDescription: `Click a button to get a random value in a certain category, such as heads or tails or dice roll.`,
+      longDescription:
         `In Randomizer you can randomize various different things.
 Simply choose what to randomize (open the menu by clicking the button in the top-left corner
 and press the button located at the bottom to randomize.
@@ -123,12 +128,13 @@ if you want to play board games but don't have a dice with you.`,
   },
   cookieClicker: {
     name: 'Cookie Clicker',
-    route: '/cookie-clicker/',
+    route: '/cookie-clicker',
     thumbnailImgSrc: require('@/assets/images/game-thumbnails/cookie_clicker_thumbnail.jpg'),
     thumbnailImgAlt: 'Cookie Clicker game',
     releaseDate: '31.8.2019',
     description: {
-      mainDescription:
+      shortDescription: `Try to get as many points as you can by clicking a cookie. Buy upgrades to get points faster.`,
+      longDescription:
         `Cookie Clicker is a game where you click a cookie to gain points, or in this case, bake cookies.
 You can use your baked cookies to buy upgrades, which helps you bake more cookies faster.
 

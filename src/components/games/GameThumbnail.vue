@@ -1,23 +1,28 @@
 <template>
   <div class="game-thumbnail">
-    <span>{{ name }}</span>
-    <router-link :to="route">
-      <img :src="thumbnailImgSrc" :alt="thumbnailImgAlt" />
+    <span>{{ game.name }}</span>
+    <router-link :to="game.route">
+      <div class="short-description-container">
+        <p>{{ game.description.shortDescription }}</p>
+      </div>
+      <img :src="game.thumbnailImgSrc" :alt="game.thumbnailImgAlt" />
     </router-link>
-    <time>{{ releaseDate }}</time>
+    <time>{{ game.releaseDate }}</time>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { GameInfo } from '@/interfaces/GameInfo';
+
 export default defineComponent({
   name: 'GameThumbnail',
+
   props: {
-    name: String,
-    route: String,
-    thumbnailImgSrc: String,
-    thumbnailImgAlt: String,
-    releaseDate: String
+    game: {
+      type: Object as () => GameInfo,
+      required: true
+    }
   }
 });
 </script>
@@ -34,15 +39,44 @@ export default defineComponent({
   transition: 1s;
   padding: 0 1vw 0.75vw 1vw;
 
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 5px;
+    border-radius: 5px;
+  }
+
+  .short-description-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    transition: 0.5s;
+    &:hover {
+      opacity: 1;
+    }
+
+    p {
+      color: white;
+      text-align: left;
+      font-weight: normal;
+      font-style: normal;
+    }
+  }
+
   img {
     width: 22vw;
     border-radius: 5px;
-    margin: 20px, 0;
     transition: 1s;
-  }
-
-  img:hover {
-    width: 24vw;
   }
 
   span,
@@ -60,15 +94,15 @@ export default defineComponent({
   .game-thumbnail {
     margin: 3vw;
     padding: 0 1.5vw 1.5vw 1.5vw;
+
     img {
       width: 36vw;
     }
-    img:hover {
-      width: 40vw;
-    }
+
     span {
       font-size: 16px;
     }
+
     time {
       font-size: 10px;
       margin: auto 1.5vw;
@@ -80,15 +114,15 @@ export default defineComponent({
   .game-thumbnail {
     margin: 2.5vw;
     padding: 0 2vw 2vw 2vw;
+
     img {
       width: 58vw;
     }
-    img:hover {
-      width: 64vw;
-    }
+
     span {
       font-size: 18px;
     }
+
     time {
       font-size: 12px;
     }
