@@ -1,15 +1,9 @@
 <template>
-  <div
-    class="game-area"
-    ref="gameArea"
-    v-hammer:swipe.horizontal.vertical="(e) => changeDirection(e)"
-  >
+  <div class="game-area" ref="gameArea" v-swipe="(direction) => changeDirection(direction)">
     <div class="game-area-container">
       <TopBar
         @go-back="$emit('go-back')"
-        @reset-game="
-          gameArea && canvas && ctx ? game.resetGame(gameArea, canvas, ctx) : ''
-        "
+        @reset-game="gameArea && canvas && ctx ? game.resetGame(gameArea, canvas, ctx) : ''"
         :score="game.score"
         :timesMoved="game.timesMoved"
       />
@@ -43,16 +37,16 @@ export default defineComponent({
     const canvas = ref<HTMLCanvasElement>(null!);
     const ctx = ref<CanvasRenderingContext2D>(null!);
 
-    function changeDirection(e: Event) {
+    function changeDirection(newDirection: string) {
       if (canvas.value && ctx.value) {
         let direction = '';
-        if (e.type === 'swipeup' && props.game.snake.facing !== 'S') {
+        if (newDirection === 'up' && props.game.snake.facing !== 'S') {
           direction = 'N';
-        } else if (e.type === 'swiperight' && props.game.snake.facing !== 'W') {
+        } else if (newDirection === 'right' && props.game.snake.facing !== 'W') {
           direction = 'E';
-        } else if (e.type === 'swipedown' && props.game.snake.facing !== 'N') {
+        } else if (newDirection === 'down' && props.game.snake.facing !== 'N') {
           direction = 'S';
-        } else if (e.type === 'swipeleft' && props.game.snake.facing !== 'E') {
+        } else if (newDirection === 'left' && props.game.snake.facing !== 'E') {
           direction = 'W';
         }
         emit('change-snake-direction', direction);
