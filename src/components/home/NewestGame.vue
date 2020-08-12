@@ -44,8 +44,9 @@ export default defineComponent({
 
   .description-container {
     width: 50%;
-    text-align: justify;
     padding-right: 10px;
+    text-align: left;
+    box-sizing: border-box;
 
     h2 {
       font-size: 32px;
@@ -56,6 +57,10 @@ export default defineComponent({
       display: inline-block;
       font-size: 24px;
       font-style: normal;
+    }
+
+    p {
+      text-align: justify;
     }
 
     time {
@@ -77,6 +82,7 @@ export default defineComponent({
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    box-sizing: border-box;
 
     img {
       width: 45vh;
@@ -88,21 +94,37 @@ export default defineComponent({
 
 @media only screen and (max-width: 575px) {
   .newest-game {
-    padding: 20px;
+    padding: 20px 0;
     flex-direction: column;
 
     .description-container {
-      width: 100%;
+      width: 64vw;
+      max-width: 64vw;
       padding-bottom: 20px;
+      text-align: center;
+
+      h2 {
+        font-size: 9vw;
+      }
+
+      h3 {
+        font-size: 6vw;
+      }
+
+      time {
+        font-size: 3.5vw;
+      }
     }
 
     .thumbnail-container {
       width: 100%;
       padding: 0;
-    }
+      justify-content: center;
 
-    img {
-      width: 64vw;
+      img {
+        width: 64vw;
+        max-width: 64vw;
+      }
     }
   }
 }
