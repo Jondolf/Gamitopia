@@ -1,15 +1,18 @@
 <template>
   <div class="newest-game">
-    <h2>Newest Game</h2>
-    <div class="thumbnail-container">
-      <span>{{ newestGame.name }}</span>
+    <div class="description-container">
+      <h2>Newest Game</h2>
       <router-link :to="newestGame.route">
-        <div class="short-description-container">
-          <p>{{ newestGame.description.shortDescription }}</p>
-        </div>
+        <h3>{{ newestGame.name }}</h3>
+      </router-link>
+      <p>{{ newestGame.description.shortDescription }}</p>
+      <time>Released on {{ newestGame.releaseDate }}</time>
+    </div>
+
+    <div class="thumbnail-container">
+      <router-link :to="newestGame.route">
         <img :src="newestGame.thumbnailImgSrc" :alt="newestGame.thumbnailImgAlt" />
       </router-link>
-      <time>{{ newestGame.releaseDate }}</time>
     </div>
   </div>
 </template>
@@ -17,82 +20,48 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
+import { GameInfo } from '@/interfaces/GameInfo';
 
 export default defineComponent({
   name: 'NewestGame',
 
-  data() {
-    return {
-      newestGame: useStore().state.games.newestGame
-    };
+  setup() {
+    const newestGame: GameInfo = useStore().state.games.newestGame;
+    return { newestGame };
   }
 });
 </script>
 
 <style lang="scss" scoped>
 .newest-game {
-  background-color: var(--color-primary);
-  text-align: center;
-  height: 70vh;
-  padding: 5vh;
-  color: white;
+  min-height: 40vh;
+  padding: 20px 5vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--color-primary-tint);
+  box-sizing: border-box;
 
-  h2 {
-    margin: 5vh auto 2vh auto;
-    font-size: 35px;
-  }
+  .description-container {
+    width: 50%;
+    text-align: justify;
+    padding-right: 10px;
 
-  .thumbnail-container {
-    display: inline-flex;
-    flex-direction: column;
-
-    span {
-      margin: auto;
-      font-size: 18px;
+    h2 {
+      font-size: 32px;
+      margin: 0 auto 1.5vh auto;
     }
 
-    a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      border-radius: 5px;
-      margin: 25px;
-    }
-
-    .short-description-container {
-      background-color: rgba(0, 0, 0, 0.5);
-      padding: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      opacity: 0;
-      transition: 0.5s;
-      &:hover {
-        opacity: 1;
-      }
-
-      p {
-        color: white;
-        text-align: left;
-        font-weight: normal;
-        font-style: normal;
-      }
-    }
-
-    img {
-      width: 45vh;
-      max-width: 70vw;
-      border-radius: 5px;
+    h3 {
+      display: inline-block;
+      font-size: 24px;
+      font-style: normal;
     }
 
     time {
-      font-size: 12px;
+      font-size: 17px;
+      font-weight: bold;
+      margin-top: 20px;
     }
 
     span,
@@ -100,10 +69,38 @@ export default defineComponent({
       display: block;
     }
   }
+
+  .thumbnail-container {
+    width: 50%;
+    height: 100%;
+    padding-left: 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    img {
+      width: 45vh;
+      max-width: 45vw;
+      border-radius: 5px;
+    }
+  }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 575px) {
   .newest-game {
+    padding: 20px;
+    flex-direction: column;
+
+    .description-container {
+      width: 100%;
+      padding-bottom: 20px;
+    }
+
+    .thumbnail-container {
+      width: 100%;
+      padding: 0;
+    }
+
     img {
       width: 64vw;
     }

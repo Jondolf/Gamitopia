@@ -17,7 +17,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #games {
   padding-top: 66px;
 }

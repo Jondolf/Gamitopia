@@ -1,6 +1,9 @@
 <template>
   <div id="home">
-    <NewestGame />
+    <div class="top-container">
+      <Welcome />
+      <NewestGame />
+    </div>
     <RecentGames />
     <LatestNewsPost />
   </div>
@@ -8,6 +11,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import Welcome from '@/components/home/Welcome.vue';
 import NewestGame from '@/components/home/NewestGame.vue';
 import RecentGames from '@/components/home/RecentGames.vue';
 import LatestNewsPost from '@/components/home/LatestNewsPost.vue';
@@ -16,6 +20,7 @@ export default defineComponent({
   name: 'Home',
 
   components: {
+    Welcome,
     NewestGame,
     RecentGames,
     LatestNewsPost
@@ -23,8 +28,15 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #home {
   padding-top: 66px;
+
+  .top-container {
+    background-color: var(--color-primary);
+    text-align: center;
+    min-height: 70vh;
+    color: white;
+  }
 }
 </style>

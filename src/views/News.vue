@@ -193,7 +193,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 h1.page-title-header {
   color: var(--color-light-contrast);
   text-align: center;
