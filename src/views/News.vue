@@ -1,6 +1,7 @@
 <template>
   <div id="news">
-    <h1 class="page-title-header">News</h1>
+    <PageHeader>News</PageHeader>
+
     <router-link to="/admin/create-news-post/" v-if="isAdmin"
       ><button class="create-news-post-button">Create news post</button>
     </router-link>
@@ -86,6 +87,7 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
 
+import PageHeader from '@/components/PageHeader.vue';
 import NewsSearch from '@/components/news/NewsSearch.vue';
 import NewsPost from '@/components/news/NewsPost.vue';
 
@@ -97,6 +99,7 @@ export default defineComponent({
   name: 'News',
 
   components: {
+    PageHeader,
     NewsSearch,
     NewsPost
   },
@@ -194,12 +197,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-h1.page-title-header {
-  color: var(--color-light-contrast);
-  text-align: center;
-  padding: 10px 0;
-}
-
 a {
   &:visited {
     color: white;
@@ -210,8 +207,6 @@ a {
 }
 
 #news {
-  padding-top: 86px;
-
   .create-news-post-button,
   .copy-news-posts-as-json-button {
     padding: 10px;

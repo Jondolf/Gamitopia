@@ -1,21 +1,29 @@
 <template>
-  <div class="about">
+  <div id="about">
+    <PageHeader>About</PageHeader>
+
     <div class="about-gamitopia">
       <h2>About Gamitopia</h2>
       <p>
         Gamitopia is a website with completely free games made by me. My goal is to make fun games and projects and
         learn programming along the way.
+        <br />
+        <a href="https://github.com/Jondolf/Gamitopia" target="_blank">A link to Gamitopia's GitHub repository</a>
       </p>
 
       <div class="bottom-container">
         <div class="made-with">
           <h3>Made with</h3>
+          <h4>Frontend</h4>
           <ul>
-            <li>HTML</li>
-            <li>SCSS/CSS</li>
-            <li>TS/JS</li>
             <li>Vue.js</li>
-            <li>Nest.js</li>
+            <li>HTML</li>
+            <li>SCSS</li>
+            <li>TypeScript</li>
+          </ul>
+          <h4>Backend</h4>
+          <ul>
+            <li>Nest.js (with TypeScript)</li>
             <li>TypeORM</li>
           </ul>
         </div>
@@ -32,21 +40,25 @@
         I am a Finnish junior high school student who has worked with HTML, CSS and JavaScript for roughly 3-4 years. I
         have also worked with Vue, SCSS and TypeScript.
         <br />
-        <a href="https://github.com/Jondolf" target="_blank">The link to my GitHub profile</a>
+        <a href="https://github.com/Jondolf" target="_blank">A link to my GitHub profile</a>
       </p>
 
       <div class="bottom-container">
         <div class="languages-that-i-have-used">
-          <h3>Languages that I have used (and more)</h3>
+          <h3>Programming languages & frameworks that I have used</h3>
+          <h4>Web</h4>
           <ul>
             <li>HTML</li>
             <li>SCSS/CSS</li>
-            <li>TS/JS</li>
-            <li>Vue.js 2</li>
+            <li>TypeScript/JavaScript</li>
+            <li>Vue.js</li>
             <li>A bit of Angular</li>
             <li>Nest.js</li>
+          </ul>
+          <h4>Other</h4>
+          <ul>
             <li>Some C# (with Unity)</li>
-            <li>A bit of Python 2 & 3</li>
+            <li>A bit of Python</li>
             <li>A tiny bit of Java</li>
           </ul>
         </div>
@@ -68,15 +80,19 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import PageHeader from '@/components/PageHeader.vue';
 
 export default defineComponent({
-  name: 'About'
+  name: 'About',
+
+  components: {
+    PageHeader
+  }
 });
 </script>
 
 <style lang="scss" scoped>
-.about {
-  padding-top: 76px;
+#about {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -136,6 +152,11 @@ export default defineComponent({
         width: 100%;
       }
 
+      h4 {
+        width: 100%;
+        margin: 5px 0;
+      }
+
       li {
         list-style: inside;
       }
@@ -144,8 +165,8 @@ export default defineComponent({
 }
 
 @media only screen and (max-width: 500px) {
-  .about .about-gamitopia .bottom-container,
-  .about .about-me .bottom-container {
+  #about .about-gamitopia .bottom-container,
+  #about .about-me .bottom-container {
     flex-direction: column;
 
     div {

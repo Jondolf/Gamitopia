@@ -1,9 +1,6 @@
 <template>
   <div class="game-thumbnails">
-    <h2>All games</h2>
-    <div class="game-container">
-      <GameThumbnail v-for="(game, index) in games" :key="index" :game="game" />
-    </div>
+    <GameThumbnail v-for="(game, index) in games" :key="index" :game="game" />
   </div>
 </template>
 
@@ -28,14 +25,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-h2 {
-  padding-top: 50px;
-  margin: 0;
-  color: var(--color-light-contrast);
-}
-
-.game-container {
-  margin: auto;
+.game-thumbnails {
+  margin: -2.5vw auto 0 auto;
   padding: initial;
 }
 </style>
