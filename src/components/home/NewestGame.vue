@@ -34,12 +34,15 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .newest-game {
+  width: 95vw;
   min-height: 40vh;
+  margin: auto;
   padding: 20px 5vw;
   display: flex;
   flex-direction: row;
   align-items: center;
   background-color: var(--color-primary-tint);
+  border-radius: 5px;
   box-sizing: border-box;
 
   .description-container {

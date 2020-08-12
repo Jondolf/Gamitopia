@@ -36,6 +36,7 @@ export default defineComponent({
     background-color: var(--color-primary);
     text-align: center;
     min-height: 70vh;
+    padding-bottom: 2.5vw;
     color: white;
   }
 }
