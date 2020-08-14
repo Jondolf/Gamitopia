@@ -60,8 +60,7 @@ const gameRoutes: Array<RouteRecordRaw> = [
   {
     path: '/target-practise',
     name: 'TargetPractise',
-    component: () =>
-      import('@/views/games/target-practise/TargetPractise.vue'),
+    component: () => import('@/views/games/TargetPractise.vue'),
     meta: {
       title: 'Target Practise | Gamitopia'
     }

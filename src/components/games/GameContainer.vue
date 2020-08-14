@@ -1,8 +1,6 @@
 <template>
   <div
-    :style="
-      isFullscreen ? { width: '100%', height: '100%' } : { width, height }
-    "
+    :style="isFullscreen ? { width: '100%', height: '100%' } : { width, height }"
     :class="isFullscreen ? 'game-container fullscreen' : 'game-container'"
   >
     <slot></slot>
