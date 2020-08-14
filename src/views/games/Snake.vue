@@ -1,10 +1,7 @@
 <template>
   <GamePage :game="snakeState" id="snake">
     <GameContainer width="80vw" height="80vh" :isFullscreen="isFullscreen">
-      <SnakeGame
-        @toggle-fullscreen="isFullscreen = !isFullscreen"
-        :isFullscreen="isFullscreen"
-      />
+      <SnakeGame @toggle-fullscreen="isFullscreen = !isFullscreen" :isFullscreen="isFullscreen" />
     </GameContainer>
   </GamePage>
 </template>
@@ -25,7 +22,7 @@ export default defineComponent({
     SnakeGame
   },
 
-  data() {
+  setup() {
     return {
       isFullscreen: false,
       snakeState: useStore().state.games.allGames.snake

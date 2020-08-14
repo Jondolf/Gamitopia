@@ -1,10 +1,7 @@
 <template>
   <GamePage :game="cookieClickerState" id="cookieClicker">
     <GameContainer width="80vw" height="80vh" :isFullscreen="isFullscreen">
-      <CookieClickerGame
-        @toggle-fullscreen="isFullscreen = !isFullscreen"
-        :isFullscreen="isFullscreen"
-      />
+      <CookieClickerGame @toggle-fullscreen="isFullscreen = !isFullscreen" :isFullscreen="isFullscreen" />
     </GameContainer>
   </GamePage>
 </template>
@@ -25,7 +22,7 @@ export default defineComponent({
     CookieClickerGame
   },
 
-  data() {
+  setup() {
     return {
       isFullscreen: false,
       cookieClickerState: useStore().state.games.allGames.cookieClicker

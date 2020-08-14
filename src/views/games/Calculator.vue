@@ -1,10 +1,7 @@
 <template>
   <GamePage :game="calculatorState" id="calculator">
     <GameContainer width="80vw" height="80vh" :isFullscreen="isFullscreen">
-      <CalculatorApp
-        @toggle-fullscreen="isFullscreen = !isFullscreen"
-        :isFullscreen="isFullscreen"
-      />
+      <CalculatorApp @toggle-fullscreen="isFullscreen = !isFullscreen" :isFullscreen="isFullscreen" />
     </GameContainer>
   </GamePage>
 </template>
@@ -25,7 +22,7 @@ export default defineComponent({
     CalculatorApp
   },
 
-  data() {
+  setup() {
     return {
       isFullscreen: false,
       calculatorState: useStore().state.games.allGames.calculator

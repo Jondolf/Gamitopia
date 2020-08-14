@@ -1,10 +1,7 @@
 <template>
   <GamePage :game="randomizerState" id="randomizer">
     <GameContainer width="80vw" height="80vh" :isFullscreen="isFullscreen">
-      <RandomizerGame
-        @toggle-fullscreen="isFullscreen = !isFullscreen"
-        :isFullscreen="isFullscreen"
-      />
+      <RandomizerGame @toggle-fullscreen="isFullscreen = !isFullscreen" :isFullscreen="isFullscreen" />
     </GameContainer>
   </GamePage>
 </template>
@@ -25,7 +22,7 @@ export default defineComponent({
     RandomizerGame
   },
 
-  data() {
+  setup() {
     return {
       isFullscreen: false,
       randomizerState: useStore().state.games.allGames.randomizer

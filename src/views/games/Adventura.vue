@@ -1,10 +1,7 @@
 <template>
   <GamePage :game="adventuraState" id="adventura">
     <GameContainer width="80vw" height="80vh" :isFullscreen="isFullscreen">
-      <AdventuraGame
-        @toggle-fullscreen="isFullscreen = !isFullscreen"
-        :isFullscreen="isFullscreen"
-      />
+      <AdventuraGame @toggle-fullscreen="isFullscreen = !isFullscreen" :isFullscreen="isFullscreen" />
     </GameContainer>
   </GamePage>
 </template>
@@ -25,7 +22,7 @@ export default defineComponent({
     AdventuraGame
   },
 
-  data() {
+  setup() {
     return {
       isFullscreen: false,
       adventuraState: useStore().state.games.allGames.adventura

@@ -1,10 +1,7 @@
 <template>
   <GamePage :game="ticTacToeState" id="ticTacToe">
     <GameContainer width="80vw" height="80vh" :isFullscreen="isFullscreen">
-      <TicTacToeGame
-        @toggle-fullscreen="isFullscreen = !isFullscreen"
-        :isFullscreen="isFullscreen"
-      />
+      <TicTacToeGame @toggle-fullscreen="isFullscreen = !isFullscreen" :isFullscreen="isFullscreen" />
     </GameContainer>
   </GamePage>
 </template>
