@@ -26,8 +26,11 @@ export default defineComponent({
     if (localStorage.getItem('jwt')) {
       store.commit('changeIsAdmin', true);
     }
-    // @ts-ignore
-    onMounted(FastClick.attach(document.body));
+    onMounted(() => {
+      // @ts-ignore
+      FastClick.attach(document.body);
+      document.dispatchEvent(new Event('rendered'));
+    });
   }
 });
 </script>
