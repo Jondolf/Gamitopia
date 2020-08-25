@@ -4,7 +4,7 @@
 
 [Gamitopia](http://gamitopia.herokuapp.com/) is a website with completely free games and apps all made by me. I publish my projects there and make news/blog posts about the development process and about new game releases.
 
-<img src="https://github.com/Jondolf/Gamitopia/blob/master/src/assets/images/paradise_island.png" width="250" height="250"/>
+<img src="https://github.com/Jondolf/Gamitopia/blob/master/src/assets/images/gamitopia_logo_circle.png" width="250" height="250"/>
 
 ## Project Structure
 

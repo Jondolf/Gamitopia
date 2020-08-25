@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Meta -->
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-
     <meta
       name="description"
       content="Gamitopia is a website with many different games that can range from classics like Snake and Tic-Tac-Toe, to unique small indie games like turn based strategy games, platformers and combat games. My goal is to make fun games and to learn programming along the way."
@@ -15,52 +14,38 @@
       content="game, games, game website, programming, coding, code, blogs, frontend, backend, vue.js"
     />
 
+    <title>Gamitopia</title>
+
+    <!-- Styles -->
     <link rel="stylesheet" href="/highlightjs/atom-one-dark.css" />
 
+    <!-- Fonts -->
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons&display=swap"
-      rel="stylesheet"
-      rel="preload"
+      as="font"
+      rel="stylesheet preload"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Nunito+Sans:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&family=Nunito:ital,wght@0,200;0,400;0,700;1,200;1,400;1,700&display=swap"
-      rel="stylesheet"
-      rel="preload"
+      as="font"
+      rel="stylesheet preload"
     />
 
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/img/icons/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/img/icons/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/img/icons/favicon-16x16.png"
-    />
+    <!-- Icons and manifest -->
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png" />
     <link rel="manifest" href="/manifest.webmanifest" />
-    <link
-      rel="mask-icon"
-      href="/img/icons/safari-pinned-tab.svg"
-      color="#374cc2"
-    />
     <meta name="msapplication-TileColor" content="#2d89ef" />
     <meta name="theme-color" content="#374cc2" />
-
-    <title>Gamitopia</title>
   </head>
+
   <body>
     <noscript>
       <strong
-        >We're sorry but Gamitopia doesn't work properly without JavaScript
-        enabled. Please enable it to continue.</strong
+        >We're sorry but Gamitopia doesn't work properly without JavaScript enabled. Please enable it to
+        continue.</strong
       >
     </noscript>
     <div id="app" data-server-rendered="true"></div>

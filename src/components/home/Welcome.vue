@@ -1,7 +1,7 @@
 <template>
   <div class="welcome">
     <span class="welcome-to-text">Welcome To</span>
-    <h1 class="gamitopia-text">Gamitopia</h1>
+    <img src="@/assets/images/gamitopia_logo_wide.png" alt="Gamitopia wide logo" class="gamitopia-text" />
   </div>
 </template>
 
@@ -29,8 +29,8 @@ export default defineComponent({
   }
 
   .gamitopia-text {
-    font-size: 42px;
-    font-weight: bold;
+    width: 60vh;
+    max-width: 80vw;
     margin: 5px 0 5px 0;
   }
 }

@@ -29,7 +29,7 @@
         </div>
 
         <div class="gamitopia-logo-container">
-          <img src="@/assets/images/paradise_island.png" alt="Gamitopia logo" />
+          <img src="@/assets/images/gamitopia_logo.jpg" alt="Gamitopia logo" />
         </div>
       </div>
     </div>
@@ -139,6 +139,7 @@ export default defineComponent({
           justify-self: center;
           height: 35vw;
           max-height: 40vh;
+          border-radius: 5px;
         }
       }
 

@@ -1,16 +1,10 @@
 <template>
   <div class="cookie-clicker-game">
     <audio v-if="musicOn" loop="true" autoplay ref="backgroundMusic">
-      <source
-        src="@/assets/sound/cookie-clicker-background-music.mp3"
-        type="audio/mp3"
-      />
+      <source src="@/assets/sound/cookie-clicker-background-music.mp3" type="audio/mp3" />
     </audio>
     <audio v-if="sfxOn" ref="cookieClickSound">
-      <source
-        src="@/assets/sound/cookie-clicker-sound-effect.mp3"
-        type="audio/mp3"
-      />
+      <source src="@/assets/sound/cookie-clicker-sound-effect.mp3" type="audio/mp3" />
     </audio>
 
     <UpgradeContainer
@@ -19,17 +13,10 @@
       :amountOfPointsByTime="amountOfPointsByTime"
       @btn-clicked="upgradeItem"
     />
-    <ResetProgress
-      v-if="resetProgressVisibility"
-      @cancel="resetProgressVisibility = false"
-      @reset="resetProgress()"
-    />
+    <ResetProgress v-if="resetProgressVisibility" @cancel="resetProgressVisibility = false" @reset="resetProgress()" />
     <div class="cookie-clicking-container">
       <div class="settings-container">
-        <button
-          @click="resetProgressVisibility = !resetProgressVisibility"
-          class="open-reset-menu"
-        >
+        <button @click="resetProgressVisibility = !resetProgressVisibility" class="open-reset-menu">
           Reset
         </button>
         <SoundControlBtn
@@ -44,13 +31,8 @@
           :soundOn="sfxOn"
           @btn-clicked="sfxOn = !sfxOn"
         />
-        <button
-          @click="$emit('toggle-fullscreen')"
-          class="toggle-fullscreen-button"
-        >
-          <i class="material-icons">{{
-            isFullscreen ? 'fullscreen_exit' : 'fullscreen'
-          }}</i>
+        <button @click="$emit('toggle-fullscreen')" class="toggle-fullscreen-button">
+          <i class="material-icons">{{ isFullscreen ? 'fullscreen_exit' : 'fullscreen' }}</i>
         </button>
       </div>
       <p class="points">
@@ -105,9 +87,7 @@ export default defineComponent({
       pointInterval: null as number | null,
       previousTime: performance.now(),
 
-      cookieClickSound: new Audio(
-        require('@/assets/sound/cookie-clicker-sound-effect.mp3')
-      ) as HTMLAudioElement,
+      cookieClickSound: new Audio(require('@/assets/sound/cookie-clicker-sound-effect.mp3')) as HTMLAudioElement,
       backgroundMusic: this.$refs.backgroundMusic as HTMLAudioElement,
 
       points: 0,
@@ -164,25 +144,14 @@ export default defineComponent({
         this.resetInterval();
       }
 
-      localStorage.setItem(
-        'cookieClickerPointsPerClick',
-        JSON.stringify(this.pointsPerClick)
-      );
-      localStorage.setItem(
-        'cookieClickerSpeedOfPointsByTime',
-        JSON.stringify(this.speedOfPointsByTime)
-      );
-      localStorage.setItem(
-        'cookieClickerAmountOfPointsByTime',
-        JSON.stringify(this.amountOfPointsByTime)
-      );
+      localStorage.setItem('cookieClickerPointsPerClick', JSON.stringify(this.pointsPerClick));
+      localStorage.setItem('cookieClickerSpeedOfPointsByTime', JSON.stringify(this.speedOfPointsByTime));
+      localStorage.setItem('cookieClickerAmountOfPointsByTime', JSON.stringify(this.amountOfPointsByTime));
     },
 
     addPointsByTime() {
       const timeDifference = performance.now() - this.previousTime;
-      const timesAdded = Math.floor(
-        timeDifference / this.speedOfPointsByTime.speed
-      );
+      const timesAdded = Math.floor(timeDifference / this.speedOfPointsByTime.speed);
       this.previousTime += timesAdded * this.speedOfPointsByTime.speed;
 
       this.points += timesAdded * this.amountOfPointsByTime.pointsToAdd;
@@ -191,10 +160,7 @@ export default defineComponent({
     resetInterval() {
       this.previousTime = performance.now();
       clearInterval(this.pointInterval!);
-      this.pointInterval = setInterval(
-        () => this.addPointsByTime(),
-        Math.max(this.speedOfPointsByTime.speed, 50)
-      );
+      this.pointInterval = setInterval(() => this.addPointsByTime(), Math.max(this.speedOfPointsByTime.speed, 50));
     },
 
     playSound(sound: string) {
@@ -210,9 +176,7 @@ export default defineComponent({
       this.points = JSON.parse(localStorage.getItem('cookieClickerPoints')!!);
     }
     if (localStorage.getItem('cookieClickerPointsPerClick')) {
-      this.pointsPerClick = Upgrade.fromJSON(
-        JSON.parse(localStorage.getItem('cookieClickerPointsPerClick')!!)
-      );
+      this.pointsPerClick = Upgrade.fromJSON(JSON.parse(localStorage.getItem('cookieClickerPointsPerClick')!!));
     }
     if (localStorage.getItem('cookieClickerSpeedOfPointsByTime')) {
       this.speedOfPointsByTime = Upgrade.fromJSON(
@@ -224,10 +188,7 @@ export default defineComponent({
         JSON.parse(localStorage.getItem('cookieClickerAmountOfPointsByTime')!!)
       );
     }
-    if (
-      this.speedOfPointsByTime.level === 2 ||
-      this.amountOfPointsByTime.level === 2
-    ) {
+    if (this.speedOfPointsByTime.level === 2 || this.amountOfPointsByTime.level === 2) {
       this.resetInterval();
     }
   },
