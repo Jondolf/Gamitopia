@@ -120,7 +120,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 .news-post-edit {
   padding-top: 66px;
 
@@ -145,10 +145,10 @@ export default defineComponent({
     font-size: 18px;
     font-weight: bold;
     position: relative;
-  }
-  .submit-btn:hover {
-    opacity: 0.9;
-    border-radius: 10px;
+    &:hover {
+      opacity: 0.9;
+      border-radius: 10px;
+    }
   }
 }
 </style>
