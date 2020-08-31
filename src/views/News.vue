@@ -2,7 +2,7 @@
   <div id="news">
     <PageHeader>News</PageHeader>
 
-    <router-link to="/admin/create-news-post/" v-if="isAdmin"
+    <router-link to="/admin/create-news-post" v-if="isAdmin"
       ><button class="create-news-post-button">Create news post</button>
     </router-link>
     <button v-if="isAdmin" @click="copyNewsPostsAsJSONToClipboard()" class="copy-news-posts-as-json-button">
@@ -107,7 +107,7 @@ export default defineComponent({
   setup() {
     const news = ref<News[]>([]);
     const filteredNews = ref<News[]>([]);
-    const allowedYears: number[] = [];
+    const allowedYears = ref<number[]>(getYearsFrom2019ToNow().sort());
     const areAllPostsCollapsed = ref(false);
     const isAdmin: boolean = useStore().state.isAdmin;
 
@@ -116,7 +116,7 @@ export default defineComponent({
     function getYearsFrom2019ToNow(): number[] {
       const currentYear = new Date().getFullYear();
       const years: number[] = [];
-      for (let year = 2019; year < currentYear; year++) {
+      for (let year = 2019; year <= currentYear; year++) {
         years.push(year);
       }
       return years;
@@ -134,8 +134,9 @@ export default defineComponent({
 
     function handleYearCheckBoxCheck() {
       const amountOfCheckBoxes = document.getElementsByClassName('year-checkbox').length;
-      allYearsCheckbox.value.checked = allowedYears.length >= amountOfCheckBoxes;
-      allYearsCheckbox.value.indeterminate = allowedYears.length > 0 && allowedYears.length < amountOfCheckBoxes;
+      allYearsCheckbox.value.checked = allowedYears.value.length >= amountOfCheckBoxes;
+      allYearsCheckbox.value.indeterminate =
+        allowedYears.value.length > 0 && allowedYears.value.length < amountOfCheckBoxes;
     }
 
     function handleAllYearsCheckBoxCheck(isChecked: boolean) {
@@ -150,7 +151,7 @@ export default defineComponent({
       for (const post of newsPosts) {
         const date = post.getElementsByTagName('time')[0] as HTMLTimeElement;
         const year = +date.innerText.split('.')[2];
-        if (allowedYears.includes(year)) {
+        if (allowedYears.value.includes(year)) {
           post.style.display = 'block';
         } else {
           post.style.display = 'none';

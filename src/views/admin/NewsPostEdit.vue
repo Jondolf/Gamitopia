@@ -25,12 +25,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-const NewsPostWritingArea = () =>
-  import('@/components/admin/NewsPostWritingArea.vue');
+import NewsPostWritingArea from '@/components/admin/NewsPostWritingArea.vue';
 import StatusMessage from './StatusMessage.vue';
 
 import { getNewsPost } from './actions/getNewsPost';
 import { editNewsPost } from './actions/editNewsPost';
+import { useRoute } from 'vue-router';
 
 export default defineComponent({
   name: 'NewsPostEdit',
@@ -71,16 +71,8 @@ export default defineComponent({
 
     async handleEditNewsPost() {
       try {
-        const data = await editNewsPost(
-          this.id,
-          this.title,
-          this.body,
-          this.date
-        );
-        this.displayStatus(
-          `Successfully edited #${this.id} news post`,
-          'Success'
-        );
+        const data = await editNewsPost(this.id, this.title, this.body, this.date);
+        this.displayStatus(`Successfully edited #${this.id} news post`, 'Success');
       } catch (error) {
         this.displayStatus(error.message, 'Error');
       }
@@ -107,16 +99,12 @@ export default defineComponent({
   },
 
   async mounted() {
-    this.id = this.$route.params.id;
+    this.id = useRoute().params.id as string;
     await this.handleGetNewsPost();
   },
 
-  beforeRouteLeave(to, from, next) {
-    if (
-      !window.confirm(
-        'Are you sure you want to leave? Any unsaved data will be lost.'
-      )
-    ) {
+  beforeRouteLeave(route: any, redirect: any, next: any) {
+    if (!window.confirm('Are you sure you want to leave? Any unsaved data will be lost.')) {
       return;
     }
     next();

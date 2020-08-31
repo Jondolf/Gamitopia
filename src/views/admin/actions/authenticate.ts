@@ -1,6 +1,6 @@
 import { AuthResponse } from '@/interfaces/AuthResponse';
+import store from '@/store/index';
 import Axios, { AxiosError } from 'axios';
-import { useStore } from 'vuex';
 
 export async function authenticate(
   url: string,
@@ -8,7 +8,6 @@ export async function authenticate(
   password: string
 ) {
   try {
-    const store = useStore();
     const response = await Axios.post<AuthResponse>(url, {
       username: username,
       password: password

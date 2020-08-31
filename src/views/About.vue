@@ -53,6 +53,7 @@
             <li>TypeScript/JavaScript</li>
             <li>Vue.js</li>
             <li>A bit of Angular</li>
+            <li>Ionic 5 (with Angular)</li>
             <li>Nest.js</li>
           </ul>
           <h4>Other</h4>

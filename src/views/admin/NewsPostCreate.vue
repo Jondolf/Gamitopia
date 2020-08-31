@@ -10,7 +10,7 @@
 
     <h2>Create news post</h2>
 
-    <NewsPostWritingArea
+    <NewsPostWritingAreaMarkdown
       v-model:title="title"
       :originalBody="originalBody"
       v-model:date="date"
@@ -25,8 +25,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-const NewsPostWritingArea = () =>
-  import('@/components/admin/NewsPostWritingArea.vue');
+import NewsPostWritingAreaMarkdown from '@/components/admin/NewsPostWritingAreaMarkdown.vue';
 import StatusMessage from './StatusMessage.vue';
 
 import { createNewsPost } from './actions/createNewsPost';
@@ -35,7 +34,7 @@ import router from '../../router';
 export default defineComponent({
   name: 'NewsPostCreate',
   components: {
-    NewsPostWritingArea,
+    NewsPostWritingAreaMarkdown,
     StatusMessage
   },
 
@@ -91,13 +90,8 @@ export default defineComponent({
     }
   },
 
-  beforeRouteLeave(to, from, next) {
-    if (
-      !this.released &&
-      !window.confirm(
-        "Are you sure you want to leave? You haven't released this post yet!"
-      )
-    ) {
+  beforeRouteLeave(route: any, redirect: any, next: any) {
+    if (!this.released && !window.confirm("Are you sure you want to leave? You haven't released this post yet!")) {
       return;
     }
     next();

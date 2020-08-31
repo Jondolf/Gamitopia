@@ -28,7 +28,6 @@ export default function useUnityLoader() {
     const script = document.createElement('script');
     script.src = loaderUrl;
     script.onload = () => {
-      console.log(canvas)
       // @ts-ignore
       createUnityInstance(canvas.value, config, (progress: number) => {
         progressBarFull.value.style.width = 100 * progress + '%';

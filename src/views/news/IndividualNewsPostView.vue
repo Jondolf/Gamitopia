@@ -11,7 +11,7 @@
 
     <div v-else class="not-found-container">
       <h1>Unfortunately this news post was not found.</h1>
-      <router-link to="/news/">You can go view all news here.</router-link>
+      <router-link to="/news">You can go view all news here.</router-link>
     </div>
   </div>
 </template>

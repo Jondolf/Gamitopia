@@ -21,11 +21,7 @@
           :class="{ 'is-active': menu.isActive }"
           :style="`left: ${menu.left}px; bottom: ${menu.bottom}px;`"
         >
-          <form
-            class="menububble__form"
-            v-if="linkMenuIsActive"
-            @submit.prevent="setLinkUrl(commands.link, linkUrl)"
-          >
+          <form class="menububble__form" v-if="linkMenuIsActive" @submit.prevent="setLinkUrl(commands.link, linkUrl)">
             <input
               class="menububble__input"
               type="text"
@@ -34,11 +30,7 @@
               ref="linkInput"
               @keydown.esc="hideLinkMenu"
             />
-            <button
-              class="menububble__button"
-              @click="setLinkUrl(commands.link, null)"
-              type="button"
-            >
+            <button class="menububble__button" @click="setLinkUrl(commands.link, null)" type="button">
               <i class="remove">Remove</i>
             </button>
           </form>
@@ -53,43 +45,23 @@
             </button>
           </template>
 
-          <button
-            class="menububble__button"
-            :class="{ 'is-active': isActive.bold() }"
-            @click="commands.bold"
-          >
+          <button class="menububble__button" :class="{ 'is-active': isActive.bold() }" @click="commands.bold">
             <i class="material-icons">format_bold</i>
           </button>
 
-          <button
-            class="menububble__button"
-            :class="{ 'is-active': isActive.italic() }"
-            @click="commands.italic"
-          >
+          <button class="menububble__button" :class="{ 'is-active': isActive.italic() }" @click="commands.italic">
             <i class="material-icons">format_italic</i>
           </button>
 
-          <button
-            class="menububble__button"
-            :class="{ 'is-active': isActive.strike() }"
-            @click="commands.strike"
-          >
+          <button class="menububble__button" :class="{ 'is-active': isActive.strike() }" @click="commands.strike">
             <i class="material-icons">strikethrough_s</i>
           </button>
 
-          <button
-            class="menububble__button"
-            :class="{ 'is-active': isActive.underline() }"
-            @click="commands.underline"
-          >
+          <button class="menububble__button" :class="{ 'is-active': isActive.underline() }" @click="commands.underline">
             <i class="material-icons">format_underline</i>
           </button>
 
-          <button
-            class="menububble__button"
-            :class="{ 'is-active': isActive.code() }"
-            @click="commands.code"
-          >
+          <button class="menububble__button" :class="{ 'is-active': isActive.code() }" @click="commands.code">
             <i class="material-icons">code</i>
           </button>
         </div>
@@ -97,12 +69,7 @@
 
       <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
         <div class="menubar">
-          <button
-            title="Bold"
-            class="menubar__button"
-            :class="{ 'is-active': isActive.bold() }"
-            @click="commands.bold"
-          >
+          <button title="Bold" class="menubar__button" :class="{ 'is-active': isActive.bold() }" @click="commands.bold">
             <i class="material-icons">format_bold</i>
           </button>
 
@@ -223,18 +190,11 @@
             <i class="material-icons">code</i>
           </button>
 
-          <button
-            class="menubar__button"
-            @click="showImagePrompt(commands.image)"
-          >
+          <button class="menubar__button" @click="showImagePrompt(commands.image)">
             <i class="material-icons">image</i>
           </button>
 
-          <button
-            title="Horizontal line"
-            class="menubar__button"
-            @click="commands.horizontal_rule"
-          >
+          <button title="Horizontal line" class="menubar__button" @click="commands.horizontal_rule">
             <i class="material-icons">remove</i>
           </button>
 
@@ -248,19 +208,9 @@
         </div>
       </editor-menu-bar>
 
-      <editor-content
-        v-model="editor.content"
-        class="editor__content"
-        :editor="editor"
-      />
+      <editor-content v-model="editor.content" class="editor__content" :editor="editor" />
     </div>
-    <input
-      :value="date"
-      @input="$emit('update:date', $event.target.value)"
-      type="date"
-      name="date"
-      class="date"
-    />
+    <input :value="date" @input="$emit('update:date', $event.target.value)" type="date" name="date" class="date" />
   </div>
 </template>
 
@@ -392,10 +342,7 @@ export default defineComponent({
     },
 
     originalBody() {
-      this.editor.setContent(
-        this.originalBody + '<pre id="codeBlockToRemove"><code></code></pre>',
-        true
-      );
+      this.editor.setContent(this.originalBody + '<pre id="codeBlockToRemove"><code></code></pre>', true);
       //? I create the code element and remove it right after because the code highlighting didn't work without editing the code content for some reason
       const codeBlocks = document.getElementsByTagName('pre');
       const codeBlockToRemove = codeBlocks[codeBlocks.length - 1];

@@ -317,6 +317,8 @@ export default defineComponent({
     height: 0;
     overflow: hidden;
     transition: 1.5s;
+    white-space: normal;
+
     img {
       width: 75%;
       max-width: 400px;
