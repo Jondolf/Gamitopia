@@ -1,8 +1,6 @@
 <template>
   <div
-    v-hammer:swipe.vertical="
-      (e) => $emit(e.type === 'swipedown' ? 'openMenu' : 'closeMenu')
-    "
+    v-swipe="(direction) => $emit(direction === 'down' ? 'openMenu' : direction === 'up' ? 'closeMenu' : '')"
     :style="{ top: isMenuOpen ? '20%' : '-55%' }"
     class="calculator-more-commands-menu"
   >
@@ -13,10 +11,7 @@
       <button @click="$emit('add-symbol-to-calculation', ')')" class="command">
         )
       </button>
-      <button
-        @click="$emit('add-symbol-to-calculation', 'mod')"
-        class="command"
-      >
+      <button @click="$emit('add-symbol-to-calculation', 'mod')" class="command">
         mod
       </button>
       <button @click="$emit('add-symbol-to-calculation', '%')" class="command">
@@ -25,47 +20,28 @@
       <button @click="$emit('add-symbol-to-calculation', '!')" class="command">
         n!
       </button>
-      <button
-        @click="$emit('add-symbol-to-calculation', 'sin(')"
-        class="command"
-      >
+      <button @click="$emit('add-symbol-to-calculation', 'sin(')" class="command">
         sin
       </button>
       <button @click="$emit('add-symbol-to-calculation', 'cos(')" class="cos">
         cos
       </button>
-      <button
-        @click="$emit('add-symbol-to-calculation', 'tan(')"
-        class="command"
-      >
+      <button @click="$emit('add-symbol-to-calculation', 'tan(')" class="command">
         tan
       </button>
-      <button
-        @click="$emit('add-symbol-to-calculation', 'log(')"
-        class="command"
-      >
+      <button @click="$emit('add-symbol-to-calculation', 'log(')" class="command">
         log
       </button>
-      <button
-        @click="$emit('add-symbol-to-calculation', 'ln(')"
-        class="command"
-      >
+      <button @click="$emit('add-symbol-to-calculation', 'ln(')" class="command">
         ln
       </button>
-      <button
-        @click="$emit('add-symbol-to-calculation', 'lg(')"
-        class="command"
-      >
+      <button @click="$emit('add-symbol-to-calculation', 'lg(')" class="command">
         lg
       </button>
     </div>
 
     <div @click="$emit('toggle-menu')" class="swipe-container">
-      <i
-        :style="{ transform: isMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)' }"
-        class="material-icons"
-        >expand_more</i
-      >
+      <i :style="{ transform: isMenuOpen ? 'rotate(180deg)' : 'rotate(0deg)' }" class="material-icons">expand_more</i>
     </div>
   </div>
 </template>
