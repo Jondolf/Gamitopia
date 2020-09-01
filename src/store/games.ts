@@ -15,7 +15,7 @@ const allGames: AllGames = {
     route: '/target-practise',
     thumbnailImgSrc: require('@/assets/images/game-thumbnails/target_practise_thumbnail.jpg'),
     thumbnailImgAlt: 'Target Practise app',
-    releaseDate: '11.8.2020',
+    releaseDate: '31.8.2020',
     description: {
       shortDescription: `Shoot targets to get points and try to get as many points as you can.`,
       longDescription:
