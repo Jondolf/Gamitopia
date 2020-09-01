@@ -79,7 +79,7 @@ The game works with a keyboard (WASD or arrow keys) or with a touch screen (swip
     thumbnailImgAlt: 'Adventura game',
     releaseDate: '24.12.2019',
     description: {
-      shortDescription: `Fight enemies and bosses, gather equipment, buy upgrades and travel the word of Adventura.`,
+      shortDescription: `Fight enemies and bosses, gather equipment, buy upgrades and travel through the world of Adventura.`,
       longDescription:
         `Fight enemies as you go through the many areas of Adventura while getting stronger and stronger, collecting new gear and weapons.
 
