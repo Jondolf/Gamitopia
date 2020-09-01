@@ -17,6 +17,7 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue';
 import useUnityLoader from '@/composables/games/useUnityLoader';
+import { onBeforeRouteLeave, RouteLocation } from 'vue-router';
 
 export default defineComponent({
   name: 'UnityGame',
@@ -33,6 +34,7 @@ export default defineComponent({
     const { container, canvas, loadingBar, progressBarFull, fullscreenButton, loadGame } = useUnityLoader();
 
     onMounted(() => loadGame(props.buildUrl, props.projectName, props.gameName, props.gameVersion, props.isGzipped));
+    onBeforeRouteLeave((to: RouteLocation) => window.location.replace(to.fullPath));
 
     return {
       container,
