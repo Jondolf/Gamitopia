@@ -1,4 +1,5 @@
-export class NewsPostDto {
+export interface NewsPost {
+  id?: number | string;
   tags: string[];
   title: string;
   bodyAsMarkdown: string;

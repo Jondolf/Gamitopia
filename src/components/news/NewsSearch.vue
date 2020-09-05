@@ -17,13 +17,13 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { News } from '@/interfaces/News';
+import { NewsPost } from '@/interfaces/NewsPost';
 
 export default defineComponent({
   name: 'NewsSearch',
 
   props: {
-    newsPosts: Array as () => News[],
+    newsPosts: Array as () => NewsPost[],
     isCaseSensitive: {
       type: Boolean,
       default: false
@@ -33,12 +33,12 @@ export default defineComponent({
 
   setup(props, { emit }) {
     const searchText = ref('');
-    const filteredNewsPosts = ref<News[]>([]);
+    const filteredNewsPosts = ref<NewsPost[]>([]);
 
     function handleFilterNews(newSearchText: string) {
       searchText.value = newSearchText;
       filterNews();
-      emit('filter-news', filteredNewsPosts);
+      emit('filter-news', filteredNewsPosts.value);
     }
 
     function filterNews() {
@@ -47,7 +47,7 @@ export default defineComponent({
           filteredNewsPosts.value = props.newsPosts;
           return;
         }
-        filteredNewsPosts.value = props.newsPosts.filter((newsPost: News) =>
+        filteredNewsPosts.value = props.newsPosts.filter((newsPost: NewsPost) =>
           props.isCaseSensitive
             ? newsPost.title.includes(searchText.value)
             : newsPost.title.toLowerCase().includes(searchText.value.toLowerCase())

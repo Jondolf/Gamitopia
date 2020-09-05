@@ -54,7 +54,7 @@ const routes: Array<RouteRecordRaw> = [
     beforeEnter: async (to, from, next) => {
       const newsPost = await getNewsPost(to.params.id.toString());
       document.title = `${newsPost.title} | Gamitopia`;
-      document.querySelector('head meta[name=description]')?.setAttribute('content', newsPost.body.replace(/(<([^>]+)>)/gi, "").replace(/\r?\n|\r/g, ' ').slice(0, 50) + '...')
+      document.querySelector('head meta[name=description]')?.setAttribute('content', newsPost.bodyAsHTML.replace(/(<([^>]+)>)/gi, "").replace(/\r?\n|\r/g, ' ').slice(0, 50) + '...')
       next();
     }
   },

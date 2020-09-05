@@ -1,14 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { NewsPost } from './newsPost.interface';
 import { News } from 'src/entities/news.entity';
 import { NewsPostDto } from './newsPost.dto';
 
 @Injectable()
 export class NewsService {
   async getNewsPosts(): Promise<News[]> {
-    return await News.find({
-      order: { id: 'ASC' }
-    });
+    return await News.find({ order: { id: 'ASC' } });
   }
 
   async getNewsPostById(id: string): Promise<News> {
@@ -25,15 +22,17 @@ export class NewsService {
 
   async createNewsPost(newsPost: NewsPostDto) {
     return await News.create({
+      tags: newsPost.tags,
       title: newsPost.title,
-      body: newsPost.body,
+      bodyAsMarkdown: newsPost.bodyAsMarkdown,
+      bodyAsHTML: newsPost.bodyAsHTML,
       date: newsPost.date
     }).save();
   }
 
-  async updateNewsPost(id: string, { title, body, date }: NewsPostDto) {
+  async updateNewsPost(id: string, { tags, title, bodyAsMarkdown, bodyAsHTML, date }: NewsPostDto) {
     const newsPost = await News.findOneOrFail(id);
-    return await News.merge(newsPost, { title, body, date }).save();
+    return await News.merge(newsPost, { tags, title, bodyAsMarkdown, bodyAsHTML, date }).save();
   }
 
   async deleteNewsPost(id: string) {

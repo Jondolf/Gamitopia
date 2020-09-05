@@ -10,11 +10,11 @@
 
     <h2>Create news post</h2>
 
-    <NewsPostWritingAreaMarkdown
-      v-model:title="title"
-      :originalBody="originalBody"
-      v-model:date="date"
-      @body-changed="updateBody"
+    <NewsPostWritingArea
+      v-model:title="newsPost.title"
+      v-model:date="newsPost.date"
+      @change-tags="updateTags"
+      @change-body="updateBody"
     />
     <button @click="handleCreateNewsPost()" class="submit-btn">
       Save
@@ -23,86 +23,93 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onBeforeMount, onBeforeUnmount, reactive, ref } from 'vue';
 
-import NewsPostWritingAreaMarkdown from '@/components/admin/NewsPostWritingAreaMarkdown.vue';
+import NewsPostWritingArea from '@/components/admin/NewsPostWritingArea.vue';
 import StatusMessage from './StatusMessage.vue';
 
 import { createNewsPost } from './actions/createNewsPost';
 import router from '../../router';
+import { NewsPost } from '@/interfaces/NewsPost';
+import { onBeforeRouteLeave, RouteLocationNormalized } from 'vue-router';
 
 export default defineComponent({
   name: 'NewsPostCreate',
+
   components: {
-    NewsPostWritingAreaMarkdown,
+    NewsPostWritingArea,
     StatusMessage
   },
 
-  data() {
-    return {
-      originalBody: '',
-      id: '',
+  setup() {
+    const newsPost = reactive<NewsPost>({
+      id: 0,
+      tags: [],
       title: '',
-      body: '',
-      date: new Date().toISOString().slice(0, 10),
-      statusMessage: '',
-      statusMessageType: '',
-      showStatus: false,
-      released: false
-    };
-  },
+      bodyAsMarkdown: '',
+      bodyAsHTML: '',
+      date: new Date().toISOString().slice(0, 10)
+    });
 
-  methods: {
-    updateBody(body: string) {
-      this.body = body;
-    },
+    const statusMessage = ref('');
+    const statusMessageType = ref('');
+    const showStatus = ref(false);
+    const released = ref(false);
 
-    async handleCreateNewsPost() {
+    function updateTags(tags: string[]) {
+      newsPost.tags = tags;
+    }
+
+    function updateBody(markdown: string, html: string) {
+      newsPost.bodyAsMarkdown = markdown;
+      newsPost.bodyAsHTML = html;
+    }
+
+    async function handleCreateNewsPost() {
       try {
-        const data = await createNewsPost(this.title, this.body, this.date);
-        this.displayStatus(`Successfully created news post`, 'Success');
-        this.released = true;
+        await createNewsPost(newsPost);
+        displayStatus(`Successfully created news post`, 'Success');
+        released.value = true;
         setTimeout(() => {
           router.push('/news');
         }, 1000);
       } catch (error) {
-        this.displayStatus(error.message, 'Error');
+        displayStatus(error.message, 'Error');
       }
-    },
+    }
 
-    displayStatus(message: string, messageType: string) {
-      this.statusMessage = message;
-      this.statusMessageType = messageType;
-      this.showStatus = true;
-    },
+    function displayStatus(message: string, messageType: string) {
+      statusMessage.value = message;
+      statusMessageType.value = messageType;
+      showStatus.value = true;
+    }
 
-    formatDate(date: string) {
-      return date
-        .slice(0, 10)
-        .split('-')
-        .reverse()
-        .join('.');
-    },
-
-    preventNav(event: any) {
+    function preventNav(event: Event) {
       event.preventDefault();
-      event.returnValue = '';
+      event.returnValue = false;
     }
-  },
 
-  beforeRouteLeave(route: any, redirect: any, next: any) {
-    if (!this.released && !window.confirm("Are you sure you want to leave? You haven't released this post yet!")) {
-      return;
-    }
-    next();
-  },
+    onBeforeRouteLeave((route: RouteLocationNormalized, redirect: RouteLocationNormalized, next: Function) => {
+      if (!released.value && !window.confirm("Are you sure you want to leave? You haven't released this post yet!")) {
+        return;
+      }
+      next();
+    });
 
-  beforeMount() {
-    window.addEventListener('beforeunload', this.preventNav);
-  },
+    onBeforeMount(() => window.addEventListener('beforeunload', preventNav));
 
-  beforeUnmount() {
-    window.removeEventListener('beforeunload', this.preventNav);
+    onBeforeUnmount(() => window.removeEventListener('beforeunload', preventNav));
+
+    return {
+      newsPost,
+      statusMessage,
+      statusMessageType,
+      showStatus,
+      released,
+      updateTags,
+      updateBody,
+      handleCreateNewsPost
+    };
   }
 });
 </script>

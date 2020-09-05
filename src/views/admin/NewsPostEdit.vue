@@ -11,11 +11,15 @@
     <h2>Edit news post</h2>
 
     <NewsPostWritingArea
-      v-model:title="title"
-      :originalBody="originalBody"
-      v-model:date="date"
-      @body-changed="updateBody"
+      v-model:title="newsPost.title"
+      v-model:date="newsPost.date"
+      :originalTags="originalTags"
+      :originalBodyAsMarkdown="originalBodyAsMarkdown"
+      :originalBodyAsHTML="originalBodyAsHTML"
+      @change-tags="updateTags"
+      @change-body="updateBody"
     />
+
     <button @click="handleEditNewsPost()" class="submit-btn">
       Save
     </button>
@@ -23,99 +27,120 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onBeforeMount, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 
 import NewsPostWritingArea from '@/components/admin/NewsPostWritingArea.vue';
 import StatusMessage from './StatusMessage.vue';
 
 import { getNewsPost } from './actions/getNewsPost';
 import { editNewsPost } from './actions/editNewsPost';
-import { useRoute } from 'vue-router';
+
+import { NewsPost } from '@/interfaces/NewsPost';
+import { onBeforeRouteLeave, RouteLocationNormalized, useRoute } from 'vue-router';
 
 export default defineComponent({
   name: 'NewsPostEdit',
+
   components: {
     NewsPostWritingArea,
     StatusMessage
   },
 
-  data() {
-    return {
-      originalBody: '',
-      id: '',
+  setup() {
+    const newsPost = reactive<NewsPost>({
+      id: '0',
+      tags: [],
       title: '',
-      body: '',
-      date: new Date().toISOString().slice(0, 10),
-      statusMessage: '',
-      statusMessageType: '',
-      showStatus: false
-    };
-  },
+      bodyAsMarkdown: '',
+      bodyAsHTML: '',
+      date: new Date().toISOString().slice(0, 10)
+    });
+    const originalTags = ref<string[]>([]);
+    const originalBodyAsMarkdown = ref('');
+    const originalBodyAsHTML = ref('');
 
-  methods: {
-    updateBody(body: string) {
-      this.body = body;
-    },
+    const statusMessage = ref('');
+    const statusMessageType = ref('');
+    const showStatus = ref(false);
+    const released = ref(false);
 
-    async handleGetNewsPost() {
+    function updateTags(tags: string[]) {
+      newsPost.tags = tags;
+    }
+
+    function updateBody(markdown: string, html: string) {
+      newsPost.bodyAsMarkdown = markdown;
+      newsPost.bodyAsHTML = html;
+    }
+
+    async function handleGetNewsPost() {
       try {
-        const newsPost = await getNewsPost(this.id);
-        this.title = newsPost.title;
-        this.body = newsPost.body;
-        this.date = newsPost.date.slice(0, 10);
-        this.originalBody = this.body;
+        const data = await getNewsPost(newsPost.id?.toString()!);
+        newsPost.id = data.id;
+        newsPost.tags = data.tags;
+        newsPost.title = data.title;
+        newsPost.bodyAsMarkdown = data.bodyAsMarkdown;
+        newsPost.bodyAsHTML = data.bodyAsHTML;
+        newsPost.date = new Date(data.date).toISOString().slice(0, 10);
+        originalTags.value = data.tags;
+        originalBodyAsMarkdown.value = data.bodyAsMarkdown;
+        originalBodyAsHTML.value = data.bodyAsHTML;
       } catch (error) {
-        this.displayStatus(error.message, 'Error');
+        displayStatus(error.message, 'Error');
       }
-    },
+    }
 
-    async handleEditNewsPost() {
+    async function handleEditNewsPost() {
       try {
-        const data = await editNewsPost(this.id, this.title, this.body, this.date);
-        this.displayStatus(`Successfully edited #${this.id} news post`, 'Success');
+        await editNewsPost(newsPost);
+        displayStatus(`Successfully edited #${newsPost.id} news post`, 'Success');
       } catch (error) {
-        this.displayStatus(error.message, 'Error');
+        displayStatus(error.message, 'Error');
       }
-    },
+    }
 
-    displayStatus(message: string, messageType: string) {
-      this.statusMessage = message;
-      this.statusMessageType = messageType;
-      this.showStatus = true;
-    },
+    function displayStatus(message: string, messageType: string) {
+      statusMessage.value = message;
+      statusMessageType.value = messageType;
+      showStatus.value = true;
+    }
 
-    formatDate(date: string) {
-      return date
-        .slice(0, 10)
-        .split('-')
-        .reverse()
-        .join('.');
-    },
-
-    preventNav(event: any) {
+    function preventNav(event: Event) {
       event.preventDefault();
-      event.returnValue = '';
+      event.returnValue = false;
     }
-  },
 
-  async mounted() {
-    this.id = useRoute().params.id as string;
-    await this.handleGetNewsPost();
-  },
+    onBeforeRouteLeave((route: RouteLocationNormalized, redirect: RouteLocationNormalized, next: Function) => {
+      if (!released.value && !window.confirm('Are you sure you want to leave? All unsaved data will be lost.')) {
+        return;
+      }
+      next();
+    });
 
-  beforeRouteLeave(route: any, redirect: any, next: any) {
-    if (!window.confirm('Are you sure you want to leave? Any unsaved data will be lost.')) {
-      return;
-    }
-    next();
-  },
+    onBeforeMount(() => window.addEventListener('beforeunload', preventNav));
 
-  beforeMount() {
-    window.addEventListener('beforeunload', this.preventNav);
-  },
+    onMounted(async () => {
+      if (newsPost.id) {
+        newsPost.id = useRoute().params.id.toString();
+        await handleGetNewsPost();
+      }
+    });
 
-  beforeUnmount() {
-    window.removeEventListener('beforeunload', this.preventNav);
+    onBeforeUnmount(() => window.removeEventListener('beforeunload', preventNav));
+
+    return {
+      newsPost,
+      originalTags,
+      originalBodyAsMarkdown,
+      originalBodyAsHTML,
+      statusMessage,
+      statusMessageType,
+      showStatus,
+      released,
+      updateTags,
+      updateBody,
+      handleEditNewsPost
+    };
   }
 });
 </script>

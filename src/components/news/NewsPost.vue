@@ -1,17 +1,30 @@
 <template>
   <div class="news-post" v-if="!isDeleted">
     <div class="top-container">
-      <router-link v-if="isAdmin" :to="`/news/${id}`" :title="`Go to news post #${id}`" class="news-post-id"
-        >#{{ id }}</router-link
+      <router-link
+        v-if="isAdmin"
+        :to="`/news/${newsPost.id}`"
+        :title="`Go to news post #${newsPost.id}`"
+        class="news-post-id"
+        >#{{ newsPost.id }}</router-link
       >
-      <div class="left-container">
+      <div class="header-container">
+        <h1 class="news-post-title">{{ newsPost.title }}</h1>
+        <div class="tags">
+          <span
+            v-for="(tag, index) in newsPost.tags"
+            :key="index"
+            :style="{ backgroundColor: getTagByName(tag).backgroundColor, color: getTagByName(tag).textColor }"
+            class="tag"
+            >{{ tag }}</span
+          >
+        </div>
+      </div>
+
+      <div class="toolbar">
         <button @click="copyLink" title="Copy link to clipboard">
           <i @click="copyLink" class="material-icons">link</i>
         </button>
-        <h1 class="news-post-title">{{ title }}</h1>
-      </div>
-
-      <div class="right-container">
         <button v-if="canCollapse" @click="isCollapsed = !isCollapsed" class="toggle-collapse-button">
           <i v-if="isCollapsed" class="material-icons" title="expand">
             expand_more
@@ -22,12 +35,12 @@
         </button>
         <div v-if="isAdmin" class="admin-tools">
           <router-link
-            v-if="id"
+            v-if="newsPost.id"
             :to="{
               path: '/admin/edit-news-post',
               name: 'EditNewsPost',
               params: {
-                id: id
+                id: newsPost.id
               }
             }"
           >
@@ -41,12 +54,12 @@
     </div>
 
     <div
-      v-html="body"
+      v-html="newsPost.bodyAsHTML"
       :style="[!isCollapsed ? { height: computedBodyHeight } : {}]"
       class="news-post-body"
       ref="newsPostBodyContainer"
     ></div>
-    <time :datetime="date" class="news-post-date">{{ date }}</time>
+    <time :datetime="newsPost.date" class="news-post-date">{{ formatDate(newsPost.date) }}</time>
   </div>
 </template>
 
@@ -65,20 +78,19 @@ hljs.registerLanguage('xml', xml);
 hljs.registerLanguage('scss', scss);
 hljs.registerLanguage('typescript', typescript);
 
+import { useNewsPostTags } from '@/composables/news/useNewsPostTags';
 import { deleteNewsPost } from '@/views/admin/actions/deleteNewsPost';
+import { NewsPost } from '@/interfaces/NewsPost';
+import { formatDate } from '@/views/admin/actions/formatDate';
 
 export default defineComponent({
   name: 'NewsPost',
 
   props: {
-    id: {
-      type: Number,
-      required: true,
-      default: NaN
+    newsPost: {
+      type: Object as () => NewsPost,
+      required: true
     },
-    title: String,
-    body: String,
-    date: String,
     canCollapse: Boolean,
     areAllCollapsed: {
       type: Boolean,
@@ -95,6 +107,8 @@ export default defineComponent({
     const statusMessageType = ref('');
     const newsPostBodyContainer = ref<HTMLDivElement>(null!);
     const computedBodyHeight = ref('0');
+
+    const { getTagByName } = useNewsPostTags();
 
     function initBodyHeight() {
       newsPostBodyContainer.value.style.height = 'auto';
@@ -114,7 +128,7 @@ export default defineComponent({
     function copyLink() {
       const dummy = document.createElement('input') as HTMLInputElement;
       document.body.appendChild(dummy);
-      dummy.value = 'https://gamitopia.herokuapp.com/news/' + props.id.toString();
+      dummy.value = 'https://gamitopia.herokuapp.com/news/' + props.newsPost.id?.toString();
       dummy.select();
       document.execCommand('copy');
       document.body.removeChild(dummy);
@@ -125,9 +139,11 @@ export default defineComponent({
         return;
       }
       try {
-        await deleteNewsPost(props.id);
-        displayStatus(`Successfully deleted #${props.id} news post`, 'Success');
-        isDeleted.value = true;
+        if (props.newsPost.id) {
+          await deleteNewsPost(+props.newsPost.id);
+          displayStatus(`Successfully deleted #${props.newsPost.id} news post`, 'Success');
+          isDeleted.value = true;
+        }
       } catch (error) {
         displayStatus(error.message, 'Error');
       }
@@ -186,7 +202,9 @@ export default defineComponent({
       computedBodyHeight,
       newsPostBodyContainer,
       copyLink,
-      handleDeleteNewsPost
+      handleDeleteNewsPost,
+      formatDate,
+      getTagByName
     };
   }
 });
@@ -239,8 +257,8 @@ export default defineComponent({
       }
     }
 
-    .left-container,
-    .right-container {
+    .header-container,
+    .toolbar {
       display: flex;
       align-items: center;
 
@@ -267,9 +285,11 @@ export default defineComponent({
         &:first-child {
           margin-left: 0;
         }
+
         a {
           height: 100%;
         }
+
         i {
           color: white;
           font-size: 25px;
@@ -285,18 +305,34 @@ export default defineComponent({
         }
       }
     }
-    .left-container {
+
+    .header-container {
+      flex-direction: column;
       justify-content: flex-start;
+      align-items: flex-start;
       margin-right: 30px;
+
+      .tags {
+        .tag {
+          display: inline-block;
+          padding: 5px;
+          margin-right: 5px;
+          margin-top: 5px;
+          border-radius: 5px;
+        }
+      }
     }
-    .right-container {
+
+    .toolbar {
       justify-content: flex-end;
       position: absolute;
       top: 30px;
       right: 20px;
+
       .admin-tools {
         display: flex;
         align-items: center;
+
         button,
         a:first-child {
           margin-left: 25px;
@@ -333,12 +369,15 @@ export default defineComponent({
 
     ul {
       list-style: inside square;
+
       li ul {
         list-style: inside circle;
       }
     }
+
     ol {
       list-style: inside decimal;
+
       li ol {
         list-style: inside lower-latin;
       }
@@ -350,13 +389,12 @@ export default defineComponent({
       border-radius: 5px;
       background-color: var(--color-light);
       margin: 15px auto;
+
       li,
       li p {
         color: black;
       }
-      li[data-type='todo_item'] {
-        line-height: 0;
-      }
+
       li ul,
       li ol {
         margin: 0;

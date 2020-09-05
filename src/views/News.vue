@@ -56,26 +56,18 @@
       </div>
 
       <NewsSearch
-        @filter-news="
-          (filteredNewsPosts) => {
-            filteredNews = filteredNewsPosts;
-            filterNewsPostsByYear();
-          }
-        "
+        @filter-news="filterNewsPostsBySearch"
         :newsPosts="news"
         :isCaseSensitive="false"
-        placeholderText="Type in the name of the news post"
+        placeholderText="Search news"
       />
     </div>
 
     <div class="news-posts-container">
-      <NewsPost
+      <NewsPostComponent
         v-for="newsPost in filteredNews"
         :key="newsPost.id"
-        :id="newsPost.id"
-        :title="newsPost.title"
-        :body="newsPost.body"
-        :date="formatDate(newsPost.date)"
+        :newsPost="newsPost"
         :canCollapse="true"
         :areAllCollapsed="areAllPostsCollapsed"
       />
@@ -89,11 +81,10 @@ import { useStore } from 'vuex';
 
 import PageHeader from '@/components/PageHeader.vue';
 import NewsSearch from '@/components/news/NewsSearch.vue';
-import NewsPost from '@/components/news/NewsPost.vue';
+import NewsPostComponent from '@/components/news/NewsPost.vue';
 
 import { getNewsPosts } from './admin/actions/getNewsPosts';
-import { formatDate } from './admin/actions/formatDate';
-import { News } from '../interfaces/News';
+import { NewsPost } from '@/interfaces/NewsPost';
 
 export default defineComponent({
   name: 'News',
@@ -101,12 +92,12 @@ export default defineComponent({
   components: {
     PageHeader,
     NewsSearch,
-    NewsPost
+    NewsPostComponent
   },
 
   setup() {
-    const news = ref<News[]>([]);
-    const filteredNews = ref<News[]>([]);
+    const news = ref<NewsPost[]>([]);
+    const filteredNews = ref<NewsPost[]>([]);
     const allowedYears = ref<number[]>(getYearsFrom2019ToNow().sort());
     const areAllPostsCollapsed = ref(false);
     const isAdmin: boolean = useStore().state.isAdmin;
@@ -144,6 +135,12 @@ export default defineComponent({
       for (const checkbox of checkBoxes) {
         checkbox.checked = isChecked;
       }
+    }
+
+    function filterNewsPostsBySearch(filteredNewsPosts: NewsPost[]) {
+      console.log(filteredNewsPosts);
+      filteredNews.value = filteredNewsPosts;
+      filterNewsPostsByYear();
     }
 
     function filterNewsPostsByYear() {
@@ -189,9 +186,9 @@ export default defineComponent({
       expandAll,
       handleYearCheckBoxCheck,
       handleAllYearsCheckBoxCheck,
+      filterNewsPostsBySearch,
       filterNewsPostsByYear,
-      copyNewsPostsAsJSONToClipboard,
-      formatDate
+      copyNewsPostsAsJSONToClipboard
     };
   }
 });

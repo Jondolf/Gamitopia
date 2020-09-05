@@ -1,20 +1,12 @@
+import { NewsPost } from '@/interfaces/NewsPost';
 import axios, { AxiosError } from 'axios';
 import { handleUnauthorized } from './handleUnauthorized';
-import { News } from '@/interfaces/News';
 
-export async function createNewsPost(
-  title: string,
-  body: string,
-  date: string
-) {
+export async function createNewsPost(newsPost: NewsPost) {
   try {
-    const response = await axios.post<News>(
+    const response = await axios.post<NewsPost>(
       '/api/news',
-      {
-        title: title,
-        body: body,
-        date: date
-      },
+      newsPost,
       {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('jwt')

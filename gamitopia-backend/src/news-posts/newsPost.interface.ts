@@ -1,5 +1,7 @@
 export interface NewsPost {
+  tags: string[];
   title: string;
-  body: string;
+  bodyAsMarkdown: string;
+  bodyAsHTML: string;
   date: Date;
 }

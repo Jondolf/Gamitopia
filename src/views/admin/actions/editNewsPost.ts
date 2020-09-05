@@ -1,17 +1,12 @@
+import { NewsPost } from '@/interfaces/NewsPost';
 import axios, { AxiosError } from 'axios';
-import { News } from '../../../interfaces/News';
 import { handleUnauthorized } from './handleUnauthorized';
 
-export async function editNewsPost(
-  id: string,
-  title: string,
-  body: string,
-  date: string
-) {
+export async function editNewsPost(newsPost: NewsPost) {
   try {
-    const response = await axios.put<News>(
-      `/api/news/${id}`,
-      { title: title, body: body, date: date },
+    const response = await axios.put<NewsPost>(
+      `/api/news/${newsPost.id}`,
+      newsPost,
       {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('jwt')
@@ -23,7 +18,7 @@ export async function editNewsPost(
     const error: AxiosError = err;
     handleUnauthorized(error);
     throw new Error(
-      `Something went wrong with editing #${id} news post. Here's the error: ${error}`
+      `Something went wrong with editing #${newsPost.id} news post. Here's the error: ${error}`
     );
   }
 }
