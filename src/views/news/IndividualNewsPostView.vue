@@ -1,13 +1,6 @@
 <template>
   <div id="individualNewsPostView">
-    <NewsPost
-      v-if="newsPostFound"
-      :id="newsPost.id"
-      :title="newsPost.title"
-      :body="newsPost.body"
-      :date="formatDate(newsPost.date)"
-      :canCollapse="true"
-    />
+    <NewsPost v-if="newsPostFound" :newsPost="newsPost" :canCollapse="true" />
 
     <div v-else class="not-found-container">
       <h1>Unfortunately this news post was not found.</h1>
@@ -22,7 +15,6 @@ import { useRoute } from 'vue-router';
 import NewsPost from '@/components/news/NewsPost.vue';
 import { formatDate } from '../admin/actions/formatDate';
 import { getNewsPost } from '../admin/actions/getNewsPost';
-import { News } from '../../interfaces/News';
 
 export default defineComponent({
   name: 'IndividualNewsPostView.vue',
@@ -32,7 +24,7 @@ export default defineComponent({
   },
 
   setup() {
-    const newsPost = ref<News>({ id: NaN, title: '', body: '', date: '' });
+    const newsPost = ref<NewsPost>({ id: NaN, tags: [], title: '', bodyAsMarkdown: '', bodyAsHTML: '', date: '' });
     const newsPostFound = ref(true);
 
     async function handleGetNewsPost() {

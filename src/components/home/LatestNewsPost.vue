@@ -1,51 +1,47 @@
 <template>
   <div class="latest-news-post">
     <h2>Latest News Post</h2>
-    <NewsPost :id="newsPost.id" :title="newsPost.title" :body="newsPost.body" :date="handleFormatDate(date)" />
+    <NewsPostComponent :newsPost="newsPost" :canCollapse="false" />
     <p>{{ errorMessage }}</p>
-
-    <div class="news-post-gradient"></div>
 
     <router-link :to="'/news/' + newsPost.id" class="read-all">Read here</router-link>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 
-import NewsPost from '@/components/news/NewsPost.vue';
+import NewsPostComponent from '@/components/news/NewsPost.vue';
 
-import { News } from '@/interfaces/News';
+import { NewsPost } from '@/interfaces/NewsPost';
 import { getLatestNewsPost } from '@/views/admin/actions/getNewsPostLatest';
-import { formatDate } from '@/views/admin/actions/formatDate';
 
 export default defineComponent({
   name: 'LatestNewsPost',
 
   components: {
-    NewsPost
+    NewsPostComponent
   },
 
-  data() {
-    return {
-      errorMessage: '',
-      newsPost: {} as News,
-      date: '' // Date in data as well to avoid an error where date is not found due to it not being found from the database yet
-    };
-  },
+  setup() {
+    const newsPost = ref<NewsPost>({ id: NaN, tags: [], title: '', bodyAsMarkdown: '', bodyAsHTML: '', date: '' });
+    const errorMessage = ref('');
 
-  methods: {
-    handleFormatDate: formatDate
-  },
-
-  async mounted() {
-    try {
-      this.newsPost = await getLatestNewsPost();
-      this.date = this.newsPost.date;
-      this.errorMessage = '';
-    } catch (error) {
-      this.errorMessage = error.message;
+    async function handleGetLatestNewsPost() {
+      try {
+        newsPost.value = await getLatestNewsPost();
+        errorMessage.value = '';
+      } catch (error) {
+        errorMessage.value = error.message;
+      }
     }
+
+    onMounted(handleGetLatestNewsPost);
+
+    return {
+      newsPost,
+      errorMessage
+    };
   }
 });
 </script>
@@ -79,20 +75,9 @@ export default defineComponent({
     transform: translateX(-50%);
     background-color: white;
     color: black;
-  }
-  a:hover {
-    border-radius: 10px;
-  }
-  .news-post-gradient {
-    position: absolute;
-    top: 50%;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 30px;
-    width: 70%;
-    border-radius: 5px;
-    background: linear-gradient(180deg, rgba(250, 231, 231, 0) 70%, var(--color-primary) 100%);
+    &:hover {
+      border-radius: 10px;
+    }
   }
 }
 </style>

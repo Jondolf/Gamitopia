@@ -92,10 +92,7 @@ export default defineComponent({
       required: true
     },
     canCollapse: Boolean,
-    areAllCollapsed: {
-      type: Boolean,
-      required: true
-    }
+    areAllCollapsed: Boolean
   },
 
   setup(props) {
@@ -166,17 +163,22 @@ export default defineComponent({
     watch(
       () => props.areAllCollapsed,
       (newAreAllCollapsed) => {
-        isCollapsed.value = newAreAllCollapsed;
+        if (newAreAllCollapsed) {
+          isCollapsed.value = newAreAllCollapsed;
+        }
       }
     );
 
-    watchEffect(() => {
-      if (!isCollapsed.value && newsPostBodyContainer.value) {
-        newsPostBodyContainer.value.querySelectorAll('code').forEach((block) => {
-          hljs.highlightBlock(block);
-        });
+    watch(
+      () => props.newsPost.bodyAsHTML,
+      () => {
+        if (!isCollapsed.value && newsPostBodyContainer.value) {
+          newsPostBodyContainer.value.querySelectorAll('code').forEach((block) => {
+            hljs.highlightBlock(block);
+          });
+        }
       }
-    });
+    );
 
     onMounted(() => {
       initBodyHeight();
