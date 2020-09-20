@@ -1,7 +1,8 @@
 import Decimal from 'decimal.js';
 import Hammer from 'hammerjs';
 import { createApp } from 'vue';
-import VueGtag from 'vue-gtag';
+// @ts-ignore
+import gtag from 'vue-gtag-next';
 import App from './App.vue';
 import './assets/global.scss';
 import './registerServiceWorker';
@@ -13,7 +14,7 @@ Decimal.set({ precision: 100, rounding: 4 });
 const app = createApp(App);
 
 app.directive('swipe', {
-  mounted(el: HTMLElement, binding) {
+  beforeMount(el: HTMLElement, binding) {
     if (typeof binding.value === 'function') {
       const mc = new Hammer(el);
       mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL })
@@ -27,13 +28,9 @@ app.directive('swipe', {
 
 app.use(store)
   .use(router)
-  .use(
-    () => VueGtag,
-    {
-      config: { id: 'UA-146791846-1' },
-      appName: 'Gamitopia'
-    },
-    router
+  .use(gtag, {
+    property: { id: 'UA-146791846-1' },
+  }
   );
 
 app.mount('#app');

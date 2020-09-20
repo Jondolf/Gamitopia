@@ -1,4 +1,6 @@
 import { getNewsPost } from '@/views/admin/actions/getNewsPost';
+// @ts-ignore
+import { trackRouter } from "vue-gtag-next";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "../views/Home.vue";
 import adminRoutes from './admin';
@@ -81,6 +83,8 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 });
+
+trackRouter(router);
 
 router.beforeEach((to, from, next) => {
   const nearestWithTitle = to.matched.slice().reverse().find(r => r.meta && r.meta.title);
