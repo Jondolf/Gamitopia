@@ -65,7 +65,7 @@ export function useCodeHighlighter() {
    * Highlights all code elements found inside the given element
    */
   function highlightAllInElement(element: HTMLElement) {
-    const codeBlocks: NodeListOf<HTMLElement> = document.querySelectorAll('pre code');
+    const codeBlocks: NodeListOf<HTMLElement> = element.querySelectorAll('pre code');
     codeBlocks.forEach((block) => addLanguageLabelToBlock(block.parentElement!));
 
     const codeElements: NodeListOf<HTMLElement> = element.querySelectorAll('code');
