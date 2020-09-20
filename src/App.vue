@@ -23,9 +23,11 @@ export default defineComponent({
 
   setup() {
     const store = useStore();
+
     if (localStorage.getItem('jwt')) {
       store.commit('changeIsAdmin', true);
     }
+
     onMounted(() => {
       // @ts-ignore
       FastClick.attach(document.body);

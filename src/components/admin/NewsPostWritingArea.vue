@@ -30,12 +30,13 @@
       :value="markdownBody"
       class="editor"
     ></textarea>
-    <div v-else v-html="parsedBody" class="editor"></div>
+    <div v-else v-html="parsedBody" class="editor" ref="preview"></div>
     <input :value="date" @input="$emit('update:date', $event.target.value)" type="date" name="date" class="date" />
   </div>
 </template>
 
 <script lang="ts">
+import { useCodeHighlighter } from '@/composables/useCodeHighlighter';
 import { defineComponent, ref, watch } from 'vue';
 
 export default defineComponent({
@@ -58,11 +59,19 @@ export default defineComponent({
     const parsedBody = ref<string>(null!);
     const tagsAsString = ref('');
     const isPreview = ref(false);
+    const preview = ref<HTMLDivElement>(null!);
+
+    const { highlightAllInElement } = useCodeHighlighter();
 
     function parseBody() {
       parsedBody.value = md.render(markdownBody.value);
     }
 
+    watch(isPreview, () =>
+      setTimeout(() => {
+        highlightAllInElement(preview.value);
+      }, 0)
+    );
     watch(
       () => props.originalTags,
       (newTags) => (tagsAsString.value = newTags?.join(', ')!)
@@ -81,6 +90,7 @@ export default defineComponent({
       markdownBody,
       tagsAsString,
       isPreview,
+      preview,
       parseBody
     };
   }

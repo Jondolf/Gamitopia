@@ -63,15 +63,28 @@ code {
 }
 
 // Code blocks
-pre code {
-  display: block;
-  overflow-x: auto;
-  color: #abb2bf;
-  background: #323640;
-  border-radius: 5px;
-  width: 100%;
-  padding: 15px;
-  margin: 15px auto;
+pre {
+  position: relative;
+
+  .code-language-name {
+    position: absolute;
+    top: 30px;
+    right: 15px;
+    font-family: monospace;
+    font-size: 12px;
+    color: #abb2bf;
+  }
+
+  code {
+    display: block;
+    overflow-x: auto;
+    color: #abb2bf;
+    background: #323640;
+    border-radius: 5px;
+    width: 100%;
+    padding: 15px;
+    margin: 15px auto;
+  }
 }
 
 i {

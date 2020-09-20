@@ -64,24 +64,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, watchEffect, onMounted } from 'vue';
+import { defineComponent, ref, watch, onMounted } from 'vue';
 import { useStore } from 'vuex';
-// @ts-ignore
-import hljs from 'highlight.js/lib/core';
-// @ts-ignore
-import xml from 'highlight.js/lib/languages/xml'; // Didn't find HTML so I use XML here
-// @ts-ignore
-import scss from 'highlight.js/lib/languages/scss';
-// @ts-ignore
-import typescript from 'highlight.js/lib/languages/typescript';
-hljs.registerLanguage('xml', xml);
-hljs.registerLanguage('scss', scss);
-hljs.registerLanguage('typescript', typescript);
 
 import { useNewsPostTags } from '@/composables/news/useNewsPostTags';
 import { deleteNewsPost } from '@/views/admin/actions/deleteNewsPost';
 import { NewsPost } from '@/interfaces/NewsPost';
 import { formatDate } from '@/views/admin/actions/formatDate';
+import { useCodeHighlighter } from '@/composables/useCodeHighlighter';
 
 export default defineComponent({
   name: 'NewsPost',
@@ -106,6 +96,7 @@ export default defineComponent({
     const computedBodyHeight = ref('0');
 
     const { getTagByName } = useNewsPostTags();
+    const { highlightAllInElement } = useCodeHighlighter();
 
     function initBodyHeight() {
       newsPostBodyContainer.value.style.height = 'auto';
@@ -154,6 +145,7 @@ export default defineComponent({
 
     watch(isCollapsed, (newIsCollapsed) => {
       if (!newIsCollapsed && newsPostBodyContainer.value.style.height !== computedBodyHeight.value) {
+        highlightAllInElement(newsPostBodyContainer.value);
         setTimeout(() => {
           computedBodyHeight.value = newsPostBodyContainer.value.scrollHeight + 'px';
         }, 1500);
@@ -163,7 +155,7 @@ export default defineComponent({
     watch(
       () => props.areAllCollapsed,
       (newAreAllCollapsed) => {
-        if (newAreAllCollapsed) {
+        if (newAreAllCollapsed !== undefined) {
           isCollapsed.value = newAreAllCollapsed;
         }
       }
@@ -172,11 +164,11 @@ export default defineComponent({
     watch(
       () => props.newsPost.bodyAsHTML,
       () => {
-        if (!isCollapsed.value && newsPostBodyContainer.value) {
-          newsPostBodyContainer.value.querySelectorAll('code').forEach((block) => {
-            hljs.highlightBlock(block);
-          });
-        }
+        setTimeout(() => {
+          if (!isCollapsed.value && newsPostBodyContainer.value) {
+            highlightAllInElement(newsPostBodyContainer.value);
+          }
+        }, 0);
       }
     );
 
@@ -186,9 +178,7 @@ export default defineComponent({
         isCollapsed.value = true;
       }
       if (!isCollapsed.value) {
-        newsPostBodyContainer.value.querySelectorAll('code').forEach((block) => {
-          hljs.highlightBlock(block);
-        });
+        highlightAllInElement(newsPostBodyContainer.value);
         setTimeout(() => {
           if (newsPostBodyContainer.value !== null) {
             computedBodyHeight.value = newsPostBodyContainer.value.scrollHeight + 'px';
