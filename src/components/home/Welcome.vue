@@ -2,7 +2,6 @@
   <div class="welcome">
     <span class="welcome-to-text">Welcome To</span>
     <img src="@/assets/images/gamitopia_logo_wide.png" alt="Gamitopia wide logo" class="gamitopia-text" />
-    <p class="anniversary-text">1st Anniversary</p>
   </div>
 </template>
 
@@ -34,14 +33,6 @@ export default defineComponent({
     width: 60vh;
     max-width: 80vw;
     margin: 5px 0 5px 0;
-  }
-
-  .anniversary-text {
-    background: linear-gradient(90deg, rgb(255, 255, 0), rgb(255, 100, 50));
-    color: transparent;
-    font-weight: bold;
-    background-clip: text;
-    -webkit-background-clip: text;
   }
 }
 </style>
