@@ -47,14 +47,13 @@ body::-webkit-scrollbar-thumb {
 code {
   display: inline;
   overflow-x: auto;
-  color: #abb2bf;
-  background: #323640;
   border-radius: 5px;
   padding: 4px;
   margin: 0px 2px;
   font-family: 'Fira Code', monospace;
   font-size: 12px;
   line-height: 1.5rem;
+
   span {
     font-family: 'Fira Code', monospace;
     font-size: 12px;
@@ -68,7 +67,7 @@ pre {
 
   .code-language-name {
     position: absolute;
-    top: 30px;
+    top: 15px;
     right: 15px;
     font-family: monospace;
     font-size: 12px;
@@ -78,13 +77,21 @@ pre {
   code {
     display: block;
     overflow-x: auto;
-    color: #abb2bf;
-    background: #323640;
     border-radius: 5px;
     width: 100%;
     padding: 15px;
-    margin: 15px auto;
+    margin: 7.5px 0;
   }
+}
+
+.light code {
+  color: #383a42;
+  background: #fafafa;
+}
+
+.dark code {
+  color: #abb2bf;
+  background: #323640;
 }
 
 i {

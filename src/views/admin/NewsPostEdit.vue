@@ -8,17 +8,22 @@
       :showMessage="showStatus"
     />
 
-    <h2>Edit news post</h2>
-
-    <NewsPostWritingArea
-      v-model:title="newsPost.title"
-      v-model:date="newsPost.date"
-      :originalTags="originalTags"
-      :originalBodyAsMarkdown="originalBodyAsMarkdown"
-      :originalBodyAsHTML="originalBodyAsHTML"
-      @change-tags="updateTags"
-      @change-body="updateBody"
-    />
+    <div class="side-by-side-view">
+      <NewsPostMarkdownEditor
+        v-model:title="newsPost.title"
+        v-model:date="newsPost.date"
+        :originalTags="newsPost.tags"
+        :originalBodyAsMarkdown="newsPost.bodyAsMarkdown"
+        @change-tags="updateTags"
+        @change-body="updateBody"
+      />
+      <MarkdownPreview
+        :title="newsPost.title"
+        :tags="newsPost.tags"
+        :bodyAsHTML="newsPost.bodyAsHTML"
+        :date="newsPost.date"
+      />
+    </div>
 
     <button @click="handleEditNewsPost()" class="submit-btn">
       Save
@@ -29,7 +34,8 @@
 <script lang="ts">
 import { defineComponent, onBeforeMount, onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 
-import NewsPostWritingArea from '@/components/admin/NewsPostWritingArea.vue';
+import NewsPostMarkdownEditor from '@/components/admin/NewsPostMarkdownEditor.vue';
+import MarkdownPreview from '@/components/admin/MarkdownPreview.vue';
 import StatusMessage from './StatusMessage.vue';
 
 import { getNewsPost } from './actions/getNewsPost';
@@ -42,7 +48,8 @@ export default defineComponent({
   name: 'NewsPostEdit',
 
   components: {
-    NewsPostWritingArea,
+    NewsPostMarkdownEditor,
+    MarkdownPreview,
     StatusMessage
   },
 
@@ -149,9 +156,9 @@ export default defineComponent({
 .news-post-edit {
   padding-top: 66px;
 
-  h2 {
-    margin: 30px auto;
-    color: var(--color-light-contrast);
+  .side-by-side-view {
+    width: 100%;
+    display: flex;
   }
 
   .submit-btn {

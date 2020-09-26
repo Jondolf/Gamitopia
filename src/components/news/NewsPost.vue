@@ -345,13 +345,28 @@ export default defineComponent({
     height: 0;
     overflow: hidden;
     transition: 1.5s;
-    white-space: normal;
+    white-space: pre-wrap;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0;
+    }
 
     img {
       width: 75%;
       max-width: 400px;
       margin: 10px auto;
       border-radius: 5px;
+    }
+
+    blockquote {
+      border-left: 3px white solid;
+      margin-left: 0;
+      padding-left: 1.25rem;
     }
 
     a {
@@ -377,10 +392,10 @@ export default defineComponent({
 
     ul,
     ol {
-      padding: 10px;
+      padding: 0 10px;
       border-radius: 5px;
       background-color: var(--color-light);
-      margin: 15px auto;
+      margin: auto;
 
       li,
       li p {
