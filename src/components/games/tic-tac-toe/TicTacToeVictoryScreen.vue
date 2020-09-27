@@ -42,7 +42,7 @@ export default defineComponent({
     background-color: white;
     color: black;
     font-family: Nunito;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     &:hover {
       background-color: rgb(200, 200, 200);
     }

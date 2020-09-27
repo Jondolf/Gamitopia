@@ -8,16 +8,9 @@
     </div>
 
     <div class="area-map-btn-container">
-      <div
-        v-for="(area, index) in areas"
-        :key="index"
-        @click="goToArea(area)"
-        class="area-map-btn"
-      >
+      <div v-for="(area, index) in areas" :key="index" @click="goToArea(area)" class="area-map-btn">
         <div
-          v-if="
-            bossesDefeated.includes(area.bossDefeatedToUnlock) || index === 0
-          "
+          v-if="bossesDefeated.includes(area.bossDefeatedToUnlock) || index === 0"
           :style="`background-image: url(${area.groundImgSrc})`"
           class="unlocked-area"
         >
@@ -30,10 +23,7 @@
             <span>Fight boss</span>
           </button>
         </div>
-        <div
-          v-if="!bossesDefeated.includes(area.bossDefeatedToUnlock)"
-          class="locked-area"
-        >
+        <div v-if="!bossesDefeated.includes(area.bossDefeatedToUnlock)" class="locked-area">
           <span>?</span>
         </div>
       </div>
@@ -162,7 +152,7 @@ export default defineComponent({
           z-index: 2;
           position: absolute;
           padding: 10px;
-          border-radius: 5px;
+          border-radius: var(--border-radius);
           font-weight: bold;
           background-color: rgba(0, 0, 0, 0.5);
         }

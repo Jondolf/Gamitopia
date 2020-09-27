@@ -32,7 +32,7 @@ export default defineComponent({
   background-color: var(--color-primary);
   margin: 3.5vw;
   display: inline-block;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   justify-content: center;
   align-items: center;
   color: white;
@@ -45,7 +45,7 @@ export default defineComponent({
     align-items: center;
     position: relative;
     margin-bottom: 5px;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
   }
 
   .short-description-container {
@@ -75,7 +75,7 @@ export default defineComponent({
 
   img {
     width: 22vw;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     transition: 1s;
   }
 

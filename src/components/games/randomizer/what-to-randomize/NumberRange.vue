@@ -56,9 +56,7 @@ export default defineComponent({
       if (this.minValue <= this.maxValue) {
         this.minValue = Math.ceil(this.minValue);
         this.maxValue = Math.floor(this.maxValue);
-        this.result =
-          Math.floor(Math.random() * (this.maxValue - this.minValue + 1)) +
-          this.minValue;
+        this.result = Math.floor(Math.random() * (this.maxValue - this.minValue + 1)) + this.minValue;
       }
     }
   },
@@ -66,8 +64,7 @@ export default defineComponent({
   watch: {
     minValue() {
       if (this.minValue > this.maxValue) {
-        this.errorMessage =
-          'Minimum value has to be smaller than the maximum value';
+        this.errorMessage = 'Minimum value has to be smaller than the maximum value';
         this.isError = true;
       } else {
         this.isError = false;
@@ -77,8 +74,7 @@ export default defineComponent({
 
     maxValue() {
       if (this.maxValue < this.minValue) {
-        this.errorMessage =
-          'Maximum value has to be smaller than the minimum value';
+        this.errorMessage = 'Maximum value has to be smaller than the minimum value';
         this.isError = true;
       } else {
         this.isError = false;
@@ -110,7 +106,7 @@ export default defineComponent({
     background-color: rgba(255, 255, 255, 0.65);
     font-family: Nunito;
     border: 2px solid black;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     padding: 12px;
     outline: none;
     font-size: 18px;
@@ -138,7 +134,7 @@ export default defineComponent({
         background-color: rgba(255, 255, 255, 0.65);
         font-family: Nunito;
         border: 2px solid black;
-        border-radius: 5px;
+        border-radius: var(--border-radius);
         padding: 7px;
         outline: none;
         font-size: 14px;

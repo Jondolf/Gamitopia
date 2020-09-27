@@ -234,7 +234,7 @@ export default defineComponent({
       caret-color: var(--color-light-contrast);
       outline: none;
       border: none;
-      border-radius: 5px;
+      border-radius: var(--border-radius);
       resize: none;
       font-family: 'Nunito Sans';
       font-size: 17px;

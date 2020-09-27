@@ -59,14 +59,14 @@ export default defineComponent({
   overflow: hidden;
   max-height: 400px;
   margin-bottom: 20px;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   h2 {
     margin: 10px auto 40px auto;
   }
   a {
     font-weight: normal;
     position: absolute;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     bottom: 20px;
     padding: 5px 10px 5px 10px;
     font-weight: bold;

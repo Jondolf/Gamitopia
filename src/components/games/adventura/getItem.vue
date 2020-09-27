@@ -53,7 +53,7 @@ export default defineComponent({
   background-color: rgba(0, 0, 0, 0.5);
   width: 33%;
   text-align: left;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   position: absolute;
   top: 10%;
   z-index: 2;

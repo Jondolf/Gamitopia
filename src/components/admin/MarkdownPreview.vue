@@ -76,7 +76,7 @@ export default defineComponent({
         padding: 5px;
         margin-right: 5px;
         margin-top: 5px;
-        border-radius: 5px;
+        border-radius: var(--border-radius);
       }
     }
   }
@@ -104,7 +104,7 @@ export default defineComponent({
       width: 75%;
       max-width: 400px;
       margin: 10px auto;
-      border-radius: 5px;
+      border-radius: var(--border-radius);
     }
 
     blockquote {
@@ -140,7 +140,7 @@ export default defineComponent({
     ol {
       padding: 10px;
       margin: auto;
-      border-radius: 5px;
+      border-radius: var(--border-radius);
       background-color: var(--color-light);
 
       li {

@@ -210,7 +210,7 @@ a {
     padding: 10px;
     margin-bottom: 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     opacity: none;
     color: white;
     background-color: var(--color-primary);
@@ -227,7 +227,7 @@ a {
   .options {
     width: 70%;
     padding: 30px;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     text-align: left;
     background-color: var(--color-primary);
     margin: auto;
@@ -251,7 +251,7 @@ a {
           border: none;
           outline: none;
           margin-top: 10px;
-          border-radius: 5px;
+          border-radius: var(--border-radius);
           transition: 0.4s;
           &:hover {
             padding: 15px;

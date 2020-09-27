@@ -45,7 +45,7 @@ export default defineComponent({
 
   .btn-container button {
     background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     outline: none;
     border: none;
     margin: 5px 15px 5px 5px;

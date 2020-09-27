@@ -1,10 +1,7 @@
 <template>
   <div class="battle-area">
     <audio :src="soundToPlay" ref="soundEffect"></audio>
-    <audio
-      :src="require('@/assets/sound/games/adventura/thud.mp3')"
-      ref="enemySoundEffect"
-    ></audio>
+    <audio :src="require('@/assets/sound/games/adventura/thud.mp3')" ref="enemySoundEffect"></audio>
     <ChooseMove
       v-if="getItem === false && playerDead === false"
       :ironSword="ironSword"
@@ -26,9 +23,7 @@
       @heal="heal"
     />
     <GetItem
-      v-if="
-        getItem && unlockedMoves.includes(currentArea.areaBoss.itemDropped.name)
-      "
+      v-if="getItem && unlockedMoves.includes(currentArea.areaBoss.itemDropped.name)"
       :currentArea="currentArea"
       :getItem="getItem"
       :itemToUnlock="itemToUnlock"
@@ -57,13 +52,7 @@
             {{ damageInflicted }}
           </p>
         </div>
-        <img
-          :src="enemy.imgSrc"
-          ref="enemy"
-          draggable="false"
-          alt="Enemy"
-          id="enemy"
-        />
+        <img :src="enemy.imgSrc" ref="enemy" draggable="false" alt="Enemy" id="enemy" />
       </div>
     </div>
   </div>
@@ -125,9 +114,7 @@ export default defineComponent({
       damageHasBeenReceived: false,
       damageHasBeenInflicted: false,
       groundBackgroundImgSrc: this.currentArea.groundImgSrc,
-      enemy: this.currentArea.enemiesInArea[
-        Math.floor(Math.random() * this.currentArea.enemiesInArea.length)
-      ]
+      enemy: this.currentArea.enemiesInArea[Math.floor(Math.random() * this.currentArea.enemiesInArea.length)]
     };
   },
   methods: {
@@ -136,16 +123,13 @@ export default defineComponent({
     },
     playSound(sound: string) {
       if (this.sfxOn && sound !== 'enemy') {
-        this.soundToPlay = require('@/assets/sound/games/adventura/' +
-          sound +
-          '.mp3');
+        this.soundToPlay = require('@/assets/sound/games/adventura/' + sound + '.mp3');
         const soundEffectElement = this.$refs.soundEffect as HTMLAudioElement;
         setTimeout(() => {
           soundEffectElement.play();
         }, 1);
       } else if (this.sfxOn && sound === 'enemy') {
-        const enemySoundEffect = this.$refs
-          .enemySoundEffect as HTMLAudioElement;
+        const enemySoundEffect = this.$refs.enemySoundEffect as HTMLAudioElement;
         setTimeout(() => {
           enemySoundEffect.play();
         }, 1);
@@ -255,11 +239,7 @@ export default defineComponent({
       }
     },
     heal(amount: number, manaToConsume: number) {
-      if (
-        this.playerTurn &&
-        this.mana - manaToConsume >= 0 &&
-        this.health !== this.maxHealth
-      ) {
+      if (this.playerTurn && this.mana - manaToConsume >= 0 && this.health !== this.maxHealth) {
         this.$emit('heal', amount, manaToConsume);
         this.changeTurn();
         this.playSound('heal');
@@ -279,13 +259,7 @@ export default defineComponent({
       }, 1);
     },
     emitEnemyStatus() {
-      this.$emit(
-        'set-enemy-status',
-        this.enemy.health,
-        this.enemy.mana,
-        this.enemy.weakness,
-        this.enemy.strength
-      );
+      this.$emit('set-enemy-status', this.enemy.health, this.enemy.mana, this.enemy.weakness, this.enemy.strength);
       this.$emit('enemy', this.enemy, this.enemy.name);
     },
     getEnemy(enemyType: string) {
@@ -309,16 +283,13 @@ export default defineComponent({
     },
     setBackgroundAndGround() {
       const background = this.$refs.background as HTMLElement;
-      const animatableBackground = this.$refs
-        .animatableBackground as HTMLElement;
+      const animatableBackground = this.$refs.animatableBackground as HTMLElement;
       const ground = this.$refs.ground as HTMLElement;
       if (this.currentArea.backgroundImgSrc !== null) {
-        background.style.backgroundImage =
-          'url(' + this.currentArea.backgroundImgSrc + ')';
+        background.style.backgroundImage = 'url(' + this.currentArea.backgroundImgSrc + ')';
       }
       if (this.currentArea.animatableBackgroundImgSrc !== null) {
-        animatableBackground.style.backgroundImage =
-          'url(' + this.currentArea.animatableBackgroundImgSrc + ')';
+        animatableBackground.style.backgroundImage = 'url(' + this.currentArea.animatableBackgroundImgSrc + ')';
       }
       ground.style.backgroundImage = 'url(' + this.groundBackgroundImgSrc + ')';
 
@@ -333,11 +304,7 @@ export default defineComponent({
       if (this.enemyHealth === 0 && this.bossToFight === true) {
         const enemyElement = this.$refs.enemy as HTMLElement;
         enemyElement.style.opacity = '0';
-        if (
-          !this.unlockedMoves.includes(
-            this.currentArea.areaBoss.itemDropped.name
-          )
-        ) {
+        if (!this.unlockedMoves.includes(this.currentArea.areaBoss.itemDropped.name)) {
           this.getItem = true;
         } else {
           this.getItem = false;
@@ -354,14 +321,9 @@ export default defineComponent({
       }, 1);
     },
     playerTurn: function() {
-      if (
-        this.playerTurn &&
-        this.getNewEnemy === false &&
-        this.hasHealed === false
-      ) {
+      if (this.playerTurn && this.getNewEnemy === false && this.hasHealed === false) {
         this.$emit('get-mana', 1);
-        const damageHasBeenReceived = this.$refs
-          .damageHasBeenReceived as HTMLElement;
+        const damageHasBeenReceived = this.$refs.damageHasBeenReceived as HTMLElement;
         if (this.enemyHealth !== 0) {
           damageHasBeenReceived.style.opacity = '1';
         }
@@ -369,8 +331,7 @@ export default defineComponent({
           damageHasBeenReceived.style.opacity = '0';
         }, 999);
       } else if (this.enemyTurn && this.hasHealed === false) {
-        const damageHasBeenInflicted = this.$refs
-          .damageHasBeenInflicted as HTMLElement;
+        const damageHasBeenInflicted = this.$refs.damageHasBeenInflicted as HTMLElement;
         damageHasBeenInflicted.style.opacity = '1';
         setTimeout(() => {
           damageHasBeenInflicted.style.opacity = '0';
@@ -475,7 +436,7 @@ export default defineComponent({
       width: 100px;
       background-color: rgba(0, 0, 0, 0.5);
       margin-bottom: 8px;
-      border-radius: 5px;
+      border-radius: var(--border-radius);
     }
     .player,
     .enemy {

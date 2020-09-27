@@ -2,10 +2,7 @@
   <div :class="card.rarity.toLowerCase() + ' card'">
     <div class="name-and-img-container">
       <h2 class="name">{{ card.name }}</h2>
-      <div
-        class="animatable-background-img"
-        ref="animatableBackgroundImg"
-      ></div>
+      <div class="animatable-background-img" ref="animatableBackgroundImg"></div>
       <img :src="card.imgSrc" alt="Card" />
     </div>
 
@@ -38,8 +35,7 @@ export default defineComponent({
   },
 
   mounted() {
-    const animatableBackgroundElement = this.$refs
-      .animatableBackgroundImg as HTMLElement;
+    const animatableBackgroundElement = this.$refs.animatableBackgroundImg as HTMLElement;
     animatableBackgroundElement.style.backgroundImage = `url(${this.card.animatableImgSrc})`;
   }
 });
@@ -191,7 +187,7 @@ export default defineComponent({
   width: 200px;
   height: 325px;
   border: 2px solid black;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
 
   .name-and-img-container {
     height: 200px;

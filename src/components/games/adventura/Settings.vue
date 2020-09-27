@@ -5,16 +5,13 @@
       <div class="btn-container">
         <button @click="$emit('go-back')">Go back</button>
         <button @click="$emit('toggle-fullscreen')">
-          <span v-if="fullscreenOn">Fullscreen on</span
-          ><span v-if="!fullscreenOn">Fullscreen off</span>
+          <span v-if="fullscreenOn">Fullscreen on</span><span v-if="!fullscreenOn">Fullscreen off</span>
         </button>
         <button @click="$emit('toggle-music')">
-          <span v-if="musicOn">Music on</span
-          ><span v-if="!musicOn">Music off</span>
+          <span v-if="musicOn">Music on</span><span v-if="!musicOn">Music off</span>
         </button>
         <button @click="$emit('toggle-sfx')">
-          <span v-if="sfxOn">Sound effects on</span
-          ><span v-if="!sfxOn">Sound effects off</span>
+          <span v-if="sfxOn">Sound effects on</span><span v-if="!sfxOn">Sound effects off</span>
         </button>
       </div>
     </div>
@@ -88,7 +85,7 @@ export default defineComponent({
       margin-bottom: 15px;
       padding: 15px;
       border: none;
-      border-radius: 5px;
+      border-radius: var(--border-radius);
       transition: 0.4s;
     }
     button:hover {

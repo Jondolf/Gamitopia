@@ -26,7 +26,7 @@ export default defineComponent({
   color: white;
   z-index: 2;
   padding: 20px, 0, 0, 0;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   overflow: hidden;
   border: 2px solid black;
 

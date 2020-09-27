@@ -41,10 +41,7 @@
       class="row-to-win-input"
     />
     <p class="numbers-needed-in-a-row-to-win">{{ numbersNeededInARowToWin }}</p>
-    <button
-      @click="$emit('toggle-fullscreen')"
-      class="toggle-fullscreen-button"
-    >
+    <button @click="$emit('toggle-fullscreen')" class="toggle-fullscreen-button">
       Toggle fullscreen
     </button>
   </div>
@@ -88,8 +85,7 @@ export default defineComponent({
     },
 
     displayNum() {
-      this.numberToDisplay =
-        this.gridWidth.toString() + 'x' + this.gridHeight.toString();
+      this.numberToDisplay = this.gridWidth.toString() + 'x' + this.gridHeight.toString();
     },
 
     setGridSize() {
@@ -104,8 +100,7 @@ export default defineComponent({
 
     setRowNeededToWin() {
       const rowToWinInput = this.$refs.rowToWinInput as HTMLInputElement;
-      this.numbersNeededInARowToWin =
-        'Numbers needed in a row required to win: ' + rowToWinInput.value;
+      this.numbersNeededInARowToWin = 'Numbers needed in a row required to win: ' + rowToWinInput.value;
       this.$emit('row-to-win-changed', rowToWinInput.value);
     }
   },
@@ -227,7 +222,7 @@ export default defineComponent({
     height: auto;
     background-color: transparent;
     border: 2px solid var(--color-light-contrast);
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     color: var(--color-light-contrast);
     margin-top: 5%;
     &:hover {

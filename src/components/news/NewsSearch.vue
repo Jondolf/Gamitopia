@@ -70,7 +70,7 @@ export default defineComponent({
   color: white;
   background-color: var(--color-secondary);
   border: 2px solid white;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   display: flex;
   align-items: center;
   box-sizing: border-box;

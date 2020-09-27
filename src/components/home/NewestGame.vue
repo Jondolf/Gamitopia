@@ -42,7 +42,7 @@ export default defineComponent({
   flex-direction: row;
   align-items: center;
   background-color: var(--color-primary-tint);
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   box-sizing: border-box;
 
   .description-container {
@@ -90,7 +90,7 @@ export default defineComponent({
     img {
       width: 45vh;
       max-width: 45vw;
-      border-radius: 5px;
+      border-radius: var(--border-radius);
     }
   }
 }

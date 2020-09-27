@@ -66,7 +66,7 @@ export default defineComponent({
   width: 45px;
   height: 45px;
   margin: 0 10px;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   transition: 0.5s;
   border-radius: 50%;
   display: flex;

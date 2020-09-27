@@ -109,7 +109,7 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     box-sizing: border-box;
 
     h2 {
@@ -140,7 +140,7 @@ export default defineComponent({
           justify-self: center;
           height: 35vw;
           max-height: 40vh;
-          border-radius: 5px;
+          border-radius: var(--border-radius);
         }
       }
 

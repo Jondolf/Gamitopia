@@ -3,10 +3,7 @@
     <h2>Card game</h2>
     <h2>!Not Officially Released, Isn't Finished!</h2>
     <div class="game-container" ref="gameContainer">
-      <button
-        @click="isFullscreen = !isFullscreen"
-        class="toggle-fullscreen-btn"
-      >
+      <button @click="isFullscreen = !isFullscreen" class="toggle-fullscreen-btn">
         <i class="material-icons">fullscreen</i>
       </button>
       <GameBoard :playerHand="playerHand" :enemyHand="enemyHand" />
@@ -16,8 +13,8 @@
       <div class="mainDescription">
         <h3>Description</h3>
         <p>
-          Card game is an ambituos indie game with over 30 cards to put into
-          your deck and fight with. You can play against a computer.
+          Card game is an ambituos indie game with over 30 cards to put into your deck and fight with. You can play
+          against a computer.
         </p>
       </div>
       <div class="otherDescription">
@@ -214,16 +211,10 @@ export default defineComponent({
     isFullscreen() {
       const gameContainer = this.$refs.gameContainer as HTMLElement;
       if (this.isFullscreen === true) {
-        gameContainer.classList.replace(
-          'game-container',
-          'fullscreen-game-container'
-        );
+        gameContainer.classList.replace('game-container', 'fullscreen-game-container');
         document.body.style.overflow === 'hidden';
       } else {
-        gameContainer.classList.replace(
-          'fullscreen-game-container',
-          'game-container'
-        );
+        gameContainer.classList.replace('fullscreen-game-container', 'game-container');
         document.body.style.overflow === 'auto';
       }
     }
@@ -259,7 +250,7 @@ export default defineComponent({
     max-width: 1500px;
     height: 600px;
     border: 2px solid;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     margin: auto;
     overflow: hidden;
   }
@@ -279,7 +270,7 @@ export default defineComponent({
     width: 70%;
     display: flex;
     background-color: var(--color-primary);
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     margin: 50px auto;
     color: white;
     text-align: left;

@@ -25,8 +25,7 @@ export default defineComponent({
   watch: {
     calculation() {
       setTimeout(() => {
-        const calculationElement = this.$refs
-          .calculation as HTMLParagraphElement;
+        const calculationElement = this.$refs.calculation as HTMLParagraphElement;
         if (this.calculation[0] === '=') {
           calculationElement.scrollLeft = 0;
         } else {
@@ -68,7 +67,7 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     outline: none;
     font-size: 16px;
     font-weight: 900;

@@ -16,13 +16,8 @@
         <i class="material-icons">menu</i>
       </button>
       <h2>{{ whatToRandomize }}</h2>
-      <button
-        @click="$emit('toggle-fullscreen')"
-        class="toggle-fullscreen-button"
-      >
-        <i class="material-icons">{{
-          isFullscreen ? 'fullscreen_exit' : 'fullscreen'
-        }}</i>
+      <button @click="$emit('toggle-fullscreen')" class="toggle-fullscreen-button">
+        <i class="material-icons">{{ isFullscreen ? 'fullscreen_exit' : 'fullscreen' }}</i>
       </button>
     </div>
 
@@ -84,17 +79,7 @@ export default defineComponent({
 .randomizer-game {
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    -45deg,
-    #124cca,
-    #e7623a,
-    #a83ae7,
-    #124cca,
-    #1296ca,
-    #1bbb78,
-    #1296ca,
-    #124cca
-  );
+  background: linear-gradient(-45deg, #124cca, #e7623a, #a83ae7, #124cca, #1296ca, #1bbb78, #1296ca, #124cca);
   color: white;
   background-size: 900% 900%;
   animation: animategradient 90s infinite;
@@ -134,7 +119,7 @@ export default defineComponent({
     top: 15px;
     width: 45px;
     height: 45px;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     transition: 0.4s ease-out;
     display: flex;
     justify-content: center;

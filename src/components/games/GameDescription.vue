@@ -58,7 +58,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   background-color: var(--color-primary);
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   padding: 20px;
   margin: 50px auto;
   color: white;
@@ -81,7 +81,7 @@ export default defineComponent({
     width: 100%;
     max-width: 400px;
     margin: 10px auto;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
   }
 
   time {

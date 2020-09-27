@@ -46,7 +46,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 #statusMessage {
   background-color: var(--color-primary);
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.75);
   width: 25%;
   padding: 10px;

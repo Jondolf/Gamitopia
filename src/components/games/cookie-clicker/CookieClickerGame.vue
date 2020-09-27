@@ -221,7 +221,7 @@ export default defineComponent({
     height: 35px;
     padding: 10px;
     background-color: white;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     display: flex;
     align-items: center;
     justify-content: center;

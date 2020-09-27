@@ -33,7 +33,7 @@ export default defineComponent({
   margin: auto;
   background-color: black;
   border: 2px solid var(--color-light-contrast);
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   font-family: 'Nunito', 'Nunito Sans', sans-serif;
   box-sizing: border-box;
   overflow: hidden;

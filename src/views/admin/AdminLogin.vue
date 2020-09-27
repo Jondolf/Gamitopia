@@ -22,12 +22,7 @@
         required
       />
       <div class="show-password-container">
-        <input
-          type="checkbox"
-          name="show-password"
-          class="checkbox"
-          @click="togglePasswordVisibility()"
-        />
+        <input type="checkbox" name="show-password" class="checkbox" @click="togglePasswordVisibility()" />
         <label for="checkbox"> Show password</label>
       </div>
       <p class="login-error">{{ loginError }}</p>
@@ -68,11 +63,7 @@ export default defineComponent({
 
     async handleAuthenticate() {
       try {
-        const jwt = await authenticate(
-          '/api/admin/login',
-          this.username,
-          this.password
-        );
+        const jwt = await authenticate('/api/admin/login', this.username, this.password);
         this.loginError = '';
         localStorage.setItem('jwt', jwt);
         router.replace('/');
@@ -150,7 +141,7 @@ export default defineComponent({
     padding-left: 10px;
     min-width: 40%;
     width: auto;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     background-color: rgb(245, 245, 245);
     transition: 0.2s;
     outline: none;
@@ -176,7 +167,7 @@ export default defineComponent({
     height: 70px;
     min-width: 40%;
     width: auto;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     background-color: var(--color-primary);
     color: white;
     transition: 0.2s;

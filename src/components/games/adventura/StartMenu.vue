@@ -5,10 +5,7 @@
     <div class="ui-elements" v-if="currentView === 'Start menu'">
       <h1>Adventura</h1>
       <div class="btn-container">
-        <button
-          v-if="checkIfGameStarted('continue')"
-          @click="$emit('change-current-view', 'Map')"
-        >
+        <button v-if="checkIfGameStarted('continue')" @click="$emit('change-current-view', 'Map')">
           Continue adventure
         </button>
         <button @click="checkIfGameStarted('reset')">
@@ -18,8 +15,7 @@
         <div class="confirm-reset-progress" v-if="confirmResetBtnVisibility">
           <h2>CONFIRM RESET?</h2>
           <p>
-            All of your saved progress will be erased and you will have to start
-            over.
+            All of your saved progress will be erased and you will have to start over.
           </p>
           <div class="confirm-reset-btn-container">
             <button @click="confirmResetBtnVisibility = false">
@@ -43,10 +39,7 @@
         </button>
       </div>
     </div>
-    <Instructions
-      v-if="currentView === 'Instructions'"
-      @go-back="$emit('change-current-view', 'Start menu')"
-    />
+    <Instructions v-if="currentView === 'Instructions'" @go-back="$emit('change-current-view', 'Start menu')" />
     <Settings
       v-if="currentView === 'Settings'"
       :fullscreenOn="fullscreenOn"
@@ -154,16 +147,11 @@ export default defineComponent({
     },
 
     setBackgroundImg() {
-      const animatableBackgroundImg = this.$refs
-        .animatableBackgroundImg as HTMLElement;
+      const animatableBackgroundImg = this.$refs.animatableBackgroundImg as HTMLElement;
       const backgroundImg = this.$refs.backgroundImg as HTMLElement;
-      if (
-        this.unlockedAreas[this.unlockedAreas.length - 1]
-          .animatableBackgroundImgSrc !== null
-      ) {
+      if (this.unlockedAreas[this.unlockedAreas.length - 1].animatableBackgroundImgSrc !== null) {
         animatableBackgroundImg.style.backgroundImage = `url(${
-          this.unlockedAreas[this.unlockedAreas.length - 1]
-            .animatableBackgroundImgSrc
+          this.unlockedAreas[this.unlockedAreas.length - 1].animatableBackgroundImgSrc
         })`;
       } else {
         animatableBackgroundImg.style.display = 'none';
@@ -281,7 +269,7 @@ export default defineComponent({
       margin-bottom: 15px;
       padding: 15px;
       border: none;
-      border-radius: 5px;
+      border-radius: var(--border-radius);
       transition: 0.4s;
     }
     button:hover {

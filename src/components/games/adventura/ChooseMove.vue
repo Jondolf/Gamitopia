@@ -1,15 +1,9 @@
 <template>
   <div class="choose-move">
-    <button
-      v-if="unlockedMoves.includes('Iron sword')"
-      @click="strikeWithSword(ironSword.damage)"
-    >
+    <button v-if="unlockedMoves.includes('Iron sword')" @click="strikeWithSword(ironSword.damage)">
       Strike with sword 0MP
     </button>
-    <button
-      v-if="unlockedMoves.includes('Heal scroll')"
-      @click="heal(healScroll.heal, healScroll.manaToConsume)"
-    >
+    <button v-if="unlockedMoves.includes('Heal scroll')" @click="heal(healScroll.heal, healScroll.manaToConsume)">
       Heal {{ healScroll.manaToConsume }}MP
     </button>
     <button
@@ -24,10 +18,7 @@
     >
       Blast water {{ waterScroll.manaToConsume }}MP
     </button>
-    <button
-      v-if="unlockedMoves.includes('Ice scroll')"
-      @click="blastIce(iceScroll.damage, iceScroll.manaToConsume)"
-    >
+    <button v-if="unlockedMoves.includes('Ice scroll')" @click="blastIce(iceScroll.damage, iceScroll.manaToConsume)">
       Blast ice {{ iceScroll.manaToConsume }}MP
     </button>
     <button
@@ -36,17 +27,12 @@
     >
       Blast earth {{ earthScroll.manaToConsume }}MP
     </button>
-    <button
-      v-if="unlockedMoves.includes('Air scroll')"
-      @click="blastAir(airScroll.damage, airScroll.manaToConsume)"
-    >
+    <button v-if="unlockedMoves.includes('Air scroll')" @click="blastAir(airScroll.damage, airScroll.manaToConsume)">
       Blast air {{ airScroll.manaToConsume }}MP
     </button>
     <button
       v-if="unlockedMoves.includes('Lightning scroll')"
-      @click="
-        blastLightning(lightningScroll.damage, lightningScroll.manaToConsume)
-      "
+      @click="blastLightning(lightningScroll.damage, lightningScroll.manaToConsume)"
     >
       Blast lightning {{ lightningScroll.manaToConsume }}MP
     </button>
@@ -106,7 +92,7 @@ export default defineComponent({
   background-color: rgba(0, 0, 0, 0.5);
   width: 33%;
   text-align: left;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   position: absolute;
   top: 10%;
   z-index: 2;

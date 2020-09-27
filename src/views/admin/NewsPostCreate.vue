@@ -137,7 +137,7 @@ export default defineComponent({
     height: 40px;
     min-width: 10%;
     width: auto;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     background-color: var(--color-primary);
     color: white;
     transition: 0.2s;

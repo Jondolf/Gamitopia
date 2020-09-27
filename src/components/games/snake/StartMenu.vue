@@ -44,7 +44,7 @@ export default defineComponent({
 
     button {
       background-color: rgba(255, 255, 255, 0.7);
-      border-radius: 5px;
+      border-radius: var(--border-radius);
       font-weight: bold;
       outline: none;
       border: none;

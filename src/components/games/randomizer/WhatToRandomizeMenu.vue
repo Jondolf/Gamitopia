@@ -13,10 +13,7 @@
       :key="index"
       :class="whatToRandomizeOption.className"
     >
-      <img
-        :src="whatToRandomizeOption.imageSrc"
-        :alt="whatToRandomizeOption.imageAlt"
-      />
+      <img :src="whatToRandomizeOption.imageSrc" :alt="whatToRandomizeOption.imageAlt" />
       <p>{{ whatToRandomizeOption.name }}</p>
     </button>
   </div>
@@ -99,7 +96,7 @@ export default defineComponent({
       width: 45px;
       height: 45px;
       margin-right: 20px;
-      border-radius: 5px;
+      border-radius: var(--border-radius);
       transition: 0.4s ease-out;
       display: flex;
       justify-content: center;

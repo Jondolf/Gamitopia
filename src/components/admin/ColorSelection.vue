@@ -107,7 +107,7 @@ export default defineComponent({
   border: 2px solid black;
   background-color: white;
   color: black;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   text-align: left;
   width: 120px;
   margin: 5px;
@@ -116,7 +116,7 @@ export default defineComponent({
     text-align: left;
     .color-square {
       border: 2px solid black;
-      border-radius: 5px;
+      border-radius: var(--border-radius);
       width: 20px;
       height: 20px;
       margin-right: 5px;

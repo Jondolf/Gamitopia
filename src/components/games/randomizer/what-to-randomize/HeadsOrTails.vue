@@ -73,7 +73,7 @@ export default defineComponent({
     background-color: rgba(255, 255, 255, 0.65);
     font-family: Nunito;
     border: 2px solid black;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     padding: 12px;
     outline: none;
     font-size: 18px;

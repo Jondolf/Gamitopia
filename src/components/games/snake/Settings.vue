@@ -147,8 +147,7 @@ export default defineComponent({
     const speed = ref(5);
 
     if (localStorage.getItem('snakeSpeed')) {
-      speed.value =
-        (1000 - +JSON.parse(localStorage.getItem('snakeSpeed')!)) / 100;
+      speed.value = (1000 - +JSON.parse(localStorage.getItem('snakeSpeed')!)) / 100;
     } else {
       speed.value = (1000 - props.game.tickSpeed) / 100;
     }
@@ -159,23 +158,11 @@ export default defineComponent({
 
     function changeBoardSize(size: string) {
       if (size === 'small') {
-        emit(
-          size + '-board',
-          boards.smallBoard,
-          450 / boards.smallBoard[0].length
-        );
+        emit(size + '-board', boards.smallBoard, 450 / boards.smallBoard[0].length);
       } else if (size === 'medium') {
-        emit(
-          size + '-board',
-          boards.mediumBoard,
-          450 / boards.mediumBoard[0].length
-        );
+        emit(size + '-board', boards.mediumBoard, 450 / boards.mediumBoard[0].length);
       } else if (size === 'large') {
-        emit(
-          size + '-board',
-          boards.largeBoard,
-          450 / boards.largeBoard[0].length
-        );
+        emit(size + '-board', boards.largeBoard, 450 / boards.largeBoard[0].length);
       }
     }
 
@@ -221,7 +208,7 @@ export default defineComponent({
 
     button {
       background-color: rgba(255, 255, 255, 0.7);
-      border-radius: 5px;
+      border-radius: var(--border-radius);
       font-weight: bold;
       outline: none;
       border: none;

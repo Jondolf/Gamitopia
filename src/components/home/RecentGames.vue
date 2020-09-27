@@ -34,7 +34,7 @@ h2 {
 
 .new-img {
   width: 18vw;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   margin: 20px, 0;
   transition: 1s;
 }
