@@ -1,7 +1,7 @@
 import { GameInfo } from '@/interfaces/GameInfo';
 import { createStore } from 'vuex';
 
-type GameKey = 'targetPractise' | 'calculator' | 'snake' | 'adventura' | 'ticTacToe' | 'randomizer' | 'cookieClicker'; // For proper typing
+type GameKey = 'inTheShadows' | 'targetPractise' | 'calculator' | 'snake' | 'adventura' | 'ticTacToe' | 'randomizer' | 'cookieClicker'; // For proper typing
 
 type AllGames = {
   [key in GameKey]: GameInfo;
@@ -10,6 +10,20 @@ type AllGames = {
 // TODO add update histories to game descriptions. This could be collapsible. Look at commit history from GitHub (maybe). Make them objects, like: updates: [{ date: ??, message: ?? }, { date: ??, message: ?? }, ...]
 
 const allGames: AllGames = {
+  inTheShadows: {
+    name: 'In the Shadows (DEMO)',
+    route: '/in-the-shadows',
+    thumbnailImgSrc: require('@/assets/images/game-thumbnails/in_the_shadows_thumbnail.jpg'),
+    thumbnailImgAlt: 'Target Practise app',
+    releaseDate: '1.12.2020',
+    description: {
+      shortDescription: `Sneak past guards without going into light.`,
+      longDescription:
+        `This is a demo`,
+      madeWith: ['Godot'],
+      support: []
+    }
+  },
   targetPractise: {
     name: '🏹 Target Practise',
     route: '/target-practise',

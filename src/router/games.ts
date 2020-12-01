@@ -101,6 +101,18 @@ const gameRoutes: Array<RouteRecordRaw> = [
         content: games.targetPractise.description.shortDescription
       }]
     }
+  },
+  {
+    path: '/in-the-shadows',
+    name: 'InTheShadows',
+    component: () => import('@/views/games/InTheShadows.vue'),
+    meta: {
+      title: 'In the Shadows | Gamitopia',
+      metaTags: [{
+        name: 'description',
+        content: games.targetPractise.description.shortDescription
+      }]
+    }
   }
 ]
 
