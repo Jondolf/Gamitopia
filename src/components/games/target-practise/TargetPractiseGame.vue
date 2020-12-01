@@ -2,7 +2,7 @@
   <div class="target-practise-game">
     <UnityGame
       buildUrl="/unity-games/target-practise/Build"
-      projectName="targetPractiseBuild"
+      fileName="targetPractiseBuild"
       gameName="Target Practise"
       gameVersion="1.0"
       :isGzipped="false"

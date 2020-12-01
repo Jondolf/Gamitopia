@@ -7,13 +7,13 @@ export default function useUnityLoader() {
   const progressBarFull = ref<HTMLElement>(null!);
   const fullscreenButton = ref<HTMLElement>(null!);
 
-  function loadGame(buildUrl: string, projectName: string, gameName: string, gameVersion: string, isGzipped: boolean) {
-    const loaderUrl = `${buildUrl}/${projectName}.asm.loader.js`;
+  function loadGame(buildUrl: string, fileName: string, gameName: string, gameVersion: string, isGzipped: boolean) {
+    const loaderUrl = `${buildUrl}/${fileName}.asm.loader.js`;
     const config = {
-      dataUrl: `${buildUrl}/${projectName}.data${isGzipped ? '.gz' : ''}`,
-      frameworkUrl: `${buildUrl}/${projectName}.asm.framework.js${isGzipped ? '.gz' : ''}`,
-      codeUrl: `${buildUrl}/${projectName}.asm.js${isGzipped ? '.gz' : ''}`,
-      memoryUrl: `${buildUrl}/${projectName}.asm.mem${isGzipped ? '.gz' : ''}`,
+      dataUrl: `${buildUrl}/${fileName}.data${isGzipped ? '.gz' : ''}`,
+      frameworkUrl: `${buildUrl}/${fileName}.asm.framework.js${isGzipped ? '.gz' : ''}`,
+      codeUrl: `${buildUrl}/${fileName}.asm.js${isGzipped ? '.gz' : ''}`,
+      memoryUrl: `${buildUrl}/${fileName}.asm.mem${isGzipped ? '.gz' : ''}`,
       streamingAssetsUrl: 'StreamingAssets',
       companyName: 'Gamitopia',
       productName: gameName,

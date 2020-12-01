@@ -24,7 +24,7 @@ export default defineComponent({
 
   props: {
     buildUrl: { type: String, required: true },
-    projectName: { type: String, required: true },
+    fileName: { type: String, required: true },
     gameName: { type: String, required: true },
     gameVersion: { type: String, required: true },
     isGzipped: { type: Boolean, required: true }
@@ -33,7 +33,7 @@ export default defineComponent({
   setup(props) {
     const { container, canvas, loadingBar, progressBarFull, fullscreenButton, loadGame } = useUnityLoader();
 
-    onMounted(() => loadGame(props.buildUrl, props.projectName, props.gameName, props.gameVersion, props.isGzipped));
+    onMounted(() => loadGame(props.buildUrl, props.fileName, props.gameName, props.gameVersion, props.isGzipped));
     onBeforeRouteLeave((to: RouteLocation) => window.location.replace(to.fullPath));
 
     return {
