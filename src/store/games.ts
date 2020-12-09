@@ -14,13 +14,17 @@ const allGames: AllGames = {
     name: 'In the Shadows (DEMO)',
     route: '/in-the-shadows',
     thumbnailImgSrc: require('@/assets/images/game-thumbnails/in_the_shadows_thumbnail.jpg'),
-    thumbnailImgAlt: 'Target Practise app',
+    thumbnailImgAlt: 'In the Shadows game',
     releaseDate: '1.12.2020',
     description: {
       shortDescription: `Sneak past guards without going into light.`,
       longDescription:
-        `This is a demo`,
-      madeWith: ['Godot'],
+        `**Note:** this game is a demo and may be expanded and improved later.
+
+Sneak past guards as you wander through each room.
+
+You are a thief whose task is to steal the incredibly valuable diamond. To stay hidden you must stay out of the guards' lights and utilize the different obstacles.`,
+      madeWith: ['Godot (with GDScript)'],
       support: []
     }
   },
@@ -28,7 +32,7 @@ const allGames: AllGames = {
     name: '🏹 Target Practise',
     route: '/target-practise',
     thumbnailImgSrc: require('@/assets/images/game-thumbnails/target_practise_thumbnail.jpg'),
-    thumbnailImgAlt: 'Target Practise app',
+    thumbnailImgAlt: 'Target Practise game',
     releaseDate: '31.8.2020',
     description: {
       shortDescription: `Shoot targets to get points and try to get as many points as you can.`,
@@ -38,7 +42,7 @@ Good luck!
 
 **Note:** This is not finished yet and may have bugs.`,
       madeWith: ['Unity', 'C#', 'Blender'],
-      support: []
+      support: ['Fullscreen support: yes']
     }
   },
   calculator: {
