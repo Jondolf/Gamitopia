@@ -1,8 +1,6 @@
 <template>
   <div class="game-description">
     <div class="main">
-      <h1>{{ game.name }}</h1>
-      <h2>Description</h2>
       <p v-html="parsedMainDescription"></p>
       <img :src="game.thumbnailImgSrc" :alt="game.thumbnailImgAlt" />
       <time>Released on {{ game.releaseDate }}</time>
@@ -97,10 +95,6 @@ export default defineComponent({
   .main {
     padding-bottom: 20px;
     border-bottom: 1px solid;
-
-    p {
-      white-space: pre-line;
-    }
   }
 
   .other {
