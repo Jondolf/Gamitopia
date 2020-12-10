@@ -39,7 +39,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import GameBoard from '@/components/games/card-game/GameBoard.vue';
+import GameBoard from '@/games/card-game/GameBoard.vue';
 
 export default defineComponent({
   name: 'CardGame',

@@ -1,19 +1,19 @@
 // @ts-ignore
-import adventuraDescription from '@/components/games/adventura/README.md';
+import adventuraDescription from '@/games/adventura/README.md';
 // @ts-ignore
-import calculatorDescription from '@/components/games/calculator/README.md';
+import calculatorDescription from '@/games/calculator/README.md';
 // @ts-ignore
-import cookieClickerDescription from '@/components/games/cookie-clicker/README.md';
+import cookieClickerDescription from '@/games/cookie-clicker/README.md';
 // @ts-ignore
-import inTheShadowsDescription from '@/components/games/in-the-shadows/README.md';
+import inTheShadowsDescription from '@/games/in-the-shadows/README.md';
 // @ts-ignore
-import randomizerDescription from '@/components/games/randomizer/README.md';
+import randomizerDescription from '@/games/randomizer/README.md';
 // @ts-ignore
-import snakeDescription from '@/components/games/snake/README.md';
+import snakeDescription from '@/games/snake/README.md';
 // @ts-ignore
-import targetPractiseDescription from '@/components/games/target-practise/README.md';
+import targetPractiseDescription from '@/games/target-practise/README.md';
 // @ts-ignore
-import ticTacToeDescription from '@/components/games/tic-tac-toe/README.md';
+import ticTacToeDescription from '@/games/tic-tac-toe/README.md';
 import { GameInfo } from '@/interfaces/GameInfo';
 import { createStore } from 'vuex';
 

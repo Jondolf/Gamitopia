@@ -2,10 +2,7 @@
   <div class="game-page">
     <GameHeader :game="game" />
     <slot><!-- Game container comes here --></slot>
-    <GooglePlayLink
-      v-if="game.googlePlayStoreLink"
-      :link="game.googlePlayStoreLink"
-    />
+    <GooglePlayLink v-if="game.googlePlayStoreLink" :link="game.googlePlayStoreLink" />
     <GameDescription :game="game" />
   </div>
 </template>
@@ -27,7 +24,10 @@ export default defineComponent({
   },
 
   props: {
-    game: Object as () => GameInfo
+    game: {
+      type: Object as () => GameInfo,
+      required: true
+    }
   }
 });
 </script>

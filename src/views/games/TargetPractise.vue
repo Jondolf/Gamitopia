@@ -11,7 +11,7 @@ import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import GamePage from '@/components/games/GamePage.vue';
 import GameContainer from '@/components/games/GameContainer.vue';
-import TargetPractiseGame from '@/components/games/target-practise/TargetPractiseGame.vue';
+import TargetPractiseGame from '@/games/target-practise/TargetPractiseGame.vue';
 
 export default defineComponent({
   name: 'TargetPractise',

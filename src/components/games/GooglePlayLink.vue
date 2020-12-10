@@ -3,10 +3,7 @@
     <a
       href="https://play.google.com/store/apps/details?id=com.gamitopia.calculator&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
     >
-      <img
-        src="@/assets/images/google-play-badge.png"
-        alt="Get it on Google Play"
-      />
+      <img src="@/assets/images/google-play-badge.png" alt="Get it on Google Play" />
     </a>
     <p>Google Play and the Google Play logo are trademarks of Google LLC.</p>
   </div>

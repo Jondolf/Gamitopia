@@ -11,7 +11,7 @@ import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import GamePage from '@/components/games/GamePage.vue';
 import GameContainer from '@/components/games/GameContainer.vue';
-import CookieClickerGame from '@/components/games/cookie-clicker/CookieClickerGame.vue';
+import CookieClickerGame from '@/games/cookie-clicker/CookieClickerGame.vue';
 
 export default defineComponent({
   name: 'CookieClicker',

@@ -11,7 +11,7 @@ import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import GamePage from '@/components/games/GamePage.vue';
 import GameContainer from '@/components/games/GameContainer.vue';
-import TicTacToeGame from '@/components/games/tic-tac-toe/TicTacToeGame.vue';
+import TicTacToeGame from '@/games/tic-tac-toe/TicTacToeGame.vue';
 
 export default defineComponent({
   name: 'TicTacToe',

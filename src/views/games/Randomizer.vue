@@ -11,7 +11,7 @@ import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import GamePage from '@/components/games/GamePage.vue';
 import GameContainer from '@/components/games/GameContainer.vue';
-import RandomizerGame from '@/components/games/randomizer/RandomizerGame.vue';
+import RandomizerGame from '@/games/randomizer/RandomizerGame.vue';
 
 export default defineComponent({
   name: 'Randomizer',

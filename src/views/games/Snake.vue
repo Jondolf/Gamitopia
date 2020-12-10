@@ -11,7 +11,7 @@ import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import GamePage from '@/components/games/GamePage.vue';
 import GameContainer from '@/components/games/GameContainer.vue';
-import SnakeGame from '@/components/games/snake/SnakeGame.vue';
+import SnakeGame from '@/games/snake/SnakeGame.vue';
 
 export default defineComponent({
   name: 'Snake',

@@ -11,7 +11,7 @@ import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import GamePage from '@/components/games/GamePage.vue';
 import GameContainer from '@/components/games/GameContainer.vue';
-import InTheShadowsGame from '@/components/games/in-the-shadows/InTheShadowsGame.vue';
+import InTheShadowsGame from '@/games/in-the-shadows/InTheShadowsGame.vue';
 
 export default defineComponent({
   name: 'InTheShadows',

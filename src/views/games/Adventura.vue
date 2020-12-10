@@ -11,7 +11,7 @@ import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import GamePage from '@/components/games/GamePage.vue';
 import GameContainer from '@/components/games/GameContainer.vue';
-import AdventuraGame from '@/components/games/adventura/AdventuraGame.vue';
+import AdventuraGame from '@/games/adventura/AdventuraGame.vue';
 
 export default defineComponent({
   name: 'Adventura',

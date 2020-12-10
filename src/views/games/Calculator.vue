@@ -11,7 +11,7 @@ import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import GamePage from '@/components/games/GamePage.vue';
 import GameContainer from '@/components/games/GameContainer.vue';
-import CalculatorApp from '@/components/games/calculator/CalculatorApp.vue';
+import CalculatorApp from '@/games/calculator/CalculatorApp.vue';
 
 export default defineComponent({
   name: 'Calculator',
