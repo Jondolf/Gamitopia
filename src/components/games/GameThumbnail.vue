@@ -30,14 +30,14 @@ export default defineComponent({
 <style lang="scss" scoped>
 .game-thumbnail {
   background-color: var(--color-primary);
-  margin: 3.5vw;
+  margin: 1.5vw;
   display: inline-block;
   border-radius: var(--border-radius);
   justify-content: center;
   align-items: center;
   color: white;
   transition: 1s;
-  padding: 0 1vw 0.75vw 1vw;
+  padding: 0 0.75vw 0.25vw 0.75vw;
 
   a {
     display: flex;
@@ -74,7 +74,7 @@ export default defineComponent({
   }
 
   img {
-    width: 22vw;
+    width: 14vw;
     border-radius: var(--border-radius);
     transition: 1s;
   }
@@ -90,10 +90,50 @@ export default defineComponent({
   }
 }
 
+@media only screen and (max-width: 2325px) {
+  .game-thumbnail {
+    margin: 2vw;
+    padding: 0 1vw 0.75vw 1vw;
+
+    img {
+      width: 17vw;
+    }
+
+    span {
+      font-size: 14px;
+    }
+
+    time {
+      font-size: 12px;
+      margin: auto 1.5vw;
+    }
+  }
+}
+
+@media only screen and (max-width: 1775px) {
+  .game-thumbnail {
+    margin: 3.5vw;
+    padding: 0 1.5vw 1vw 1.5vw;
+
+    img {
+      width: 22vw;
+    }
+
+    span {
+      font-size: 14px;
+    }
+
+    time {
+      font-size: 12px;
+      margin: auto 1.5vw;
+    }
+  }
+}
+
 @media only screen and (max-width: 700px) {
   .game-thumbnail {
     margin: 3vw;
-    padding: 0 1.5vw 1.5vw 1.5vw;
+    padding: 0 1.5vw 1.25vw 1.5vw;
 
     img {
       width: 36vw;
@@ -104,7 +144,7 @@ export default defineComponent({
     }
 
     time {
-      font-size: 10px;
+      font-size: 12px;
       margin: auto 1.5vw;
     }
   }
@@ -113,7 +153,7 @@ export default defineComponent({
 @media only screen and (max-width: 500px) {
   .game-thumbnail {
     margin: 2.5vw;
-    padding: 0 2vw 2vw 2vw;
+    padding: 0 2vw 1.5vw 2vw;
 
     img {
       width: 58vw;
