@@ -20,6 +20,8 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  bottom: 0;
 
   i {
     font-size: 20px;

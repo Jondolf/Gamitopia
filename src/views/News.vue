@@ -1,58 +1,16 @@
 <template>
   <div id="news">
-    <PageHeader>News</PageHeader>
-
-    <router-link to="/admin/create-news-post" v-if="isAdmin"
-      ><button class="create-news-post-button">Create news post</button>
-    </router-link>
-    <button v-if="isAdmin" @click="copyNewsPostsAsJSONToClipboard()" class="copy-news-posts-as-json-button">
-      Copy news posts as JSON
-    </button>
-
     <div class="options">
-      <div class="top-container">
-        <div class="collapse-expand-container">
-          <button @click="collapseAll">Collapse all</button>
-          <button @click="expandAll">Expand all</button>
-        </div>
+      <div v-if="isAdmin" class="admin-tools">
+        <button @click="push('/admin/create-news-post')" class="create-news-post-button">Create news post</button>
+        <button @click="copyNewsPostsAsJSONToClipboard()" class="copy-news-posts-as-json-button">
+          Copy news posts as JSON
+        </button>
+      </div>
 
-        <div class="year-selection-container">
-          <div class="all-years-checkbox-container">
-            <input
-              type="checkbox"
-              checked
-              @click="
-                allowedYears = ($event.target.checked ? getYearsFrom2019ToNow() : []).sort();
-                handleAllYearsCheckBoxCheck($event.target.checked);
-                filterNewsPostsByYear();
-              "
-              name="allYears"
-              id="allYears"
-              ref="allYearsCheckbox"
-            />
-            <label for="allYears">All</label>
-          </div>
-
-          <div v-for="index in new Date().getFullYear() - 2019 + 1" :key="index" class="checkbox-container">
-            <input
-              type="checkbox"
-              checked
-              @change="
-                allowedYears = allowedYears.sort();
-                allowedYears.includes(2019 + index - 1)
-                  ? allowedYears.splice(allowedYears.indexOf(2019 + index - 1), 1)
-                  : allowedYears.push(2019 + index - 1);
-                allowedYears = allowedYears.sort();
-                handleYearCheckBoxCheck();
-                filterNewsPostsByYear();
-              "
-              :name="`year${2019 + index - 1}`"
-              :id="`year${2019 + index - 1}`"
-              class="year-checkbox"
-            />
-            <label :for="`year${2019 + index - 1}`">{{ 2019 + index - 1 }}</label>
-          </div>
-        </div>
+      <div class="collapse-expand-container">
+        <button @click="collapseAll">Collapse all</button>
+        <button @click="expandAll">Expand all</button>
       </div>
 
       <NewsSearch
@@ -61,16 +19,57 @@
         :isCaseSensitive="false"
         placeholderText="Search news"
       />
+
+      <div class="year-selection-container">
+        <div class="all-years-checkbox-container">
+          <input
+            type="checkbox"
+            checked
+            @click="
+              allowedYears = ($event.target.checked ? getYearsFrom2019ToNow() : []).sort();
+              handleAllYearsCheckBoxCheck($event.target.checked);
+              filterNewsPostsByYear();
+            "
+            name="allYears"
+            id="allYears"
+            ref="allYearsCheckbox"
+          />
+          <label for="allYears">All</label>
+        </div>
+
+        <div v-for="index in new Date().getFullYear() - 2019 + 1" :key="index" class="checkbox-container">
+          <input
+            type="checkbox"
+            checked
+            @change="
+              allowedYears = allowedYears.sort();
+              allowedYears.includes(2019 + index - 1)
+                ? allowedYears.splice(allowedYears.indexOf(2019 + index - 1), 1)
+                : allowedYears.push(2019 + index - 1);
+              allowedYears = allowedYears.sort();
+              handleYearCheckBoxCheck();
+              filterNewsPostsByYear();
+            "
+            :name="`year${2019 + index - 1}`"
+            :id="`year${2019 + index - 1}`"
+            class="year-checkbox"
+          />
+          <label :for="`year${2019 + index - 1}`">{{ 2019 + index - 1 }}</label>
+        </div>
+      </div>
     </div>
 
-    <div class="news-posts-container">
-      <NewsPostComponent
-        v-for="newsPost in filteredNews"
-        :key="newsPost.id"
-        :newsPost="newsPost"
-        :canCollapse="true"
-        :areAllCollapsed="areAllPostsCollapsed"
-      />
+    <div class="content">
+      <PageHeader :style="{ paddingTop: 0 }">News</PageHeader>
+      <div class="news-posts-container">
+        <NewsPostComponent
+          v-for="newsPost in filteredNews"
+          :key="newsPost.id"
+          :newsPost="newsPost"
+          :canCollapse="true"
+          :areAllCollapsed="areAllPostsCollapsed"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -85,6 +84,7 @@ import NewsPostComponent from '@/components/news/NewsPost.vue';
 
 import { getNewsPosts } from './admin/actions/getNewsPosts';
 import { NewsPost } from '@/interfaces/NewsPost';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   name: 'News',
@@ -103,6 +103,8 @@ export default defineComponent({
     const isAdmin: boolean = useStore().state.isAdmin;
 
     const allYearsCheckbox = ref<HTMLInputElement>(null!);
+
+    const { push } = useRouter();
 
     function getYearsFrom2019ToNow(): number[] {
       const currentYear = new Date().getFullYear();
@@ -188,7 +190,8 @@ export default defineComponent({
       handleAllYearsCheckBoxCheck,
       filterNewsPostsBySearch,
       filterNewsPostsByYear,
-      copyNewsPostsAsJSONToClipboard
+      copyNewsPostsAsJSONToClipboard,
+      push
     };
   }
 });
@@ -205,96 +208,107 @@ a {
 }
 
 #news {
-  .create-news-post-button,
-  .copy-news-posts-as-json-button {
-    padding: 10px;
-    margin-bottom: 20px;
-    border: none;
-    border-radius: var(--border-radius);
-    opacity: none;
-    color: white;
-    background-color: var(--color-primary);
-    transition: 0.4s;
-    &:hover {
-      border-radius: 10px;
-    }
-  }
-
-  .create-news-post-button {
-    margin-right: 10px;
-  }
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: absolute;
+  top: 68px;
+  right: 0;
+  bottom: 0;
+  left: 0;
 
   .options {
-    width: 70%;
+    width: 15vw;
     padding: 30px;
+    margin: 15px;
     border-radius: var(--border-radius);
     text-align: left;
-    background-color: var(--color-primary);
-    margin: auto;
+    background-color: var(--color-primary-tint);
+    z-index: 1;
 
-    .top-container {
+    .admin-tools,
+    .collapse-expand-container {
+      width: 100%;
       display: flex;
-      padding-bottom: 15px;
+      margin-bottom: 15px;
 
-      .collapse-expand-container {
-        width: 50%;
-        margin-right: 15px;
+      button {
+        background-color: var(--color-light);
+        color: var(--color-light-contrast);
+        width: 100%;
+        padding: 10px;
+        border: 3px solid var(--color-light);
+        outline: none;
+        border-radius: var(--border-radius);
+        transition: 0.4s;
+        &:hover {
+          border: 3px solid var(--color-light-contrast);
+        }
+        &:first-child {
+          margin-right: 15px;
+        }
+      }
+    }
+
+    .year-selection-container {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      margin-top: 15px;
+
+      div {
         display: flex;
-        flex-direction: column;
         align-items: center;
-
-        button {
-          background-color: var(--color-light);
-          color: var(--color-light-contrast);
-          width: 100%;
-          padding: 10px 0 10px 0;
-          border: none;
-          outline: none;
-          margin-top: 10px;
-          border-radius: var(--border-radius);
-          transition: 0.4s;
-          &:hover {
-            padding: 15px;
-          }
-          &:first-child {
-            margin: 0;
-          }
+        margin-bottom: 10px;
+        &:last-child {
+          margin-bottom: 0;
         }
       }
 
-      .year-selection-container {
-        width: 50%;
-        margin-left: 15px;
-        display: flex;
-        flex-direction: column;
+      input {
+        margin-right: 10px;
+      }
 
-        div {
-          display: flex;
-          align-items: center;
-          margin-bottom: 10px;
-          &:last-child {
-            margin-bottom: 0;
-          }
-        }
+      label {
+        display: inline;
+      }
 
-        input {
-          margin-right: 10px;
-        }
-
-        label {
-          display: inline;
-        }
-
-        .checkbox-container {
-          padding-left: 15px;
-        }
+      .checkbox-container {
+        padding-left: 15px;
       }
     }
   }
 
-  .news-posts-container {
-    display: flex;
-    flex-direction: column-reverse;
+  .content {
+    width: 85vw;
+    margin: 15px;
+    overflow: auto;
+
+    .news-posts-container {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+  #news {
+    flex-direction: column;
+    position: static;
+    padding-top: 68px;
+    width: 90%;
+    margin: auto;
+
+    .options {
+      width: 80%;
+      max-width: 50em;
+      margin: 15px auto;
+    }
+
+    .content {
+      width: 100%;
+      margin: 15px auto;
+    }
   }
 }
 </style>

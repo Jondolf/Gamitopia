@@ -92,6 +92,10 @@ export default defineComponent({
     background-color: transparent;
     border: none;
     font-size: 18px;
+    &::placeholder {
+      color: white;
+      opacity: 0.8;
+    }
   }
 }
 </style>

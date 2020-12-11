@@ -204,7 +204,8 @@ export default defineComponent({
 
 <style lang="scss">
 .news-post {
-  width: 70%;
+  width: 80%;
+  max-width: 50em;
   background-color: var(--color-primary);
   color: white;
   margin: 20px auto;

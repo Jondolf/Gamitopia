@@ -2,7 +2,6 @@
   <div id="app">
     <Nav />
     <router-view />
-    <Footer />
   </div>
 </template>
 
@@ -11,14 +10,12 @@ import * as FastClick from 'fastclick';
 import { defineComponent, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import Nav from '@/components/Nav.vue';
-import Footer from '@/components/Footer.vue';
 
 export default defineComponent({
   name: 'App',
 
   components: {
-    Nav,
-    Footer
+    Nav
   },
 
   setup() {
@@ -42,6 +39,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  width: 100%;
+  min-height: 100vh;
 }
 </style>
