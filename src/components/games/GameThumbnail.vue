@@ -37,14 +37,13 @@ export default defineComponent({
   align-items: center;
   color: white;
   transition: 1s;
-  padding: 0 0.75vw 0.25vw 0.75vw;
+  padding: 0 0.75vw;
 
   a {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    margin-bottom: 5px;
     border-radius: var(--border-radius);
   }
 
@@ -81,31 +80,28 @@ export default defineComponent({
 
   span,
   time {
-    margin: auto 0.5vw;
+    margin: auto;
     display: block;
   }
 
+  span {
+    font-size: 18px;
+    line-height: 36px;
+  }
+
   time {
-    font-size: 12px;
+    font-size: 16px;
+    line-height: 32px;
   }
 }
 
 @media only screen and (max-width: 2325px) {
   .game-thumbnail {
     margin: 2vw;
-    padding: 0 1vw 0.75vw 1vw;
+    padding: 0 1vw;
 
     img {
       width: 17vw;
-    }
-
-    span {
-      font-size: 14px;
-    }
-
-    time {
-      font-size: 12px;
-      margin: auto 1.5vw;
     }
   }
 }
@@ -113,19 +109,10 @@ export default defineComponent({
 @media only screen and (max-width: 1775px) {
   .game-thumbnail {
     margin: 3.5vw;
-    padding: 0 1.5vw 1vw 1.5vw;
+    padding: 0 1.5vw;
 
     img {
       width: 22vw;
-    }
-
-    span {
-      font-size: 14px;
-    }
-
-    time {
-      font-size: 12px;
-      margin: auto 1.5vw;
     }
   }
 }
@@ -133,19 +120,10 @@ export default defineComponent({
 @media only screen and (max-width: 700px) {
   .game-thumbnail {
     margin: 3vw;
-    padding: 0 1.5vw 1.25vw 1.5vw;
+    padding: 0 1.5vw;
 
     img {
       width: 36vw;
-    }
-
-    span {
-      font-size: 16px;
-    }
-
-    time {
-      font-size: 12px;
-      margin: auto 1.5vw;
     }
   }
 }
@@ -153,18 +131,10 @@ export default defineComponent({
 @media only screen and (max-width: 500px) {
   .game-thumbnail {
     margin: 2.5vw;
-    padding: 0 2vw 1.5vw 2vw;
+    padding: 0 2vw;
 
     img {
       width: 58vw;
-    }
-
-    span {
-      font-size: 18px;
-    }
-
-    time {
-      font-size: 12px;
     }
   }
 }
