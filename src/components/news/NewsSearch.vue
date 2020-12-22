@@ -7,7 +7,7 @@
     <input
       @input="handleFilterNews($event.target.value)"
       @keyup.enter="$event.target.blur()"
-      :value="searchText"
+      :value="searchTerm"
       :placeholder="placeholderText"
       type="search"
       id="searchBar"
@@ -16,14 +16,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { NewsPost } from '@/interfaces/NewsPost';
+import { useSearch } from '@/composables/useSearch';
 
 export default defineComponent({
   name: 'NewsSearch',
 
   props: {
-    newsPosts: Array as () => NewsPost[],
+    newsPosts: {
+      type: Array as () => NewsPost[],
+      required: true
+    },
     isCaseSensitive: {
       type: Boolean,
       default: false
@@ -32,31 +36,20 @@ export default defineComponent({
   },
 
   setup(props, { emit }) {
-    const searchText = ref('');
-    const filteredNewsPosts = ref<NewsPost[]>([]);
+    const postTitles = computed<string[]>(() => props.newsPosts.map((post) => post.title));
+    const { searchTerm, availableItems } = useSearch(postTitles);
+
+    const filteredNewsPosts = computed<NewsPost[]>(() =>
+      props.newsPosts.filter((post) => availableItems.value.includes(post.title))
+    );
 
     function handleFilterNews(newSearchText: string) {
-      searchText.value = newSearchText;
-      filterNews();
+      searchTerm.value = newSearchText;
       emit('filter-news', filteredNewsPosts.value);
     }
 
-    function filterNews() {
-      if (props.newsPosts) {
-        if (searchText.value === '') {
-          filteredNewsPosts.value = props.newsPosts;
-          return;
-        }
-        filteredNewsPosts.value = props.newsPosts.filter((newsPost: NewsPost) =>
-          props.isCaseSensitive
-            ? newsPost.title.includes(searchText.value)
-            : newsPost.title.toLowerCase().includes(searchText.value.toLowerCase())
-        );
-      }
-    }
-
     return {
-      searchText,
+      searchTerm,
       handleFilterNews
     };
   }
