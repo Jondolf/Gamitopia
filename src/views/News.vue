@@ -140,7 +140,6 @@ export default defineComponent({
     }
 
     function filterNewsPostsBySearch(filteredNewsPosts: NewsPost[]) {
-      console.log(filteredNewsPosts);
       filteredNews.value = filteredNewsPosts;
       filterNewsPostsByYear();
     }
