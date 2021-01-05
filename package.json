@@ -16,7 +16,7 @@
     "@types/highlight.js": "^9.12.4",
     "@types/markdown-it": "^10.0.1",
     "@types/sanitize-html": "^1.27.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "decimal.js": "^10.2.0",
     "fastclick": "^1.0.6",
