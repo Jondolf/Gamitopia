@@ -1,11 +1,11 @@
 import { ref } from 'vue';
 
 export default function useGodotLoader() {
-  const canvas = ref<HTMLCanvasElement>(null!)
-  const statusProgress = ref<HTMLDivElement>(null!)
-  const statusProgressInner = ref<HTMLDivElement>(null!)
-  const statusIndeterminate = ref<HTMLDivElement>(null!)
-  const statusNotice = ref<HTMLDivElement>(null!)
+  const canvas = ref<HTMLCanvasElement>(null!);
+  const statusProgress = ref<HTMLDivElement>(null!);
+  const statusProgressInner = ref<HTMLDivElement>(null!);
+  const statusIndeterminate = ref<HTMLDivElement>(null!);
+  const statusNotice = ref<HTMLDivElement>(null!);
 
   function loadGame(buildUrl: string, fileName: string) {
     const script = document.createElement('script');
@@ -64,7 +64,7 @@ export default function useGodotLoader() {
             throw new Error('Invalid status mode');
         }
         statusMode = mode;
-      }
+      };
 
       function animateStatusIndeterminate(ms: number) {
         const i = Math.floor(ms / INDETERMINATE_STATUS_STEP_MS % 8);
@@ -85,7 +85,7 @@ export default function useGodotLoader() {
           statusNotice.value.appendChild(document.createTextNode(line));
           statusNotice.value.appendChild(document.createElement('br'));
         });
-      }
+      };
 
       engine.setProgressFunc((current: number, total: number) => {
         if (total > 0) {
@@ -100,7 +100,7 @@ export default function useGodotLoader() {
         } else {
           setStatusMode('indeterminate');
         }
-      })
+      });
 
       function displayFailureNotice(err: any) {
         const msg = err.message || err;
@@ -114,14 +114,13 @@ export default function useGodotLoader() {
         displayFailureNotice('WebGL not available');
       } else {
         setStatusMode('indeterminate');
-        console.log(canvas.value);
         engine.setCanvas(canvas.value);
         engine.startGame(`${buildUrl}/${fileName}`, `${buildUrl}/${fileName}.pck`).then(() => {
           setStatusMode('hidden');
           initializing = false;
         }, displayFailureNotice);
       }
-    }
+    };
     document.body.appendChild(script);
   }
 
@@ -132,5 +131,5 @@ export default function useGodotLoader() {
     statusIndeterminate,
     statusNotice,
     loadGame
-  }
+  };
 }
