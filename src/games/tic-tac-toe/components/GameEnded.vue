@@ -1,6 +1,6 @@
 <template>
-  <div class="tic-tac-toe-victory-screen">
-    <h2>{{ gameEndMessage }}</h2>
+  <div class="game-ended">
+    <h2>{{ msg }}</h2>
     <button @click="$emit('restart')">Restart</button>
   </div>
 </template>
@@ -9,16 +9,16 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'TicTacToeVictoryScreen',
+  name: 'GameEnded',
 
   props: {
-    gameEndMessage: String
+    msg: String
   }
 });
 </script>
 
 <style lang="scss" scoped>
-.tic-tac-toe-victory-screen {
+.game-ended {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -50,7 +50,7 @@ export default defineComponent({
 }
 
 @media only screen and (max-width: 650px) {
-  .tic-tac-toe-victory-screen {
+  .game-ended {
     h2 {
       font-size: 14px;
     }
@@ -64,7 +64,7 @@ export default defineComponent({
 }
 
 @media only screen and (max-width: 600px) {
-  .tic-tac-toe-victory-screen {
+  .game-ended {
     h2 {
       font-size: 20px;
     }
@@ -78,7 +78,7 @@ export default defineComponent({
 }
 
 @media only screen and (max-width: 400px) {
-  .tic-tac-toe-victory-screen {
+  .game-ended {
     h2 {
       font-size: 16px;
     }

@@ -23,8 +23,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Grid from './Grid.vue';
-import StartMenu from './StartMenu.vue';
+import Grid from './components/Grid.vue';
+import StartMenu from './components/StartMenu.vue';
+
 export default defineComponent({
   name: 'TicTacToeGame',
 
