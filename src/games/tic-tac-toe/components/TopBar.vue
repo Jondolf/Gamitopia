@@ -1,7 +1,7 @@
 <template>
   <div class="top-bar">
-    <button @click="openStartMenu">Open Menu</button>
-    <button @click="onClickButton">Restart</button>
+    <button @click="$emit('go-back')">Open Menu</button>
+    <button @click="$emit('restart')">Restart</button>
   </div>
 </template>
 
@@ -9,74 +9,34 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'TopBar',
-
-  methods: {
-    onClickButton() {
-      this.$emit('clicked');
-    },
-
-    openStartMenu() {
-      this.$emit('start-menu-btn-clicked');
-    }
-  }
+  name: 'TopBar'
 });
 </script>
 
 <style lang="scss" scoped>
 .top-bar {
   width: 100%;
-  height: 10vw;
-  border-bottom: 2px solid black;
-  background-color: white;
+  height: 75px;
+  margin: 0;
+  border-bottom: 2px solid var(--color-light-contrast);
+  background-color: rgba(75, 75, 200, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 
   button {
     width: 50%;
     height: 100%;
-    background-color: rgba(34, 40, 49, 0.5);
-    color: white;
-    font-size: 3vw;
     outline: none;
     border: none;
+    border-radius: 0;
     font-family: Nunito;
-    background-color: rgba(34, 40, 49, 0.5);
-    transition: 0.4s;
-    &:hover {
-      background-color: rgb(91, 97, 112);
-    }
-  }
-}
-
-.dark .top-bar {
-  background-color: black;
-  border-bottom: 2px solid white;
-
-  button {
-    background-color: rgb(36, 41, 49);
-    &:hover {
-      background-color: rgb(50, 57, 68);
-    }
-  }
-}
-
-@media only screen and (min-width: 600px) {
-  .top-bar {
-    height: 6vw;
-    button {
-      font-size: 2vw;
-    }
-  }
-}
-
-@media only screen and (min-width: 1100px) {
-  .top-bar {
-    height: 4vw;
-    button {
-      font-size: 1.5vw;
-    }
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-light-contrast);
+    background-color: transparent;
+    transition: 0.3s;
   }
 }
 </style>

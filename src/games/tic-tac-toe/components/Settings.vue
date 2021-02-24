@@ -1,7 +1,7 @@
 <template>
-  <div class="settings">
+  <div class="view settings">
     <h2>Settings</h2>
-    <button @click="this.toggleSettingsVisibility">
+    <button @click="$emit('go-back')" class="menu-button">
       Back To Home Menu
     </button>
     <div class="grid-size-setting-container">
@@ -10,23 +10,21 @@
           type="range"
           max="10"
           min="1"
-          @input="setGridSize"
+          @input="(e) => $emit('set-grid-width', +e.target.value)"
           :value="gridWidthProp"
-          ref="gridWidthInput"
-          class="grid-width-input"
+          class="grid-width-input range"
         />
         <p>Width</p>
       </div>
-      <p>{{ numberToDisplay }}</p>
+      <p class="grid-size">{{ gridWidthProp }}x{{ gridHeightProp }}</p>
       <div class="size-input">
         <input
           type="range"
           max="10"
           min="1"
-          @input="setGridSize"
+          @input="(e) => $emit('set-grid-height', +e.target.value)"
           :value="gridHeightProp"
-          ref="gridHeightInput"
-          class="grid-height-input"
+          class="grid-height-input range"
         />
         <p>Height</p>
       </div>
@@ -35,12 +33,21 @@
       type="range"
       max="10"
       min="1"
-      @input="setRowNeededToWin"
-      :value="this.symbolsNeededInARow"
-      ref="rowToWinInput"
-      class="row-to-win-input"
+      @input="(e) => $emit('set-target-symbol-row-length', +e.target.value)"
+      :value="targetSymbolRowLength"
+      class="target-symbol-row-length-input range"
     />
-    <p class="numbers-needed-in-a-row-to-win">{{ numbersNeededInARowToWin }}</p>
+    <p class="target-symbol-row-length">Crosses or noughts needed in a row to win: {{ targetSymbolRowLength }}</p>
+    <div class="ai-starts">
+      <label for="aiStarts">AI starts</label>
+      <input
+        type="checkbox"
+        @input="(e) => $emit('set-ai-starts', e.target.checked)"
+        :checked="aiStarts"
+        class="checkbox"
+        id="aiStarts"
+      />
+    </div>
     <button @click="$emit('toggle-fullscreen')" class="toggle-fullscreen-button">
       Toggle fullscreen
     </button>
@@ -54,88 +61,23 @@ export default defineComponent({
   name: 'StartMenu',
 
   props: {
-    symbolsNeededInARow: Number,
     gridWidthProp: Number,
-    gridHeightProp: Number
-  },
-
-  data() {
-    return {
-      gridWidthInput: this.$refs.gridWidthInput as HTMLInputElement,
-      gridHeightInput: this.$refs.gridHeightInput as HTMLInputElement,
-      settingsVisibility: true,
-      numberToDisplay: '3',
-      gridWidth: '3',
-      gridHeight: '3',
-      numbersNeededInARowToWin: 'Numbers in a row required to win: '
-    };
-  },
-
-  methods: {
-    toggleSettingsVisibility() {
-      this.$emit('open-settings-btn-clicked');
-    },
-
-    setGridWidth(width: number) {
-      this.$emit('grid-width-changed', width);
-    },
-
-    setGridHeight(height: number) {
-      this.$emit('grid-height-changed', height);
-    },
-
-    displayNum() {
-      this.numberToDisplay = this.gridWidth.toString() + 'x' + this.gridHeight.toString();
-    },
-
-    setGridSize() {
-      const gridWidthInput = this.$refs.gridWidthInput as HTMLInputElement;
-      const gridHeightInput = this.$refs.gridHeightInput as HTMLInputElement;
-      this.gridWidth = gridWidthInput.value;
-      this.gridHeight = gridHeightInput.value;
-      this.setGridWidth(+this.gridWidth);
-      this.setGridHeight(+this.gridHeight);
-      this.displayNum();
-    },
-
-    setRowNeededToWin() {
-      const rowToWinInput = this.$refs.rowToWinInput as HTMLInputElement;
-      this.numbersNeededInARowToWin = 'Numbers needed in a row required to win: ' + rowToWinInput.value;
-      this.$emit('row-to-win-changed', rowToWinInput.value);
-    }
-  },
-
-  mounted() {
-    this.setGridSize();
-    this.setRowNeededToWin();
+    gridHeightProp: Number,
+    targetSymbolRowLength: Number,
+    aiStarts: Boolean
   }
 });
 </script>
 
 <style lang="scss" scoped>
-.settings {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  overflow: auto;
-  box-sizing: border-box;
-  background-color: white;
-  color: black;
+.view.settings {
+  display: block;
 
-  h2 {
-    margin: 15px 0;
-  }
-
-  p {
-    color: black;
-  }
-
-  input {
+  input.range {
     -webkit-appearance: none;
     appearance: none;
     width: 33%;
+    max-width: 550px;
     height: 8px;
     background: #d3d3d3;
     outline: none;
@@ -148,7 +90,7 @@ export default defineComponent({
     }
   }
 
-  input::-webkit-slider-thumb {
+  input.range::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
     width: 18px;
@@ -159,7 +101,7 @@ export default defineComponent({
     border: none;
   }
 
-  input::-moz-range-thumb {
+  input.range::-moz-range-thumb {
     width: 18px;
     height: 18px;
     background: rgb(95, 95, 255);
@@ -168,52 +110,44 @@ export default defineComponent({
     border: none;
   }
 
-  button {
-    width: 100%;
-    height: 20%;
-    color: white;
-    font-size: 16px;
-    outline: none;
-    border: 1px solid black;
-    border-left: none;
-    border-right: none;
-    background-color: rgba(34, 40, 49, 0.5);
-    transition: 0.4s;
-    &:hover {
-      background-color: rgb(91, 97, 112);
-    }
-  }
-
   .grid-size-setting-container {
     display: flex;
     justify-content: space-between;
     padding: 5%;
 
-    h3 {
-      border: 1px solid;
-      padding: 5px;
-      margin-bottom: 15px;
-      font-size: 3vw;
-    }
-
-    button {
-      border: 1px solid;
-      margin: 5px;
-      padding: 5px;
-    }
-
     .size-input {
-      margin: 0 10px 0 10px;
+      width: 100%;
+      padding: 0 15px 0 15px;
 
       .grid-width-input,
       .grid-height-input {
         width: 100%;
       }
     }
+
+    .grid-size {
+      min-width: 50px;
+    }
   }
 
-  .numbers-needed-in-a-row-to-win {
+  .target-symbol-row-length-input.range {
+    width: 100%;
+  }
+
+  .target-symbol-row-length {
     font-size: 13px;
+  }
+
+  .ai-starts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+
+    label {
+      margin-right: 10px;
+      color: var(--color-light-contrast);
+    }
   }
 
   .toggle-fullscreen-button {
@@ -224,27 +158,10 @@ export default defineComponent({
     border: 2px solid var(--color-light-contrast);
     border-radius: var(--border-radius);
     color: var(--color-light-contrast);
+    font-weight: normal;
     margin-top: 5%;
     &:hover {
       background-color: transparent;
-    }
-  }
-}
-
-.dark .settings {
-  background-color: black;
-  color: white;
-
-  p {
-    color: white;
-  }
-
-  button {
-    background-color: rgb(36, 41, 49);
-    color: white;
-    border-color: white;
-    &:hover {
-      background-color: rgb(50, 57, 68);
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
-  <div class="instructions">
+  <div class="view instructions">
     <h2>Instructions</h2>
-    <button @click="toggleInstructionsVisibility">
+    <button @click="$emit('go-back')" class="menu-button">
       Back To Home Menu
     </button>
     <p>
@@ -21,88 +21,16 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'Instructions',
-
-  methods: {
-    toggleInstructionsVisibility() {
-      this.$emit('toggle-instructions-btn-clicked');
-    }
-  }
+  name: 'Instructions'
 });
 </script>
 
 <style lang="scss" scoped>
 .instructions {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  z-index: 2;
-  overflow: auto;
-
-  h2 {
-    margin: 15px 0;
-  }
-
-  p,
-  h3 {
-    color: black;
-  }
-
-  button {
-    width: 100%;
-    height: 20%;
-    color: white;
-    font-size: 16px;
-    outline: none;
-    border: 1px solid black;
-    border-left: none;
-    border-right: none;
-    transition: 0.4s;
-    background-color: rgb(144, 147, 152);
-    &:hover {
-      background-color: rgb(91, 97, 112);
-    }
-  }
-
   p {
-    padding: 0.6vw;
     text-align: left;
-    font-size: 1vw;
-  }
-}
-
-.dark.default-dark .instructions {
-  background-color: black;
-  p,
-  h3 {
-    color: white;
-  }
-
-  h2 {
-    background-color: black;
-  }
-
-  button {
-    background-color: rgb(36, 41, 49);
-    color: white;
-    border-color: white;
-    &:hover {
-      background-color: rgb(50, 57, 68);
-    }
-  }
-}
-
-@media only screen and (max-width: 1100px) {
-  .instructions p {
-    font-size: 1.4vw;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .instructions p {
-    font-size: 2vw;
+    width: 90%;
+    max-width: 50em;
   }
 }
 </style>

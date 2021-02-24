@@ -20,8 +20,9 @@ export default defineComponent({
 <style lang="scss" scoped>
 .game-ended {
   position: absolute;
+  top: 0;
+  bottom: 0;
   width: 100%;
-  height: 100%;
   background-color: rgba(34, 40, 49, 0.5);
   display: flex;
   flex-direction: column;
@@ -30,6 +31,9 @@ export default defineComponent({
 
   h2 {
     color: white;
+    background-color: transparent;
+    border: none;
+    padding: 0;
     margin: 0 auto 20px auto;
   }
 

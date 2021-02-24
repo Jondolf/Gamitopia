@@ -16,7 +16,15 @@ export function useGrid() {
     }
   }
 
+  function emptyGrid() {
+    for (let i = 0; i < grid.value.length; i++) {
+      for (let j = 0; j < grid.value[0].length; j++) {
+        grid.value[i][j] = '';
+      }
+    }
+  }
+
   return {
-    grid, gridElement, addSymbol
+    grid, gridElement, addSymbol, emptyGrid
   };
 }
