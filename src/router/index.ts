@@ -56,7 +56,7 @@ const routes: Array<RouteRecordRaw> = [
     beforeEnter: async (to, from, next) => {
       const newsPost = await getNewsPost(to.params.id.toString());
       document.title = `${newsPost.title} | Gamitopia`;
-      document.querySelector('head meta[name=description]')?.setAttribute('content', newsPost.bodyAsHTML.replace(/(<([^>]+)>)/gi, "").replace(/\r?\n|\r/g, ' ').slice(0, 50) + '...')
+      document.querySelector('head meta[name=description]')?.setAttribute('content', newsPost.bodyAsHTML.replace(/(<([^>]+)>)/gi, "").replace(/\r?\n|\r/g, ' ').slice(0, 50) + '...');
       next();
     }
   },
@@ -91,21 +91,21 @@ router.beforeEach((to, from, next) => {
   const nearestWithMetaDescription = to.matched.slice().reverse().find(r => r.meta && r.meta.metaTags);
 
   if (nearestWithTitle) {
-    document.title = nearestWithTitle.meta.title;
+    document.title = nearestWithTitle.meta.title as string;
   } else {
     document.title = 'Gamitopia';
   }
 
   if (!nearestWithMetaDescription) {
-    return next()
+    return next();
   };
 
-  nearestWithMetaDescription.meta.metaTags.map((metaTag: { name: string, content: string }) => {
+  (nearestWithMetaDescription.meta.metaTags as any[]).map((metaTag: { name: string, content: string; }) => {
     const descriptionElement = document.querySelector('head meta[name="description"]') as HTMLMetaElement;
     descriptionElement.setAttribute('content', metaTag.content);
-  })
+  });
 
   next();
-})
+});
 
 export default router;

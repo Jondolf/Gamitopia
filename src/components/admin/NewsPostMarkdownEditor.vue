@@ -39,7 +39,7 @@
 <script lang="ts">
 import { useCodeHighlighter } from '@/composables/useCodeHighlighter';
 import { defineComponent, onMounted, ref, watch } from 'vue';
-import * as sanitizeHtml from 'sanitize-html';
+import sanitizeHtml from 'sanitize-html';
 
 export default defineComponent({
   name: 'NewsPostMarkdownEditor',

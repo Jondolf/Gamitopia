@@ -1,6 +1,6 @@
 <template>
   <div id="individualNewsPostView">
-    <NewsPost v-if="newsPostFound" :newsPost="newsPost" :canCollapse="true" />
+    <NewsPostComp v-if="newsPostFound" :newsPost="newsPost" :canCollapse="true" />
 
     <div v-else class="not-found-container">
       <h1>Unfortunately this news post was not found.</h1>
@@ -12,15 +12,16 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import NewsPost from '@/components/news/NewsPost.vue';
+import NewsPostComp from '@/components/news/NewsPost.vue';
 import { formatDate } from '../admin/actions/formatDate';
 import { getNewsPost } from '../admin/actions/getNewsPost';
+import { NewsPost } from '@/interfaces/NewsPost';
 
 export default defineComponent({
   name: 'IndividualNewsPostView.vue',
 
   components: {
-    NewsPost
+    NewsPostComp
   },
 
   setup() {

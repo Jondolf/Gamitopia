@@ -10,8 +10,8 @@ export default defineComponent({
   name: 'SoundControlBtn',
 
   props: {
-    soundOnText: String,
-    soundOffText: String,
+    soundOnText: { type: String, required: true },
+    soundOffText: { type: String, required: true },
     soundOn: Boolean
   },
 

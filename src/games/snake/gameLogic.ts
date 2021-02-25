@@ -263,7 +263,7 @@ export class Game {
       this.timesMoved++;
       this.timer = setTimeout(() => {
         this.tick(canvas, ctx);
-      }, this.tickSpeed);
+      }, this.tickSpeed) as unknown as number; // Without this it threw an error during build
     }
   }
 
