@@ -1,23 +1,14 @@
+use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
 const PLAYER_SYMBOL: char = 'X';
 const AI_SYMBOL: char = 'O';
 
 #[wasm_bindgen]
+#[derive(Serialize, Deserialize)]
 pub struct Coord {
-    pub x: u32,
-    pub y: u32,
-}
-
-pub struct SymbolSequence {
-    pub symbol: String,
-    pub length: u32,
-}
-
-struct SequenceCounter {
-    counter: u32,
-    prev_symbol: String,
-    max_seq_length: u32,
+    pub x: i32,
+    pub y: i32,
 }
 
 #[wasm_bindgen]
@@ -30,13 +21,18 @@ pub enum GameState {
 }
 
 #[wasm_bindgen]
-pub fn find_best_move(grid: &JsValue, target_symbol_seq_length: u32) -> Coord {
-    let string_grid: Vec<Vec<String>> = grid.into_serde().unwrap();
-    get_best_move(string_grid, target_symbol_seq_length)
+pub fn find_best_move(grid: &JsValue, prev_move: &JsValue, target_symbol_seq_length: u32) -> Coord {
+    let grid: Vec<Vec<String>> = grid.into_serde().unwrap();
+    let prev_move: Coord = prev_move.into_serde().unwrap();
+    get_best_move(grid, prev_move, target_symbol_seq_length)
 }
 
 /// Gets the best move by calling `minimax` on all empty squares
-fn get_best_move(mut grid: Vec<Vec<String>>, target_symbol_seq_length: u32) -> Coord {
+fn get_best_move(
+    mut grid: Vec<Vec<String>>,
+    prev_move: Coord,
+    target_symbol_seq_length: u32,
+) -> Coord {
     let mut best_score = f64::NEG_INFINITY;
     let mut best_move = Coord { x: 0, y: 0 };
     for y in 0..grid.len() {
@@ -45,6 +41,7 @@ fn get_best_move(mut grid: Vec<Vec<String>>, target_symbol_seq_length: u32) -> C
                 grid[y][x] = String::from(AI_SYMBOL);
                 let score = minimax(
                     grid.clone(),
+                    &prev_move,
                     target_symbol_seq_length,
                     0,
                     5,
@@ -56,8 +53,8 @@ fn get_best_move(mut grid: Vec<Vec<String>>, target_symbol_seq_length: u32) -> C
                 if score > best_score {
                     best_score = score;
                     best_move = Coord {
-                        x: x as u32,
-                        y: y as u32,
+                        x: x as i32,
+                        y: y as i32,
                     };
                 }
             }
@@ -68,6 +65,7 @@ fn get_best_move(mut grid: Vec<Vec<String>>, target_symbol_seq_length: u32) -> C
 
 fn minimax(
     mut grid: Vec<Vec<String>>,
+    prev_move: &Coord,
     target_symbol_seq_length: u32,
     depth: u32,
     max_depth: u32,
@@ -75,7 +73,7 @@ fn minimax(
     mut beta: f64,
     is_maximizing: bool,
 ) -> f64 {
-    let result = check_game_state(&grid, target_symbol_seq_length);
+    let result = check_game_state(&grid, &prev_move, target_symbol_seq_length);
     if result != GameState::Resume || depth >= max_depth {
         match result {
             GameState::P1Won => -10.0,
@@ -91,6 +89,10 @@ fn minimax(
                     grid[y][x] = String::from(AI_SYMBOL);
                     let score = minimax(
                         grid.clone(),
+                        &Coord {
+                            x: x as i32,
+                            y: y as i32,
+                        },
                         target_symbol_seq_length,
                         depth + 1,
                         max_depth,
@@ -116,6 +118,10 @@ fn minimax(
                     grid[y][x] = String::from(PLAYER_SYMBOL);
                     let score = minimax(
                         grid.clone(),
+                        &Coord {
+                            x: x as i32,
+                            y: y as i32,
+                        },
                         target_symbol_seq_length,
                         depth + 1,
                         max_depth,
@@ -162,73 +168,147 @@ Siirto
 ///
 /// assert_eq!(check_game_state(grid, target_symbol_seq_length), GameState::P1Won);
 /// ```
-fn check_game_state(grid: &[Vec<String>], target_symbol_seq_length: u32) -> GameState {
-    let grid_width = grid[0].len();
-    let grid_height = grid.len();
-    let rows: Vec<Vec<String>> = generate_grid_from_vec(grid);
-    let mut columns: Vec<Vec<String>> = vec![];
-    let mut diagonal_rows: Vec<Vec<String>> = vec![];
-    let reversed_rows: Vec<Vec<String>> = rows.clone().into_iter().rev().collect();
-    let mut reversed_diagonal_rows: Vec<Vec<String>> = vec![];
-    // Columns
-    for x in 0..grid_width {
-        columns.push([].to_vec());
-        for row in &rows {
-            columns[x].push(row[x].to_string());
-        }
-    }
-    // Diagonal rows
-    for y in (-(grid_height as isize) + 1)..(grid_width as isize) {
-        let mut diagonal_row = vec![];
-        for x in 0..grid_height {
-            if (x as isize) + y >= 0 && y + (x as isize) < (grid_width as isize) {
-                diagonal_row.push(rows[x as usize][(y as usize) + (x as usize)].to_string());
-            }
-        }
-        diagonal_rows.push(diagonal_row);
-    }
-    // Reversed diagonal rows
-    for y in (-(grid_height as isize) + 1)..(grid_width as isize) {
-        let mut reversed_diagonal_row = vec![];
-        for x in 0..grid_height {
-            if (x as isize) + y >= 0 && y + (x as isize) < (grid_width as isize) {
-                reversed_diagonal_row
-                    .push(reversed_rows[x as usize][(y as usize) + (x as usize)].to_string());
-            }
-        }
-        reversed_diagonal_rows.push(reversed_diagonal_row);
-    }
-    let is_grid_full = !rows
+fn check_game_state(
+    grid: &[Vec<String>],
+    prev_move: &Coord,
+    target_symbol_seq_length: u32,
+) -> GameState {
+    let is_grid_full = !grid
         .iter()
         .any(|row| row.iter().any(|symbol| symbol == " "));
-    let symbol_arrays = vec![rows, columns, diagonal_rows, reversed_diagonal_rows].concat();
-    let symbol_sequences: Vec<SymbolSequence> = symbol_arrays
-        .into_iter()
-        .map(find_max_symbol_sequence)
-        .collect();
-    let longest_seq = symbol_sequences.into_iter().fold(
-        SymbolSequence {
-            symbol: String::from(' '),
-            length: 0,
-        },
-        |prev: SymbolSequence, curr: SymbolSequence| -> SymbolSequence {
-            if curr.length > prev.length && !curr.symbol.contains(' ') {
-                return curr;
-            }
-            prev
-        },
-    );
-    let game_won = longest_seq.length >= target_symbol_seq_length;
+    let game_won = row_has_sequence(grid, prev_move, target_symbol_seq_length)
+        || col_has_sequence(grid, prev_move, target_symbol_seq_length)
+        || diagonal_row_has_sequence(grid, prev_move, target_symbol_seq_length)
+        || reversed_diagonal_row_has_sequence(grid, prev_move, target_symbol_seq_length);
     if game_won {
-        if longest_seq.symbol == PLAYER_SYMBOL.to_string() {
+        if grid[prev_move.y as usize][prev_move.x as usize] == PLAYER_SYMBOL.to_string() {
             return GameState::P1Won;
-        } else if longest_seq.symbol == AI_SYMBOL.to_string() {
+        } else if grid[prev_move.y as usize][prev_move.x as usize] == AI_SYMBOL.to_string() {
             return GameState::P2Won;
         }
     } else if is_grid_full {
         return GameState::Tie;
     }
     GameState::Resume
+}
+
+fn row_has_sequence(
+    grid: &[Vec<String>],
+    prev_move: &Coord,
+    target_symbol_seq_length: u32,
+) -> bool {
+    let symbol = &grid[prev_move.y as usize][prev_move.x as usize];
+    if symbol == " " {
+        return false;
+    }
+    let mut counter: u32 = 0;
+    for x in (prev_move.x - (target_symbol_seq_length as i32) + 1)
+        ..(prev_move.x + (target_symbol_seq_length as i32))
+    {
+        if x >= (grid[0].len() as i32) {
+            break;
+        } else if x >= 0 {
+            if &grid[prev_move.y as usize][x as usize] == symbol {
+                counter += 1;
+                if counter >= target_symbol_seq_length {
+                    return true;
+                }
+            } else {
+                counter = 0;
+            }
+        }
+    }
+    false
+}
+
+fn col_has_sequence(
+    grid: &[Vec<String>],
+    prev_move: &Coord,
+    target_symbol_seq_length: u32,
+) -> bool {
+    let symbol = &grid[prev_move.y as usize][prev_move.x as usize];
+    if symbol == " " {
+        return false;
+    }
+    let mut counter: u32 = 0;
+    for y in (prev_move.y - (target_symbol_seq_length as i32) - 1)
+        ..(prev_move.y + (target_symbol_seq_length as i32))
+    {
+        if y >= (grid.len() as i32) {
+            break;
+        } else if y >= 0 {
+            if &grid[y as usize][prev_move.x as usize] == symbol {
+                counter += 1;
+                if counter >= target_symbol_seq_length {
+                    return true;
+                }
+            } else {
+                counter = 0;
+            }
+        }
+    }
+    false
+}
+
+fn diagonal_row_has_sequence(
+    grid: &[Vec<String>],
+    prev_move: &Coord,
+    target_symbol_seq_length: u32,
+) -> bool {
+    let symbol = &grid[prev_move.y as usize][prev_move.x as usize];
+    if symbol == " " {
+        return false;
+    }
+    let mut counter: u32 = 0;
+    for x in (prev_move.x - (target_symbol_seq_length as i32) + 1)
+        ..(prev_move.x + (target_symbol_seq_length as i32))
+    {
+        let y = x - prev_move.x + prev_move.y;
+        if x >= (grid[0].len() as i32) || y >= (grid.len() as i32) {
+            break;
+        } else if x >= 0 && y >= 0 {
+            if &grid[y as usize][x as usize] == symbol {
+                counter += 1;
+                if counter >= target_symbol_seq_length {
+                    return true;
+                }
+            } else {
+                counter = 0;
+            }
+        }
+    }
+    false
+}
+
+fn reversed_diagonal_row_has_sequence(
+    grid: &[Vec<String>],
+    prev_move: &Coord,
+    target_symbol_seq_length: u32,
+) -> bool {
+    let symbol = &grid[prev_move.y as usize][prev_move.x as usize];
+    if symbol == " " {
+        return false;
+    }
+    let mut counter: u32 = 0;
+    for x in (prev_move.x - (target_symbol_seq_length as i32) + 1)
+        ..(prev_move.x + (target_symbol_seq_length as i32))
+    {
+        let y = -x - prev_move.x + prev_move.y;
+        println!("{}, {}", x, y);
+        if x >= (grid[0].len() as i32) || y < 0 {
+            break;
+        } else if x >= 0 && y >= 0 {
+            if &grid[y as usize][x as usize] == symbol {
+                counter += 1;
+                if counter >= target_symbol_seq_length {
+                    return true;
+                }
+            } else {
+                counter = 0;
+            }
+        }
+    }
+    false
 }
 
 /// Checks the current state of the game.
@@ -247,50 +327,78 @@ fn check_game_state(grid: &[Vec<String>], target_symbol_seq_length: u32) -> Game
 /// console.log(check_game_state_js(grid, targetSymbolSeqLength)); // Returns P1Won
 /// ```
 #[wasm_bindgen]
-pub fn check_game_state_js(grid: &JsValue, target_symbol_seq_length: u32) -> GameState {
+pub fn check_game_state_js(
+    grid: &JsValue,
+    prev_move: &JsValue,
+    target_symbol_seq_length: u32,
+) -> GameState {
     let string_grid: Vec<Vec<String>> = grid.into_serde().unwrap();
-    check_game_state(&string_grid, target_symbol_seq_length)
+    let prev_move: Coord = prev_move.into_serde().unwrap();
+    check_game_state(&string_grid, &prev_move, target_symbol_seq_length)
 }
 
-fn find_max_symbol_sequence(symbols: Vec<String>) -> SymbolSequence {
-    let result = symbols.into_iter().fold(
-        SequenceCounter {
-            counter: 0,
-            prev_symbol: String::from(' '),
-            max_seq_length: 0,
-        },
-        |counter: SequenceCounter, curr_symbol: String| -> SequenceCounter {
-            let new_counter = if curr_symbol != " " && curr_symbol == counter.prev_symbol {
-                counter.counter + 1
-            } else {
-                1
-            };
-            let new_prev_symbol = if curr_symbol == " " {
-                counter.prev_symbol
-            } else {
-                curr_symbol
-            };
-            let new_max_seq_length = std::cmp::max(counter.max_seq_length, new_counter);
-            SequenceCounter {
-                counter: new_counter,
-                prev_symbol: new_prev_symbol,
-                max_seq_length: new_max_seq_length,
-            }
-        },
+#[test]
+fn get_row_works() {
+    let grid = vec![
+        vec![String::from(' '), String::from('X'), String::from(' ')],
+        vec![String::from('X'), String::from('X'), String::from('X')],
+        vec![String::from(' '), String::from('O'), String::from(' ')],
+    ];
+    assert_eq!(row_has_sequence(&grid, &Coord { x: 0, y: 0 }, 3), false);
+    assert_eq!(row_has_sequence(&grid, &Coord { x: 2, y: 1 }, 3), true);
+    assert_eq!(row_has_sequence(&grid, &Coord { x: 1, y: 2 }, 3), false);
+}
+
+#[test]
+fn col_has_sequence_works() {
+    let grid = vec![
+        vec![String::from('O'), String::from(' '), String::from(' ')],
+        vec![String::from('O'), String::from(' '), String::from('X')],
+        vec![String::from('O'), String::from(' '), String::from(' ')],
+    ];
+    assert_eq!(col_has_sequence(&grid, &Coord { x: 0, y: 0 }, 3), true);
+    assert_eq!(col_has_sequence(&grid, &Coord { x: 1, y: 1 }, 3), false);
+    assert_eq!(col_has_sequence(&grid, &Coord { x: 2, y: 2 }, 3), false);
+}
+
+#[test]
+fn diagonal_row_has_sequence_works() {
+    let grid = vec![
+        vec![String::from('X'), String::from(' '), String::from(' ')],
+        vec![String::from('O'), String::from('X'), String::from(' ')],
+        vec![String::from(' '), String::from(' '), String::from('X')],
+    ];
+    assert_eq!(
+        diagonal_row_has_sequence(&grid, &Coord { x: 0, y: 0 }, 3),
+        true
     );
-    SymbolSequence {
-        symbol: result.prev_symbol,
-        length: result.max_seq_length,
-    }
+    assert_eq!(
+        diagonal_row_has_sequence(&grid, &Coord { x: 1, y: 0 }, 3),
+        false
+    );
+    assert_eq!(
+        diagonal_row_has_sequence(&grid, &Coord { x: 0, y: 1 }, 3),
+        false
+    );
 }
 
-fn generate_grid_from_vec(grid: &[Vec<String>]) -> Vec<Vec<String>> {
-    let mut grid_mock = [].to_vec();
-    for y in 0..grid.len() {
-        grid_mock.push([].to_vec());
-        for x in 0..grid[0].len() {
-            grid_mock[y].push(grid[y][x].to_string());
-        }
-    }
-    grid_mock
+#[test]
+fn reversed_diagonal_row_has_sequence_works() {
+    let grid = vec![
+        vec![String::from(' '), String::from(' '), String::from('O')],
+        vec![String::from('X'), String::from('O'), String::from(' ')],
+        vec![String::from('O'), String::from(' '), String::from(' ')],
+    ];
+    assert_eq!(
+        reversed_diagonal_row_has_sequence(&grid, &Coord { x: 0, y: 1 }, 3),
+        false
+    );
+    assert_eq!(
+        reversed_diagonal_row_has_sequence(&grid, &Coord { x: 1, y: 0 }, 3),
+        false
+    );
+    assert_eq!(
+        reversed_diagonal_row_has_sequence(&grid, &Coord { x: 0, y: 2 }, 3),
+        true
+    );
 }

@@ -64,12 +64,15 @@ export default defineComponent({
 
     const { grid, gridElement, setGridSize, addSymbol, emptyGrid } = useGrid();
 
+    const previousMove = ref<Coord>({ x: 0, y: 0 });
+
     function toggleStartMenuVisibility() {
       emit('open-start-menu-btn-clicked');
     }
 
     function onClickSquare(coord: Coord) {
       if (grid.value[coord.y][coord.x] === ' ' && (turn.value === 1 || !props.againstAI)) {
+        previousMove.value = coord;
         addSymbol(turn.value === 1 ? 'X' : 'O', { x: coord.x, y: coord.y });
         setTimeout(() => {
           checkGameEnded();
@@ -84,7 +87,12 @@ export default defineComponent({
     }
 
     function playAITurn() {
-      const { x, y } = ai.find_best_move(cloneValue(grid.value), cloneValue(props.targetSymbolRowLength));
+      const { x, y } = ai.find_best_move(
+        cloneValue(grid.value),
+        cloneValue(previousMove.value),
+        cloneValue(props.targetSymbolRowLength)
+      );
+      previousMove.value = { x, y };
       addSymbol('O', { x, y });
       setTimeout(() => {
         checkGameEnded();
@@ -95,7 +103,18 @@ export default defineComponent({
     }
 
     function checkGameEnded() {
-      const result = ai.check_game_state_js(cloneValue(grid.value), cloneValue(props.targetSymbolRowLength));
+      setTimeout(() => {
+        ai.check_game_state_js(
+          cloneValue(grid.value),
+          cloneValue(previousMove.value),
+          cloneValue(props.targetSymbolRowLength)
+        );
+      }, 0);
+      const result = ai.check_game_state_js(
+        cloneValue(grid.value),
+        cloneValue(previousMove.value),
+        cloneValue(props.targetSymbolRowLength)
+      );
       switch (result) {
         case 1:
           gameEnded.value = true;

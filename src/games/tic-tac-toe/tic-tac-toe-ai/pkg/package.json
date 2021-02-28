@@ -1,0 +1,15 @@
+{
+  "name": "tic-tac-toe-ai",
+  "collaborators": [
+    "Gamitopia"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "tic_tac_toe_ai_bg.wasm",
+    "tic_tac_toe_ai.js",
+    "tic_tac_toe_ai.d.ts"
+  ],
+  "module": "tic_tac_toe_ai.js",
+  "types": "tic_tac_toe_ai.d.ts",
+  "sideEffects": false
+}
