@@ -1,7 +1,8 @@
+import { GameSymbol } from "../types/gameSymbol";
 import { Grid } from "../types/grid";
 import { Row } from "../types/row";
 
-export function checkGameState(turn: 1 | 2, grid: Grid, targetSymbolRowLength: number): '' | 'X' | 'O' | 'Tie' {
+export function checkGameState(grid: Grid, targetSymbolRowLength: number): GameSymbol | 'Tie' {
   const rows = grid;
   const reversedRows: Row[] = [...rows].reverse();
   const reversedDiagonalRows: Row[] = [];
@@ -27,7 +28,7 @@ export function checkGameState(turn: 1 | 2, grid: Grid, targetSymbolRowLength: n
     }
   }
 
-  // Set diagonalRows and reversedDiagonalRows
+  // Set reversedDiagonalRows
   for (let i = -rows.length + 1; i < columns.length; i++) {
     const diagonalRow: Row = [];
     reversedDiagonalRows.push(diagonalRow);
@@ -39,7 +40,7 @@ export function checkGameState(turn: 1 | 2, grid: Grid, targetSymbolRowLength: n
   }
 
   const symbolArrays = [...rows, ...columns, ...diagonalRows, ...reversedDiagonalRows];
-  const isGridFull = grid.filter((row) => row.filter((square) => square === '').length).length === 0;
+  const isGridFull = grid.filter((row) => row.filter((square) => square === ' ').length).length === 0;
   const symbolSequences: { symbol: string, length: number; }[] = symbolArrays.map(arr => findMaxSymbolSequence(arr));
   const longestSeq = symbolSequences.reduce((prev, curr) => {
     return curr.length > prev.length && curr.symbol !== '' ? curr : prev;
@@ -51,18 +52,18 @@ export function checkGameState(turn: 1 | 2, grid: Grid, targetSymbolRowLength: n
   } else if (isGridFull) {
     return 'Tie';
   } else {
-    return '';
+    return ' ';
   }
 
-  function findMaxSymbolSequence(symbols: string[]) {
-    const result: [number, string, number] = symbols.reduce(
-      ([counter, previousValue, maxSeqLength]: [number, string, number], currentSymbol: string) => {
-        const newCounter = currentSymbol && currentSymbol === previousValue ? counter + 1 : 1;
-        const newPreviousValue = currentSymbol === '' ? previousValue : currentSymbol;
+  function findMaxSymbolSequence(symbols: Row) {
+    const result: [number, GameSymbol, number] = symbols.reduce(
+      ([counter, previousValue, maxSeqLength]: [number, GameSymbol, number], currentSymbol: string) => {
+        const newCounter = currentSymbol !== ' ' && currentSymbol === previousValue ? counter + 1 : 1;
+        const newPreviousValue = currentSymbol === ' ' ? previousValue : currentSymbol;
         const newMaxSeqLength = Math.max(maxSeqLength, newCounter);
-        return [newCounter, newPreviousValue, newMaxSeqLength] as [number, string, number];
+        return [newCounter, newPreviousValue, newMaxSeqLength] as [number, GameSymbol, number];
       },
-      [0, '', 0]
+      [0, ' ', 0]
     );
     return {
       symbol: result[1],

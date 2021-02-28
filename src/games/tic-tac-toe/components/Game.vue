@@ -36,6 +36,7 @@ import { useGrid } from '../composables/useGrid';
 import { Coord } from '../types/coord';
 import { checkGameState } from '../helpers/checkGameState';
 import { findBestMove } from '../helpers/findBestMove';
+import * as ai from '../tic-tac-toe-ai/pkg/tic_tac_toe_ai';
 
 export default defineComponent({
   name: 'Game',
@@ -61,54 +62,50 @@ export default defineComponent({
     const gameEnded = ref(false);
     const gameEndMessage = ref('');
 
-    const { grid, gridElement, addSymbol, emptyGrid } = useGrid();
+    const { grid, gridElement, setGridSize, addSymbol, emptyGrid } = useGrid();
 
     function toggleStartMenuVisibility() {
       emit('open-start-menu-btn-clicked');
     }
 
     function onClickSquare(coord: Coord) {
-      if (grid.value[coord.y][coord.x] === '') {
+      if (grid.value[coord.y][coord.x] === ' ' && (turn.value === 1 || !props.againstAI)) {
         addSymbol(turn.value === 1 ? 'X' : 'O', { x: coord.x, y: coord.y });
-        checkGameEnded();
-        if (!gameEnded.value) {
-          changeTurn();
-          if (props.againstAI) {
-            setTimeout(() => {
+        setTimeout(() => {
+          checkGameEnded();
+          if (!gameEnded.value) {
+            changeTurn();
+            if (props.againstAI) {
               playAITurn();
-            }, 0);
+            }
           }
-        }
+        }, 0);
       }
     }
 
     function playAITurn() {
-      const move = findBestMove(
-        cloneValue(turn.value),
-        cloneValue(grid.value),
-        'X',
-        'O',
-        cloneValue(props.targetSymbolRowLength)
-      );
-      addSymbol('O', move);
-      checkGameEnded();
-      if (!gameEnded.value) {
-        changeTurn();
-      }
+      const { x, y } = ai.find_best_move(cloneValue(grid.value), cloneValue(props.targetSymbolRowLength));
+      addSymbol('O', { x, y });
+      setTimeout(() => {
+        checkGameEnded();
+        if (!gameEnded.value) {
+          changeTurn();
+        }
+      }, 0);
     }
 
     function checkGameEnded() {
-      const result = checkGameState(turn.value, grid.value, props.targetSymbolRowLength);
+      const result = ai.check_game_state_js(cloneValue(grid.value), cloneValue(props.targetSymbolRowLength));
       switch (result) {
-        case 'X':
+        case 1:
           gameEnded.value = true;
           gameEndMessage.value = 'Player With X Wins!';
           break;
-        case 'O':
+        case 2:
           gameEnded.value = true;
           gameEndMessage.value = 'Player With O Wins!';
           break;
-        case 'Tie':
+        case 3:
           gameEnded.value = true;
           gameEndMessage.value = 'Tie';
       }
@@ -130,19 +127,6 @@ export default defineComponent({
       } else {
         turn.value = 1;
       }
-    }
-
-    function setGridSize() {
-      grid.value = [];
-      for (let i = 0; i < props.gridHeight; i++) {
-        grid.value.push([]);
-        for (let j = 0; j < props.gridWidth; j++) {
-          grid.value[i].push('');
-        }
-      }
-      emptyGrid();
-      setSquareSize();
-      setFontSize();
     }
 
     function setSquareSize() {
@@ -171,14 +155,29 @@ export default defineComponent({
       return JSON.parse(JSON.stringify(value));
     }
 
-    watch(() => props.gridWidth, setGridSize);
-    watch(() => props.gridHeight, setGridSize);
-    watch(() => props.targetSymbolRowLength, setGridSize);
+    watch(
+      () => props.gridWidth,
+      () => {
+        setGridSize(props.gridWidth, props.gridHeight);
+        setSquareSize();
+        setFontSize();
+      }
+    );
+    watch(
+      () => props.gridHeight,
+      () => {
+        setGridSize(props.gridWidth, props.gridHeight);
+        setSquareSize();
+        setFontSize();
+      }
+    );
 
     onMounted(() => {
       window.addEventListener('resize', setSquareSize);
       window.addEventListener('resize', setFontSize);
-      setGridSize();
+      setGridSize(props.gridWidth, props.gridHeight);
+      setSquareSize();
+      setFontSize();
       if (props.againstAI && props.aiStarts) {
         turn.value = 2;
         setTimeout(() => {

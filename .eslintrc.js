@@ -13,6 +13,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020
   },
+  ignorePatterns: ['**/pkg/*'],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
@@ -21,6 +22,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
+    '@typescript-eslint/camelcase': 'off',
     'prettier/prettier': [
       'warn',
       {

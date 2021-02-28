@@ -1,1 +1,3 @@
-export type Row = string[];
+import { GameSymbol } from "./gameSymbol";
+
+export type Row = GameSymbol[];
