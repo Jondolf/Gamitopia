@@ -30,7 +30,9 @@ const connectionOptions = process.env.DATABASE_URL
       database: connectionOptions?.database || process.env.DB_NAME,
       autoLoadEntities: true,
       logging: true,
-      ssl: true
+      ssl: {
+        rejectUnauthorized: false,
+      }
     }),
     NewsModule,
     AuthModule
