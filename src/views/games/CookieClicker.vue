@@ -1,32 +1,18 @@
 <template>
-  <GamePage :game="cookieClickerState" id="cookieClicker">
+  <GamePage :game="state" id="cookieClicker">
     <GameContainer width="80vw" height="80vh" :isFullscreen="isFullscreen">
       <CookieClickerGame @toggle-fullscreen="isFullscreen = !isFullscreen" :isFullscreen="isFullscreen" />
     </GameContainer>
   </GamePage>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup name="CookieClicker" lang="ts">
+import { ref } from 'vue';
 import { useStore } from 'vuex';
 import GamePage from '@/components/games/GamePage.vue';
 import GameContainer from '@/components/games/GameContainer.vue';
 import CookieClickerGame from '@/games/cookie-clicker/CookieClickerGame.vue';
 
-export default defineComponent({
-  name: 'CookieClicker',
-
-  components: {
-    GamePage,
-    GameContainer,
-    CookieClickerGame
-  },
-
-  setup() {
-    return {
-      isFullscreen: false,
-      cookieClickerState: useStore().state.games.allGames.cookieClicker
-    };
-  }
-});
+const isFullscreen = ref(false);
+const state = useStore().state.games.allGames.cookieClicker;
 </script>

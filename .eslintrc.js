@@ -38,6 +38,12 @@ module.exports = {
       env: {
         jest: true
       }
+    },
+    {
+      files: ['**/*.vue'],
+      rules: {
+        '@typescript-eslint/no-unused-vars': 'off'
+      }
     }
   ]
 };
