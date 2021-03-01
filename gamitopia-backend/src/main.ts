@@ -4,6 +4,8 @@ import * as enforce from 'express-sslify';
 import * as helmet from 'helmet';
 import { AppModule } from './app.module';
 
+process.on('uncaughtException', (err) => { console.warn(err, false); });
+
 async function bootstrap() {
   try {
     const app = await NestFactory.create(AppModule);
