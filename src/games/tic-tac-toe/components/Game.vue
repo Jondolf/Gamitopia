@@ -34,8 +34,6 @@ import GameEnded from './GameEnded.vue';
 import TopBar from './TopBar.vue';
 import { useGrid } from '../composables/useGrid';
 import { Coord } from '../types/coord';
-import { checkGameState } from '../helpers/checkGameState';
-import { findBestMove } from '../helpers/findBestMove';
 import * as ai from '../tic-tac-toe-ai/pkg/tic_tac_toe_ai';
 
 export default defineComponent({
@@ -55,7 +53,7 @@ export default defineComponent({
     aiStarts: { type: Boolean, required: true }
   },
 
-  setup(props, { emit }) {
+  setup(props) {
     const turn = ref<1 | 2>(1);
     const squareSize = ref('10vw');
     const fontSize = ref('');
@@ -65,10 +63,6 @@ export default defineComponent({
     const { grid, gridElement, setGridSize, addSymbol, emptyGrid } = useGrid();
 
     const previousMove = ref<Coord>({ x: 0, y: 0 });
-
-    function toggleStartMenuVisibility() {
-      emit('open-start-menu-btn-clicked');
-    }
 
     function onClickSquare(coord: Coord) {
       if (grid.value[coord.y][coord.x] === ' ' && (turn.value === 1 || !props.againstAI)) {
@@ -218,7 +212,6 @@ export default defineComponent({
       gameEndMessage,
       grid,
       gridElement,
-      toggleStartMenuVisibility,
       onClickSquare,
       addSymbol,
       restartGame
