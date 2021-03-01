@@ -97,6 +97,9 @@ function addBorrowedObject(obj) {
     return stack_pointer;
 }
 /**
+* A helper function for calling `get_best_move` from JavaScript.
+*
+* It turns the `grid` and `prev_move` JavaScript arguments to Rust values, calls `get_best_move` with them and returns a `Coord`.
 * @param {any} grid
 * @param {any} prev_move
 * @param {number} target_symbol_seq_length
@@ -114,20 +117,8 @@ export function find_best_move(grid, prev_move, target_symbol_seq_length) {
 
 /**
 * Checks the current state of the game.
-* This function can be called from JavaScript.
 *
-* # Example
-*
-* ```js
-* const grid = [
-*   ['X', ' ', ' '],
-*   [' ', 'X', 'O'],
-*   ['O', ' ', 'X']
-* ];
-* const targetSymbolSeqLength = 3;
-*
-* console.log(check_game_state_js(grid, targetSymbolSeqLength)); // Returns P1Won
-* ```
+* The `grid` should be a JavaScript array of arrays of strings and the `prev_move` shuold be an object with the number properties `x` and `y`.
 * @param {any} grid
 * @param {any} prev_move
 * @param {number} target_symbol_seq_length

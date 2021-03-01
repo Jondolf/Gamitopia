@@ -1,8 +1,10 @@
 [package]
 name = "tic-tac-toe-ai"
-version = "0.1.0"
-authors = ["Gamitopia"]
+version = "0.2.0"
+authors = ["Gamitopia <gamitopia@gmail.com>"]
 edition = "2018"
+description = "A Tic-Tac-Toe AI for my Tic-Tac-Toe game"
+readme = "./README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

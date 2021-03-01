@@ -1,3 +1,7 @@
+//! A Tic-Tac-Toe AI for my own [Tic-Tac-Toe](https://gamitopia.herokuapp.com/tic-tac-toe) game.
+
+#![allow(clippy::too_many_arguments)]
+
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
@@ -20,6 +24,9 @@ pub enum GameState {
     Tie,
 }
 
+/// A helper function for calling `get_best_move` from JavaScript.
+///
+/// It turns the `grid` and `prev_move` JavaScript arguments to Rust values, calls `get_best_move` with them and returns a `Coord`.
 #[wasm_bindgen]
 pub fn find_best_move(grid: &JsValue, prev_move: &JsValue, target_symbol_seq_length: u32) -> Coord {
     let grid: Vec<Vec<String>> = grid.into_serde().unwrap();
@@ -27,7 +34,7 @@ pub fn find_best_move(grid: &JsValue, prev_move: &JsValue, target_symbol_seq_len
     get_best_move(grid, prev_move, target_symbol_seq_length)
 }
 
-/// Gets the best move by calling `minimax` on all empty squares
+/// Finds the best move by calling `minimax` on all empty squares.
 fn get_best_move(
     mut grid: Vec<Vec<String>>,
     prev_move: Coord,
@@ -63,6 +70,9 @@ fn get_best_move(
     best_move
 }
 
+/// Evaluates the score of a given scenario by calling itself recursively and *minimizing* the loss for a worst case scenario and *maximizing* the minimum gain.
+///
+/// This is based on the [minimax](https://en.wikipedia.org/wiki/Minimax) algorithm.
 fn minimax(
     mut grid: Vec<Vec<String>>,
     prev_move: &Coord,
@@ -142,32 +152,9 @@ fn minimax(
     }
 }
 
-/*
-Siirto
-
-*/
-
 /// Checks the current state of the game.
 ///
-/// # Example
-///
-/// ```rust
-/// enum GameState {
-///     Resume,
-///     P1Won,
-///     P2Won,
-///     Tie,
-/// }
-///
-/// let grid = vec![
-///     vec![String::from('X'), 'String::from(' '), String::from(' ')],
-///     vec![String::from(' '), 'String::from('X'), String::from('O')],
-///     vec![String::from('O'), 'String::from(' '), String::from('X')],
-/// ];
-/// let target_symbol_seq_length = 3;
-///
-/// assert_eq!(check_game_state(grid, target_symbol_seq_length), GameState::P1Won);
-/// ```
+/// Returns a `GameState` enum, which can be `Resume`, `P1Won`, `P2Won` or `Tie`.
 fn check_game_state(
     grid: &[Vec<String>],
     prev_move: &Coord,
@@ -192,6 +179,9 @@ fn check_game_state(
     GameState::Resume
 }
 
+/// Checks if the previous move has a winning symbol row.
+///
+/// It only checks the nearby squares on the left and right sides of the previous move to reduce iteration.
 fn row_has_sequence(
     grid: &[Vec<String>],
     prev_move: &Coord,
@@ -221,6 +211,9 @@ fn row_has_sequence(
     false
 }
 
+/// Checks if the previous move has a winning symbol row.
+///
+/// It only checks the nearby squares on the top and bottom sides of the previous move to reduce iteration.
 fn col_has_sequence(
     grid: &[Vec<String>],
     prev_move: &Coord,
@@ -250,6 +243,9 @@ fn col_has_sequence(
     false
 }
 
+/// Checks if the previous move has a winning symbol row.
+///
+/// It only checks the nearby squares on the top left and bottom right sides of the previous move to reduce iteration.
 fn diagonal_row_has_sequence(
     grid: &[Vec<String>],
     prev_move: &Coord,
@@ -280,6 +276,9 @@ fn diagonal_row_has_sequence(
     false
 }
 
+/// Checks if the previous move has a winning symbol row.
+///
+/// It only checks the nearby squares on the bottom left and top right sides of the previous move to reduce iteration.
 fn reversed_diagonal_row_has_sequence(
     grid: &[Vec<String>],
     prev_move: &Coord,
@@ -312,20 +311,8 @@ fn reversed_diagonal_row_has_sequence(
 }
 
 /// Checks the current state of the game.
-/// This function can be called from JavaScript.
 ///
-/// # Example
-///
-/// ```js
-/// const grid = [
-///   ['X', ' ', ' '],
-///   [' ', 'X', 'O'],
-///   ['O', ' ', 'X']
-/// ];
-/// const targetSymbolSeqLength = 3;
-///
-/// console.log(check_game_state_js(grid, targetSymbolSeqLength)); // Returns P1Won
-/// ```
+/// The `grid` should be a JavaScript array of arrays of strings and the `prev_move` shuold be an object with the number properties `x` and `y`.
 #[wasm_bindgen]
 pub fn check_game_state_js(
     grid: &JsValue,
