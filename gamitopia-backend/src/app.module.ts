@@ -29,7 +29,8 @@ const connectionOptions = process.env.DATABASE_URL
       password: connectionOptions?.password || process.env.DB_PASSWORD,
       database: connectionOptions?.database || process.env.DB_NAME,
       autoLoadEntities: true,
-      logging: true,
+      logging: 'all',
+      logger: 'simple-console',
       ssl: process.env.DATABASE_URL ? true : false,
       extra: {
         ssl: process.env.DATABASE_URL
