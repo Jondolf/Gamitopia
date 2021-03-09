@@ -7,12 +7,13 @@
     <p>
       Two players take turns putting X's or O's (the starting player uses X's) onto the grid. The player that gets a row
       of three (with default settings) either horizontally, vertically or diagonally wins the game. If the grid is full
-      and nobody has gotten a row of 3, the game will be a tie.
+      and nobody has won yet, the game will be a tie.
     </p>
     <h3>Variations</h3>
     <p>
       To change how big the grid is and/or how long of a row you need to win, go to settings and adjust the sliders.
       There you can change the width and height of the grid and how many X's or O's you need in a row to win the game.
+      You can also make the AI start the game, if you are playing against an AI.
     </p>
   </div>
 </template>
