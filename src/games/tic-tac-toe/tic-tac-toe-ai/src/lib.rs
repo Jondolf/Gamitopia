@@ -46,9 +46,17 @@ fn get_best_move(
         for x in 0..grid[0].len() {
             if grid[y][x].contains(' ') {
                 grid[y][x] = String::from(AI_SYMBOL);
+                let curr_move = Coord {
+                    x: x as i32,
+                    y: y as i32,
+                };
                 let score = minimax(
                     grid.clone(),
-                    &prev_move,
+                    if best_move.x == 0 && best_move.y == 0 {
+                        &prev_move
+                    } else {
+                        &curr_move
+                    },
                     target_symbol_seq_length,
                     0,
                     5,

@@ -72,9 +72,11 @@ export default defineComponent({
           checkGameEnded();
           if (!gameEnded.value) {
             changeTurn();
-            if (props.againstAI) {
-              playAITurn();
-            }
+            setTimeout(() => {
+              if (props.againstAI) {
+                playAITurn();
+              }
+            }, 0);
           }
         }, 0);
       }
