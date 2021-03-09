@@ -2,7 +2,7 @@
 
 An AI for my [Tic-Tac-Toe](https://gamitopia.herokuapp.com/tic-tac-toe) game written in [Rust](https://www.rust-lang.org/).
 
-The "AI" was made with the [minimax](https://en.wikipedia.org/wiki/Minimax) algorithm. It finds the best possible move by going through (most) moves and evaluating, what the best move is for the AI and what the worst move is for the player.
+The "AI" was made with the [minimax](https://en.wikipedia.org/wiki/Minimax) algorithm. It evaluates the score of a given scenario by calling itself recursively and _minimizing_ the loss for a worst case scenario and _maximizing_ the minimum gain.
 
 ## Why Rust?
 
@@ -16,8 +16,8 @@ In the end it was worth it. After converting the TypeScript code to Rust without
 
 To use the code on the web I had to compile it to WebAssembly.
 
-For that I used [wasm-pack](https://github.com/rustwasm/wasm-pack), a tool for building rust-generated WebAssembly packages. The `wasm-pack build` command creates a pkg directory that has the `.wasm` and `.js` files.
+For that I used [wasm-pack](https://github.com/rustwasm/wasm-pack), a tool for building rust-generated WebAssembly packages. The `wasm-pack build` command creates a pkg directory that has the necessary `.wasm` and `.js` files.
 
 To communicate between JavaScript and WebAssembly (like taking arguments from JavaScript and using them in Rust) I used [wasm-bindgen](https://rustwasm.github.io/docs/wasm-bindgen). It basically allows me to import JS functionality to Rust and export Rust functionality to JS.
 
-After exposing Rust functions with `wasm-bindgen` and building it with `wasm-pack`, I can now simply import Rust code in JavaScript with `import { whatever } from '/path/to/pkg/tic_tac_toe_ai.js'`.
+After exposing Rust functions with `wasm-bindgen` and building the code with `wasm-pack`, I can now simply import Rust code in JavaScript with `import { whatever } from '/path/to/pkg/tic_tac_toe_ai.js'`.
