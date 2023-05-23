@@ -1,5 +1,12 @@
 # 🌴 Gamitopia
 
+## Maintenance update
+
+Gamitopia doesn't really reflect my motivations or skills anymore, and I haven't updated it in a long time, so I have decided to archive the project.
+You can still find the code in this repository, but the website will no longer be maintained or updated, and the blog is not available, as it used to be in a separate PostgreSQL database, which has now been shut down.
+
+My new personal website can be found at https://joonaa.dev. It is similar to Gamitopia in that it contains a blog and some of my projects, but it has less of a focus on games, and it better represents my current capabilities and interests.
+
 ## Description
 
 [Gamitopia](http://gamitopia.herokuapp.com/) is a website with completely free games and apps all made by me. I publish my projects there and make news/blog posts about the development process and about new game releases.
